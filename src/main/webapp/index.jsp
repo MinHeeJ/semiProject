@@ -3,24 +3,7 @@
 <!DOCTYPE html>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
-	<div class="account_wrapper">
 
-        <!-- 로그인 전 -->
-        <ul class="account_list">
-            <li><a href="">회원가입</a></li>
-            <li><a href="">로그인</a></li>
-        </ul>
-
-        <!-- 로그인 후 -->
-        <div class="user_info_container">
-            <span>***님, 환영합니다!</span>
-            <ul class="account_list">
-                <li><a href="">장바구니</a></li>
-                <li><a href="">마이페이지</a></li>
-                <li><a href="">로그아웃</a></li>
-            </ul>
-        </div>
-    </div>
 
     <div class="swiper slide_wrapper">
         <div class="swiper-wrapper">
@@ -97,55 +80,5 @@
                 </p>
             </div>
 		</div>
-		
-		<script>
-        let slide_index = 0;
-        let slide_prev = document.querySelector('.slide_prev');
-        let slide_next = document.querySelector('.slide_next');
-        let swiper_wrapper = document.querySelector('.swiper-wrapper');
-        let slide_page_number = document.querySelectorAll('.slide_page_number');
-
-        slide_prev.addEventListener('click', ()=>{
-            slide_page_number[slide_index].classList.remove('slide_active');
-
-            if(slide_index === 0){
-                slide_index = 2;
-            }else{
-                slide_index -= 1;
-            }
-
-            swiper_wrapper.style.left = -1200 * slide_index + 'px';
-            slide_page_number[slide_index].classList.add('slide_active');
-
-        })
-
-        slide_next.addEventListener('click', ()=>{
-            slide_page_number[slide_index].classList.remove('slide_active');
-
-            if(slide_index === 2){
-                slide_index = 0;
-            }else{
-                slide_index += 1;
-            }
-
-            swiper_wrapper.style.left = -1200 * slide_index + 'px';
-            slide_page_number[slide_index].classList.add('slide_active');
-
-        })
-
-        setInterval(() => {
-            slide_page_number[slide_index].classList.remove('slide_active');
-
-            if(slide_index === 2){
-                slide_index = 0;
-            }else{
-                slide_index += 1;
-            }
-
-            swiper_wrapper.style.left = -1200 * slide_index + 'px';
-            slide_page_number[slide_index].classList.add('slide_active');
-        }, 3000)
-    </script>
-    
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 
