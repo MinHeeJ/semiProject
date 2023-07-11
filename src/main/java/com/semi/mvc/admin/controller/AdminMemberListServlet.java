@@ -27,10 +27,10 @@ public class AdminMemberListServlet extends HttpServlet {
 		// 1. 입력값 처리 x
 		
 		// 2. 업무로직
-//		List<Member> members = memberService.findAll();
-//		System.out.println("members = " + members);
+		List<Member> members = memberService.findAll();
+		System.out.println("members = " + members);
 		
-//		request.setAttribute("members", members);
+		request.setAttribute("members", members);
 		
 		// 3. 응답처리
 		request.getRequestDispatcher("/WEB-INF/views/admin/memberList.jsp")
