@@ -21,7 +21,7 @@
             </ul>
         </div>
     </div>
-
+	
     <div class="swiper slide_wrapper">
         <div class="swiper-wrapper">
             <div class="swiper-slide"></div>
@@ -96,6 +96,11 @@
                 </p>
                 </p>
             </div>
+		</div>
+		
+		<!-- 고객센터 -->
+		<div class="serviceCenter">
+			<a href="#">고객센터</a>
 		</div>
 		
 		<script>
