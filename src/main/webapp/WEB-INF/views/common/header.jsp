@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <title>킥킥샐러드</title>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/main.css" />
+
 </head>
 <body>
     <header>
@@ -25,6 +26,7 @@
                 <li><a href="">고객센터</a></li>
             </ul>
         </nav>
+        
     </header>
 </body>
 </html>
