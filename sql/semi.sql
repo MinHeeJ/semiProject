@@ -36,24 +36,24 @@ create table category (
 
 create table order_tbl (
 	order_no number(20),
-    serial_no number(20),
-	count number default 1,
+    memeber_id varchar2(20),
 	order_date date default sysdate,
 	state varchar(20) default 0,
     constraints pk_order_no primary key(order_no),
-    constraints fk_order_serial_no foreign key(serial_no) references order_detail(serial_no) on delete cascade,
+    constraints fk_order_memeber_id foreign key(memeber_id) references member(member_id) on delete cascade,
     constraints ck_order_state check(state in (0, 1, 2))
 );
-
+--drop table order_tbl;
 create table cart_tbl (
+    cart_no number,
 	product	varchar2(100),
 	member_id varchar2(20),
 	count number default 1,
 	price number not null,
-    constraints pk_cart_no_product primary key(product, member_id),
+    constraints pk_cart_no_product primary key(cart_no, product),
     constraints fk_cart_member_id foreign key(member_id) references member(member_id) on delete cascade
 );
-
+--drop table cart_tbl;
 create table board (
 	board_no number,
 	writer varchar2(20),
@@ -78,14 +78,17 @@ create table board_comment (
 );
 
 create table order_detail (
-	serial_no number,
-	member_id varchar(20),
-	product	varchar2(100),
+	order_serial_no number,
+    order_no number,
+    cart_no number,
+    product varchar2(100),
+    count number,
     price number,
-    constraints pk_order_detail_serial_no primary key(serial_no),
-    constraints fk_order_detail_member_id foreign key(member_id, product) references cart_tbl(member_id, product) on delete cascade
+    constraints pk_order_detail_order_serial_no primary key(order_serial_no),
+    constraints fk_order_detail_order_no foreign key(order_no) references order_tbl(order_no) on delete cascade,
+    constraints fk_order_detail_cart_no_product foreign key(cart_no, product) references cart_tbl(cart_no, product) on delete cascade
 );
-
+--drop table order_detail;
 create table store (
 	store_no number,
 	store_name varchar2(30) not null,
@@ -134,12 +137,15 @@ create table like_tbl (
     constraints fk_like_review_no foreign key(review_no) references review(review_no) on delete cascade
 );
 
-create table cart_detail (
+create table selected_option (
 	serial_no number,
+    member_id varchar2(20),
 	ingredient_no number,
 	count number null,
 	calorie number null,
 	price number null,
-    constraints pk_cart_detail_serial_no primary key(serial_no),
-    constraints fk_cart_detail_product_ingredient_no foreign key(ingredient_no) references ingredient(ingredient_no)
+    constraints pk_selected_option_serial_no primary key(serial_no),
+    constraints fk_selected_option_member_id foreign key(member_id) references member(member_id) on delete cascade,
+    constraints fk_selected_option_ingredient_no foreign key(ingredient_no) references ingredient(ingredient_no)
 );
+--drop table cart_detail;
