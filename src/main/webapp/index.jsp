@@ -4,24 +4,6 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 
-		<div class="account_wrapper">
-
-        <!-- 로그인 전 -->
-        <ul class="account_list">
-            <li><a href="">회원가입</a></li>
-            <li><a href="">로그인</a></li>
-        </ul>
-
-        <!-- 로그인 후 -->
-        <div class="user_info_container">
-            <span>***님, 환영합니다!</span>
-            <ul class="account_list">
-                <li><a href="">장바구니</a></li>
-                <li><a href="">마이페이지</a></li>
-                <li><a href="">로그아웃</a></li>
-            </ul>
-        </div> 
-    </div>
 
     <div class="swiper slide_wrapper">
         <div class="swiper-wrapper">
