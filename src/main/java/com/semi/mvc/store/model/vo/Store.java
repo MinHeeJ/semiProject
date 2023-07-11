@@ -1,4 +1,4 @@
-package com.semi.mvc.store.vo;
+package com.semi.mvc.store.model.vo;
 
 public class Store {
 	private int storeNo;
