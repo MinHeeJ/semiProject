@@ -1,4 +1,4 @@
-package semi.mvc.board.exception;
+package semi.mvc.board.model.exception;
 
 public class BoardException extends RuntimeException {
 
