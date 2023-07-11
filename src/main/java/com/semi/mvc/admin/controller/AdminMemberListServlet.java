@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.semi.mvc.admin.model.service.MemberService;
+import com.semi.mvc.member.model.service.MemberService;
 import com.semi.mvc.member.model.vo.Member;
 
 /**

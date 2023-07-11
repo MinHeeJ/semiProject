@@ -112,6 +112,7 @@ create table store (
 );
 --drop table store;
 create sequence seq_store_no;
+--drop sequence seq_store_no;
 insert into store values(seq_store_no.nextval, '킥킥샐러드 역삼역점', '서울 강남구 강남대로94길 66 지상1층', '02-123-4567');
 insert into store values(seq_store_no.nextval, '킥킥샐러드 강남역점', '서울 강남구 강남대로84길 23 1층', '02-111-2222');
 select * from store;
@@ -126,6 +127,7 @@ create table ingredient (
     constraints fk_ingredient_category_no foreign key(category_no) references category(category_no) on delete cascade
 );
 create sequence seq_ingredient_no;
+--drop sequence seq_ingredient_no;
 insert into ingredient values(seq_ingredient_no.nextval, 1, '호밀빵', 270, 2000);
 insert into ingredient values(seq_ingredient_no.nextval, 1, '샐러드볼', 0, 500);
 insert into ingredient values(seq_ingredient_no.nextval, 2, '양상추', 4, 500);
