@@ -270,3 +270,17 @@ footer p {
     justify-content: center;
     align-items: center;
 }
+
+/* 고객센터 */
+.serviceCenter{
+	background-color: purple;
+	width: 120px;
+    height: 120px;
+    position: fixed;
+    bottom: 100px;
+    right: 100px;
+    border-radius: 50%;
+    display: flex;
+	justify-content: center;
+	align-items: center;
+}
