@@ -48,7 +48,9 @@
         <% } %>
     </div>
     
-
+	<div class="serviceCenter">
+	<a href="">고객센터</a>
+	</div>
     <!-- 로그인 후 -->
     <!-- <div class="recommend_contents login_after">
         <div id="balloon">
