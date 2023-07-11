@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 	<div class="account_wrapper">
@@ -20,6 +19,18 @@
                 <li><a href="">로그아웃</a></li>
             </ul>
         </div>
+        
+        <!-- 관리자일 경우 로그인 -->
+        <div class="user_info_container">
+            <span>님, 환영합니다!</span>
+            <ul class="account_list">
+                <li><a href="">매출조회</a></li>
+                <li><a href="">전체주문내역</a></li>
+                <li><a href="">전체회원조회</a></li>
+                <li><a href="">로그인</a></li>
+            </ul>
+        </div>
+        
     </div>
 	
     <div class="swiper slide_wrapper">
@@ -96,11 +107,6 @@
                 </p>
                 </p>
             </div>
-		</div>
-		
-		<!-- 고객센터 -->
-		<div class="serviceCenter">
-			<a href="#">고객센터</a>
 		</div>
 		
 		<script>
