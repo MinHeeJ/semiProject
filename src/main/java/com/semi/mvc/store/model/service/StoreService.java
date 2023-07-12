@@ -33,5 +33,20 @@ public class StoreService {
 		close(conn);
 		return totalContent;
 	}
+
+	public int insertStore(Store newStore) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = storeDao.insertMember(conn, newStore);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
 	
 }

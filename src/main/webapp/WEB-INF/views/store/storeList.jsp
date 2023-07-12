@@ -14,7 +14,10 @@
 	<h2>매장조회</h2>
 	
 	<div id="search-container">
-       
+       <input 
+		type="button" value="매장등록"
+		onclick="location.href='<%= request.getContextPath() %>/store/storeEnroll';">
+		
         <div id="search-name">
             <form action="<%=request.getContextPath()%>/store/storeFinder">
                 <input type="text" name="searchKeyword" size="25" placeholder="검색할 매장명을 입력하세요."/>
