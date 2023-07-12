@@ -22,15 +22,17 @@ create table member (
 	phone varchar2(50) not null,
 	address	varchar2(500) not null,
 	gender char(1),
-	member_role	char(1)	not null,
+	member_role	char(1),
     constraints pk_member_id primary key(member_id),
     constraints ck_member_gender check(gender in ('M', 'F')),
     constraints ck_member_role check(member_role in ('U', 'A'))
 );
 insert into member values ('admin', 1234, '관리자', '010-1234-5678', '서울시 역삼동', 'F', 'A');
 insert into member values ('honggd', 1234, '홍지디', '010-1234-5678', '서울시 역삼동', 'M', 'U');
+insert into member values ('qwerty', 1234, '쿼티', '010-1122-3344', '경기도 안산시', 'F', default);
 --delete from member where member_id = 'honggd';
 select * from member;
+--alter table member modify member_role default 'U';
 
 create table category (
 	category_no	number,
