@@ -201,4 +201,9 @@ create table selected_option (
     constraints fk_selected_option_member_id foreign key(member_id) references member(member_id) on delete cascade,
     constraints fk_selected_option_ingredient_no foreign key(ingredient_no) references ingredient(ingredient_no)
 );
---drop table cart_detail;
+--drop table selected_option;
+create sequence seq_option_no;
+-- drop sequence seq_option_no;
+select * from selected_option;
+-- delete from selected_option;
+select * from ingredient;
