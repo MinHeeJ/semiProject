@@ -86,4 +86,20 @@ public class StoreDao {
 		}
 		return totalContent;
 	}
+
+	public int insertMember(Connection conn, Store newStore) {
+		int result = 0;
+		String sql = prop.getProperty("insertStore");
+		//insert into store values( seq_store_no.nextval, ?,?,?)
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, newStore.getStoreName());
+			pstmt.setString(2, newStore.getAddress());
+			pstmt.setString(3, newStore.getPhone());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new StoreException(e);
+		}
+		return result;
+	}
 }

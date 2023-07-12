@@ -6,7 +6,7 @@
 	<h2>매장 추가 정보 입력</h2>
 	<form 
 		name="checkNameDuplicateFrm" 
-		action="<%= request.getContextPath() %>/member/checkNameDuplicate">
+		action="<%= request.getContextPath() %>/store/checkNameDuplicate">
 		<input type="hidden" name="storeName"/>
 	</form>
 	<form name="storeEnrollFrm" action="" method="POST">
@@ -14,7 +14,7 @@
 			<tr>
 				<th>매장명<sup>*</sup></th>
 				<td>
-					<input type="text" placeholder="4글자이상" name="storeName" id="_storeName" value="sejong" required>
+					<input type="text" placeholder="4글자이상" name="storeName" id="_storeName" required>
 					<input type="button" value="중복검사" onclick="checkNameDuplicate();"/>
 					<input type="hidden" id="nameValid" value="0"/>
 					<%-- id검사여부 확인용: 0-유효하지않음, 1-유효한 아이디 --%>
