@@ -24,7 +24,7 @@
         <div class="user_info_container">
             <span>님, 환영합니다!</span>
             <ul class="account_list">
-                <li><a href="">매출조회</a></li>
+                <li><a href="<%= request.getContextPath() %>/admin/salesLookUp">매출조회</a></li>
                 <li><a href="">전체주문내역</a></li>
                 <li><a href="<%= request.getContextPath() %>/admin/memberList">전체회원조회</a></li>
                 <li><a href="">로그인</a></li>
