@@ -15,9 +15,21 @@ public class SelectedOption {
 	private int count;
 	private int calorie;
 	private int price;
+	private String ingredientName;
 	
 	
-	
+	public String getIngredientName() {
+		return ingredientName;
+	}
+
+
+
+	public void setIngredientName(String ingredientName) {
+		this.ingredientName = ingredientName;
+	}
+
+
+
 	public SelectedOption() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -25,7 +37,9 @@ public class SelectedOption {
 
 
 
-	public SelectedOption(int serialNo, String memberId, int ingredientNo, int count, int calorie, int price) {
+
+	public SelectedOption(int serialNo, String memberId, int ingredientNo, int count, int calorie, int price,
+			String ingredientName) {
 		super();
 		this.serialNo = serialNo;
 		this.memberId = memberId;
@@ -33,6 +47,7 @@ public class SelectedOption {
 		this.count = count;
 		this.calorie = calorie;
 		this.price = price;
+		this.ingredientName = ingredientName;
 	}
 
 
@@ -40,7 +55,8 @@ public class SelectedOption {
 	@Override
 	public String toString() {
 		return "SelectedOption [serialNo=" + serialNo + ", memberId=" + memberId + ", ingredientNo=" + ingredientNo
-				+ ", count=" + count + ", calorie=" + calorie + ", price=" + price + "]";
+				+ ", count=" + count + ", calorie=" + calorie + ", price=" + price + ", ingredientName="
+				+ ingredientName + "]";
 	}
 
 
