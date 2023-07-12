@@ -58,5 +58,34 @@ public class MemberDao {
 		return member;
 	}
 
+	public int updateMemberRole(Connection conn, String memberId, MemberRole memberRole) {
+		int result = 0;
+		String sql = prop.getProperty("updateMemberRole");
+		// update member set member_role = ? where member_id = ?
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, memberRole.name());
+			pstmt.setString(2, memberId);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new MemberException(e);
+		}
+		return result;
+	}
+
+	public int deleteMember(Connection conn, String memberId) {
+		int result = 0;
+		String sql = prop.getProperty("deleteMember");
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, memberId);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new MemberException(e);
+		}
+		return result;
+	}
+
 
 }

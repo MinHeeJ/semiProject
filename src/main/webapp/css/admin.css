@@ -1,0 +1,25 @@
+@CHARSET "UTF-8";
+
+/* 회원 전체조회 */
+h1 {
+	font-size: 50px;
+	text-align: center;
+}
+table#tbl-member {
+	width: 990px;
+	margin: 0 auto;
+	border: 1px solid black;
+	border-collapse: collapse;
+	text-align: center;
+}
+table#tbl-member th {
+	width: 150px; 
+	border: 1px solid; 
+	padding: 10px; 
+	text-align: center; 
+} 
+table#tbl-member td {
+	border: 1px solid; 
+	padding: 10px; 
+	text-align: center;
+}
