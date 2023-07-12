@@ -265,6 +265,10 @@ header > nav > ul > li > a{
     color: #fff;
     font-weight: bold;
 }
+footer{ 
+background-color:#00bcd4; clear:both; height:75px; text-align:center;padding-top:40px;
+}
+
 footer p {
 	display: flex;
     justify-content: center;
@@ -273,9 +277,9 @@ footer p {
 
 /* 고객센터 */
 .serviceCenter{
-	background-color: purple;
-	width: 120px;
-    height: 120px;
+	background-color: yellow;
+	width: 80px;
+    height: 80px;
     position: fixed;
     bottom: 100px;
     right: 100px;

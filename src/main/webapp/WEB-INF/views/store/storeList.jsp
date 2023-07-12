@@ -1,9 +1,17 @@
+<%@page import="com.semi.mvc.store.model.vo.Store"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
+<%
+	List<Store> stores = (List<Store>)request.getAttribute("stores");
+	// 검색관련 
+	String searchKeyword = request.getParameter("searchKeyword");
+%>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/store.css" />
 <section id="storeList-container">
-	<h2>회원관리</h2>
+	<h2>매장조회</h2>
 	
 	<div id="search-container">
        
@@ -15,7 +23,7 @@
         </div>
         
        
-    </div>
+    </div> 
 	
 	<table id="tbl-store">
 		<thead>
@@ -27,30 +35,32 @@
 				
 			</tr>
 		</thead>
+		
 		<tbody>
 			<% 	if(stores == null || stores.isEmpty()) { %>
-				<tr>
-					<td colspan="4">조회 결과가 없습니다.</td>
-				</tr>
+			<tr>
+				<td colspan="4">조회 결과가 없습니다.</td>
+			</tr>
 			<%	
 				} 
 				else { 
 					for(Store store : stores) {
 			%>
-				<tr>
+			<tr>
 					<td><%= store.getStoreNo() %></td>
-					<td><%= store.getstoreName() %></td>
-					<td><%= store.getAddress() %></td>
-					<td><%= store.getPhone() %></td>
-					
+					<td><%= store.getStoreName() %></td>
+					<td><%= store.getAddress() %></td> 
+					<td><%= store.getPhone() %></td> 
 				</tr>
-			
-			<% 		
+				<% 		
 					}
 				} 
 			%>
 		</tbody>
 	</table>
+	<div id='pagebar'>
+		<%= request.getAttribute("pagebar") %>
+	</div>
 </section>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
