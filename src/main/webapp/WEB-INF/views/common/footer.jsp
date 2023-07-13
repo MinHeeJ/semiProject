@@ -1,15 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-   
-    <!-- 고객센터 -->
-	<div class="serviceCenter">
-		<a href="#">고객센터</a>
-	</div>
-    
-	<footer>
-		<p>&lt;Copyright 1998-2023 <strong>KH정보교육원</strong>. All rights reserved.&gt;</p>
-	</footer>
-	
-</body>
-</html>
+<!-- 푸터 내용 -->
+<footer>
+    <!-- 푸터 내용 생략 -->
+</footer>
+
+<script>
+    // 필요한 JavaScript 코드
+</script>

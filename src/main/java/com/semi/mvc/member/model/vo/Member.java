@@ -9,9 +9,7 @@ public class Member {
 	private Gender gender;
 	private MemberRole memberRole;
 	
-	public Member() {
-		super();
-	}
+
 
 	public Member(String memberId, String password, String name, String phone, String address, Gender gender,
 			MemberRole memberRole) {
