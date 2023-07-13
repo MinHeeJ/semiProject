@@ -22,7 +22,7 @@ create table member (
 	phone varchar2(50) not null,
 	address	varchar2(500) not null,
 	gender char(1),
-	member_role	char(1),
+	member_role	char(1) default 'U',
     constraints pk_member_id primary key(member_id),
     constraints ck_member_gender check(gender in ('M', 'F')),
     constraints ck_member_role check(member_role in ('U', 'A'))
@@ -33,6 +33,7 @@ insert into member values ('qwerty', 1234, '쿼티', '010-1122-3344', '경기도
 --delete from member where member_id = 'honggd';
 select * from member;
 --alter table member modify member_role default 'U';
+drop table member;
 
 create table category (
 	category_no	number,
@@ -45,17 +46,27 @@ insert into category values (3, 'topping');
 insert into category values (4, 'sauce');
 insert into category values (5, 'drink');
 select * from category;
+--drop table category;
 
 create table order_tbl (
 	order_no number(20),
-    memeber_id varchar2(20),
+    member_id varchar2(20),
 	order_date date default sysdate,
-	state varchar(20) default 0,
+	state varchar(20) default '주문접수완료',
     constraints pk_order_no primary key(order_no),
-    constraints fk_order_memeber_id foreign key(memeber_id) references member(member_id) on delete cascade,
-    constraints ck_order_state check(state in (0, 1, 2))
+    constraints fk_order_member_id foreign key(member_id) references member(member_id) on delete cascade,
+    constraints ck_order_state check(state in ('주문접수완료', '음식준비중', '준비완료'))
 );
 --drop table order_tbl;
+--alter table order_tbl modify state varchar2(50);
+--alter table order_tbl rename column memeber_id to member_id;
+--alter table order_tbl drop constraints ck_order_state;
+alter table order_Tbl modify state varchar2(20) default '주문처리중';
+alter table order_tbl modify constraints ck_order_state check (state in ('준비중', '주문완료', '준비완료'));
+insert into order_tbl values(1, 'honggd', default, default);
+insert into order_tbl values(2, 'admin', default, default);
+--update order_tbl set state = '준비완료' where order_no = 2;
+select * from order_tbl;
 
 create table cart_tbl (
     cart_no number,
@@ -67,6 +78,10 @@ create table cart_tbl (
     constraints fk_cart_member_id foreign key(member_id) references member(member_id) on delete cascade
 );
 --drop table cart_tbl;
+insert into cart_tbl values(1, '양상추 닭가슴살 콜라', 'honggd', 1, 5000);
+insert into cart_tbl values(2, '루꼴라 연어 콜라', 'honggd', 1, 7000);
+insert into cart_tbl values(3, '양파 고기 콜라', 'admin', 1, 4000);
+select * from cart_tbl;
 
 create table board (
 	board_no number,
@@ -77,6 +92,7 @@ create table board (
     constraints pk_board_no primary key(board_no),
     constraints fk_board_writer foreign key(writer) references member(member_id)on delete cascade
 );
+--drop table board;
 
 create table board_comment (
     comment_no number,
@@ -90,6 +106,7 @@ create table board_comment (
     constraints fk_board_comment_board_no foreign key(board_no) references board(board_no) on delete cascade,
     constraints fk_board_comment_writer foreign key(writer) references member(member_id) on delete cascade
 );
+--drop table board_comment;
 
 create table order_detail (
 	order_serial_no number,
@@ -103,6 +120,18 @@ create table order_detail (
     constraints fk_order_detail_cart_no_product foreign key(cart_no, product) references cart_tbl(cart_no, product) on delete cascade
 );
 --drop table order_detail;
+insert into order_detail values(1, 1, 1, '양상추 닭가슴살 콜라', 1, 5000);
+insert into order_detail values(2, 1, 2, '루꼴라 연어 콜라', 1, 7000);
+insert into order_detail values(3, 2, 3, '양파 고기 콜라', 1, 4000);
+select * from order_detail;
+
+select
+    *
+from
+    (select * from order_tbl t left join order_detail d on t.order_no = d.order_no)
+where
+    order_serial_no = 1;
+
 
 create table store (
 	store_no number,
@@ -128,6 +157,7 @@ create table ingredient (
     constraints pk_ingredient_no primary key(ingredient_no),
     constraints fk_ingredient_category_no foreign key(category_no) references category(category_no) on delete cascade
 );
+--drop table ingredient;
 create sequence seq_ingredient_no;
 --drop sequence seq_ingredient_no;
 insert into ingredient values(seq_ingredient_no.nextval, 1, '호밀빵', 270, 2000);
@@ -169,6 +199,7 @@ create table faq_board (
     constraints pk_faq_board_board_no primary key(board_no),
     constraints fk_faq_board_writer foreign key(writer) references member(member_id) on delete cascade
 );
+--drop table faq_board;
 
 create table review (
 	review_no number,
@@ -179,6 +210,7 @@ create table review (
     constraints pk_review_no primary key(review_no),
     constraints fk_review_writer foreign key(writer) references member(member_id) on delete cascade
 );
+--drop table review;
 
 create table like_tbl (
 	like_no	number,
@@ -189,6 +221,7 @@ create table like_tbl (
     constraints fk_like_member_id foreign key(member_id) references member(member_id) on delete cascade,
     constraints fk_like_review_no foreign key(review_no) references review(review_no) on delete cascade
 );
+--drop table like_tbl;
 
 create table selected_option (
 	serial_no number,

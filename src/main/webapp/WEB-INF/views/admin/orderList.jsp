@@ -1,70 +1,86 @@
+<%@page import="com.semi.mvc.order.model.vo.State"%>
+<%@page import="com.semi.mvc.order.model.vo.Order"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin.css" />
-
-	<div class="wrapper">
-        <div class="text">
-            <h1>주문내역 전체조회</h1>
-        </div>
-
+<%
+	List<Order> orders = (List<Order>) request.getAttribute("orders");
+	for(Order order : orders)
+		System.out.println(order.getOrderSerialNo());
+%>
+<section>
+	<h1>주문내역 전체조회</h1>
+	
+    <div>
         <table>
             <thead>
               <tr>
                 <th>회원아이디</th>
-                <th>이름</th>
                 <th>상품</th>
                 <th>수량</th>
                 <th>주문일자</th>
+                <th>금액</th>
                 <th>처리상태</th>
               </tr>
             </thead>
             
             <tbody>
-              <tr>
-                <td>MIROO</td>
-                <td>한미루</td>
-                <td>샐러드(~)</td>
-                <td>1</td>
-                <td>2023-07-02</td>
-                <td>
-                  <select>
-                    <option value="준비중">준비중</option>
-                    <option value="완료">완료</option>
-                  </select>
-                </td>
-              </tr>
-
-              <tr>
-                <td>MINHEE</td>
-                <td>정민희</td>
-                <td>샌드위치(~)</td>
-                <td>2</td>
-                <td>2023-07-02</td>
-                <td>
-                  <select>
-                    <option value="준비중">준비중</option>
-                    <option value="완료">완료</option>
-                  </select>
-                </td>
-              </tr>
-
-              <tr>
-                <td>HEEJIN</td>
-                <td>신희진</td>
-                <td>샐러드(~)</td>
-                <td>3</td>
-                <td>2023-07-02</td>
-                <td>
-                  <select>
-                    <option value="준비중">준비중</option>
-                    <option value="완료">완료</option>
-                  </select>
-                </td>
-              </tr>
-            
+            <% if(orders == null || orders.isEmpty()) { %>
+            	<tr>
+					<td>조회 결과가 없습니다.</td>
+				</tr>
+            <% } 
+            	else { 
+            		for(Order order : orders) { %>
+		              <tr>
+		                <td><%= order.getMemberId() %></td>
+		                <td><%= order.getProduct() %></td>
+		                <td><%= order.getCount() %></td>
+		                <td><%= order.getOrderDate() %></td>
+		                <td><%= order.getPrice() %></td>
+		                <td>
+		                  <select class="state" data-order-serial-no="<%= order.getOrderSerialNo() %>">
+		                    <option value="주문접수완료" <%= order.getState().equals(State.orderComplete.getState()) ? "selected" : "" %>>주문접수완료</option>
+		                    <option value="음식준비중" <%= order.getState().equals(State.preparing.getState()) ? "selected" : "" %>>음식준비중</option>
+		                    <option value="준비완료" <%= order.getState().equals(State.complete.getState()) ? "selected" : "" %>>준비완료</option>
+		                  </select>
+		                </td>
+		              </tr>
+            <%
+            		}
+            	} 
+            %>
             </tbody>
           </table>
-        </div>
-        
+    </div>
+</section>
+<!-- 처리상태 수정 -->
+<form
+	name="stateUpdateFrm"
+	action="<%= request.getContextPath() %>/admin/stateUpdate"
+	method="POST">
+	<input type="hidden" name="state"/>
+	<input type="hidden" name="orderSerialNo"/>
+</form>
+<script>
+document.querySelectorAll("select.state").forEach((elem) => {
+	elem.addEventListener("change", (e) => {
+		
+		if(confirm("처리상태를 수정하시겠습니까?")) {
+			const stateVal = e.target.value;
+			const orderSerialNoVal = e.target.dataset.orderSerialNo;
+			
+			const frm = document.stateUpdateFrm;
+			frm.state.value = stateVal;
+			frm.orderSerialNo.value = orderSerialNoVal;
+			frm.submit();
+		}
+		else {
+			e.target.querySelector("option[selected]").selected = true;
+		}
+	});
+});
+</script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

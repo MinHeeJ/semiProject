@@ -28,10 +28,11 @@ public class AdminOrderListServlet extends HttpServlet {
 		
 		// 2. 업무로직
 		List<Order> orders = orderService.findAll();
-		System.out.println("orders = " + orders);
+		
+		request.setAttribute("orders", orders);
 		
 		// 3. 응답처리
-		request.getRequestDispatcher("/WEB-INF/views/admin/orderList")
+		request.getRequestDispatcher("/WEB-INF/views/admin/orderList.jsp")
 			.forward(request, response);
 	}
 
