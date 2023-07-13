@@ -41,7 +41,7 @@ public class OrderService {
 		return result;
 	}
 
-	public List<Order> findByDate(Date startDate, Date endDate) {
+	public List<Order> findByDate(String startDate, String endDate) {
 		Connection conn = getConnection();
 		List<Order> orders = orderDao.findByDate(conn, startDate, endDate);
 		close(conn);

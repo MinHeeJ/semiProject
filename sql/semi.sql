@@ -33,7 +33,7 @@ insert into member values ('qwerty', 1234, '쿼티', '010-1122-3344', '경기도
 --delete from member where member_id = 'honggd';
 select * from member;
 --alter table member modify member_role default 'U';
-drop table member;
+--drop table member;
 
 create table category (
 	category_no	number,
@@ -52,19 +52,20 @@ create table order_tbl (
 	order_no number(20),
     member_id varchar2(20),
 	order_date date default sysdate,
-	state varchar(20) default '주문접수완료',
+	state varchar(40) default '주문접수완료',
     constraints pk_order_no primary key(order_no),
     constraints fk_order_member_id foreign key(member_id) references member(member_id) on delete cascade,
-    constraints ck_order_state check(state in ('주문접수완료', '음식준비중', '준비완료'))
+    constraints ck_order_state check(state in ('주문접수완료', '주문처리완료'))
 );
 --drop table order_tbl;
 --alter table order_tbl modify state varchar2(50);
 --alter table order_tbl rename column memeber_id to member_id;
 --alter table order_tbl drop constraints ck_order_state;
-alter table order_Tbl modify state varchar2(20) default '주문처리중';
+alter table order_tbl modify state varchar2(20) default '주문처리중';
 alter table order_tbl drop constraints ck_order_state;
 insert into order_tbl values(1, 'honggd', default, default);
 insert into order_tbl values(2, 'admin', default, default);
+insert into order_tbl values(3, 'admin', '2023-06-11', default);
 --update order_tbl set state = '준비완료' where order_no = 2;
 select * from order_tbl;
 
@@ -80,7 +81,7 @@ create table cart_tbl (
 --drop table cart_tbl;
 insert into cart_tbl values(1, '양상추 닭가슴살 콜라', 'honggd', 1, 5000);
 insert into cart_tbl values(2, '루꼴라 연어 콜라', 'honggd', 1, 7000);
-insert into cart_tbl values(3, '양파 고기 콜라', 'admin', 1, 4000);
+insert into cart_tbl values(4, '양파 고기 콜라', 'admin', 1, 4000);
 select * from cart_tbl;
 
 create table board (
@@ -122,13 +123,10 @@ create table order_detail (
 --drop table order_detail;
 insert into order_detail values(1, 1, 1, '양상추 닭가슴살 콜라', 1, 5000);
 insert into order_detail values(2, 1, 2, '루꼴라 연어 콜라', 1, 7000);
-insert into order_detail values(3, 2, 3, '양파 고기 콜라', 1, 4000);
+insert into order_detail values(4, 3, 4, '양파 고기 콜라', 1, 4000);
 select * from order_detail;
 
-select
-    *
-from
-    (select * from order_tbl t left join order_detail d on t.order_no = d.order_no);
+--select * from (select * from order_tbl t left join order_detail d on t.order_no = d.order_no) where order_date between '2023-07-01' and '2023-07-14' order by order_date;
 
 
 create table store (
@@ -210,18 +208,6 @@ create table review (
 );
 --drop table review;
 
-create table attachment (
-    no number, 
-    board_no number not null,
-    original_filename varchar2(255) not null, -- 실제파일명
-    renamed_filename varchar2(255) not null, -- 저장파일명 (영문자/숫자)
-    reg_date date default sysdate,
-    constraints pk_attachment_no primary key(no),
-    constraints fk_attachment_board_no foreign key(board_no) references board(board_no)  on delete cascade,
-    constraints fk_attachment_review_no foreign key(board_no) references review(review_no) on delete cascade
-    
-);
-
 create table like_tbl (
 	like_no	number,
 	member_id varchar2(20),
@@ -250,8 +236,3 @@ create sequence seq_option_no;
 select * from selected_option;
 -- delete from selected_option;
 select * from ingredient;
-
---테이블 수정 및 시퀀스 생성
-create sequence seq_cart_no;
-ALTER TABLE cart_tbl MODIFY product VARCHAR2(1000);
-ALTER TABLE order_detail MODIFY product VARCHAR2(1000);
