@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.semi.mvc.cart.model.dao.CartDao;
+import com.semi.mvc.cart.model.vo.Cart;
 import com.semi.mvc.cart.model.vo.Ingredient;
 import com.semi.mvc.cart.model.vo.SelectedOption;
 
@@ -45,6 +46,34 @@ public class CartService {
 			close(conn);
 		}
 		return result;
+	}
+
+	public int insertCart(String confirmOptions, String totalPrice, String memberId) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = cartDao.insertCart(conn, confirmOptions, totalPrice, memberId);
+			result = cartDao.deleteSelectedOption(conn, memberId);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public List<Cart> findAllCart(String memberId) {
+		List<Cart> carts = new ArrayList<>();
+		
+		Connection conn = getConnection();
+		
+		carts = cartDao.findAllCart(conn, memberId);
+		
+		close(conn);
+		
+		return carts;
 	}
 
 }

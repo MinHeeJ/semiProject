@@ -54,9 +54,12 @@ public class SelectedOption {
 
 	@Override
 	public String toString() {
-		return "SelectedOption [serialNo=" + serialNo + ", memberId=" + memberId + ", ingredientNo=" + ingredientNo
-				+ ", count=" + count + ", calorie=" + calorie + ", price=" + price + ", ingredientName="
-				+ ingredientName + "]";
+//		return "SelectedOption [serialNo=" + serialNo + ", memberId=" + memberId + ", ingredientNo=" + ingredientNo
+//				+ ", count=" + count + ", calorie=" + calorie + ", price=" + price + ", ingredientName="
+//				+ ingredientName + "]";
+		
+		return ingredientName + "(" + count +")";
+		
 	}
 
 
