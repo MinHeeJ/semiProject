@@ -14,8 +14,19 @@ public class Cart {
 	
 	public Cart() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
+	
+
+	public Cart(int cartNo, String product, String memberId, int count, int price) {
+		super();
+		this.cartNo = cartNo;
+		this.product = product;
+		this.memberId = memberId;
+		this.count = count;
+		this.price = price;
+	}
+
+
 
 	public int getCartNo() {
 		return cartNo;

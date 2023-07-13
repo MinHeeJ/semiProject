@@ -5,10 +5,10 @@ import java.sql.Date;
 import com.semi.mvc.cart.model.vo.Cart;
 
 public class Order extends Cart {
+	private int orderSerialNo;
 	private int orderNo;
 	private Date orderDate;
-	private State state;
-	private int orderSerialNo;
+	private String state;
 	
 	public Order() {
 		super();
@@ -18,13 +18,12 @@ public class Order extends Cart {
 		super(cartNo, product, memberId, count, price);
 	}
 
-	public Order(int cartNo, String product, String memberId, int count, int price, int orderNo, Date orderDate,
-			State state, int orderSerialNo) {
+	public Order(int orderSerialNo, int orderNo, String memberId, int cartNo, String product, Date orderDate, String state, int count, int price) {
 		super(cartNo, product, memberId, count, price);
+		this.orderSerialNo = orderSerialNo;
 		this.orderNo = orderNo;
 		this.orderDate = orderDate;
 		this.state = state;
-		this.orderSerialNo = orderSerialNo;
 	}
 
 	public int getOrderNo() {
@@ -43,14 +42,14 @@ public class Order extends Cart {
 		this.orderDate = orderDate;
 	}
 
-	public State getState() {
+	public String getState() {
 		return state;
 	}
 
-	public void setState(State state) {
+	public void setState(String state) {
 		this.state = state;
 	}
-
+	
 	public int getOrderSerialNo() {
 		return orderSerialNo;
 	}
@@ -64,5 +63,6 @@ public class Order extends Cart {
 		return "Order [orderNo=" + orderNo + ", orderDate=" + orderDate + ", state=" + state + ", orderSerialNo="
 				+ orderSerialNo + ", toString()=" + super.toString() + "]";
 	}
+
 
 }

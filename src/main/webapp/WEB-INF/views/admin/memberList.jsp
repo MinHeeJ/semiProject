@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin.css" />
 <section id="memberList-container">
 	<h1>회원 전체 조회</h1>
+	
     <div id="memberList-wrapper">
 		<table id="tbl-member">
             <thead>
