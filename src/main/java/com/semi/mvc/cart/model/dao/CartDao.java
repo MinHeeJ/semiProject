@@ -130,6 +130,21 @@ private Properties prop = new Properties();
 				
 		return carts;
 	}
+
+	public int updateCart(Connection conn, int cartNo, int updateQuentity) {
+		int result = 0;
+		String sql = prop.getProperty("updateQuentity");
+		// update cart_tbl set count = ? where cart_no = ?
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, updateQuentity);		
+			pstmt.setInt(2, cartNo);		
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new CartException(e);
+		}
+		return result;
+	}
 	
 	
 

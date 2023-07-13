@@ -29,11 +29,11 @@ List<Cart> carts = (List)request.getAttribute("carts");
 <body>
 	<section id="CartListSection">
 	<h1>장 바 구 니</h1>
+	<form id ="printCartList">
 	<div id = "cartbuttons">
 		<button id="cartUpdate">수정</button>
 		<button id="cartDelete">삭제</button>	
 	</div>
-	<form id ="printCartList">
 	<table id ="cartListTable">
         <thead>
             <tr>
@@ -50,10 +50,12 @@ List<Cart> carts = (List)request.getAttribute("carts");
         	for(int i = 0; i < carts.size(); i++){
         %>
       		<tr>
-                <td><input type="checkbox"></td>
+                <td><input type="checkbox" name= "checkedOrNot" value = "<%= carts.get(i).getCartNo()%>"></td>
                 <td><%= i +1 %></td>
                 <td><%= carts.get(i).getProduct() %></td>
-                <td><input type="number" min="1" max="10" value = "1"></td>
+                <td><input type="number" name= "quentity" min="1" max="10" value = "1">
+                	<input type = "hidden" name= "cartNumber" value="<%= carts.get(i).getCartNo()%>">
+                </td>
                 <td><%= carts.get(i).getPrice() %></td>
             </tr>
         		      
@@ -69,6 +71,31 @@ List<Cart> carts = (List)request.getAttribute("carts");
 
 	<script>
 	
+		document.querySelector("#printCartList").onsubmit =(e) =>{
+			
+			e.preventDefault();
+			
+			const frmData = new FormData(e.target); 
+			$.ajax({				
+				url : "<%= request.getContextPath()%>/update/cart",
+				data : frmData,
+				processData : false, 
+				contentType : false, 
+				method : "POST",
+				dataType : "json",
+				success(responseData){
+					const {result, message} = responseData;
+					alert(message);
+				
+				},
+				complete(){
+					console.log("완료");
+				}
+			
+			});
+			
+		}
+		
 	</script>
 
 </body>

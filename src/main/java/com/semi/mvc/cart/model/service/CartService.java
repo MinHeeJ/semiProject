@@ -76,4 +76,19 @@ public class CartService {
 		return carts;
 	}
 
+	public int updateCart(int cartNo, int updateQuentity) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = cartDao.updateCart(conn, cartNo, updateQuentity);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
 }
