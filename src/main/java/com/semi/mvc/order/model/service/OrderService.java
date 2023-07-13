@@ -6,6 +6,8 @@ import static com.semi.mvc.common.JdbcTemplate.getConnection;
 import static com.semi.mvc.common.JdbcTemplate.rollback;
 
 import java.sql.Connection;
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.semi.mvc.order.model.dao.OrderDao;
@@ -23,12 +25,12 @@ public class OrderService {
 		return orders;
 	}
 
-	public int stateUpdate(int orderSerialNo, String state) {
+	public int stateUpdate(int orderNo, String state) {
 		int result = 0;
 		Connection conn = getConnection();
 		
 		try {
-			result = orderDao.stateUpdate(conn, orderSerialNo, state);
+			result = orderDao.stateUpdate(conn, orderNo, state);
 			commit(conn);
 		} catch (Exception e) {
 			rollback(conn);
@@ -37,6 +39,13 @@ public class OrderService {
 			close(conn);
 		}
 		return result;
+	}
+
+	public List<Order> findByDate(Date startDate, Date endDate) {
+		Connection conn = getConnection();
+		List<Order> orders = orderDao.findByDate(conn, startDate, endDate);
+		close(conn);
+		return orders;
 	}
 
 }
