@@ -75,17 +75,20 @@ public class OrderDao {
 		return result;
 	}
 
-	public List<Order> findByDate(Connection conn, Date startDate, Date endDate) {
+	public List<Order> findByDate(Connection conn, String startDate, String endDate) {
 		List<Order> orders = new ArrayList<>();
 		String sql = prop.getProperty("findByDate");
-		
-		try (
-			PreparedStatement pstmt = conn.prepareStatement(sql);
-			ResultSet rset = pstmt.executeQuery();
-		) {
-			while(rset.next()) {
-				Order order = handleOrderResultSet(rset);
-				orders.add(order);
+		// select * from (select * from order_tbl t left join order_detail d on t.order_no = d.order_no) 
+		// where order_date between ? and ?
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, startDate);
+			pstmt.setString(2, endDate);
+			
+			try (ResultSet rset = pstmt.executeQuery()) {
+				while(rset.next()) {
+					Order order = handleOrderResultSet(rset);
+					orders.add(order);
+				}
 			}
 		} catch (SQLException e) {
 			throw new OrderException(e);
