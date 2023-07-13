@@ -62,7 +62,7 @@ create table order_tbl (
 --alter table order_tbl rename column memeber_id to member_id;
 --alter table order_tbl drop constraints ck_order_state;
 alter table order_Tbl modify state varchar2(20) default '주문처리중';
-alter table order_tbl modify constraints ck_order_state check (state in ('준비중', '주문완료', '준비완료'));
+alter table order_tbl drop constraints ck_order_state;
 insert into order_tbl values(1, 'honggd', default, default);
 insert into order_tbl values(2, 'admin', default, default);
 --update order_tbl set state = '준비완료' where order_no = 2;
@@ -128,9 +128,7 @@ select * from order_detail;
 select
     *
 from
-    (select * from order_tbl t left join order_detail d on t.order_no = d.order_no)
-where
-    order_serial_no = 1;
+    (select * from order_tbl t left join order_detail d on t.order_no = d.order_no);
 
 
 create table store (
