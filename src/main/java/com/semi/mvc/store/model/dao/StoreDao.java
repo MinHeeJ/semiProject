@@ -102,4 +102,39 @@ public class StoreDao {
 		}
 		return result;
 	}
+
+	public Store findByName(Connection conn, String storeName) {
+		String sql = prop.getProperty("findByName");
+		Store store = null;
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, storeName);
+			try (ResultSet rset = pstmt.executeQuery()) {
+				while (rset.next()) {
+					store = handleStoreResultSet(rset);
+					
+				}
+			}
+		} catch (SQLException e) {
+			throw new StoreException(e);
+		}
+		return store;
+		
+		
+	}
+
+	public int deleteStore(Connection conn, int storeNo) {
+		int result = 0;
+		String sql = prop.getProperty("deleteStore");
+		//delete from store where store_no = ?
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, storeNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new StoreException(e);
+		}
+		return result;
+	}
+
+	
 }
