@@ -5,10 +5,10 @@
 	<div class="account_wrapper">
 
         <!-- 로그인 전 -->
-        <ul class="account_list">
-            <li><a href="">회원가입</a></li>
-            <li><a href="">로그인</a></li>
-        </ul>
+<ul class="account_list">
+    <li><a href="<%= request.getContextPath() %>/member/memberEnroll">회원가입</a></li>
+    <li><a href="">로그인</a></li>
+</ul>
 
         <!-- 로그인 후 -->
         <div class="user_info_container">
