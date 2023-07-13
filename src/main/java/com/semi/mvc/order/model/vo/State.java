@@ -1,9 +1,8 @@
 package com.semi.mvc.order.model.vo;
 
 public enum State {
-	orderComplete("주문완료"),
-	preparing("준비중"),
-	complete("준비완료");
+	orderComplete("주문접수완료"),
+	complete("주문처리완료");
 
 	private String state; // state선언
 
