@@ -210,6 +210,18 @@ create table review (
 );
 --drop table review;
 
+create table attachment (
+    no number, 
+    board_no number not null,
+    original_filename varchar2(255) not null, -- 실제파일명
+    renamed_filename varchar2(255) not null, -- 저장파일명 (영문자/숫자)
+    reg_date date default sysdate,
+    constraints pk_attachment_no primary key(no),
+    constraints fk_attachment_board_no foreign key(board_no) references board(board_no)  on delete cascade,
+    constraints fk_attachment_review_no foreign key(board_no) references review(review_no) on delete cascade
+    
+);
+
 create table like_tbl (
 	like_no	number,
 	member_id varchar2(20),

@@ -40,11 +40,13 @@ table {
 	
 }
 
-#search-container {
-	  display: inline-block;
+#search-container button {
+	  margin-left: 100px;
+		
 	 
 }
 
 #search-name{
 	display: flex;
+	float : right;
 }
