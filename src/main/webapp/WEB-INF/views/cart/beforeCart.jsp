@@ -27,8 +27,11 @@ int totalCalorie =0;
 #optionPrint .optionsLeft {display: inline-block; margin-left: 20px; text-align: left; font-size : 15px; width : 45%}
 #optionPrint .optionsRight {display: inline-block; margin-right: 20px; text-align: right; font-size : 15px; width : 45%}
 .totals {font-size : 23px; font-weight: bold;}
+#selectConfirm h1 {margin-top : 3%; font-size : 25px; font-weight: bold;}
+#selectConfirm button {display: inline-block; width : 150px; height: 50px; font-size : 20px; font-weight: bold; margin: 3% 1%; border: 1px solid black; background-color: white; border-radius : 10px}
+#selectConfirm button:hover {background-color : darkgreen; color: white}
 </style>
-
+<script src="<%= request.getContextPath() %>/js/jquery-3.7.0.js"></script>
 <body>
 	<section id="beforeCartSection">
 		<h1 id= "receiptTitle"> 🥗 <%= selectedOption.get(0).getMemberId()%>님의 맞춤형 샐러드가 완성되었습니다 🥗</h1>
@@ -46,16 +49,30 @@ int totalCalorie =0;
 			%>		
 		</div>
 		<% } %>
+		<br>
 		<img src="<%= request.getContextPath() %>/images/cart/line.png" alt="" width="100%"/>
-		<br><br>
+		<br>
 		<span  class="totals">✨ Total Price : <%= totalPrice %> 원 ✨</span><br>	
-		<span  class="totals">✨ Total Calorie : <%= totalCalorie %> kcal ✨</span><br>	
+		<span  class="totals">✨ Total Calorie : <%= totalCalorie %> kcal ✨</span><br>	<br>
 		<img src="<%= request.getContextPath() %>/images/cart/receiptBottom.png" alt="" id="receipBottom" width="100%"/>
+		</div>
+		
+		<div id = "selectConfirm">
+			<h1>장바구니에 담으시겠습니까?</h1>
+			<form action="<%=request.getContextPath()%>/complete/select">
+				<input type = "hidden" id="confirmOptions" value = "<%= selectedOption %>">
+				<button type = "button" id= "goToCart"> 예 </button>
+				<button type = "button" id="goBack">아니오</button>
+			</form>
+		
 		</div>
 	</section>
 
 	<script>
-	
+		document.querySelector("#goToCart").onclick=()=>{
+			
+			
+		};
 		
 	</script>
 
