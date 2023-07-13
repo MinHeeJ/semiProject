@@ -46,4 +46,25 @@ public class MemberService {
 		return result;
 	}
 
+	public Member findById(String memberId) {
+		Connection conn = getConnection();
+		Member member = memberDao.findById(conn, memberId);
+		close(conn);
+		return member;
+	}
+
+	public int insertMember(Member newMember) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = memberDao.insertMember(conn, newMember);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
 }
