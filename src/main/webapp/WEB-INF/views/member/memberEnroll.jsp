@@ -11,7 +11,7 @@
     <form name="memberEnrollFrm" action="" method="POST">
         <table>
             <tr>
-                <th>아이디<sup>*</sup></th>
+                <th>아이디<sup>: </sup></th>
                 <td>
                     <input type="text" placeholder="4글자이상" name="memberId" id="_memberId" value="sejong" required>
                     <input type="button" value="중복검사" onclick="checkIdDuplicate();"/>
