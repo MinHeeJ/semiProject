@@ -250,3 +250,8 @@ create sequence seq_option_no;
 select * from selected_option;
 -- delete from selected_option;
 select * from ingredient;
+
+--테이블 수정 및 시퀀스 생성
+create sequence seq_cart_no;
+ALTER TABLE cart_tbl MODIFY product VARCHAR2(1000);
+ALTER TABLE order_detail MODIFY product VARCHAR2(1000);

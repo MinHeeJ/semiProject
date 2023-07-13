@@ -13,78 +13,20 @@ List<Ingredient> ingredients = (List) request.getAttribute("ingredients");
 <title></title>
 
 <style>
-.order-step {
-	display: none;
-}
-
-.order-step.active {
-	display: block;
-}
-.stepNum {
-	width: 60px;
-	height : 60px;
-    border-radius: 50%;
-    display: inline-block;
-    font-size : 50px;
-    font-weight : bold;
-    color : white;
-    background-color : darkgreen;
-    text-align: center;
-    vertical-align : center;
-    margin : 5% 0 5% 1%;
-}
-
-#selectTitle {
-	font-size : 40px;
-	font-weight : bold;
-	margin-left : 1%;
-}
-#changeStep{
-	width: 100%;
-	height : 30%;
-	margin : 10% 0 10% 0;
-}
-
-#changeStep button {
-	color : white;
-    background-color : darkgreen;
-    font-size : 20px;
-    font-weight : bold;
-	width: 80px;
-	height : 40px;
-	border-radius: 10px;
-	border-color: black;
-	display: inline-block;
-	
-}
-#nextButton {
-	position: absolute;
-	right: 30%;
-	transform: translateY(-50%);
-}
-
-#previousButton {
-	position: absolute;
-	left: 30%;
-	transform: translateY(-50%);
-}
-
-#submitButton {
-	position: absolute;
-	right: 30%;
-	transform: translateY(-50%);
-}
-#optionSelectSection{
-	width: 1024px;
-}
-#optionSelectSection form div{
-	text-align: center;
-}
-.selectTitle {
-	font-size : 40px;
-	font-weight : bold;
-	margin-left : 1%;
-}
+.order-step { display: none; }
+.order-step.active { display: block;}
+.stepNum {width: 60px; height : 60px; border-radius: 50%; display: inline-block; font-size : 50px; font-weight : bold; color : white;
+		  background-color : darkgreen; text-align: center; vertical-align : center; margin : 5% 0 5% 1%;}
+#selectTitle {font-size : 40px; font-weight : bold; margin-left : 1%;}
+#changeStep{width: 100%; height : 30%; margin : 10% 0 10% 0;}
+#changeStep button {color : white; background-color : darkgreen; font-size : 20px; font-weight : bold; width: 80px; height : 40px;
+	border-radius: 10px; border-color: black; display: inline-block;}
+#nextButton {position: absolute; right: 30%; transform: translateY(-50%);}
+#previousButton {position: absolute; left: 30%; transform: translateY(-50%);}
+#submitButton {position: absolute; right: 30%; transform: translateY(-50%);}
+#optionSelectSection{width: 1200px;}
+#optionSelectSection form div{text-align: center;}
+.selectTitle {font-size : 40px; font-weight : bold; margin-left : 1%;}
 
 </style>
 
