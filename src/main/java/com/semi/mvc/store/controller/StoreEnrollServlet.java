@@ -38,17 +38,19 @@ public class StoreEnrollServlet extends HttpServlet {
 		String address = request.getParameter("address");
 		String phone = request.getParameter("phone");
 		
-		Store newStore = new Store(0, storeName, address, phone);
+		Store newStore = new Store(' ', storeName, address, phone);
+		System.out.println("newStore = " + newStore);
 		
 		// 2. 업무로직 - db저장 요청
 		int result = storeService.insertStore(newStore);
+		System.out.println("result = " + result);
 		
 		// 결과 메세지 속성 등록 : 성공적으로 회원등록 했습니다. 
 		HttpSession session = request.getSession();
-		session.setAttribute("msg", "성공적으로 회원등록 했습니다.");
+		session.setAttribute("msg", "성공적으로 매장등록 했습니다.");
 		
 		// 3. 인덱스페이지 리다이렉트
-		response.sendRedirect(request.getContextPath() + "/");
+		response.sendRedirect(request.getContextPath() + "/store/storeList");
 	}
 
 }

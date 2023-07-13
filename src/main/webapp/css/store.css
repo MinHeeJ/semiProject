@@ -36,6 +36,15 @@ table {
 /*페이지바*/
 #pagebar{
 	text-align: center;
-	 padding: 30px;
+	padding: 30px;
 	
+}
+
+#search-container {
+	  display: inline-block;
+	 
+}
+
+#search-name{
+	display: flex;
 }

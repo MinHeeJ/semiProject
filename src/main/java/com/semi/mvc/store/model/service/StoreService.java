@@ -48,5 +48,28 @@ public class StoreService {
 		}
 		return result;
 	}
+
+	public Store findByName(String storeName) {
+		Connection conn = getConnection();
+		Store store = storeDao.findByName(conn,storeName);
+		close(conn);
+		return store;
+	}
+
+	public int deleteStore(int storeNo) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = storeDao.deleteStore(conn, storeNo);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
 	
 }

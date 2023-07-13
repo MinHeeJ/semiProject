@@ -9,7 +9,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>매장명중복검사</title>
+<style>
+div#checkName-container{text-align:center; padding-top:50px;}
+span#available {color:green; font-weight:bold;}
+span#duplicated {color:red; font-weight:bold;}
+</style>
 </head>
 	<body>
 		<div id="checkName-container">
