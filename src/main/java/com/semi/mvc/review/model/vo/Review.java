@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Review extends ReviewEntity {
 	private int attachCnt;
-	private List<Attachment> attachments = new ArrayList<>();
+	private List<AttachmentReview> attachments = new ArrayList<>();
 	private int commentCnt;
 	
 	
@@ -17,11 +17,11 @@ public class Review extends ReviewEntity {
 		this.attachCnt = attachCnt;
 	}
 
-	public List<Attachment> getAttachments() {
+	public List<AttachmentReview> getAttachments() {
 		return attachments;
 	}
 
-	public void setAttachments(List<Attachment> attachments) {
+	public void setAttachments(List<AttachmentReview> attachments) {
 		this.attachments = attachments;
 	}
 
@@ -33,7 +33,7 @@ public class Review extends ReviewEntity {
 		this.commentCnt = commentCnt;
 	}
 
-	public void addAttachment(Attachment attach) {
+	public void addAttachment(AttachmentReview attach) {
 		if(attach != null)
 			this.attachments.add(attach);
 	}
