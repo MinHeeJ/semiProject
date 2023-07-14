@@ -5,7 +5,7 @@
 <div class="account_wrapper">
     <!-- 로그인 전 -->
     <ul class="account_list">
-        <li><a href="<%= request.getContextPath() %>/member/memberLogin">로그인</a></li>
+        <li><a href="<%= request.getContextPath() %>/member/MemberLogin">로그인</a></li>
         <li><a href="<%= request.getContextPath() %>/member/memberEnroll">회원가입</a></li>
     </ul>
 
