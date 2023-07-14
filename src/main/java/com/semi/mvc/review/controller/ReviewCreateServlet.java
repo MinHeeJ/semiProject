@@ -38,11 +38,9 @@ public class ReviewCreateServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 업로드파일 저장경로 C:\\Workspaces\\web_server_workspace\\hello-mvc\\src\\main\\webapp\\upload\\board
 				ServletContext application = getServletContext();
-				String saveDirectory = application.getRealPath("/upload/board");
+				String saveDirectory = application.getRealPath("/upload/review");
 				System.out.println("saveDirectory = " + saveDirectory);
-				// 파일하나당 최대크기 10MB 
 				int maxPostSize = 1024 * 1024 * 10; 
-				// 인코딩
 				String encoding = "utf-8";
 				
 				// 파일명 재지정 정책객체
@@ -57,13 +55,12 @@ public class ReviewCreateServlet extends HttpServlet {
 				String writer = multiReq.getParameter("writer");
 				String content = multiReq.getParameter("content");
 				Review review = new Review();
-				
-//				board.setTitle(title);
-//				board.setWriter(writer);
-//				board.setContent(content);
-//				System.out.println(board);
-//				
-				// Attachment객체 생성 (Board 추가)
+				review.setTitle(title);
+				review.setWriter(writer);
+				review.setContent(content);
+				System.out.println(review);
+//			
+				// Attachment객체 생성 (review 추가)
 				Enumeration<String> filenames = multiReq.getFileNames(); // upFile1, upFile2
 				while(filenames.hasMoreElements()) {
 					String name = filenames.nextElement(); // input:file[name]
@@ -72,17 +69,16 @@ public class ReviewCreateServlet extends HttpServlet {
 						Attachment attach = new Attachment();
 						attach.setOriginalFilename(multiReq.getOriginalFileName(name));
 						attach.setRenamedFilename(multiReq.getFilesystemName(name)); // renamedFilename
-//						board.addAttachment(attach);
+						review.addAttachment(attach);
 					}
 				}
 				
 				// 2. 업무로직
-//				int result = reviewService.insertBoard(board);
+			//	int result = reviewService.insertReview(review);
 				
 				// 3. 응답처리 (목록페이지로 redirect) - POST방식 DML처리후 url변경을 위해 redirect처리
-//				request.getSession().setAttribute("msg", "게시글이 성공적으로 등록되었습니다.");
-				
-//				response.sendRedirect(request.getContextPath() + "/board/boardDetail?no=" + board.getNo());
+				request.getSession().setAttribute("msg", "게시글이 성공적으로 등록되었습니다.");
+				response.sendRedirect(request.getContextPath() + "/review/review" + review.getReviewNo());
 	}
 
 }

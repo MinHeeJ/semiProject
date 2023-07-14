@@ -42,7 +42,7 @@
 </section>
 <script>
 /**
-* boardCreateFrm 유효성 검사
+* reviewCreateFrm 유효성 검사
 */
 document.reviewCreateFrm.onsubmit = (e) => {
 	const frm = e.target;
