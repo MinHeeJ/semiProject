@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+/*메인*/
+
+h2{
+	 font-size: 40px;
+	 text-align: center;
+	 font-weight: 600;
+	 padding: 100px;
+}
+
+/*테이블*/
+#tbl-board-view {
+   	margin : auto;
+    border: 3px solid #ddd;
+    border-collapse: collapse;
+    width: 60%;
+    padding: 100px;
+     
+  }
+  
+  
+th, td {
+    padding: 8px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+  }
+  
