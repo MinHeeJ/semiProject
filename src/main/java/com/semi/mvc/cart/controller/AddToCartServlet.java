@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.oreilly.servlet.MultipartRequest;
 import com.semi.mvc.cart.model.service.CartService;
-import com.semi.mvc.cart.model.vo.SelectedOption;
+import com.semi.mvc.cart.model.vo.Cart;
 
 /**
  * Servlet implementation class AddToCartServlet
@@ -37,18 +37,26 @@ public class AddToCartServlet extends HttpServlet {
 		String saladOrBread = multiReq.getParameter("saladOrBread");
 		String memberId = multiReq.getParameter("memberId");
 		confirmOptions = saladOrBread + " " + confirmOptions;
-		System.out.println(confirmOptions);
 		
-		System.out.println(confirmOptions + "   "+ totalPrice +"   " +"memberId" + memberId);
-		int result = 0;
+		List<Cart> allCarts = cartService.findAllCart(memberId);
 		
-		result = cartService.insertCart(confirmOptions, totalPrice, memberId);
+		boolean flag = false;
+		int result =0;
+		
+		for(Cart cart : allCarts) {
+			if(cart.getProduct().equals(confirmOptions)) {
+				result = cartService.updateCart(cart.getCartNo(), cart.getCount() + 1);
+				flag = true;
+			}
+		}
+		
+		if(!flag)
+			result = cartService.insertCart(confirmOptions, totalPrice, memberId);
 		
 		Map<String, Object> map = new HashMap<>();
 		response.setContentType("text/plain; charset=utf-8");
 		map.put("result", "success");
 		map.put("message", "장바구니 추가");
-		map.put("cart", "");
 		new Gson().toJson(map, response.getWriter());
 	}
 
