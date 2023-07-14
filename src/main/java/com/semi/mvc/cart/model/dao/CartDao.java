@@ -145,6 +145,21 @@ private Properties prop = new Properties();
 		}
 		return result;
 	}
+
+	
+	public int deleteCart(Connection conn, int cartNo) {
+		int result = 0;
+		String sql = prop.getProperty("deleteCart");
+		// delete from cart_tbl where cart_no = ?
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, cartNo);				
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new CartException(e);
+		}
+		return result;
+	}
 	
 	
 
