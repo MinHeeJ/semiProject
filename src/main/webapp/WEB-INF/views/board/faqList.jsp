@@ -19,5 +19,6 @@
 	$('div.title').click((e) => {
 		$(e.target).next().slideToggle().siblings('p.content').slideUp();
 	});
+	
 </script>
 </section>
