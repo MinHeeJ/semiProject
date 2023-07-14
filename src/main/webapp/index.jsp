@@ -13,7 +13,7 @@
         <div class="user_info_container">
             <span>***님, 환영합니다!</span>
             <ul class="account_list">
-                <li><a href="">장바구니</a></li>
+                <li><a href="<%= request.getContextPath()%>/cart/cartList.jsp">장바구니</a></li>
                 <li><a href="">마이페이지</a></li>
                 <li><a href="">로그아웃</a></li>
             </ul>

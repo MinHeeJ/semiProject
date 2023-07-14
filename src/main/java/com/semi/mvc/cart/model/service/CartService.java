@@ -91,4 +91,19 @@ public class CartService {
 		return result;
 	}
 
+	public int deleteCart(int cartNo) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = cartDao.deleteCart(conn, cartNo);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
 }

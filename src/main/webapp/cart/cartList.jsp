@@ -6,7 +6,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 <%
-List<Cart> carts = (List)request.getAttribute("carts");
+// List<Cart> carts = (List)request.getAttribute("carts");
 
 %>
 <html>
@@ -45,23 +45,7 @@ List<Cart> carts = (List)request.getAttribute("carts");
             </tr>
         </thead>
         <tbody>
-        
-        <%
-        	for(int i = 0; i < carts.size(); i++){
-        %>
-      		<tr>
-                <td><input type="checkbox" name= "checkedOrNot" value = "<%= carts.get(i).getCartNo()%>"></td>
-                <td><%= i +1 %></td>
-                <td><%= carts.get(i).getProduct() %></td>
-                <td><input type="number" name= "quentity" min="1" max="10" value = "1">
-                	<input type = "hidden" name= "cartNumber" value="<%= carts.get(i).getCartNo()%>">
-                </td>
-                <td><%= carts.get(i).getPrice() %></td>
-            </tr>
-        		      
-        <%
-        	}
-        %>       
+   
         </tbody>
     </table>
 	<button id="order">주문하기</button>
@@ -70,7 +54,72 @@ List<Cart> carts = (List)request.getAttribute("carts");
 	</section>
 
 	<script>
+	window.onload=()=>{
+		
+		findAllCeleb();
+		
+	}
 	
+	const findAllCeleb = () =>{
+		$.ajax({
+			url: "<%= request.getContextPath()%>/myCart/list",
+			dataType : "json",
+			success(responseData){
+				console.log(responseData); 
+				const tbody = document.querySelector("#cartListTable tbody");
+				tbody.innerHTML ="";
+				let index = 1;
+				responseData.forEach((cart)=>{
+					const{cartNo, product, count, price} = cart;
+					tbody.innerHTML += `
+						<tr>
+		                <td><input type="checkbox" name= "checkedOrNot" value = "\${cartNo}"></td>
+		                <td>\${index}</td>
+		                <td>\${product}</td>
+		                <td><input type="number" name= "quentity" min="1" max="10" value = "\${count}">
+		                	<input type = "hidden" name= "cartNumber" value="\${cartNo}">
+		                </td>
+		                <td>\${price}</td>
+		           		</tr>
+					`;
+					index++;
+				});			
+			}
+		
+		});
+	};
+	
+	document.querySelector("#cartDelete").onclick =(e) =>{
+		if(confirm('정말 삭제하시겠습니까?')) {
+			document.querySelector("#printCartList").onsubmit =(e) =>{
+			
+				e.preventDefault();
+			
+				const frmData = new FormData(e.target); 
+				$.ajax({				
+					url : "<%= request.getContextPath()%>/delete/cart",
+					data : frmData,
+					processData : false, 
+					contentType : false, 
+					method : "POST",
+					dataType : "json",
+					success(responseData){
+						const {result, message} = responseData;
+						alert(message);				
+					},
+					complete(){
+						findAllCeleb();
+					}
+				});
+			
+			}
+		
+		}
+	}	
+	
+	document.querySelector("#cartUpdate").onclick =(e) =>{
+		
+		
 		document.querySelector("#printCartList").onsubmit =(e) =>{
 			
 			e.preventDefault();
@@ -89,12 +138,15 @@ List<Cart> carts = (List)request.getAttribute("carts");
 				
 				},
 				complete(){
-					console.log("완료");
+					findAllCeleb();
 				}
 			
 			});
 			
 		}
+		
+	}	
+	
 		
 	</script>
 
