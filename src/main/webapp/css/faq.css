@@ -1,0 +1,28 @@
+@CHARSET "UTF-8";
+.faqContainer{
+	display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.title {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 600px;
+    height: 30px;
+    color: white;
+    background-color: #086528;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 3px;
+    margin: 3px 0;
+    margin-bottom: 10px;
+}
+.content {
+    width: 600px;
+    margin: 3px 0;
+    padding: 3px;
+    border: 1px solid #086528;
+    border-radius: 10px;
+    display: none;
+}

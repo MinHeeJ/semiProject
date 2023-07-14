@@ -1,7 +1,9 @@
+<%@ page import="com.semi.mvc.member.model.vo.Member" %>
+<%@ page import="com.semi.mvc.member.model.vo.MemberRole" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-    String loginMember = null;
+	Member loginMember = new Member();
 %>
 <!DOCTYPE html>
 <html>
@@ -9,7 +11,7 @@
 <meta charset="UTF-8">
 <title>킥킥샐러드</title>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/main.css" />
-
+<script src="<%= request.getContextPath() %>/js/jquery-3.7.0.js"></script>
 </head>
 <body>
     <header>
@@ -49,9 +51,6 @@
         <% } %>
     </div>
     
-	<div class="serviceCenter">
-	<a href="#">고객센터</a>
-	</div>
     <!-- 로그인 후 -->
     <!-- <div class="recommend_contents login_after">
         <div id="balloon">
