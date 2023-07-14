@@ -3,7 +3,7 @@ package com.semi.mvc.review.model.vo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Review {
+public class Review extends ReviewEntity {
 	private int attachCnt;
 	private List<Attachment> attachments = new ArrayList<>();
 	private int commentCnt;
