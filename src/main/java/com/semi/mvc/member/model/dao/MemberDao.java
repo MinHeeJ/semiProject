@@ -26,6 +26,22 @@ public class MemberDao {
 		}
 	}
 
+	public Member findById(Connection conn, String memberId) {
+	    String sql = "SELECT * FROM member WHERE member_id = ?";
+	    Member member = null;
+	    try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+	        pstmt.setString(1, memberId);
+	        try (ResultSet rset = pstmt.executeQuery()) {
+	            while (rset.next()) {
+	                member = handleMemberResultSet(rset);
+	            }
+	        }
+	    } catch (SQLException e) {
+	        throw new MemberException(e);
+	    }
+	    return member;
+	}
+	
 	public List<Member> findAll(Connection conn) {
 		List<Member> members = new ArrayList<>();
 		String sql = prop.getProperty("findAll");
@@ -87,21 +103,7 @@ public class MemberDao {
 		return result;
 	}
 
-	public Member findById(Connection conn, String memberId) {
-		String sql = prop.getProperty("findById"); // select * from member where member_id = ?
-		Member member = null;
-		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setString(1, memberId);
-			try (ResultSet rset = pstmt.executeQuery()) {
-				while (rset.next()) {
-					member = handleMemberResultSet(rset);
-				}
-			}
-		} catch (SQLException e) {
-			throw new MemberException(e);
-		}
-		return member;
-	}
+
 
 	public int insertMember(Connection conn, Member newMember) {
 	    int result = 0;

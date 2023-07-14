@@ -11,6 +11,10 @@ import com.semi.mvc.member.model.vo.MemberRole;
 public class MemberService {
 	private final MemberDao memberDao = new MemberDao();
 	
+	
+
+	
+	
 	public List<Member> findAll() {
 		Connection conn = getConnection();
 		List<Member> members = memberDao.findAll(conn);
@@ -68,3 +72,4 @@ public class MemberService {
 		return result;
 	}
 }
+
