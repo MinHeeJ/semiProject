@@ -13,20 +13,29 @@ List<Ingredient> ingredients = (List) request.getAttribute("ingredients");
 <title></title>
 
 <style>
+@font-face {font-family: 'Giants-Inline'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Giants-Inline.woff2') format('woff2'); font-weight: normal; font-style: normal;}
+@font-face {font-family: 'GongGothicMedium'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff'); font-weight: normal; font-style: normal;}
+@font-face {font-family: 'IBMPlexSansKR-Regular'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff') format('woff'); font-weight: normal; font-style: normal;}
+@font-face {font-family: 'GmarketSansMedium';src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');font-weight: normal;font-style: normal;}
+
 .order-step { display: none; }
 .order-step.active { display: block;}
-.stepNum {width: 60px; height : 60px; border-radius: 50%; display: inline-block; font-size : 50px; font-weight : bold; color : white;
-		  background-color : darkgreen; text-align: center; vertical-align : center; margin : 5% 0 5% 1%;}
+.stepNum {width: 60px; height : 60px; border-radius: 50%; display: inline-block; font-size : 40px; font-weight : bold; color : white; background-color : darkgreen; text-align: center; vertical-align : middle; margin : 5% 0 5% 1%;}
 #selectTitle {font-size : 40px; font-weight : bold; margin-left : 1%;}
 #changeStep{width: 100%; height : 30%; margin : 10% 0 10% 0;}
-#changeStep button {color : white; background-color : darkgreen; font-size : 20px; font-weight : bold; width: 80px; height : 40px;
-	border-radius: 10px; border-color: black; display: inline-block;}
+#changeStep button {color : white; background-color : darkgreen; font-size : 20px; font-weight : bold; width: 80px; height : 40px; border-radius: 10px; border-color: black; display: inline-block;}
 #nextButton {position: absolute; right: 30%; transform: translateY(-50%);}
 #previousButton {position: absolute; left: 30%; transform: translateY(-50%);}
 #submitButton {position: absolute; right: 30%; transform: translateY(-50%);}
-#optionSelectSection{width: 1200px;}
+#optionSelectSection{width: 1200px; font-family:'GmarketSansMedium', Courier, monospace; vertical-align : middle;}
 #optionSelectSection form div{text-align: center;}
 .selectTitle {font-size : 40px; font-weight : bold; margin-left : 1%;}
+#bread {width:300px; height :300px; background-color: white; background-image: url('<%= request.getContextPath() %>/images/cart/bread.png'); background-repeat: no-repeat; background-size: contain; background-position-y : center;}
+#saladBowl {width:300px; height :300px; background-color: white; background-image: url('<%= request.getContextPath() %>/images/cart/salad.png'); background-repeat: no-repeat; background-size: contain; background-position-y : center;}
+#step1 button{border: 0px solid black; margin: 1% 4%; border-radius: 20px;}
+#step1 button:hover{background-color: lightgreen;}
+#step1 button:click{background-color: lightgreen;}
+.labels{display: inline-block; font-size : 25px; font-weight : bold; width:300px; margin: 0% 4%;}
 
 </style>
 
@@ -37,9 +46,12 @@ List<Ingredient> ingredients = (List) request.getAttribute("ingredients");
 			<div class = "stepNum">1</div>
 			<span id= "selectTitle">메인 선택</span>
 			<br><br>
-			<img src="<%= request.getContextPath() %>/images/cart/HanSohee.jpg" alt="" id="bread"  width="300px"/>
-			<img src="<%= request.getContextPath() %>/images/cart/goYoonjung.jpg" alt="" id="saladBowl" width="300px"/>
-			<input type="hidden" class="selectSalad" name="saladOrBread">
+			<button type="button" id="bread"></button>
+			<button type="button" id="saladBowl"></button>
+			<br>
+			<span id="labelForbread" class="labels">호밀빵</span>
+			<span id="labelForSaladbowl" class="labels">샐러드볼</span>
+			<input type="hidden" class="selectSalad" name="saladOrBread" value="3">
 		</div>
 		
 		<%
@@ -77,12 +89,15 @@ List<Ingredient> ingredients = (List) request.getAttribute("ingredients");
 		let currentStep = 1;
 		let totalSteps = 5;
 		window.onload=()=>{
-			const images = document.querySelectorAll("#step1 img");
-			for(let i = 0; i <images.length; i++){
-				console.log(images);
-				images[i].onclick =(e) =>{
+			const buttons = document.querySelectorAll("#step1 button");
+			for(let i = 0; i <buttons.length; i++){
+				buttons[i].onclick =(e) =>{
 					document.querySelector(".selectSalad").value = i+1;
-					console.log(document.querySelector(".selectSalad").value);
+					buttons[i].style.backgroundColor = "lightgreen";
+					if(i == 0)
+						buttons[1].style.backgroundColor = "white";
+					else
+						buttons[0].style.backgroundColor = "white";
 				};			
 			}		
 		};
@@ -99,28 +114,33 @@ List<Ingredient> ingredients = (List) request.getAttribute("ingredients");
 		}
 
 		function nextStep() {
-			if (currentStep < totalSteps) {
-				currentStep++;
-				updateStepVisibility();
-			}
-			if (currentStep === totalSteps) {
-				document.getElementById("nextButton").style.display = "none";
-				document.getElementById("submitButton").style.display = "block";
-			}
+			if(document.querySelector(".selectSalad").value == 3){
+				alert("메인을 골라주세요!");
+			} else {			
+				if (currentStep < totalSteps) {
+					currentStep++;
+					updateStepVisibility();
+				}
+				if (currentStep === totalSteps) {
+					document.getElementById("nextButton").style.display = "none";
+					document.getElementById("submitButton").style.display = "block";
+				}
 			
-			const selectTitles = document.querySelectorAll(".selectTitle");
-			for(let i = 0; i <selectTitles.length; i++){
-				const selectTitle = selectTitles[i].innerHTML;
-				if (selectTitle == 2) {
-					selectTitles[i].innerHTML = "야채 선택";
-				} else if (selectTitle == 3) {
-					selectTitles[i].innerHTML= "소스 선택";
-				} else if (selectTitle == 4) {
-					selectTitles[i].innerHTML = "토핑 선택";
-				} else if (selectTitle == 5) {
-					selectTitles[i].innerHTML = "음료 선택";
+				const selectTitles = document.querySelectorAll(".selectTitle");
+				for(let i = 0; i <selectTitles.length; i++){
+					const selectTitle = selectTitles[i].innerHTML;
+					if (selectTitle == 2) {
+						selectTitles[i].innerHTML = "야채 선택";
+					} else if (selectTitle == 3) {
+						selectTitles[i].innerHTML= "소스 선택";
+					} else if (selectTitle == 4) {
+						selectTitles[i].innerHTML = "토핑 선택";
+					} else if (selectTitle == 5) {
+						selectTitles[i].innerHTML = "음료 선택";
+					}
 				}
 			}
+			
 		}
 
 		function updateStepVisibility() {
