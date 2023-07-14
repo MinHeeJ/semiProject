@@ -78,9 +78,11 @@ public class CartService {
 
 	public int updateCart(int cartNo, int updateQuentity) {
 		int result = 0;
+		Cart cart = null;
 		Connection conn = getConnection();
 		try {
-			result = cartDao.updateCart(conn, cartNo, updateQuentity);
+			cart = cartDao.findByCartNo(conn, cartNo);
+			result = cartDao.updateCart(conn, cart, updateQuentity);
 			commit(conn);
 		} catch (Exception e) {
 			rollback(conn);

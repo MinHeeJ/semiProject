@@ -131,13 +131,15 @@ private Properties prop = new Properties();
 		return carts;
 	}
 
-	public int updateCart(Connection conn, int cartNo, int updateQuentity) {
+	public int updateCart(Connection conn, Cart cart, int updateQuentity) {
 		int result = 0;
+		int updatePrice = cart.getPrice() / cart.getCount() * updateQuentity;
 		String sql = prop.getProperty("updateQuentity");
-		// update cart_tbl set count = ? where cart_no = ?
+		// update cart_tbl set count = ?, price= ? where cart_no = ?;
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setInt(1, updateQuentity);		
-			pstmt.setInt(2, cartNo);		
+			pstmt.setInt(2, updatePrice);				
+			pstmt.setInt(3, cart.getCartNo());		
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -159,6 +161,31 @@ private Properties prop = new Properties();
 			throw new CartException(e);
 		}
 		return result;
+	}
+
+	public Cart findByCartNo(Connection conn, int cartNo) {
+		Cart cart = new Cart();
+		String sql = prop.getProperty("findByCartNo");
+		
+		// select * from cart_tbl where cart_no = ?
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setInt(1, cartNo);
+			
+			try(ResultSet rset = pstmt.executeQuery()) {
+				while(rset.next()) {				
+					cart.setCartNo(rset.getInt("cart_no"));
+					cart.setProduct(rset.getString("product"));
+					cart.setCount(rset.getInt("count"));
+					cart.setPrice(rset.getInt("price"));
+				}		
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new CartException(e);
+		}
+				
+		return cart;
 	}
 	
 	

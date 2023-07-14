@@ -38,7 +38,7 @@ public class UpdateCartServlet extends HttpServlet {
 			for(int z = 0; z < cartNumber.length; z++) {
 				if(checkedOrNot[i].equals(cartNumber[z])) {
 					int cartNo = Integer.parseInt(cartNumber[z]);
-					int updateQuentity = Integer.parseInt(quentity[z]);
+					int updateQuentity = Integer.parseInt(quentity[z]);		
 					result = cartService.updateCart(cartNo, updateQuentity);
 				}
 				
