@@ -68,10 +68,14 @@ insert into order_tbl values(2, 'admin', default, default);
 insert into order_tbl values(3, 'admin', '2023-06-11', default);
 --update order_tbl set state = '준비완료' where order_no = 2;
 select * from order_tbl;
+create sequence seq_order_no;
+--drop sequence seq_order_no;
+--insert into order_tbl values(seq_order_no.nextval, 'honggd', default, default);
+--delete from order_tbl where member_id = 'honggd';
 
 create table cart_tbl (
     cart_no number,
-	product	varchar2(100),
+	product	varchar2(1000),
 	member_id varchar2(20),
 	count number default 1,
 	price number not null,
@@ -83,6 +87,9 @@ insert into cart_tbl values(1, '양상추 닭가슴살 콜라', 'honggd', 1, 500
 insert into cart_tbl values(2, '루꼴라 연어 콜라', 'honggd', 1, 7000);
 insert into cart_tbl values(4, '양파 고기 콜라', 'admin', 1, 4000);
 select * from cart_tbl;
+create sequence seq_cart_no;
+--drop sequence seq_cart_no;
+alter table cart_tbl modify product varchar2(1000);
 
 create table board (
 	board_no number,
@@ -113,7 +120,7 @@ create table order_detail (
 	order_serial_no number,
     order_no number,
     cart_no number,
-    product varchar2(100),
+    product varchar2(1000),
     count number,
     price number,
     constraints pk_order_detail_order_serial_no primary key(order_serial_no),
@@ -125,9 +132,11 @@ insert into order_detail values(1, 1, 1, '양상추 닭가슴살 콜라', 1, 500
 insert into order_detail values(2, 1, 2, '루꼴라 연어 콜라', 1, 7000);
 insert into order_detail values(4, 3, 4, '양파 고기 콜라', 1, 4000);
 select * from order_detail;
-
---select * from (select * from order_tbl t left join order_detail d on t.order_no = d.order_no) where order_date between '2023-07-01' and '2023-07-14' order by order_date;
-
+alter table order_detail modify product varchar2(1000);
+create sequence seq_order_serial_no;
+--drop sequence seq_order_serial_no;
+--select * from (select * from order_tbl t left join order_detail d on t.order_no = d.order_no) where order_date between '2023-07-01' and '2023-07-16' order by order_date;
+select * from order_detail d join order_tbl t on d.order_no = t.order_no;
 
 create table store (
 	store_no number,
@@ -206,23 +215,23 @@ create table review (
     constraints pk_review_no primary key(review_no),
     constraints fk_review_writer foreign key(writer) references member(member_id) on delete cascade
 );
-create sequence seq_review_no;
-select * from review;
 --drop table review;
 
-create table attachment_review (
+create table attachment (
     no number, 
-    review_no number not null,
+    board_no number not null,
     original_filename varchar2(255) not null, -- 실제파일명
     renamed_filename varchar2(255) not null, -- 저장파일명 (영문자/숫자)
     reg_date date default sysdate,
     constraints pk_attachment_no primary key(no),
-    constraints fk_attachment_review_no foreign key(review_no) references review(review_no) on delete cascade
+    constraints fk_attachment_board_no foreign key(board_no) references board(board_no)  on delete cascade,
+    constraints fk_attachment_review_no foreign key(board_no) references review(review_no) on delete cascade
+    
 );
-create sequence seq_attachment_review_no;
+select * from attachment;
+--drop table attachment;
 
-select * from attachment_review;
---drop table attachment_review;
+
 
 create table like_tbl (
 	like_no	number,
