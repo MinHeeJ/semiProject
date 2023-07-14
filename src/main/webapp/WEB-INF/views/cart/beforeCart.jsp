@@ -115,7 +115,7 @@ String memberId = "";
 				 window.location.href = '<%= request.getContextPath() %>/OnlinOrder';    
 		};
 		document.querySelector("#completeAddCart button").onclick=()=>{
-			window.location.href = '<%= request.getContextPath()%>/myCart/list';    
+			window.location.href = '<%= request.getContextPath()%>/cart/cartList.jsp';    
 		};		
 		
 	</script>

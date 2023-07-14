@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
 import com.semi.mvc.cart.model.service.CartService;
 import com.semi.mvc.cart.model.vo.Cart;
 
@@ -33,9 +34,15 @@ public class CartListServlet extends HttpServlet {
 		String memberId = "honggd";		
 		
 		List<Cart> carts = cartService.findAllCart(memberId);
-		request.setAttribute("carts", carts);
+//		request.setAttribute("carts", carts);
 		
-		request.getRequestDispatcher("/WEB-INF/views/cart/cartList.jsp").forward(request, response);
+		response.setContentType("application/json; charset=utf-8");
+		
+		// 바디
+		Gson gson = new Gson();
+		String jsonStr = gson.toJson(carts); // toJson(이 안에 제이슨으로 바꾸고 싶은 파일을 넣으면 된다)
+		System.out.println("jsonStr = " + jsonStr);
+		response.getWriter().append(jsonStr);
 	}
 
 
