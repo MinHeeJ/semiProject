@@ -45,6 +45,28 @@
     .inpType{padding-left:6px;height:24px;line-height:24px;border:1px solid #dbdbdb}
     .btncalendar{display:inline-block;width:22px;height:22px;background:url("images/하트.png") center center no-repeat; background-size: 15px 15px; text-indent:-999em}
 	.wrapper{text-align: center;}
+h1 {
+	font-size: 50px;
+	text-align: center;
+}
+table#tbl-salesLookUp {
+	width: 990px;
+	margin: 0 auto;
+	border: 1px solid black;
+	border-collapse: collapse;
+	text-align: center;
+}
+table#tbl-salesLookUp th {
+	width: 150px; 
+	border: 1px solid; 
+	padding: 10px; 
+	text-align: center; 
+}
+table#tbl-salesLookUp td {
+	border: 1px solid; 
+	padding: 10px; 
+	text-align: center;
+}
 </style>
 
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -135,17 +157,8 @@
 	
     <div class="wrapper">
 	<h1>매출조회</h1>
-        <table>
-            <thead>
-              <tr>
-              	<th>주문번호</th>
-                <th>회원아이디</th>
-                <th>상품</th>
-                <th>수량</th>
-                <th>주문일자</th>
-                <th>금액</th>
-              </tr>
-            </thead>
+        <table id="tbl-salesLookUp">
+            <thead></thead>
             <tbody></tbody>
             <tfoot></tfoot>
          </table>
@@ -257,6 +270,8 @@
         $("#searchStartDate").datepicker( "option", "maxDate", endDate );
 
     }
+    
+    
     document.salesLookUpFrm.onsubmit = (e) => {
     	e.preventDefault();
     	
@@ -274,6 +289,7 @@
     			const {result, orders} = responseData;
     			console.log(orders);
     			
+    			const thead = document.querySelector(".wrapper table thead");
     			const tbody = document.querySelector(".wrapper table tbody");
     			const tfoot = document.querySelector(".wrapper table tfoot");
     			tbody.innerHTML = "";
@@ -284,6 +300,16 @@
     				sum += temp.price;
     				console.log(sum);
     				
+    				thead.innerHTML = `
+    					<tr>
+	    	              	<th>주문번호</th>
+	    	                <th>회원아이디</th>
+	    	                <th>상품</th>
+	    	                <th>수량</th>
+	    	                <th>주문일자</th>
+	    	                <th>금액</th>
+    	              	</tr>
+    				`;
                     tbody.innerHTML += `
                         <tr>
                             <td>\${temp.orderNo}</td>

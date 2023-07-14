@@ -33,12 +33,17 @@ public class OrderServlet extends HttpServlet {
 		String[] checkedOrNot = request.getParameterValues("checkedOrNot");
 		
 		// 2. 업무로직
+		// order_tbl에 추가
+		int result = 0;
+		result = orderService.insertOrder(memberId);
+		
 		for(int i=0; i<checkedOrNot.length; i++) {
 			for(int j=0; j<cartNumber.length; j++) {
 				if(checkedOrNot[i].equals(cartNumber[j])) {
 					int cartNo = Integer.parseInt(cartNumber[j]);
 					System.out.println(cartNo);
-					int result = orderService.insertOrder(memberId, cartNo);
+					// order_detail에 추가
+					result = orderService.insertOrder(cartNo);
 				}
 			}
 		}

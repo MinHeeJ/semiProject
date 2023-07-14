@@ -78,7 +78,7 @@
 				tfoot.innerHTML ="";
 				
 				let index = 1;
-				let sum = 0;
+				
 				responseData.forEach((cart)=>{
 					const{cartNo, product, count, price} = cart;
 					
@@ -94,20 +94,31 @@
 		           		</tr>
 					`;
 					index++;
-				});		
-				responseData.forEach((cart) => {
-					const{price} = cart;
 					
-					if($('input[name="checkedOrNot"]').is(':checked')) {
-						console.log(123);
-					}
 					
-					tfoot.innerHTML =  `
-                   	 	<tr>
-               	 			<td colspan="6">총매출 : \${sum}</td>
-               	 		</tr>
-               	 	`;
-				})
+				});	
+				
+				let sum = 0;
+				document.querySelectorAll("input[name=checkedOrNot]").forEach((checkbox) => {
+					console.log(checkbox);
+					checkbox.addEventListener('change', () => {
+						if(checkbox.checked) {
+							const tr = checkbox.closest("tr"); // checkbox중 가장 가까운 tr
+						    const price = parseFloat(tr.querySelector('td:last-child').innerHTML);
+						    sum += price;
+						}
+						else {
+							const tr = checkbox.closest('tr');
+						    const price = parseFloat(tr.querySelector('td:last-child').innerHTML);
+						    sum -= price;
+						}
+						tfoot.innerHTML = `
+							<tr>
+								<td colspan="6">총금액 : \${sum}원</td>
+							</tr>
+						`;
+						});
+					});				
 			}
 		
 		});

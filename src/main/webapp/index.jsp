@@ -27,7 +27,7 @@
             <ul class="account_list">
                 <li><a href="<%= request.getContextPath() %>/admin/salesLookUp.jsp">매출조회</a></li>
                 <li><a href="<%= request.getContextPath() %>/admin/orderList">전체주문내역</a></li>
-                <li><a href="<%= request.getContextPath() %>/admin/memberList">전체회원조회</a></li>
+                <li><a href="<%= request.getContextPath() %>/admin/memberList.jsp">전체회원조회</a></li>
                 <li><a href="">로그인</a></li>
             </ul>
         </div>

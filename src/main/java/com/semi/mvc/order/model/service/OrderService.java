@@ -48,14 +48,28 @@ public class OrderService {
 		return orders;
 	}
 
-	public int insertOrder(String memberId, int cartNo) {
+	public int insertOrder(String memberId) {
+		// order_tbl에 추가
 		int result = 0;
 		Connection conn = getConnection();
 		
 		try {
-			// order_tbl에 추가
 			result = orderDao.insertOrder(conn, memberId);
-			
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+	
+	public int insertOrder(int cartNo) {
+		int result = 0;
+		Connection conn = getConnection();
+		
+		try {
 			// cart 조회
 			Cart cart = cartDao.findByCartNo(conn, cartNo);
 			System.out.println(cart);
@@ -73,6 +87,9 @@ public class OrderService {
 			// order_detail에 추가
 			result = orderDao.insertOrderDetail(conn, order);
 			
+			// cart_tbl에서 삭제
+			result = cartDao.deleteCart(conn, cartNo);
+			
 			commit(conn);
 		} catch (Exception e) {
 			rollback(conn);
@@ -89,5 +106,6 @@ public class OrderService {
 		close(conn);
 		return orders;
 	}
+
 
 }
