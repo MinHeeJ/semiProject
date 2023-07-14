@@ -21,7 +21,7 @@
 			<p class="content"><%= faq.getContent() %></p>
 			<% if(admin){ %>
 			<input type="button" id="btn-update" value="수정" onclick="location.href = '<%= request.getContextPath() %>/board/faqUpdate?no=<%= faq.getBoardNo() %>';"/>
-			<input type="button" id="btn-delete" value="삭제" onclick="location.href = '<%= request.getContextPath() %>/board/faqUpdate?no=<%= faq.getBoardNo() %>';"/>
+			<input type="button" id="btn-delete" value="삭제" onclick="location.href = '<%= request.getContextPath() %>/board/faqDelete?no=<%= faq.getBoardNo() %>';"/>
 			<% } %>
 		<% } %>
 	<% } %>
@@ -30,6 +30,7 @@
 	<div class="title">title</div>
 	<p class="content">content</p>
 </section>
+
 <script>
 	$('div.title').click((e) => {
 		$(e.target).next().slideToggle().siblings('p.content').slideUp();
