@@ -116,7 +116,7 @@ public class MemberDao {
 	        pstmt.setString(4, newMember.getPhone());
 	        pstmt.setString(5, newMember.getAddress());
 	        pstmt.setString(6, newMember.getGender() != null ? newMember.getGender().name() : null);
-	        pstmt.setString(7, newMember.getMemberRole() != null ? newMember.getMemberRole().name() : null);
+	     
 
 	        result = pstmt.executeUpdate();
 	    } catch (SQLException e) {
