@@ -1,5 +1,7 @@
 <%@ page import="com.semi.mvc.member.model.vo.Member" %>
 <%@ page import="com.semi.mvc.member.model.vo.MemberRole" %>
+<%@ page import="java.text.SimpleDateFormat"%>
+<%@ page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
