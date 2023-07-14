@@ -2,21 +2,22 @@ package com.semi.mvc.review.model.vo;
 
 import java.sql.Date;
 
-public class Attachment {
+public class AttachmentReview {
 	private int no;
-	private int boardNo;
+	private int reviewNo;
 	private String originalFilename;
 	private String renamedFilename;
 	private Date regDate;
 	
-	public Attachment() {
+	public AttachmentReview() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public Attachment(int no, int boardNo, String originalFilename, String renamedFilename, Date regDate) {
+	public AttachmentReview(int no, int reviewNo, String originalFilename, String renamedFilename, Date regDate) {
 		super();
 		this.no = no;
-		this.boardNo = boardNo;
+		this.reviewNo = reviewNo;
 		this.originalFilename = originalFilename;
 		this.renamedFilename = renamedFilename;
 		this.regDate = regDate;
@@ -30,12 +31,12 @@ public class Attachment {
 		this.no = no;
 	}
 
-	public int getBoardNo() {
-		return boardNo;
+	public int getReviewNo() {
+		return reviewNo;
 	}
 
-	public void setBoardNo(int boardNo) {
-		this.boardNo = boardNo;
+	public void setReviewNo(int reviewNo) {
+		this.reviewNo = reviewNo;
 	}
 
 	public String getOriginalFilename() {
@@ -64,7 +65,7 @@ public class Attachment {
 
 	@Override
 	public String toString() {
-		return "Attachment [no=" + no + ", boardNo=" + boardNo + ", originalFilename=" + originalFilename
+		return "AttachmentReview [no=" + no + ", reviewNo=" + reviewNo + ", originalFilename=" + originalFilename
 				+ ", renamedFilename=" + renamedFilename + ", regDate=" + regDate + "]";
 	}
 	
