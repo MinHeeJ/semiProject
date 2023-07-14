@@ -1,0 +1,45 @@
+package com.semi.mvc.order.controller;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.semi.mvc.member.model.vo.Member;
+import com.semi.mvc.order.model.service.OrderService;
+import com.semi.mvc.order.model.vo.Order;
+
+/**
+ * Servlet implementation class OrderListServlet
+ */
+@WebServlet("/order/orderList")
+public class OrderListServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private final OrderService orderService = new OrderService();
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 1. 사용자 입력값 처리
+//		HttpSession session = request.getSession();
+//		Member loginMember = (Member) session.getAttribute("loginMember");
+//		String memberId = loginMember.getMemberId();
+		String memberId = request.getParameter("memberId");
+		
+		// 2. 업무로직
+		List<Order> orders = orderService.findById(memberId);
+		System.out.println(orders);
+		request.setAttribute("orders", orders);
+		
+		// 3. 응답처리
+		request.getRequestDispatcher("/WEB-INF/views/order/orderList.jsp")
+			.forward(request, response);
+	}
+
+}
