@@ -94,6 +94,11 @@ public class Board {
 	public void setCommentCnt(int commentCnt) {
 		this.commentCnt = commentCnt;
 	}
+	
+	public void addAttachment(Attachment attach) {
+		if(attach != null)
+			this.attachments.add(attach);
+	}
 
 	@Override
 	public String toString() {

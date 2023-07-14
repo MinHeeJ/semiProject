@@ -1,6 +1,8 @@
 package com.semi.mvc.board.model.vo;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FaqBoard {
 	private int boardNo;
@@ -8,6 +10,7 @@ public class FaqBoard {
 	private String title;
 	private String content;
 	private Date regDate;
+	private List<Attachment> attachments = new ArrayList<>();
 	
 	public FaqBoard() {
 		// TODO Auto-generated constructor stub
@@ -60,6 +63,11 @@ public class FaqBoard {
 
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
+	}
+	
+	public void addAttachment(Attachment attach) {
+		if(attach != null)
+			this.attachments.add(attach);
 	}
 
 	@Override
