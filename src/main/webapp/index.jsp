@@ -1,9 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 
+        <!-- 로그인 전 -->
+<ul class="account_list">
+    <li><a href="<%= request.getContextPath() %>/member/memberEnroll">회원가입</a></li>
+    <li><a href="">로그인</a></li>
+</ul>
+
+        <!-- 로그인 후 -->
+        <div class="user_info_container">
+            <span>***님, 환영합니다!</span>
+            <ul class="account_list">
+                <li><a href="">장바구니</a></li>
+                <li><a href="">마이페이지</a></li>
+                <li><a href="">로그아웃</a></li>
+            </ul>
+        </div>
+        
+        <!-- 관리자일 경우 로그인 -->
+        <div class="user_info_container">
+            <span>님, 환영합니다!</span>
+            <ul class="account_list">
+                <li><a href="<%= request.getContextPath() %>/admin/salesLookUp.jsp">매출조회</a></li>
+                <li><a href="<%= request.getContextPath() %>/admin/orderList">전체주문내역</a></li>
+                <li><a href="<%= request.getContextPath() %>/admin/memberList">전체회원조회</a></li>
+                <li><a href="">로그인</a></li>
+            </ul>
+        </div>
+        
+    </div>
+	
 
     <div class="swiper slide_wrapper">
         <div class="swiper-wrapper">
@@ -81,4 +109,5 @@
             </div>
 		</div>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
+
 
