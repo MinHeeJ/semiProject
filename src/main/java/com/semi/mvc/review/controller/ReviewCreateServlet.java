@@ -15,7 +15,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.FileRenamePolicy;
 import com.semi.mvc.common.HelloMvcFileRenamePolicy;
 import com.semi.mvc.review.model.service.ReviewService;
-import com.semi.mvc.review.model.vo.Attachment;
+import com.semi.mvc.review.model.vo.AttachmentReview;
 import com.semi.mvc.review.model.vo.Review;
 
 /**
@@ -36,7 +36,6 @@ public class ReviewCreateServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 업로드파일 저장경로 C:\\Workspaces\\web_server_workspace\\hello-mvc\\src\\main\\webapp\\upload\\board
 				ServletContext application = getServletContext();
 				String saveDirectory = application.getRealPath("/upload/review");
 				System.out.println("saveDirectory = " + saveDirectory);
@@ -44,8 +43,6 @@ public class ReviewCreateServlet extends HttpServlet {
 				String encoding = "utf-8";
 				
 				// 파일명 재지정 정책객체
-				// 한글.txt --> 20230629_160430123_999.txt
-//				FileRenamePolicy policy = new DefaultFileRenamePolicy(); // a.txt, a1.txt, a2.txt, ...
 				FileRenamePolicy policy = new HelloMvcFileRenamePolicy();
 				
 				MultipartRequest multiReq = new MultipartRequest(request, saveDirectory, maxPostSize, encoding, policy);
@@ -59,14 +56,14 @@ public class ReviewCreateServlet extends HttpServlet {
 				review.setWriter(writer);
 				review.setContent(content);
 				System.out.println(review);
-//			
+			
 				// Attachment객체 생성 (review 추가)
 				Enumeration<String> filenames = multiReq.getFileNames(); // upFile1, upFile2
 				while(filenames.hasMoreElements()) {
 					String name = filenames.nextElement(); // input:file[name]
 					File upFile = multiReq.getFile(name);
 					if(upFile != null) {
-						Attachment attach = new Attachment();
+						AttachmentReview attach = new AttachmentReview();
 						attach.setOriginalFilename(multiReq.getOriginalFileName(name));
 						attach.setRenamedFilename(multiReq.getFilesystemName(name)); // renamedFilename
 						review.addAttachment(attach);
@@ -74,11 +71,11 @@ public class ReviewCreateServlet extends HttpServlet {
 				}
 				
 				// 2. 업무로직
-			//	int result = reviewService.insertReview(review);
+				int result = reviewService.insertReview(review);
 				
 				// 3. 응답처리 (목록페이지로 redirect) - POST방식 DML처리후 url변경을 위해 redirect처리
 				request.getSession().setAttribute("msg", "게시글이 성공적으로 등록되었습니다.");
-				response.sendRedirect(request.getContextPath() + "/review/review" + review.getReviewNo());
+				response.sendRedirect(request.getContextPath() + "/review/reviewCreate"); 
 	}
 
 }

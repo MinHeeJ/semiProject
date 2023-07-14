@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
-    
+   <link rel="stylesheet" href="<%=request.getContextPath()%>/css/review.css" /> 
 <section id="review-container">
 	<h2>리뷰작성</h2>
 	<form
@@ -18,7 +18,7 @@
 		<tr>
 			<th>작성자</th>
 			<td>
-				<input type="text" name="writer" value="<%= %>" readonly/>
+				<input type="text" name="writer" readonly/>
 			</td>
 		</tr>
 		<tr>
@@ -34,7 +34,7 @@
 		</tr>
 		<tr>
 			<th colspan="2">
-				<input type="submit" value="등록하기">
+				<input type="submit" value="등록하기" >
 			</th>
 		</tr>
 	</table>
