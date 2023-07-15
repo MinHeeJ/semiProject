@@ -78,7 +78,6 @@ public class OrderService {
 			int orderNo = orderDao.getLastOrderNo(conn);
 			Order order = new Order();
 			order.setOrderNo(orderNo);
-			order.setCartNo(cart.getCartNo());
 			order.setProduct(cart.getProduct());
 			order.setCount(cart.getCount());
 			order.setPrice(cart.getPrice());
