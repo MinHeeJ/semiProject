@@ -5,6 +5,30 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin.css" />
+<style>
+h1 {
+	font-size: 50px;
+	text-align: center;
+}
+table#tbl-orderList {
+	width: 990px;
+	margin: 0 auto;
+	border: 1px solid black;
+	border-collapse: collapse;
+	text-align: center;
+}
+table#tbl-orderList th {
+	width: 150px; 
+	border: 1px solid; 
+	padding: 10px; 
+	text-align: center; 
+}
+table#tbl-orderList td {
+	border: 1px solid; 
+	padding: 10px; 
+	text-align: center;
+}
+</style>
 <%
 	List<Order> orders = (List<Order>) request.getAttribute("orders");
 %>
@@ -12,7 +36,7 @@
 	<h1>주문내역 전체조회</h1>
 	
     <div>
-        <table>
+        <table id="tbl-orderList">
             <thead>
               <tr>
               	<th>주문번호</th>
@@ -30,12 +54,14 @@
             	<tr>
 					<td>조회 결과가 없습니다.</td>
 				</tr>
-            <% } 
-            	else { 
-            		for(Order order : orders) { %>
-		              <tr>
-		                <td><%= order.getOrderNo() %></td>
-		                <td><%= order.getMemberId() %></td>
+           	<% } else {
+				    for (int i = 0; i < orders.size(); i++) {
+				        Order order = orders.get(i); %>
+				    <tr>
+				        <% if (i == 0) { %>
+				            <td rowspan="<%= orders.size() %>"><%= order.getOrderNo() %></td>
+			                <td rowspan="<%= orders.size() %>"><%= order.getMemberId() %></td>
+				        <% } %>
 		                <td><%= order.getProduct() %></td>
 		                <td><%= order.getCount() %></td>
 		                <td><%= order.getOrderDate() %></td>
@@ -46,7 +72,7 @@
 		                    <option value="주문처리완료" <%= order.getState().equals(State.complete.getState()) ? "selected" : "" %>>주문처리완료</option>
 		                  </select>
 		                </td>
-		              </tr>
+		             </tr>
             <%
             		}
             	} 

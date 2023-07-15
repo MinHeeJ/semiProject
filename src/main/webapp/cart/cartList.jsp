@@ -26,14 +26,20 @@
 #cartUpdate {margin-left: 76.2%; margin-right:0.2%}
 </style>
 <script src="<%= request.getContextPath() %>/js/jquery-3.7.0.js"></script>
+<% loginMember = "honggd"; %>
 <body>
 	<section id="CartListSection">
 	<h1>장 바 구 니</h1>
-	<form id ="printCartList">
+	<form 
+		id ="printCartList"
+		action="<%= request.getContextPath() %>/order/cart"
+		method="POST">
+	<input type="hidden" name="memberId" value="<%= loginMember %>"/>
 	<div id = "cartbuttons">
 		<button id="cartUpdate">수정</button>
 		<button id="cartDelete">삭제</button>	
 	</div>
+	
 	<table id ="cartListTable">
         <thead>
             <tr>
@@ -44,33 +50,38 @@
                 <th>가격</th>
             </tr>
         </thead>
-        <tbody>
-   
-        </tbody>
+        <tbody></tbody>
+        <tfoot></tfoot>
     </table>
 	<button id="order">주문하기</button>
-	</form>	
+	</form>
 	
 	</section>
 
 	<script>
 	window.onload=()=>{
 		
-		findAllCeleb();
+		findAllCart();
 		
 	}
 	
-	const findAllCeleb = () =>{
+	const findAllCart = () =>{
 		$.ajax({
 			url: "<%= request.getContextPath()%>/myCart/list",
 			dataType : "json",
 			success(responseData){
-				console.log(responseData); 
+				console.log(responseData);
 				const tbody = document.querySelector("#cartListTable tbody");
+				const tfoot = document.querySelector("#cartListTable tfoot");
+				
 				tbody.innerHTML ="";
+				tfoot.innerHTML ="";
+				
 				let index = 1;
+				
 				responseData.forEach((cart)=>{
 					const{cartNo, product, count, price} = cart;
+					
 					tbody.innerHTML += `
 						<tr>
 		                <td><input type="checkbox" name= "checkedOrNot" value = "\${cartNo}"></td>
@@ -83,7 +94,31 @@
 		           		</tr>
 					`;
 					index++;
-				});			
+					
+					
+				});	
+				
+				let sum = 0;
+				document.querySelectorAll("input[name=checkedOrNot]").forEach((checkbox) => {
+					console.log(checkbox);
+					checkbox.addEventListener('change', () => {
+						if(checkbox.checked) {
+							const tr = checkbox.closest("tr"); // checkbox중 가장 가까운 tr
+						    const price = parseFloat(tr.querySelector('td:last-child').innerHTML);
+						    sum += price;
+						}
+						else {
+							const tr = checkbox.closest('tr');
+						    const price = parseFloat(tr.querySelector('td:last-child').innerHTML);
+						    sum -= price;
+						}
+						tfoot.innerHTML = `
+							<tr>
+								<td colspan="6">총금액 : \${sum}원</td>
+							</tr>
+						`;
+						});
+					});				
 			}
 		
 		});
@@ -108,7 +143,7 @@
 						alert(message);				
 					},
 					complete(){
-						findAllCeleb();
+						findAllCart();
 					}
 				});
 			
@@ -138,16 +173,17 @@
 				
 				},
 				complete(){
-					findAllCeleb();
+					findAllCart();
 				}
 			
 			});
 			
 		}
 		
-	}	
+	}
 	
-		
+	// 총금액
+	
 	</script>
 
 </body>

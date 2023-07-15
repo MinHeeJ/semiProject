@@ -1,7 +1,9 @@
 package com.semi.mvc.admin.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.semi.mvc.member.model.service.MemberService;
 import com.semi.mvc.member.model.vo.Member;
 
@@ -29,11 +32,15 @@ public class AdminMemberListServlet extends HttpServlet {
 		// 2. 업무로직
 		List<Member> members = memberService.findAll();
 		
-		request.setAttribute("members", members);
 		
 		// 3. 응답처리
-		request.getRequestDispatcher("/WEB-INF/views/admin/memberList.jsp")
-			.forward(request, response);
+		// 헤더
+		response.setContentType("application/json; charset=utf-8");
+		
+		// 바디
+		Gson gson = new Gson();
+		String jsonStr = gson.toJson(members);
+		response.getWriter().append(jsonStr);
 	}
 
 }

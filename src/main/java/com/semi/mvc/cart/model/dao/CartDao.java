@@ -178,6 +178,7 @@ private Properties prop = new Properties();
 					cart.setProduct(rset.getString("product"));
 					cart.setCount(rset.getInt("count"));
 					cart.setPrice(rset.getInt("price"));
+					cart.setMemberId(rset.getString("member_id"));
 				}		
 			}
 		} catch (Exception e) {
