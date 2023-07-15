@@ -55,6 +55,19 @@ body {
 #span4 {
     cursor: pointer;
 }
+\
+@font-face {font-family: 'Giants-Inline'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Giants-Inline.woff2') format('woff2'); font-weight: normal; font-style: normal;}
+@font-face {font-family: 'GongGothicMedium'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff'); font-weight: normal; font-style: normal;}
+@font-face {font-family: 'IBMPlexSansKR-Regular'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff') format('woff'); font-weight: normal; font-style: normal;}
+@font-face {font-family: 'GmarketSansMedium';src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');font-weight: normal;font-style: normal;}
+@font-face {font-family: 'PyeongChangPeace-Bold'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Bold.woff2') format('woff2');font-weight: 700;font-style: normal;}
+#howToUse-container { width: 1000px; margin: 10% 0; text-align:center}
+#howToUse-container div {width: 45%; display: inline-block; margin: 2%;}
+.howToUse {border: 2px solid black; }
+.howToUse img{width: 100%;} 
+.howToUse p {font-family:'IBMPlexSansKR-Regular', Courier, monospace; font-size : 20px; margin: 3% 0;}
+
+
 </style>
 <body>
     <div class="title-wrapper" style="margin-top: 100px;">
@@ -116,9 +129,27 @@ body {
                 </div>
             </div>
         </div>
-    </form>
-    <form action="" name="howToUse-container" style="display: none;">
-        <h1>이용방법 넣기</h1>
+        </form>
+    	<form action="" id="howToUse-container" style="display: none;">
+        <fieldset>  
+        <div class="howToUse">
+            <img src="<%= request.getContextPath() %>/images/main/step1.jpg" class="steps">
+            <p>1. 샐러드로 먹을지, 샌드위치로 먹을지 골라주세요</p>
+        </div>
+        <div class="howToUse">
+            <img src="<%= request.getContextPath() %>/images/main/step2.jpg" class="steps">
+            <p>2. 원하는 야채를 원하는 만큼 골라주세요</p>
+        </div>
+        <div class="howToUse">
+            <img src="<%= request.getContextPath() %>/images/main/step3.jpg" class="steps">
+            <p>3. 다양한 토핑들을 마음껏 골라주세요</p>
+        </div>
+        <div class="howToUse">
+            <img src="<%= request.getContextPath() %>/images/main/step4.jpg" class="steps">
+            <p>4. 소스까지 골라주면 나만의 커스텀 메뉴가 완성됩니다!</p>
+        </div>
+        </fieldset>
+        <br>
     </form>
 </body>
 <script>
@@ -128,7 +159,7 @@ for(let i=0; i<span.length; i++) {
     span[i].onclick = () => {
 
         const frm1 = document.querySelector("[name=introduce-container]");
-        const frm2 = document.querySelector("[name=howToUse-container]");
+        const frm2 = document.querySelector("#howToUse-container");
         if(i == 0) {
             frm1.style.display = "block";
             frm2.style.display = "none";

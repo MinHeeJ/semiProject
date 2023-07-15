@@ -185,20 +185,22 @@
 	}
 	
 	// 선택한 상품 없으면 주문 x
-	let flag = true;
 	document.querySelector("#order").onclick = (e) => {
+		
+		let flag = true;
 		 
 		const checkboxes = document.querySelectorAll("input[name=checkedOrNot]");
 		  
 	    checkboxes.forEach((checkbox) => {
-			if (!checkbox.checked && flag) {
-			    alert('선택하신 상품이 없습니다.');
-			    e.preventDefault();
+			if (checkbox.checked) 		   
 			    flag = false;
-			  }
-		  });
+		});
+	    if(flag){
+	    	 alert('선택하신 상품이 없습니다.');
+			    e.preventDefault();
+	    }
 
-		};
+	};
 	</script>
 
 </body>
