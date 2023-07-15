@@ -43,20 +43,21 @@ public class AddToCartServlet extends HttpServlet {
 		boolean flag = false;
 		int result =0;
 		
+		Map<String, Object> map = new HashMap<>();
+		response.setContentType("text/plain; charset=utf-8");
+		map.put("message", "장바구니 추가");
+		
 		for(Cart cart : allCarts) {
 			if(cart.getProduct().equals(confirmOptions)) {
 				result = cartService.updateCart(cart.getCartNo(), cart.getCount() + 1);
 				flag = true;
+				map.put("message", "이미 같은 상품이 장바구니에 존재하여 수량을 변경하였습니다.");
 			}
 		}
 		
 		if(!flag)
 			result = cartService.insertCart(confirmOptions, totalPrice, memberId);
 		
-		Map<String, Object> map = new HashMap<>();
-		response.setContentType("text/plain; charset=utf-8");
-		map.put("result", "success");
-		map.put("message", "장바구니 추가");
 		new Gson().toJson(map, response.getWriter());
 	}
 

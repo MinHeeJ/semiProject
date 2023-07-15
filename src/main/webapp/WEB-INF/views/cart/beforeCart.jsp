@@ -20,9 +20,10 @@ String memberId = "";
 <title></title>
 
 <style>
+@font-face {font-family: 'PyeongChangPeace-Bold'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Bold.woff2') format('woff2');font-weight: 700;font-style: normal;}
 #beforeCartSection { width : 1200px; text-align: center;}
 #receipt{ display: inline-block; width: 40%; border-left: 2.5px solid black; border-right: 2.5px solid black; margin : 3% 0 3% 0;}
-#receiptTitle {font-size : 30px; font-weight: bold; margin : 3% 0 3% 0;}
+#receiptTitle {font-size : 30px; margin : 3% 0 3% 0; font-family: 'PyeongChangPeace-Bold'; font-weight: 300; }
 #receipt h2 {margin-left: 20px; text-align: left; font-size : 20px; font-weight: bold;}
 #optionPrint {width : 100%}
 #optionPrint .optionsLeft {display: inline-block; margin-left: 20px; text-align: left; font-size : 15px; width : 45%}
@@ -34,6 +35,7 @@ String memberId = "";
 #completeAddCart {display : "none"; width: 100%; height: 800px; font-size : 50px; font-weight: bold;}
 #completeAddCart button {display: inline-block; width : 200px; height: 50px; font-size : 20px; font-weight: bold; margin: 3% 1%; border: 1px solid black; color: white; background-color: darkgreen; border-radius : 10px}
 </style>
+
 <script src="<%= request.getContextPath() %>/js/jquery-3.7.0.js"></script>
 <body>
 	<section id="beforeCartSection">

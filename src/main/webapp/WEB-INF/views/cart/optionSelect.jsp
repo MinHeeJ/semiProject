@@ -19,31 +19,31 @@ List<Ingredient> ingredients = (List) request.getAttribute("ingredients");
 @font-face {font-family: 'GmarketSansMedium';src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');font-weight: normal;font-style: normal;}
 
 .order-step { display: none; }
-.order-step.active { display: block;}
+.order-step.active { display: block; vertical-align : middle;}
 .stepNum {width: 60px; height : 60px; border-radius: 50%; display: inline-block; font-size : 40px; font-weight : bold; color : white; background-color : darkgreen; text-align: center; vertical-align : middle; margin : 5% 0 5% 1%;}
-#selectTitle {font-size : 40px; font-weight : bold; margin-left : 1%;}
+.stepNum span{display: inline-block; width:100%; height : 100%; margin-top: 20%}
+#selectTitle {font-size : 40px; font-weight : bold; margin-left : 1%; vertical-align : middle;}
 #changeStep{width: 100%; height : 30%; margin : 10% 0 10% 0;}
-#changeStep button {color : white; background-color : darkgreen; font-size : 20px; font-weight : bold; width: 80px; height : 40px; border-radius: 10px; border-color: black; display: inline-block;}
-#nextButton {position: absolute; right: 30%; transform: translateY(-50%);}
-#previousButton {position: absolute; left: 30%; transform: translateY(-50%);}
-#submitButton {position: absolute; right: 30%; transform: translateY(-50%);}
+#changeStep button {color : white; background-color : darkgreen; font-size : 25px; font-weight : bold; width: 150px; height : 60px; border-radius: 10px; border-color: black; display: inline-block; cursor: pointer;}
+#changeStep div {width: 45%; display: inline-block}
 #optionSelectSection{width: 1200px; font-family:'GmarketSansMedium', Courier, monospace; vertical-align : middle;}
 #optionSelectSection form div{text-align: center;}
-.selectTitle {font-size : 40px; font-weight : bold; margin-left : 1%;}
+.selectTitle {font-size : 40px; font-weight : bold; margin-left : 1%;vertical-align : middle;}
 #bread {width:300px; height :300px; background-color: white; background-image: url('<%= request.getContextPath() %>/images/cart/bread.png'); background-repeat: no-repeat; background-size: contain; background-position-y : center;}
 #saladBowl {width:300px; height :300px; background-color: white; background-image: url('<%= request.getContextPath() %>/images/cart/salad.png'); background-repeat: no-repeat; background-size: contain; background-position-y : center;}
 #step1 button{border: 0px solid black; margin: 1% 4%; border-radius: 20px;}
 #step1 button:hover{background-color: lightgreen;}
 #step1 button:click{background-color: lightgreen;}
 .labels{display: inline-block; font-size : 25px; font-weight : bold; width:300px; margin: 0% 4%;}
-
+#optionselct-container { border: 3px solid darkgreen; margin-top: 3%}
 </style>
 
 <body>
 	<section id="optionSelectSection">
+	<div id="optionselct-container">
 	<form id="orderForm" action="<%=request.getContextPath()%>/complete/select" method="POST">
 		<div class="order-step active" id="step1">
-			<div class = "stepNum">1</div>
+			<div class = "stepNum"><span>1</span></div>
 			<span id= "selectTitle">메인 선택</span>
 			<br><br>
 			<button type="button" id="bread"></button>
@@ -58,7 +58,7 @@ List<Ingredient> ingredients = (List) request.getAttribute("ingredients");
 		for (int i = 2; i <= 5; i++) {
 		%>
 		<div class="order-step" id="step<%=i%>">
-			<div class = "stepNum"><%=i%></div>
+			<div class = "stepNum"><span><%=i%></span></div>
 			<span class= "selectTitle"><%=i%></span>
 			<br><br>	
 			<%
@@ -74,14 +74,15 @@ List<Ingredient> ingredients = (List) request.getAttribute("ingredients");
 		</div>
 		<% } %>
 
-		<span name="totalPrice"></span>
 		<div id="changeStep">
+			<div id="changePrevious">
 			<button type="button" onclick="previousStep()" id="previousButton" style="display: none;">이전</button>
+			</div><div id="changeNext">
 			<button type="button" onclick="nextStep()" id="nextButton">다음</button>
-			<button type="submit" id="submitButton" style="display: none;">제출</button>
+			<button type="submit" id="submitButton" style="display: none;">제출</button></div>
 		</div>
 	</form>
-
+	</div>
 	<br><br>
 	</section>
 
@@ -108,7 +109,7 @@ List<Ingredient> ingredients = (List) request.getAttribute("ingredients");
 				updateStepVisibility();
 			}
 			if (currentStep != totalSteps) {
-				document.getElementById("nextButton").style.display = "block";
+				document.getElementById("nextButton").style.display = "inline-block";
 				document.getElementById("submitButton").style.display = "none";
 			}
 		}
@@ -123,7 +124,7 @@ List<Ingredient> ingredients = (List) request.getAttribute("ingredients");
 				}
 				if (currentStep === totalSteps) {
 					document.getElementById("nextButton").style.display = "none";
-					document.getElementById("submitButton").style.display = "block";
+					document.getElementById("submitButton").style.display = "inline-block";
 				}
 			
 				const selectTitles = document.querySelectorAll(".selectTitle");
@@ -154,7 +155,7 @@ List<Ingredient> ingredients = (List) request.getAttribute("ingredients");
 			if (currentStep === 1) {
 				document.getElementById("previousButton").style.display = "none";
 			} else {
-				document.getElementById("previousButton").style.display = "block";
+				document.getElementById("previousButton").style.display = "inline-block";
 			}
 		}
 		
