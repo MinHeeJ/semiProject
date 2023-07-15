@@ -34,7 +34,6 @@ table#tbl-orderList td {
 %>
 <section>
 	<h1>주문내역 전체조회</h1>
-	
     <div>
         <table id="tbl-orderList">
             <thead>
@@ -52,7 +51,7 @@ table#tbl-orderList td {
             <tbody>
             <% if(orders == null || orders.isEmpty()) { %>
             	<tr>
-					<td>조회 결과가 없습니다.</td>
+					<td colspan="7">조회 결과가 없습니다.</td>
 				</tr>
            	<% } else {
 				    for (int i = 0; i < orders.size(); i++) {
