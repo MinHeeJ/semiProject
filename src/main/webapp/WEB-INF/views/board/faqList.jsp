@@ -20,8 +20,21 @@
 			<div class="title"><%= faq.getTitle() %></div>
 			<p class="content"><%= faq.getContent() %></p>
 			<% if(admin){ %>
-			<input type="button" id="btn-update" value="수정" onclick="location.href = '<%= request.getContextPath() %>/board/faqUpdate?no=<%= faq.getBoardNo() %>';"/>
-			<input type="button" id="btn-delete" value="삭제" onclick="location.href = '<%= request.getContextPath() %>/board/faqDelete?no=<%= faq.getBoardNo() %>';"/>
+				<input type="button" value="수정하기" onclick="updateFaqBoard()">
+				<input type="button" value="삭제하기" onclick="deleteFaqBoard()">
+			<form action="<%= request.getContextPath() %>/board/faqDelete" name="faqDeleteFrm" method="POST">
+				<input type="hidden" name="no" value="<%= faq.getBoardNo() %>" />
+			</form>
+			<script>
+				const deleteFaqBoard = () => {
+					if(confirm("정말 이 게시글을 삭제하시겠습니까?"))
+						document.faqDeleteFrm.submit();
+				};
+				
+				const updateFaqBoard = () => {
+					location.href = "<%= request.getContextPath() %>/board/faqUpdate?no=<%= faq.getBoardNo() %>";
+				}
+			</script>
 			<% } %>
 		<% } %>
 	<% } %>
@@ -35,7 +48,8 @@
 	$('div.title').click((e) => {
 		$(e.target).next().slideToggle().siblings('p.content').slideUp();
 	});
-	
+
+
 </script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
