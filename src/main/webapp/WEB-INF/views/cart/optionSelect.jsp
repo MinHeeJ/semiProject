@@ -23,7 +23,7 @@ List<Ingredient> ingredients = (List) request.getAttribute("ingredients");
 .stepNum {width: 60px; height : 60px; border-radius: 50%; display: inline-block; font-size : 40px; font-weight : bold; color : white; background-color : darkgreen; text-align: center; vertical-align : middle; margin : 5% 0 5% 1%;}
 .stepNum span{display: inline-block; width:100%; height : 100%; margin-top: 20%}
 #selectTitle {font-size : 40px; font-weight : bold; margin-left : 1%; vertical-align : middle;}
-#changeStep{width: 100%; height : 30%; margin : 10% 0 10% 0;}
+#changeStep{width: 100%; height : 30%; margin : 8% 0 8% 0;}
 #changeStep button {color : white; background-color : darkgreen; font-size : 25px; font-weight : bold; width: 150px; height : 60px; border-radius: 10px; border-color: black; display: inline-block; cursor: pointer;}
 #changeStep div {width: 45%; display: inline-block}
 #optionSelectSection{width: 1200px; font-family:'GmarketSansMedium', Courier, monospace; vertical-align : middle;}
@@ -31,11 +31,13 @@ List<Ingredient> ingredients = (List) request.getAttribute("ingredients");
 .selectTitle {font-size : 40px; font-weight : bold; margin-left : 1%;vertical-align : middle;}
 #bread {width:300px; height :300px; background-color: white; background-image: url('<%= request.getContextPath() %>/images/cart/bread.png'); background-repeat: no-repeat; background-size: contain; background-position-y : center;}
 #saladBowl {width:300px; height :300px; background-color: white; background-image: url('<%= request.getContextPath() %>/images/cart/salad.png'); background-repeat: no-repeat; background-size: contain; background-position-y : center;}
-#step1 button{border: 0px solid black; margin: 1% 4%; border-radius: 20px;}
-#step1 button:hover{background-color: lightgreen;}
-#step1 button:click{background-color: lightgreen;}
+#step1 button{border: 0px solid black; margin: 2% 4% 1% 4%; border-radius: 20px;}
+#step1 button:hover{background-color: rgb(217, 250, 217); cursor: pointer;}
 .labels{display: inline-block; font-size : 25px; font-weight : bold; width:300px; margin: 0% 4%;}
-#optionselct-container { border: 3px solid darkgreen; margin-top: 3%}
+#optionselct-container { border: 4px solid darkgreen; margin-top: 3%; border-radius: 30px; }
+.optionContainer {font-size:20px; display: inline-block; background-color: rgb(217, 250, 217); margin-top: 1%; border-radius: 50px; width: 250px; height: 45px; vertical-align: middle;}
+.optionContainer label{display: inline-block; vertical-align: middle; width: 120px; margin-top: 2%;}
+.optionContainer input{height: 25px; display: inline-block; margin-top: 3.3%; }
 </style>
 
 <body>
@@ -65,12 +67,16 @@ List<Ingredient> ingredients = (List) request.getAttribute("ingredients");
 			for (int z = 0; z < ingredients.size(); z++) {
 				Ingredient ingredient = ingredients.get(z);
 				if (ingredient.getCategoryNo() == i) {
-			%>
+			%>		<div class="optionContainer">
 					<label for="<%=ingredient.getIngredientName()%>"><%=ingredient.getIngredientName()%></label>
 					<input type="number" id="<%=ingredient.getIngredientName()%>" name="quantity" min="0" step="1" max="10" value="0"> 
 					<input type="hidden" name="optionName" value = "<%=ingredient.getIngredientName()%>">
-					<br>
-			<% }} %>
+					</div>
+			<%
+					if(z%2 == 1){
+			%>			<br><%		
+					}}
+			} %>
 		</div>
 		<% } %>
 
@@ -87,6 +93,21 @@ List<Ingredient> ingredients = (List) request.getAttribute("ingredients");
 	</section>
 
 	<script>
+	
+		
+		document.querySelector("#orderForm").onsubmit=(e)=>{			
+			const quantities = document.querySelectorAll("[name = quantity]");
+			let bool = true;
+			quantities.forEach((quantity)=>{
+				if(quantity.value != 0)
+					bool = false;
+			})			
+			if(bool){
+				e.preventDefault();
+				alert("하나 이상의 옵션을 선택해야합니다!");
+			}
+		}
+
 		let currentStep = 1;
 		let totalSteps = 5;
 		window.onload=()=>{
@@ -94,7 +115,7 @@ List<Ingredient> ingredients = (List) request.getAttribute("ingredients");
 			for(let i = 0; i <buttons.length; i++){
 				buttons[i].onclick =(e) =>{
 					document.querySelector(".selectSalad").value = i+1;
-					buttons[i].style.backgroundColor = "lightgreen";
+					buttons[i].style.backgroundColor = "rgb(196, 230, 196)";
 					if(i == 0)
 						buttons[1].style.backgroundColor = "white";
 					else

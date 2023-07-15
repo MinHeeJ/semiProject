@@ -23,23 +23,32 @@ String memberId = "";
 @font-face {font-family: 'PyeongChangPeace-Bold'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Bold.woff2') format('woff2');font-weight: 700;font-style: normal;}
 #beforeCartSection { width : 1200px; text-align: center;}
 #receipt{ display: inline-block; width: 40%; border-left: 2.5px solid black; border-right: 2.5px solid black; margin : 3% 0 3% 0;}
-#receiptTitle {font-size : 30px; margin : 3% 0 3% 0; font-family: 'PyeongChangPeace-Bold'; font-weight: 300; }
+#receiptTitle {font-size : 30px; margin : 3% 0 3% 0; font-family: 'NanumSquareNeo-Variable'; font-weight: 300; }
 #receipt h2 {margin-left: 20px; text-align: left; font-size : 20px; font-weight: bold;}
 #optionPrint {width : 100%}
 #optionPrint .optionsLeft {display: inline-block; margin-left: 20px; text-align: left; font-size : 15px; width : 45%}
 #optionPrint .optionsRight {display: inline-block; margin-right: 20px; text-align: right; font-size : 15px; width : 45%}
 .totals {font-size : 23px; font-weight: bold;}
-#selectConfirm h1 {margin-top : 3%; font-size : 25px; font-weight: bold;}
-#selectConfirm button {display: inline-block; width : 150px; height: 50px; font-size : 20px; font-weight: bold; margin: 3% 1%; border: 1px solid black; background-color: white; border-radius : 10px}
+#selectConfirm h1 {font-family: 'NanumSquareNeo-Variable'; margin-top : 3%; font-size : 25px; font-weight: bold;}
+#selectConfirm button {font-family: 'NanumSquareNeo-Variable'; display: inline-block; width : 150px; height: 50px; font-size : 20px; font-weight: bold; margin: 3% 1%; border: 1px solid black; background-color: white; border-radius : 10px}
 #selectConfirm button:hover {background-color : darkgreen; color: white}
-#completeAddCart {display : "none"; width: 100%; height: 800px; font-size : 50px; font-weight: bold;}
-#completeAddCart button {display: inline-block; width : 200px; height: 50px; font-size : 20px; font-weight: bold; margin: 3% 1%; border: 1px solid black; color: white; background-color: darkgreen; border-radius : 10px}
+
+@font-face {font-family: 'NanumSquareNeo-Variable'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');font-weight: normal;font-style: normal;}
+#completeAddCart button {display: inline-block; width : 220px; height: 75px; font-size : 23px; font-weight: bold; margin: 2% 1%; border: 3px solid black; color: white; background-color: darkgreen; border-radius : 10px}
+#backgroundPop { display: none; width: 100%; height: 100%; position: fixed; opacity : 0.1; top: 0; left: 0; right: 0; background-color: black; z-index: 999;}
+#completeAddCart {font-family: 'NanumSquareNeo-Variable'; display: none; overflow:hidden; position: absolute; top: 50%; left: 50%; transform:translate(-50%,-50%); border: 5px solid darkgreen; border-radius: 20px; width: 700px; font-size : 30px; font-weight: bold; height: 500px; background: #fff; z-index: 1000; text-align: center; vertical-align: middle;}
+#completeAddCart button:hover {background-color : white; color: darkgreen; border: 3px solid darkgreen; }
+#completeAddCart img{width: 230px ; height: 230px}
+
+#completeAddCart img {animation: slideRight 2s linear;}
+@keyframes slideRight {0% {transform: translateX(-120%);}100% {transform: translateX(0%);}}
+#completeAddCart img.slideAnimation {animation: slideRight 2.5s linear 1;}
 </style>
 
 <script src="<%= request.getContextPath() %>/js/jquery-3.7.0.js"></script>
 <body>
 	<section id="beforeCartSection">
-		<h1 id= "receiptTitle"> 🥗 <%= selectedOption.get(0).getMemberId()%>님의 맞춤형 샐러드가 완성되었습니다 🥗</h1>
+		<h1 id= "receiptTitle"> <%= selectedOption.get(0).getMemberId()%>님의 <br><br>🥗 맞춤형 샐러드가 완성되었습니다 🥗</h1>
 		<div id="receipt">
 		<img src="<%= request.getContextPath() %>/images/cart/receiptTop.png" alt="" id="receipTop"  width="100%"/>
 		<h2><%= saladOrBread.equals("2")? "샐러드볼" : "호밀빵"%></h2>
@@ -74,15 +83,37 @@ String memberId = "";
 				<button type = "button" id="goBack">아니오</button>
 			</form>
 		</div>
-		<div id = "completeAddCart">
-			<h1>장바구니 담기가 완료되었습니다.</h1>	
-			<button type="button">장바구니로 가기</button>
-		</div>
 	</section>
+	<div id="backgroundPop"></div>
+	<div id = "completeAddCart">
+		<br><br>
+		<img src="<%= request.getContextPath() %>/images/cart/cartimg.png"><br>
+			<h1>장바구니 담기가 완료되었습니다.</h1>
+			<br>
+			<button type="button">장바구니로 가기</button>
+			<button type="button" id="createNew">새로운 주문 추가</button>
+	</div>
 
 	<script>
 	
-		window.onload=()=>{
+	
+	function popOpen() {
+
+	    const modalPop = $('#completeAddCart');
+	    
+	    document.querySelector("#backgroundPop").style.display = "inline-block"; 
+
+	    $("#backgroundPop").css('display', 'inline-block');	    
+		$(modalPop).show();
+		$("#completeAddCart img").addClass("slideAnimation");
+
+	}
+	
+	document.querySelector("#goToCart").onclick=(e)=>{
+		popOpen();
+	}
+	
+	window.onload=()=>{
 			
 			if(document.querySelector("#completeAddCart").style.display == "block"){
 				document.querySelector("#selectConfirm").style.display = "none";	
@@ -90,7 +121,7 @@ String memberId = "";
 				document.querySelector("#completeAddCart").style.display = "none"
 			}
 			
-		};
+	};
 		
 		document.querySelector("#addCartForm").onsubmit=(e)=>{
 			e.preventDefault();
@@ -115,6 +146,9 @@ String memberId = "";
 		document.querySelector("#goBack").onclick=()=>{
 			 if(confirm('초기 선택화면으로 돌아가시겠습니까?'))
 				 window.location.href = '<%= request.getContextPath() %>/OnlinOrder';    
+		};
+		document.querySelector("#createNew").onclick=()=>{
+			window.location.href = '<%= request.getContextPath() %>/OnlinOrder';    
 		};
 		document.querySelector("#completeAddCart button").onclick=()=>{
 			window.location.href = '<%= request.getContextPath()%>/cart/cartList.jsp';    
