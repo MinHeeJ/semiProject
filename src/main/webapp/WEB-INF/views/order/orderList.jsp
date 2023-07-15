@@ -34,7 +34,6 @@ table#tbl-orderList td {
 
 <section>
 	<h1>주문내역 전체조회</h1>
-	
     <div>
         <table id="tbl-orderList">
             <thead>

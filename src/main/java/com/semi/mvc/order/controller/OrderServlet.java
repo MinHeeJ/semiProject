@@ -41,7 +41,6 @@ public class OrderServlet extends HttpServlet {
 			for(int j=0; j<cartNumber.length; j++) {
 				if(checkedOrNot[i].equals(cartNumber[j])) {
 					int cartNo = Integer.parseInt(cartNumber[j]);
-					System.out.println(cartNo);
 					// order_detail에 추가
 					result = orderService.insertOrder(cartNo);
 				}
