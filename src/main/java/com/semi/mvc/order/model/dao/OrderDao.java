@@ -52,11 +52,10 @@ public class OrderDao {
 		String memberId = rset.getString("member_id");
 		Date orderDate = rset.getDate("order_date");
 		String state = rset.getString("state");
-		int cartNo = rset.getInt("cart_no");
 		String product = rset.getString("product");
 		int count = rset.getInt("count");
 		int price = rset.getInt("price");
-		Order order = new Order(orderNo, memberId, cartNo, product, orderDate, state, count, price);
+		Order order = new Order(orderNo, memberId, product, orderDate, state, count, price);
 		return order;
 	}
 
@@ -134,10 +133,9 @@ public class OrderDao {
 		
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setInt(1, order.getOrderNo());
-			pstmt.setInt(2, order.getCartNo());
-			pstmt.setString(3, order.getProduct());
-			pstmt.setInt(4, order.getCount());
-			pstmt.setInt(5, order.getPrice());
+			pstmt.setString(2, order.getProduct());
+			pstmt.setInt(3, order.getCount());
+			pstmt.setInt(4, order.getPrice());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -159,6 +157,7 @@ public class OrderDao {
 				}
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
 			throw new OrderException(e);
 		}
 		return orders;
