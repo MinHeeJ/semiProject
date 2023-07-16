@@ -247,6 +247,55 @@ public class ReviewDao {
 		return review;
 	}
 
+	public List<Review> findAllReview(Connection conn) {
+		List<Review> reviews = new ArrayList<>();
+		
+		String sql = prop.getProperty("findAllReview");
+	
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+			try(ResultSet rset = pstmt.executeQuery()) {
+				System.out.println("rset = " + rset);
+				while(rset.next()) {
+					Review result = new Review();
+					result.setReviewNo(rset.getInt("review_no"));
+					result.setWriter(rset.getString("writer"));					
+					result.setTitle(rset.getString("title"));
+					result.setContent(rset.getString("content"));
+					result.setRegDate(rset.getDate("reg_date"));
+					result.setProduct(rset.getString("product"));
+					System.out.println(result);
+					reviews.add(result);
+							
+				}
+				
+			}
+			
+		} catch (SQLException e) {
+			throw new ReviewException(e);
+		}
+		System.out.println("reviews = " + reviews);
+		return reviews;
+	}
+
+	public int findLikeCount(Connection conn, int reviewNo) {
+		int countLike = 0;
+		String sql = prop.getProperty("findLikeCount");
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, reviewNo);
+			
+			try (ResultSet rset = pstmt.executeQuery()) {
+				if (rset.next())
+					countLike = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			throw new ReviewException(e);
+		}
+		return countLike;
+	}
+
 	
 	
 
