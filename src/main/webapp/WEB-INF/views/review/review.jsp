@@ -122,9 +122,9 @@
 				</div>
 				<tr>			
 					<th colspan="2" id="th">
-			            <input type="hidden" name="reviewNo" value="<%= review.getReviewNo() %>"/>
 			           	<div>
-				            <img src="<%= request.getContextPath() %>/images/review/heart.png" alt="heart.png" style="width: 30px;" class="heart">
+				            <input type="hidden" name="reviewNo" value="<%= review.getReviewNo() %>"/>
+				            <input type="image" src="<%= request.getContextPath() %>/images/review/heart.png" alt="heart.png" style="width: 30px;" class="heart" value="<%= review.getReviewNo() %>">
 				            <p>0</p>
 			           	</div>
 						<%-- 첨부파일이 없는 게시물 수정 --%>
@@ -169,80 +169,45 @@ window.onload = () => {
 }
 
 const like = () => {
-	
-	const reviewNo = document.querySelector('input[name=reviewNo]');
-	
-	$.ajax({
-		url : "<%= request.getContextPath() %>/review/like",
-		method : "POST",
-		data : {
-			reviewNo : reviewNo.value
-		},
-		success(responseData) {
-			console.log(responseData);
-			const {likeCount, isLike} = responseData;
-			console.log(likeCount);
-			console.log(isLike);
-			
-			const th = document.querySelectorAll("#th");
-			console.log(th);
-			for(let i=0; i<th.length; i++) {
-				if(isLike) {
-					th[i].innerHTML = `
-		                <img src="<%= request.getContextPath() %>/images/review/heart.png" alt="heart.png" style="width: 30px;">
-		                <p>\${likeCount}</p>
-					`;
-				}
-				else {
-					th[i].innerHTML = `
-		                <img src="<%= request.getContextPath() %>/images/review/emptyheart.png" alt="emptyheart.png" style="width: 30px;">
-		                <p>\${likeCount}</p>
-					`;
-				}
-				
-			}
-			
-		}
-		
-	});
-}
+	// 밑에 코드 참고하면 될것같음
+};
 
+// innerHTML쪽이 안됨
 document.querySelectorAll(".heart").forEach((heart) => {
 	heart.addEventListener('click', (e) => {
-		
+		console.log(e.target.value);
 		e.preventDefault();
-		const reviewNo = document.querySelector('input[name=reviewNo]');
-		$.ajax({
-			url : "<%= request.getContextPath() %>/review/like",
-    		method : "POST",
-    		data : {
-    			reviewNo : reviewNo.value
-    		},
-			success(responseData) {
-				console.log(responseData);
-				const {likeCount, isLike} = responseData;
-				console.log(likeCount);
-				console.log(isLike);
-				
-				const th = document.querySelectorAll("#th");
-				for(let i=0; i<th.length; i++) {
-					if(isLike) {
-						th[i].innerHTML = `
-			                <img src="<%= request.getContextPath() %>/images/review/heart.png" alt="heart.png" style="width: 30px;">
-			                <p>\${likeCount}</p>
-						`;
-					}
-					else {
-						th[i].innerHTML = `
-			                <img src="<%= request.getContextPath() %>/images/review/emptyheart.png" alt="emptyheart.png" style="width: 30px;">
-			                <p>\${likeCount}</p>
-						`;
+			$.ajax({
+				url : "<%= request.getContextPath() %>/review/like",
+	    		method : "POST",
+	    		data : {
+	    			reviewNo : e.target.value
+	    		},
+				success(responseData) {
+					console.log(responseData);
+					const {likeCount, isLike} = responseData;
+					console.log(likeCount);
+					console.log(isLike);
+					
+					const th = document.querySelectorAll("#th");
+					for(let i=0; i<th.length; i++) {
+						if(isLike) {
+							th[i].innerHTML = `
+								<input type="image" src="<%= request.getContextPath() %>/images/review/heart.png" alt="heart.png" style="width: 30px;" class="heart" value="\${reviewNo}">
+				                <p>\${likeCount}</p>
+							`;
+						}
+						else {
+							th[i].innerHTML = `
+								<input type="image" src="<%= request.getContextPath() %>/images/review/emptyheart.png" alt="emptyheart.png" style="width: 30px;" class="heart" value="\${reviewNo}">
+				                <p>\${likeCount}</p>
+							`;
+						}
+						
 					}
 					
 				}
-				
-			}
-		});
+			});
 	});
 });
 
