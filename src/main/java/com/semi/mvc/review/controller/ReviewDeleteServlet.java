@@ -25,7 +25,7 @@ public class ReviewDeleteServlet extends HttpServlet {
 		System.out.println("reviewNo 여기기기기기= " + reviewNo);
 		
 		
-		int result = reviewService.deleteReview(reviewNo);
+//		int result = reviewService.deleteReview(reviewNo);
 		
 		request.getSession().setAttribute("msg", "리뷰를 성공적으로 삭제했습니다.");
 		response.sendRedirect(request.getContextPath() + "/review/reviewCreate");
