@@ -56,9 +56,7 @@ table#tbl-orderList td {
 				    for (int i = 0; i < orders.size(); i++) {
 				        Order order = orders.get(i); %>
 				    <tr>
-				        <% if (i == 0) { %>
-				            <td rowspan="<%= orders.size() %>"><%= order.getOrderNo() %></td>
-				        <% } %>
+			            <td rowspan="<%= orders.size() %>"><%= order.getOrderNo() %></td>
 		                <td><%= order.getOrderDate() %></td>
 		                <td><%= order.getProduct() %></td>
 		                <td><%= order.getCount() %></td>
