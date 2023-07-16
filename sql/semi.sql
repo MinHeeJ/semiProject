@@ -227,7 +227,7 @@ create sequence seq_like_no;
 select * from like_tbl;
 select * from like_tbl where member_id = ? and review_no = ?;
 insert into like_tbl values (seq_like_no.nextval, 'qwerty', 8, 1);
-select count(like_count) from like_tbl where review_no = 8;
+select count(like_count)  from like_tbl where review_no = 8;
 
 create table selected_option (
 	serial_no number,
