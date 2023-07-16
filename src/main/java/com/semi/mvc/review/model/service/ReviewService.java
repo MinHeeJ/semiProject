@@ -91,6 +91,32 @@ public class ReviewService {
 		return memberId;
 	}
 
+	public List<Review> findAllReview() {
+		Connection conn = getConnection();
+		List<Review> reviews = reviewDao.findAllReview(conn);
+			
+		for(int i = 0; i<reviews.size(); i++) {
+			int reviewNo = reviews.get(i).getReviewNo();
+			List<AttachmentReview> attachments = reviewDao.findAttachment(conn, reviewNo);
+			
+			for(int j = 0 ; j < attachments.size() ; j++) {
+				System.out.println(attachments.get(j));
+			}
+			reviews.get(i).setAttachments(attachments);
+		}
+		
+		close(conn);
+		return reviews;
+	}
+
+	public int findLikeCount(int reviewNo) {
+		Connection conn = getConnection();
+		int countLike = reviewDao.findLikeCount(conn, reviewNo);
+		close(conn);
+		return countLike;
+	}
+
+	
 	
 	}
 
