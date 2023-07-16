@@ -25,10 +25,20 @@
 		<button id="deleteMember">삭제</button>
     </form>
 	</div>
+	
+	<!-- 회원권한 수정 -->
+	<form
+		name="memberRoleUpdateFrm"
+		action="<%= request.getContextPath() %>/admin/memberRoleUpdate"
+		method="POST">
+		<input type="hidden" name="memberRole"/>
+		<input type="hidden" name="memberId"/>
+	</form>
 </section>
 <script>
 window.onload = () => {
 	findAll();
+	
 };
 
 const findAll = () => {
@@ -43,6 +53,9 @@ const findAll = () => {
 			[...members].forEach((member) => {
 				//console.log(member);
 				const{memberId, name, phone, address, gender, memberRole} = member;
+				const optionU = memberRole === "U" ? "selected" : "";
+				const optionA = memberRole === "A" ? "selected" : "";
+				
 				tbody.innerHTML += `
 	                <tr>
 	                    <td><input type="checkbox" name="checkedOrNot" value="\${memberId}"></td>
@@ -53,17 +66,40 @@ const findAll = () => {
 	                    <td>\${gender}</td>
 	                    <td>
 	                    	<select class="member-role" data-member-id="\${memberId}">
-	                    		<option value="U" \${memberRole} == \${memberRole}.U ? "selected" : "" %>일반</option>
-	                    		<option value="A" \${memberRole}) == \${memberRole}.A ? "selected" : "" %>관리자</option>
+	                    		<option value="U" \${optionU} %>일반</option>
+	                    		<option value="A" \${optionA} %>관리자</option>
 	                    	</select>
 	                    </td>
 	                </tr>
 				`;
 			});
 			
+			// 회원권한 수정
+			document.querySelectorAll("select.member-role").forEach((elem) => {
+				
+				elem.addEventListener("change", (e) => {
+					
+					if(confirm("회원권한을 수정하시겠습니까?")) {
+						const memberRoleVal = e.target.value;
+						const memberIdVal = e.target.dataset.memberId;
+						
+						const frm = document.memberRoleUpdateFrm;
+						frm.memberRole.value = memberRoleVal;
+						frm.memberId.value = memberIdVal;
+						frm.submit();
+					} 
+					else {
+						// option태그에 있는 selected속성이 있는 태그를 찾아서 selected속성을 true로 지정 -> 원래값 취소
+						e.target.querySelector("option[selected]").selected = true;
+					}
+				});
+			});
+			
 		}
 	});
 };
+
+
 
 // 삭제하기
 document.querySelector("#deleteMember").onclick = (e) => {
@@ -82,14 +118,13 @@ document.querySelector("#deleteMember").onclick = (e) => {
 				contentType : false, 
 				method : "POST",
 				success(responseData) {
-					const {result} = responseData;
-					alert(result);
 					findAll();
 				}
 			});
 		}
 	}
 }
+
 </script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

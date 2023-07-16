@@ -34,7 +34,6 @@ table#tbl-orderList td {
 
 <section>
 	<h1>주문내역 전체조회</h1>
-	
     <div>
         <table id="tbl-orderList">
             <thead>
@@ -57,9 +56,7 @@ table#tbl-orderList td {
 				    for (int i = 0; i < orders.size(); i++) {
 				        Order order = orders.get(i); %>
 				    <tr>
-				        <% if (i == 0) { %>
-				            <td rowspan="<%= orders.size() %>"><%= order.getOrderNo() %></td>
-				        <% } %>
+			            <td rowspan="<%= orders.size() %>"><%= order.getOrderNo() %></td>
 		                <td><%= order.getOrderDate() %></td>
 		                <td><%= order.getProduct() %></td>
 		                <td><%= order.getCount() %></td>

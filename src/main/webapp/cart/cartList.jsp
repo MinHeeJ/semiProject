@@ -34,7 +34,7 @@
 		id ="printCartList"
 		action="<%= request.getContextPath() %>/order/cart"
 		method="POST">
-	<input type="hidden" name="memberId" value="<%= loginMember %>"/>
+	<input type="hidden" name="memberId" value="honggd"/>
 	<div id = "cartbuttons">
 		<button id="cartUpdate">수정</button>
 		<button id="cartDelete">삭제</button>	
@@ -51,7 +51,11 @@
             </tr>
         </thead>
         <tbody></tbody>
-        <tfoot></tfoot>
+        <tfoot>
+        	<tr>
+				<td colspan="6">총금액 : 0원</td>
+			</tr>
+        </tfoot>
     </table>
 	<button id="order">주문하기</button>
 	</form>
@@ -75,7 +79,6 @@
 				const tfoot = document.querySelector("#cartListTable tfoot");
 				
 				tbody.innerHTML ="";
-				tfoot.innerHTML ="";
 				
 				let index = 1;
 				
@@ -154,7 +157,6 @@
 	
 	document.querySelector("#cartUpdate").onclick =(e) =>{
 		
-		
 		document.querySelector("#printCartList").onsubmit =(e) =>{
 			
 			e.preventDefault();
@@ -182,8 +184,23 @@
 		
 	}
 	
-	// 총금액
-	
+	// 선택한 상품 없으면 주문 x
+	document.querySelector("#order").onclick = (e) => {
+		
+		let flag = true;
+		 
+		const checkboxes = document.querySelectorAll("input[name=checkedOrNot]");
+		  
+	    checkboxes.forEach((checkbox) => {
+			if (checkbox.checked) 		   
+			    flag = false;
+		});
+	    if(flag){
+	    	 alert('선택하신 상품이 없습니다.');
+			    e.preventDefault();
+	    }
+
+	};
 	</script>
 
 </body>

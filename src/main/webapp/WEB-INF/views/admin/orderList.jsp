@@ -34,7 +34,12 @@ table#tbl-orderList td {
 %>
 <section>
 	<h1>주문내역 전체조회</h1>
-	
+	<div>
+		<input type="checkbox" value="주문접수완료" checked>
+		<label for="state">주문접수완료</label>
+		<input type="checkbox" value="주문처리완료" checked>
+		<label for="state">주문처리완료</label>
+	</div>
     <div>
         <table id="tbl-orderList">
             <thead>
@@ -52,16 +57,14 @@ table#tbl-orderList td {
             <tbody>
             <% if(orders == null || orders.isEmpty()) { %>
             	<tr>
-					<td>조회 결과가 없습니다.</td>
+					<td colspan="7">조회 결과가 없습니다.</td>
 				</tr>
            	<% } else {
 				    for (int i = 0; i < orders.size(); i++) {
 				        Order order = orders.get(i); %>
 				    <tr>
-				        <% if (i == 0) { %>
-				            <td rowspan="<%= orders.size() %>"><%= order.getOrderNo() %></td>
-			                <td rowspan="<%= orders.size() %>"><%= order.getMemberId() %></td>
-				        <% } %>
+			            <td><%= order.getOrderNo() %></td>
+		                <td><%= order.getMemberId() %></td>
 		                <td><%= order.getProduct() %></td>
 		                <td><%= order.getCount() %></td>
 		                <td><%= order.getOrderDate() %></td>
@@ -90,6 +93,27 @@ table#tbl-orderList td {
 	<input type="hidden" name="orderNo"/>
 </form>
 <script>
+// 선택한 체크박스만 보이게
+document.querySelectorAll("input[type=checkbox]").forEach((checkbox) => {
+    checkbox.addEventListener("change", () => {
+        const checkboxes = document.querySelectorAll("input[type=checkbox]");
+        const tr = document.querySelectorAll("#tbl-orderList tbody tr");
+
+        for(let i=0; i<tr.length; i++) {
+            const stateVal = tr[i].querySelector(".state").value;
+            let flag = true;
+            
+            for(let j=0; j<checkboxes.length; j++) {
+            	if(checkboxes[j].checked && checkboxes[j].value === stateVal) {
+            		flag = false;
+            		break;
+            	}
+            }
+           	tr[i].style.display = flag ? 'none' : 'table-row';
+        }
+    });
+});
+
 // 처리상태 수정
 document.querySelectorAll("select.state").forEach((elem) => {
 	elem.addEventListener("change", (e) => {
