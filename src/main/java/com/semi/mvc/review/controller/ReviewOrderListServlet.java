@@ -103,7 +103,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 	    String orderSerialNo = multiReq.getParameter("orderSerialNo");
 		System.out.println("writer = " + writer);
 		System.out.println("content = " + content);
-		System.out.println("orderSerialNo = " + orderSerialNo);
+		System.out.println("orderSerialNoㅋㅋㅋㅋㅋ = " + orderSerialNo);
 		Review review = new Review();
 		review.setContent(content);
 		review.setWriter(writer);

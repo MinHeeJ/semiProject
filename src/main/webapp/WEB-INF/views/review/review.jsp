@@ -17,8 +17,7 @@
 	
 %>
 <script src="<%= request.getContextPath() %>/js/jquery-3.7.0.js"></script>
-   <link rel="stylesheet" href="<%=request.getContextPath()%>/css/review.css" /> 
-
+ <link rel="stylesheet" href="<%=request.getContextPath()%>/css/review.css" />
 <section id="review-container">
 	<h2>리뷰작성</h2>
 	<form
@@ -108,17 +107,30 @@
 				<tr>
 					
 				<div class="polaroid">
-					<%for(AttachmentReview file : files){ %>
-						<img src ="<%= request.getContextPath()%>/upload/review/<%=file.getRenamedFilename() %>">
-						<%} %>
+						<p class="photo"></p>
+							<%for(AttachmentReview file : files){ %>
+								<img src ="<%= request.getContextPath()%>/upload/review/<%=file.getRenamedFilename() %>">
+							<%} %>
+						</p>
 						<p class="info">
+							<p class ="no"><%= review.getReviewNo() %></p>
 							<span class ="writer"><%= review.getWriter() %></span>
 							<span class ="photoDate"><%= review.getRegDate() %></span>
 						</p>
 						<p class ="content"><%= review.getContent() %></p>
 						<p class ="product"><%= review.getProduct() %></p>
+						
 					</div>
-					
+					<tr>			
+						<th colspan="2">
+							<%-- 첨부파일이 없는 게시물 수정 --%>
+							<input type="button" value="수정하기" onclick="updateReview()">
+							
+							<input type="button" value="삭제하기" onclick="deleteReview('<%= review.getReviewNo()%>');">
+							
+							
+						</th>
+					</tr>
 				</tr>
 				<% 		
 					}
@@ -138,10 +150,15 @@
 	</div>
 	
 	<hr />
+	
 	<div id='btn-more-container'>
 		<button id="btn-more" value="">더보기(<span id="cpage"><%= cpage %></span>/<span id="totalPage"><%= totalPage %></span>)</button>
 	</div>
 </section>
+<form action="<%= request.getContextPath() %>/review/reviewDelete" name="reviewDelFrm" method="POST" >
+	<input type="hidden" name="reviewNo" id="reviewNo" value=""/>
+
+</form>
 
 <script>
 /**
@@ -212,6 +229,19 @@ const getPage = (cpage) => {
 		}
 	});
 	
+}
+
+
+function deleteReview(reviewNo){
+	if(confirm("정말 리뷰를 삭제하시겠습니까?")){
+		document.getElementById("reviewNo").value = reviewNo;
+     
+		document.reviewDelFrm.submit();
+	}
+}
+
+const updateReview = () => {
+	location.href = "<%= request.getContextPath() %>/review/reviewCreate %>";
 }
 </script>
 

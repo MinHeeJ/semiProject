@@ -17,6 +17,7 @@ import com.semi.mvc.order.model.vo.Order;
 import com.semi.mvc.review.model.exception.ReviewException;
 import com.semi.mvc.review.model.vo.AttachmentReview;
 import com.semi.mvc.review.model.vo.Review;
+import com.semi.mvc.store.model.exception.StoreException;
 public class ReviewDao {
 	private Properties prop = new Properties();
 		
@@ -212,6 +213,38 @@ public class ReviewDao {
 		}
 		
 		return attachments;
+	}
+
+	public int deleteReview(Connection conn, int reviewNo) {
+		int result = 0;
+		String sql = prop.getProperty("deleteReview");
+		// delete from review where review_no = ?
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, reviewNo);
+			System.out.println(" DAO 리뷰넘 = " + reviewNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new ReviewException(e);
+		}
+		return result;
+	}
+
+	public Review findReviewById(Connection conn, int reviewNo) {
+		Review review = null;
+		String sql = prop.getProperty("findReviewById");
+		
+		//select * from review where review_no = ?
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, reviewNo);
+			
+			try (ResultSet rset = pstmt.executeQuery()) {
+				if (rset.next())
+					review = handleReviewResultSet(rset);
+			}
+		} catch (SQLException e) {
+			throw new ReviewException(e);
+		}
+		return review;
 	}
 
 	

@@ -75,6 +75,7 @@
 
 <form action="<%= request.getContextPath() %>/store/storeDelete" name="storeDelFrm" method="POST" >
 	<input type="hidden" name="storeNo" id="storeNo" value=""/>
+
  	<%-- <% for(Store store : stores) { %>
 		<input type="hidden" name="storeNo" value="<%= store.getStoreNo() %>"/>
  	<% } %> --%>
