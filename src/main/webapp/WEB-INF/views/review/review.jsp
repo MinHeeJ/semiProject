@@ -95,47 +95,49 @@
 	
 	<div id="photo-review-container">
 	<% 	if(reviews == null || reviews.isEmpty()) { %>
+		<tr>
+			<td>리뷰가 없습니다.</td>
+		</tr>
+		<%	
+			} 
+			else { 
+				for(Review review : reviews){
+					List<AttachmentReview> files = review.getAttachments();
+		%>
 			<tr>
-				<td>리뷰가 없습니다.</td>
-			</tr>
-			<%	
-				} 
-				else { 
-					for(Review review : reviews){
-						List<AttachmentReview> files = review.getAttachments();
-			%>
-				<tr>
-					
 				<div class="polaroid">
-						<p class="photo"></p>
-							<%for(AttachmentReview file : files){ %>
-								<img src ="<%= request.getContextPath()%>/upload/review/<%=file.getRenamedFilename() %>">
-							<%} %>
-						</p>
-						<p class="info">
-							
-							<span class ="writer"><%= review.getWriter() %></span>
-							<span class ="photoDate"><%= review.getRegDate() %></span>
-						</p>
-						<p class ="product"><%= review.getProduct() %></p>
-						<p class ="content"><%= review.getContent() %></p>
+					<p class="photo"></p>
+						<%for(AttachmentReview file : files){ %>
+							<img src ="<%= request.getContextPath()%>/upload/review/<%=file.getRenamedFilename() %>">
+						<%} %>
+					</p>
+					<p class="info">
 						
-					</div>
-					<tr>			
-						<th colspan="2">
-							<%-- 첨부파일이 없는 게시물 수정 --%>
-							<input type="button" value="수정하기" onclick="updateReview()">
-							
-							<input type="button" value="삭제하기" onclick="deleteReview('<%= review.getReviewNo()%>');">
-							
-							
-						</th>
-					</tr>
+						<span class ="writer"><%= review.getWriter() %></span>
+						<span class ="photoDate"><%= review.getRegDate() %></span>
+					</p>
+					<p class ="product"><%= review.getProduct() %></p>
+					<p class ="content"><%= review.getContent() %></p>
+					
+				</div>
+				<tr>			
+					<th colspan="2" id="th">
+			           	<div>
+				            <input type="hidden" name="reviewNo" value="<%= review.getReviewNo() %>"/>
+				            <input type="image" src="<%= request.getContextPath() %>/images/review/heart.png" alt="heart.png" style="width: 30px;" class="heart" value="<%= review.getReviewNo() %>">
+				            <p>0</p>
+			           	</div>
+						<%-- 첨부파일이 없는 게시물 수정 --%>
+						<input type="button" value="수정하기" onclick="updateReview()">
+						
+						<input type="button" value="삭제하기" onclick="deleteReview('<%= review.getReviewNo()%>');">
+					</th>
 				</tr>
-				<% 		
-					}
-				} 
-			%>
+			</tr>
+			<% 		
+				}
+			} 
+		%>
 	
 	
 	<!--  <div class="polaroid">
@@ -161,6 +163,54 @@
 </form>
 
 <script>
+// 좋아요
+window.onload = () => {
+	like();
+}
+
+const like = () => {
+	// 밑에 코드 참고하면 될것같음
+};
+
+// innerHTML쪽이 안됨
+document.querySelectorAll(".heart").forEach((heart) => {
+	heart.addEventListener('click', (e) => {
+		console.log(e.target.value);
+		e.preventDefault();
+			$.ajax({
+				url : "<%= request.getContextPath() %>/review/like",
+	    		method : "POST",
+	    		data : {
+	    			reviewNo : e.target.value
+	    		},
+				success(responseData) {
+					console.log(responseData);
+					const {likeCount, isLike} = responseData;
+					console.log(likeCount);
+					console.log(isLike);
+					
+					const th = document.querySelectorAll("#th");
+					for(let i=0; i<th.length; i++) {
+						if(isLike) {
+							th[i].innerHTML = `
+								<input type="image" src="<%= request.getContextPath() %>/images/review/heart.png" alt="heart.png" style="width: 30px;" class="heart" value="\${reviewNo}">
+				                <p>\${likeCount}</p>
+							`;
+						}
+						else {
+							th[i].innerHTML = `
+								<input type="image" src="<%= request.getContextPath() %>/images/review/emptyheart.png" alt="emptyheart.png" style="width: 30px;" class="heart" value="\${reviewNo}">
+				                <p>\${likeCount}</p>
+							`;
+						}
+						
+					}
+					
+				}
+			});
+	});
+});
+
 /**
 * reviewCreateFrm 유효성 검사
 */

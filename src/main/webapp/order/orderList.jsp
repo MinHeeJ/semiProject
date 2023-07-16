@@ -156,7 +156,7 @@ table#tbl-salesLookUp td {
 	
 	
     <div class="wrapper">
-	<h1>주문내역 조회</h1>
+	<h1>주문내역 조회(회원)</h1>
         <table id="tbl-salesLookUp">
             <thead></thead>
             <tbody></tbody>
