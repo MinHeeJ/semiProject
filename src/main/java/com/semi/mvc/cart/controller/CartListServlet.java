@@ -38,9 +38,9 @@ public class CartListServlet extends HttpServlet {
 		
 		response.setContentType("application/json; charset=utf-8");
 		
-		// 바디
+		
 		Gson gson = new Gson();
-		String jsonStr = gson.toJson(carts); // toJson(이 안에 제이슨으로 바꾸고 싶은 파일을 넣으면 된다)
+		String jsonStr = gson.toJson(carts); 
 		System.out.println("jsonStr = " + jsonStr);
 		response.getWriter().append(jsonStr);
 	}
