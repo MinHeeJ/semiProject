@@ -61,6 +61,7 @@ public class StoreService {
 		Connection conn = getConnection();
 		try {
 			result = storeDao.deleteStore(conn, storeNo);
+			
 			commit(conn);
 		} catch (Exception e) {
 			rollback(conn);

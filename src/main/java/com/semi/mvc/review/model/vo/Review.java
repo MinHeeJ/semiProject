@@ -1,5 +1,6 @@
 package com.semi.mvc.review.model.vo;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,16 @@ public class Review extends ReviewEntity {
 	private List<AttachmentReview> attachments = new ArrayList<>();
 	private int commentCnt;
 	
-	
+	public Review() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Review(int reviewNo, String writer, String title, String content, Date regDate) {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
 	public int getAttachCnt() {
 		return attachCnt;
 	}

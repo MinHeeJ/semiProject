@@ -58,7 +58,7 @@
 					<td><%= store.getPhone() %></td> 
 					
 					<td>
-						<input type="button" onclick="deleteStore();" value="매장삭제">
+						<input type="button" onclick="deleteStore('<%=store.getStoreNo()%>');" value="매장삭제">
 					</td> 
 				</tr>
 				<% 		
@@ -73,18 +73,29 @@
 	
 </section>
 
-<form action="<%= request.getContextPath() %>/store/storeDelete" name="storeDelFrm" method="POST">
+<form action="<%= request.getContextPath() %>/store/storeDelete" name="storeDelFrm" method="POST" >
+	<input type="hidden" name="storeNo" id="storeNo" value=""/>
 
- 	<% for(Store store : stores) { %>
+ 	<%-- <% for(Store store : stores) { %>
 		<input type="hidden" name="storeNo" value="<%= store.getStoreNo() %>"/>
- 	<% } %>
+ 	<% } %> --%>
 </form>
 <script>
 	
-const deleteStore = (button) => {
-	if(confirm("정말 매장을 삭제하시겠습니까?"))
+/* const deleteStore(storeNo) = (button) => {
+	if(confirm("정말 매장을 삭제하시겠습니까?")){
+		document.getElementById("storeNo").value = storeNo;
      
-	document.storeDelFrm.submit();
+		//document.storeDelFrm.submit();
+	}
+} */
+
+function deleteStore(storeNo){
+	if(confirm("정말 매장을 삭제하시겠습니까?")){
+		document.getElementById("storeNo").value = storeNo;
+     
+		document.storeDelFrm.submit();
+	}
 }
 </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

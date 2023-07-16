@@ -109,6 +109,64 @@
                 </p>
             </div>
 		</div>
+
+		
+		<script>
+		
+		document.addEventListener("DOMContentLoaded", function(){
+
+			 console.log('Load후 동작하는 함수입니다.');
+			 
+
+		});
+        let slide_index = 0;
+        let slide_prev = document.querySelector('.slide_prev');
+        let slide_next = document.querySelector('.slide_next');
+        let swiper_wrapper = document.querySelector('.swiper-wrapper');
+        let slide_page_number = document.querySelectorAll('.slide_page_number');
+
+        slide_prev.addEventListener('click', ()=>{
+            slide_page_number[slide_index].classList.remove('slide_active');
+
+            if(slide_index === 0){
+                slide_index = 2;
+            }else{
+                slide_index -= 1;
+            }
+
+            swiper_wrapper.style.left = -1200 * slide_index + 'px';
+            slide_page_number[slide_index].classList.add('slide_active');
+
+        })
+
+        slide_next.addEventListener('click', ()=>{
+            slide_page_number[slide_index].classList.remove('slide_active');
+
+            if(slide_index === 2){
+                slide_index = 0;
+            }else{
+                slide_index += 1;
+            }
+
+            swiper_wrapper.style.left = -1200 * slide_index + 'px';
+            slide_page_number[slide_index].classList.add('slide_active');
+
+        })
+
+        setInterval(() => {
+            slide_page_number[slide_index].classList.remove('slide_active');
+
+            if(slide_index === 2){
+                slide_index = 0;
+            }else{
+                slide_index += 1;
+            }
+
+            swiper_wrapper.style.left = -1200 * slide_index + 'px';
+            slide_page_number[slide_index].classList.add('slide_active');
+        }, 3000)
+    </script>
+    
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 
 
