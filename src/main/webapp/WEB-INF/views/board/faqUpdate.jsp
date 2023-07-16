@@ -1,8 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.semi.mvc.board.model.vo.FaqBoard" %>
+<%@ page import="com.semi.mvc.board.model.vo.Attachment" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<%
+	FaqBoard faq = (FaqBoard) request.getAttribute("board");
+	List<Attachment> attachments = faq.getAttachments();
+%>
 <section class="faqCreateContainer">
 	<form name="faqCreateFrm" action="<%=request.getContextPath() %>/board/faqUpdate" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="no" value="<%= faq.getBoardNo() %>" />
 		<table id="faqUpdateTable">
 		<tr>
 			<th>제 목</th>

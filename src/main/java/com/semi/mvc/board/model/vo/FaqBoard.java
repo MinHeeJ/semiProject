@@ -69,6 +69,14 @@ public class FaqBoard {
 		if(attach != null)
 			this.attachments.add(attach);
 	}
+	
+	public List<Attachment> getAttachments() {
+		return attachments;
+	}
+
+	public void setAttachments(List<Attachment> attachments) {
+		this.attachments = attachments;
+	}
 
 	@Override
 	public String toString() {
