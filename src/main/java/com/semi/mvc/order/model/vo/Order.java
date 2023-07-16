@@ -13,12 +13,12 @@ public class Order extends Cart {
 		super();
 	}
 	
-	public Order(int cartNo, String product, String memberId, int count, int price) {
-		super(cartNo, product, memberId, count, price);
+	public Order(String product, String memberId, int count, int price) {
+		super(product, memberId, count, price);
 	}
 
-	public Order(int orderNo, String memberId, int cartNo, String product, Date orderDate, String state, int count, int price) {
-		super(cartNo, product, memberId, count, price);
+	public Order(int orderNo, String memberId, String product, Date orderDate, String state, int count, int price) {
+		super(product, memberId, count, price);
 		this.orderNo = orderNo;
 		this.orderDate = orderDate;
 		this.state = state;

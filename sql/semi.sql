@@ -102,13 +102,10 @@ create table board_comment (
 create table order_detail (
 	order_serial_no number,
     order_no number,
-    cart_no number,
     product varchar2(1000),
     count number,
     price number,
-    constraints pk_order_detail_order_serial_no primary key(order_serial_no),
-    constraints fk_order_detail_order_no foreign key(order_no) references order_tbl(order_no) on delete cascade,
-    constraints fk_order_detail_cart_no_product foreign key(cart_no, product) references cart_tbl(cart_no, product) on delete cascade
+    constraints pk_order_detail_order_serial_no primary key(order_serial_no)
 );
 --drop table order_detail;
 select * from order_detail;
@@ -238,4 +235,3 @@ create sequence seq_option_no;
 -- drop sequence seq_option_no;
 select * from selected_option;
 -- delete from selected_option;
-select * from ingredient;
