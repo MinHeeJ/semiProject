@@ -111,6 +111,13 @@
 		</div>
 		
 		<script>
+		
+		document.addEventListener("DOMContentLoaded", function(){
+
+			 console.log('Load후 동작하는 함수입니다.');
+			 
+
+		});
         let slide_index = 0;
         let slide_prev = document.querySelector('.slide_prev');
         let slide_next = document.querySelector('.slide_next');

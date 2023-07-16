@@ -8,6 +8,7 @@ public class Order extends Cart {
 	private int orderNo;
 	private Date orderDate;
 	private String state;
+	private int orderSerialNo;
 	
 	public Order() {
 		super();
@@ -22,6 +23,16 @@ public class Order extends Cart {
 		this.orderNo = orderNo;
 		this.orderDate = orderDate;
 		this.state = state;
+	}
+	
+	
+	
+	public int getOrderSerialNo() {
+		return orderSerialNo;
+	}
+
+	public void setOrderSerialNo(int orderSerialNo) {
+		this.orderSerialNo = orderSerialNo;
 	}
 
 	public int getOrderNo() {
@@ -50,8 +61,11 @@ public class Order extends Cart {
 
 	@Override
 	public String toString() {
-		return "Order [orderNo=" + orderNo + ", orderDate=" + orderDate + ", state=" + state + ", toString()="
-				+ super.toString() + "]";
+		return "Order [orderNo=" + orderNo + ", orderDate=" + orderDate + ", state=" + state + ", orderSerialNo="
+				+ orderSerialNo + "]";
 	}
+
+	
+	
 	
 }

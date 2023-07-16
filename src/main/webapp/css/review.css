@@ -9,8 +9,8 @@ h2{
 	 padding: 100px;
 }
 
-/*테이블*/
-#tbl-board-view {
+/*전체 리뷰콘테이너 ( 리뷰게시판 빼고 )*/
+#review-container {
    	margin : auto;
     border: 3px solid #ddd;
     border-collapse: collapse;
@@ -25,4 +25,24 @@ th, td {
     text-align: center;
     border-bottom: 1px solid #ddd;
   }
-  
+/*주문내역 리스트 테이블*/
+#tbl-order-review{
+	margin : auto;
+    border: 3px solid #ddd;
+    border-collapse: collapse;
+    width: 60%;
+    padding: 100px;
+    text-align: center;
+}
+
+/*주문내역 리스트 테이블*/
+#tbl-board-view{
+	margin : auto;
+    border: 3px solid #ddd;
+    border-collapse: collapse;
+    width: 60%;
+    padding: 100px;
+    text-align: center;
+}
+
+
