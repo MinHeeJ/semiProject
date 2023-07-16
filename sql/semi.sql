@@ -183,29 +183,32 @@ create table faq_board (
 --drop table faq_board;
 
 create table review (
-	review_no number,
+    review_no number,
+    order_serial_no number,
 	writer varchar2(20),
-	title varchar2(200)	not null,
+	title varchar2(200),
 	content	varchar2(1000) not null,
 	reg_date date default sysdate,
     constraints pk_review_no primary key(review_no),
-    constraints fk_review_writer foreign key(writer) references member(member_id) on delete cascade
+    constraints fk_review_writer foreign key(writer) references member(member_id) on delete cascade,
+    constraints fk_order_serial_no foreign key(order_serial_no) references order_detail(order_serial_no) on delete cascade
 );
+create sequence seq_review_no;
 --drop table review;
+select * from review;
 
-create table attachment (
+create table attachment_review (
     no number, 
-    board_no number not null,
+    review_no number not null,
     original_filename varchar2(255) not null, -- 실제파일명
     renamed_filename varchar2(255) not null, -- 저장파일명 (영문자/숫자)
     reg_date date default sysdate,
     constraints pk_attachment_no primary key(no),
-    constraints fk_attachment_board_no foreign key(board_no) references board(board_no)  on delete cascade,
-    constraints fk_attachment_review_no foreign key(board_no) references review(review_no) on delete cascade
-    
+    constraints fk_attachment_review_no foreign key(review_no) references review(review_no) on delete cascade
 );
-select * from attachment;
---drop table attachment;
+create sequence seq_attachment_review_no;
+select * from attachment_review;
+--drop table attachment_review;
 
 
 create table like_tbl (
