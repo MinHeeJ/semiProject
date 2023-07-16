@@ -113,12 +113,12 @@
 							<%} %>
 						</p>
 						<p class="info">
-							<p class ="no"><%= review.getReviewNo() %></p>
+							
 							<span class ="writer"><%= review.getWriter() %></span>
 							<span class ="photoDate"><%= review.getRegDate() %></span>
 						</p>
-						<p class ="content"><%= review.getContent() %></p>
 						<p class ="product"><%= review.getProduct() %></p>
+						<p class ="content"><%= review.getContent() %></p>
 						
 					</div>
 					<tr>			

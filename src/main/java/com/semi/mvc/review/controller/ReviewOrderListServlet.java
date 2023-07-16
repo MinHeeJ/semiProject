@@ -46,9 +46,6 @@ public class ReviewOrderListServlet extends HttpServlet {
 		 * orders);
 		 */
 		
-		
-		
-		
 		int totalContent = reviewService.getTotalContent();
 		System.out.println("totalContent = " + totalContent);
 		int limit = 5;
