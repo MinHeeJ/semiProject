@@ -31,7 +31,6 @@
 
 					<th>주문상품</th>
 
-
 				</tr>
 			</thead>
 
@@ -56,7 +55,7 @@
 			%>
 			</tbody>
 		</table>
-
+	<br><br><br>
 
 		<% 	if(!(orders == null || orders.isEmpty())) { %>
 		<table id="tbl-board-view">
@@ -129,6 +128,24 @@
 
 
 <script>
+document.reviewOrderListFrm.onsubmit = (e) => {
+	const frm = e.target;
+	const title = e.target.title;
+	const content = e.target.content;
+	
+	// 제목을 작성하지 않은 경우 폼제출할 수 없음.
+	if(!/^.+$/.test(title.value)) {
+		alert("제목을 작성해주세요.");
+		return false;
+	}
+					   
+	// 내용을 작성하지 않은 경우 폼제출할 수 없음.
+	if(!/^(.|\n)+$/.test(content.value)) {
+		alert("내용을 작성해주세요.");
+		return false;
+	}
+	return true;
+}
 //좋아요
 
 function like() {
@@ -245,7 +262,7 @@ const getPage = (cpage) => {
 				    const { renamedFilename } = attachment;
 				    renamedFile = renamedFilename;
 
-				    imgElements += `<img src="<%= request.getContextPath()%>/upload/review/\${renamedFile}">`;
+				    imgElements += `<img src="<%= request.getContextPath()%>/upload/review/\${renamedFile}" id="photo">`;
 				  }
 				
 				
@@ -253,7 +270,7 @@ const getPage = (cpage) => {
 					<p class="info">
 							<span class ="writer">\${writer}</span>
 							<span class ="photoDate">\${regDate}</span>
-						</p>
+					</p>
 					<p class ="product">\${product}</p>
 					<p class ="caption">\${content}</p>
 				
@@ -276,7 +293,9 @@ const getPage = (cpage) => {
 		complete(){
 			document.querySelector("#cpage").innerHTML = cpage;
 			
-			if(cpage === <%=totalPage%>){
+
+			if(cpage === <%= totalPage%>|| cpage == 1){
+
 				const btn = document.querySelector("#btn-more");
 				btn.disabled = true;
 				btn.style.cursor = "not-allowed";
@@ -285,6 +304,7 @@ const getPage = (cpage) => {
 		}
 	});
 }
+
 
 
 function deleteReview(reviewNo){
