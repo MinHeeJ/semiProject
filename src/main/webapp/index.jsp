@@ -6,8 +6,10 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <script src="<%=request.getContextPath()%>/js/jquery-3.7.0.js"></script>
 <style>
-.polaroid {border: 2px solid black; padding: 20px; margine: 1% 0;}
-.polaroid img{width: 300px; }
+.polaroid {border: 2px solid black; padding: 20px; margine: 1% 0; width:850px;}
+.textArea {width: 73%; display: inline-block; height: 100%;}
+.imageArea {width: 20%; display: inline-block; border: 1px solid grey; height: 100%;}
+.imageArea img {width: 100%;}
 </style>
 
 	<div class="account_wrapper">
@@ -43,7 +45,7 @@
     </div>
 	
     <div class="swiper slide_wrapper">
-        <div class="swiper-wrapper">
+       	<div class="swiper-wrapper">
             <div class="swiper-slide" style="background-image: url('<%= request.getContextPath() %>/images/index/banner1.jpg');"></div>
             <div class="swiper-slide" style="background-image: url('<%= request.getContextPath() %>/images/index/banner2.jpg');"></div>
             <div class="swiper-slide" style="background-image: url('<%= request.getContextPath() %>/images/index/banner3.jpg');"></div>
@@ -201,13 +203,17 @@
 		
 					container.innerHTML += `
 						<div class="polaroid">
-						<p>구매한 조합 : \${product}</p>
-						<img src ="<%= request.getContextPath()%>/upload/review/\${renamedFile}">
-							<p class="info">
-								<span class ="writer">\${writer}</span>
-								<span class ="photoDate">\${regDate}</span>
-							</p>
-						<p class ="caption">\${content}</p>
+							<div class="textArea">
+								<p>구매한 조합 : \${product}</p>
+								<p class="info">
+									<span class ="writer">\${writer}</span>
+									<span class ="photoDate">\${regDate}</span>
+								</p>
+								<p class ="caption">\${content}</p>
+							</div>
+							<div class="imageArea">
+								<img src ="<%= request.getContextPath()%>/upload/review/\${renamedFile}">
+							</div>
 						</div>
 					`;
 				})
