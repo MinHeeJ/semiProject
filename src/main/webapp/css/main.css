@@ -129,6 +129,8 @@ header > nav > ul > li > a{
     height: 10px;
     line-height: 10px;
     border-radius: 7px;
+    color : white;
+    font-weight : bold;
     cursor:pointer;
 }
 
@@ -138,7 +140,7 @@ header > nav > ul > li > a{
     width: 150px;
     align-items: center;
     position: absolute;
-    top: 80%;
+    top: 90%;
     left: 50%;
     transform: translate(-50%, 0%);
 }
@@ -152,7 +154,7 @@ header > nav > ul > li > a{
 }
 
 .slide_active{
-    background-color: blue;
+    background-color: white;
 }
 
 .slide_wrapper > .swiper-wrapper > .swiper-slide{
@@ -181,11 +183,18 @@ header > nav > ul > li > a{
     margin-top: 7.5rem;
     position:relative;
 }
-
+@font-face {
+    font-family: 'yg-jalnan';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 .recommend_contents > h1{
     font-weight: bold;
     color: #333;
-    font-size: 36px;
+    font-size: 45px;
+    font-family: 'yg-jalnan';
+    font-weight: 1000;
 }
 
 .recommend_contents > .contents_lists{
@@ -243,23 +252,29 @@ header > nav > ul > li > a{
     width: 300px;
     line-height: 20px;
     word-break:keep-all;
+    
 }
 
 #balloon{
     position: absolute;
     top: -80px
 }
+@font-face {font-family: 'NanumSquareNeo-Variable'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');font-weight: normal;font-style: normal;}
 
 #balloon > span{
     position: absolute;
     width: 100%;
-    top: 50%;
+    top: 42%;
     left: 50%;
     transform: translate(-50%, -85%);
     text-align: center;
     color: #fff;
-    font-weight: bold;
+    font-size : 18px;
+    font-family: 'NanumSquareNeo-Variable';
+
 }
+
+
 footer{ 
 background-color:#00bcd4; clear:both; height:75px; text-align:center;padding-top:40px;
 }
@@ -269,6 +284,7 @@ footer p {
     justify-content: center;
     align-items: center;
 }
+
 
 /* 고객센터 */
 .serviceCenter{

@@ -25,6 +25,7 @@
 #cartbuttons {width : 1200px; margin-top : 2%;}
 #cartbuttons button{ width : 75px;}
 #cartUpdate {margin-left: 76.2%; margin-right:0.2%}
+
 </style>
 <script src="<%= request.getContextPath() %>/js/jquery-3.7.0.js"></script>
 <% loginMember = "honggd"; %>
@@ -81,6 +82,14 @@
 				
 				tbody.innerHTML ="";
 				
+				if(responseData == null || responseData.length == 0){
+					tbody.innerHTML += `
+						<tr>
+		                <td  colspan="5">조회된 결과가 존재하지 않습니다.</td>               
+		           		</tr>
+					`;
+				}
+	
 				let index = 1;
 				
 				responseData.forEach((cart)=>{
