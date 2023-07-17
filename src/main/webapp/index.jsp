@@ -22,7 +22,6 @@
 .textArea p {font-size: 16px; font-family: 'NanumSquareNeo-Variable';}
 @keyframes opacityAnimation {0% {opacity: 1;} 50% {opacity: 0.3;} 100% {opacity: 1;}}
 .reviewInfo { font-weight: bold;}
-
 </style>
 
 	<div class="account_wrapper">
