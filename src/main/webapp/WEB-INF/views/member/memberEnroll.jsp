@@ -13,7 +13,7 @@
             <tr>
                 <th>아이디<sup>: </sup></th>
                 <td>
-                    <input type="text" placeholder="4글자이상" name="memberId" id="_memberId" value="sejong" required>
+                    <input type="text" placeholder="4글자이상" name="memberId" id="_memberId"  required>
                     <input type="button" value="중복검사" onclick="checkIdDuplicate();"/>
                     <input type="hidden" id="idValid" value="0"/>
                     <%-- id검사여부 확인용: 0-유효하지않음, 1-유효한 아이디 --%>
@@ -22,33 +22,33 @@
             <tr>
                 <th>패스워드<sup>: </sup></th>
                 <td>
-                    <input type="password" name="password" id="_password" value="1234" required><br>
+                    <input type="password" placeholder="비밀번호 입력" name="password" id="_password"  required><br>
                 </td>
             </tr>
             <tr>
                 <th>패스워드확인<sup>: </sup></th>
                 <td>    
-                    <input type="password" id="passwordConfirmation" value="1234" required><br>
+                    <input type="password" placeholder="비밀번호 재입력"id="passwordConfirmation" required><br>
                 </td>
             </tr>  
             <tr>
                 <th>이름<sup>: </sup></th>
                 <td>    
-                <input type="text"  name="name" id="name" value="세종대왕" required><br>
+                <input type="text"  name="name" id="name"  required><br>
                 </td>
             </tr>
             <tr>
                 <th>휴대폰<sup>: </sup></th>
                 <td>    
-                    <input type="tel" placeholder="(-없이)01012345678" name="phone" id="phone" maxlength="11" value="01012341234" required><br>
+                    <input type="tel" placeholder="(-없이)01012345678" name="phone" id="phone" maxlength="11"  required><br>
                 </td>
             </tr>            
             <tr>
                 <th>주소<sup>: </sup></th>
                 <td>    
-                    <input type="text" placeholder="시/도" name="city" id="city" value="서울" required>
-                    <input type="text" placeholder="구/군" name="district" id="district" value="관악구" required>
-                    <input type="text" placeholder="상세주소" name="address" id="address" value="신림동 123-456" required><br>
+                    <input type="text" placeholder="시/도" name="city" id="city"  required>
+                    <input type="text" placeholder="구/군" name="district" id="district"  required>
+                    <input type="text" placeholder="상세주소" name="address" id="address"  required><br>
                 </td>
             </tr>            
             <tr>

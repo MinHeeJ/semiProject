@@ -26,6 +26,22 @@ public class MemberDao {
 		}
 	}
 
+	public Member findById(Connection conn, String memberId) {
+	    String sql = "SELECT * FROM member WHERE member_id = ?";
+	    Member member = null;
+	    try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+	        pstmt.setString(1, memberId);
+	        try (ResultSet rset = pstmt.executeQuery()) {
+	            while (rset.next()) {
+	                member = handleMemberResultSet(rset);
+	            }
+	        }
+	    } catch (SQLException e) {
+	        throw new MemberException(e);
+	    }
+	    return member;
+	}
+	
 	public List<Member> findAll(Connection conn) {
 		List<Member> members = new ArrayList<>();
 		String sql = prop.getProperty("findAll");
@@ -87,21 +103,7 @@ public class MemberDao {
 		return result;
 	}
 
-	public Member findById(Connection conn, String memberId) {
-		String sql = prop.getProperty("findById"); // select * from member where member_id = ?
-		Member member = null;
-		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setString(1, memberId);
-			try (ResultSet rset = pstmt.executeQuery()) {
-				while (rset.next()) {
-					member = handleMemberResultSet(rset);
-				}
-			}
-		} catch (SQLException e) {
-			throw new MemberException(e);
-		}
-		return member;
-	}
+
 
 	public int insertMember(Connection conn, Member newMember) {
 	    int result = 0;
@@ -114,7 +116,7 @@ public class MemberDao {
 	        pstmt.setString(4, newMember.getPhone());
 	        pstmt.setString(5, newMember.getAddress());
 	        pstmt.setString(6, newMember.getGender() != null ? newMember.getGender().name() : null);
-	        pstmt.setString(7, newMember.getMemberRole() != null ? newMember.getMemberRole().name() : null);
+	     
 
 	        result = pstmt.executeUpdate();
 	    } catch (SQLException e) {
@@ -123,4 +125,26 @@ public class MemberDao {
 
 	    return result;
 	}
+
+
+	public int updateMember(Connection conn, Member member) {
+	int result = 0;
+	String sql = prop.getProperty("updateMember");
+	// insert into member values (?, ?, ?, default, ?, ?, ?, ?, ?, default, default)
+    try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        pstmt.setString(1, member.getMemberId());
+        pstmt.setString(2, member.getPassword());
+        pstmt.setString(3, member.getName());
+        pstmt.setString(4, member.getPhone());
+        pstmt.setString(5, member.getAddress());
+        pstmt.setString(6, member.getGender() != null ? member.getGender().name() : null);
+     
+
+        result = pstmt.executeUpdate();
+    } catch (SQLException e) {
+        throw new MemberException(e);
+    }
+
+    return result;
+}
 }

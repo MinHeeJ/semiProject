@@ -1,4 +1,4 @@
-package com.semi.mvc.member.model.controller;
+package com.semi.mvc.member.controller;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -18,12 +18,11 @@ import com.semi.mvc.member.model.vo.Member;
 /**
  * Servlet implementation class MemberEnrollServlet
  */
-@WebServlet("/member/memberEnroll")
-public class MemberEnrollServlet extends HttpServlet {
+@WebServlet("/member/memberUpdate")
+public class MemberUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
 	private final MemberService memberService = new MemberService();
-	
+
 	/**
 	 * GET /member/memberEnroll 
 	 * - 회원가입 폼페이지 응답
@@ -39,8 +38,9 @@ public class MemberEnrollServlet extends HttpServlet {
 	 * - 회원권한, 포인트, 등록일등 sql 기본값처리
 	 * 
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    request.setCharacterEncoding("utf-8");
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+	 
 	    // 1. 사용자 입력값 처리
 	    String memberId = request.getParameter("memberId");
 	    String password = HelloMvcUtils.getEncryptedPassword(request.getParameter("password"), memberId);
@@ -49,30 +49,32 @@ public class MemberEnrollServlet extends HttpServlet {
 	    String address = request.getParameter("address");
 	    String _gender = request.getParameter("gender");
 	    
-	    Gender gender = null;
-	    if (_gender != null) {
-	        gender = Gender.valueOf(_gender);
-	    }
-	    // Member객체로 변환
-	    // insert into member values (?, ?, ?, default, ?, ?, ?, ?, ?, default, default)
-	    Member newMember = new Member(memberId, password, name, phone, address, gender, null);
+	    Gender gender = _gender != null ? Gender.valueOf(_gender) : null;
+	    
+	 
+//	    insert into member values (?, ?, ?, ?, ?, ?, default
+	    Member member = new Member(memberId, password, name, phone, address, gender, null);
+	    System.out.println(member);
 	    // 다른 속성 초기화 등...
 	
 	
 
-		// 2. 업무로직 - db저장 요청
-		int result = memberService.insertMember(newMember);
-		System.out.println("result = " + result);
+	 // 3.업무로직
+	 		int result = memberService.updateMember(member); 
 		
-		// 결과 메세지 속성 등록 : 성공적으로 회원등록 했습니다. 
-		HttpSession session = request.getSession();
-		session.setAttribute("msg", "성공적으로 회원등록 했습니다.");
-		
-		// 3. 인덱스페이지 리다이렉트
-		response.sendRedirect(request.getContextPath() + "/");
-		
-		
+		// session의 속성 loginMember도 바로 갱신
+				HttpSession session = request.getSession();
+				session.setAttribute("loginMember", memberService.findById(memberId));
+				
+		// 4. 사용자피드백 및 리다이렉트 처리
+		session.setAttribute("msg", "성공적으로 회원정보를 수정했습니다.");
+
+		response.sendRedirect(request.getContextPath() + "/member/memberDetail");
+		}
+
 	}
 
-}
+		
+		
+	
 
