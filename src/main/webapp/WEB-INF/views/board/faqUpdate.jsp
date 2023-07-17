@@ -9,7 +9,7 @@
 %>
 <section class="faqCreateContainer">
 	<form name="faqCreateFrm" action="<%=request.getContextPath() %>/board/faqUpdate" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="no" value="<%= faq.getBoardNo() %>" />
+		<input type="hidden" name="boardNo" value="<%= faq.getBoardNo() %>" />
 		<table id="faqUpdateTable">
 		<tr>
 			<th>제 목</th>
@@ -53,3 +53,5 @@
 		return true;
 	};
 </script>
+
+<%@ include file="/WEB-INF/views/common/footer.jsp" %>
