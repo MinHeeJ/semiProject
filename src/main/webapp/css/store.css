@@ -10,14 +10,17 @@ h2{
 }
 
 #search-name{
-	padding:20px;	
+	padding:10px;
 	text-align: right;
+	display: flex;
+	float : right;
 }
+
 
 /*테이블*/
 table {
    
-    border: 1px solid #ddd;
+    border: 1px solid rgb(217, 250, 217);
     border-collapse: collapse;
     width: 100%;
     padding: 100px;
@@ -26,11 +29,13 @@ table {
   th, td {
     padding: 8px;
     text-align: center;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 4px solid rgb(217, 250, 217);;
   }
 
  thead tr:first-child {
-  background-color: black;
+  background-color: rgb(217, 250, 217);
+ 	font-size: 20px;
+ 	font-weight: 900;
 }
 
 /*페이지바*/
@@ -40,13 +45,38 @@ table {
 	
 }
 
-#search-container button {
-	  margin-left: 100px;
-		
-	 
+.button {
+	margin-left: 20px;
+    background-color: #086528;
+    color: #fff;
+    border:none; 
+    border-radius:3px; 
+    padding:5px;
+    text-align: center;
+    color: white;
+    
 }
+.button:hover {
+      background-color:rgb(217, 250, 217);
+      transition: 0.1s;
+  }
 
-#search-name{
+.searchbutton{
+	text-align: right;
 	display: flex;
 	float : right;
+	background-color: #086528;
+	color: #fff;
+	 border-radius:3px; 
+	 border:none; 
+	 margin-left: 10px;
+	 width: 40px;
+	 height:23px;
 }
+
+.searchbutton:hover{
+	 background-color:rgb(217, 250, 217);
+     transition: 0.1s;
+}
+
+

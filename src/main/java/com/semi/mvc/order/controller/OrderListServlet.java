@@ -36,16 +36,24 @@ public class OrderListServlet extends HttpServlet {
 //		HttpSession session = request.getSession();
 //		Member loginMember = (Member) session.getAttribute("loginMember");
 //		String memberId = loginMember.getMemberId();
-		String memberId = request.getParameter("memberId");
+//		String memberId = multiReq.getParameter("memberId");
+		String memberId = "honggd";
 		
 		// 2. 업무로직
 		List<Order> orders = orderService.findById(memberId);
+		System.out.println("orders : " + orders);
 		
-		request.setAttribute("orders", orders);
 		
 		// 3. 응답처리
-		request.getRequestDispatcher("/WEB-INF/views/order/orderList.jsp")
-			.forward(request, response);
+		// 헤더
+		response.setContentType("application/json; charset=utf-8");
+		
+		// 바디
+		Map<String, Object> map = new HashMap<>();
+		map.put("result", "성공");
+		map.put("orders", orders);
+		System.out.println(map);
+		new Gson().toJson(map, response.getWriter());
 	}
 
 }

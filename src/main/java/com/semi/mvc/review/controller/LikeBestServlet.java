@@ -40,13 +40,22 @@ public class LikeBestServlet extends HttpServlet {
 		List<Map.Entry<Integer, Integer>> sortedEntries = new ArrayList<>(map.entrySet());
 		sortedEntries.sort(comparator);
 		
-		for (int i = 0; i < 3; i++) {
-		    int reviewNo = sortedEntries.get(i).getKey();
-		    for(Review review : reviews) {
-				if(reviewNo == review.getReviewNo()) {
-					reviewBest.add(review);
-				};
-				
+	
+		if(reviews.size() >= 3) {	
+			for (int i = 0; i < 3; i++) {
+				int reviewNo = sortedEntries.get(i).getKey();
+				for(Review review : reviews) {
+					if(reviewNo == review.getReviewNo()) 
+						reviewBest.add(review);
+				}
+			}			
+		} else {
+			for (int i = 0; i < reviews.size(); i++) {
+				int reviewNo = sortedEntries.get(i).getKey();
+				for(Review review : reviews) {
+					if(reviewNo == review.getReviewNo()) 
+						reviewBest.add(review);
+				}
 			}
 		}
 		
@@ -60,3 +69,4 @@ public class LikeBestServlet extends HttpServlet {
 
 
 }
+

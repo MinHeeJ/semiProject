@@ -5,73 +5,78 @@
         font-size: 40px;
         text-align: center;
         font-weight: 600;
-        padding: 100px;
+        padding: 50px;
    }
    
    /*전체 리뷰콘테이너 ( 리뷰게시판 빼고 )*/
    #review-container {
        margin : 160px;
-       border: 3px solid #ddd;
+       border: 2px solid #086528;
+       border-radius: 20px;
        border-collapse: collapse;
        width: 60%;
        padding: 50px;
-       
+       background-color:rgb(217, 250, 217); 
         
      }
      
      
    th, td {
-       padding: 8px;
+       padding: 20px;
        text-align: center;
-       border-bottom: 1px solid #ddd;
+       border-bottom: 1px solid rgb(217, 250, 217);
      }
      
-   /*주문내역 리스트 테이블*/
+   /*주문상품 테이블*/
    #tbl-order-review{
        margin : auto;
-       border: 3px solid #ddd;
+       color : green;
+       
+       border-radius: 10px;
        border-collapse: collapse;
-       width: 60%;
+       width: 80%;
        padding: 100px;
        text-align: center;
+       background-color: white;
+        box-shadow: 2px 2px 2px 2px;
    }
    
-   /*주문내역 리스트 테이블*/
+   /*주문내역테이블*/
    #tbl-board-view{
        margin : auto;
-       border: 3px solid #ddd;
+      color : green;
+       border-radius: 12px;
        border-collapse: collapse;
-       width: 60%;
-       padding: 100px;
+       width: 80%;
+       padding: 200px;
        text-align: center;
+       background-color: white;
+       border-radius: 10px;
    }
    
+   /*리뷰게시판테이블*/
    #photo-review-container{
-       border: 3px solid #ddd;
+       border: 3px solid red;
+        width: 70%;
+        text-align: left;
+        margin : auto;
+       
    }
    
-   .photo{
-       border: 3px solid #00ffff;
+	#photo{
        margin-right: 30px;
-   }
-   
-   .photo{
+  	   width: 30px;
        margin:10px auto;
-       width:300px;
+       width : 100px;
+       height : 100px;
        background-color:#fff;
        box-shadow: 2px 2px 3px rgba(135, 139, 133, 0.4);
-       transition: 0.5s
+       transition: 0.5s;
    }
    
-   /*.polaroid img {
-       width: 100px;
-   
-   }
-   
-   p.info{text-align:left;margin:0;}
-   span.writer{font-weight:bold;font-size:8px;}
-   span.photoDate{font-size:6px;}
-   
-   #btn-more-container{
+    #btn-more-container{
 	 text-align: center;
-   }*/
+	 
+   }
+   
+ 
