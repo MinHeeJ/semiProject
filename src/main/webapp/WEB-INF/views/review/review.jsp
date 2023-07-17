@@ -14,7 +14,6 @@
 	String product = (String) request.getAttribute("product");
 	List<Review> reviews = (List<Review>)request.getAttribute("reviews");
 	String memberId = (String) request.getAttribute("memberId");
-	
 %>
 <script src="<%= request.getContextPath() %>/js/jquery-3.7.0.js"></script>
  <link rel="stylesheet" href="<%=request.getContextPath()%>/css/review.css" />
@@ -120,11 +119,12 @@
 						<p class ="product"><%= review.getProduct() %></p>
 						<p class ="content"><%= review.getContent() %></p>
 						
+						
 					</div>
 					<tr>			
 						<th colspan="2">
 							<%-- 첨부파일이 없는 게시물 수정 --%>
-							<input type="button" value="수정하기" onclick="updateReview()">
+							<input type="button" value="수정하기" onclick="updateReview('<%= review.getReviewNo()%>');">
 							
 							<input type="button" value="삭제하기" onclick="deleteReview('<%= review.getReviewNo()%>');">
 							
@@ -151,51 +151,35 @@
 	
 	<hr />
 	
+	
 	<div id='btn-more-container'>
 		<button id="btn-more" value="">더보기(<span id="cpage"><%= cpage %></span>/<span id="totalPage"><%= totalPage %></span>)</button>
 	</div>
+
+
 </section>
 <form action="<%= request.getContextPath() %>/review/reviewDelete" name="reviewDelFrm" method="POST" >
 	<input type="hidden" name="reviewNo" id="reviewNo" value=""/>
 
 </form>
 
+
+
 <script>
 /**
 * reviewCreateFrm 유효성 검사
 */
-
-<!--
-document.reviewCreateFrm.onsubmit = (e) => {
-	const frm = e.target;
-	const title = e.target.title;
-	const content = e.target.content;
-	
-	// 제목을 작성하지 않은 경우 폼제출할 수 없음.
-	if(!/^.+$/.test(title.value)) {
-		alert("제목을 작성해주세요.");
-		return false;
-	}
-					   
-	// 내용을 작성하지 않은 경우 폼제출할 수 없음.
-	if(!/^(.|\n)+$/.test(content.value)) {
-		alert("내용을 작성해주세요.");
-		return false;
-	}
-	return true;
-}
--->
 
 document.querySelector("#btn-more").onclick = () =>{
 	const cpage = Number(document.querySelector("#cpage").innerHTML);
 	const nextPage = cpage + 1;
 	getPage(nextPage);
 };
-<!--
+
 window.addEventListener('load', () => { 
 	getPage(1);
 });
--->
+
 const getPage = (cpage) => {
 	
 	$.ajax({
@@ -204,17 +188,27 @@ const getPage = (cpage) => {
 		success(reviews) {
 			console.log(reviews);
 			const container = document.querySelector("#photo-review-container");
-			reviews.forEach((Review)=>{
-				const {reviewNo,writer, title, content, regDate,product} =Review;
+			reviews.forEach((review)=>{
+				const {reviewNo, writer, content, regDate, product} =review;
+				
+				
+				
 				container.innerHTML += `
+				
+				
+				
 					<div class="polaroid">
-					<img src ="<%= request.getContextPath()%>/upload/photo/\${renamedFilename}">
-						<p class="info">
-							<span class ="writer">\${writer}</span>
-							<span class ="photoDate">\${regDate}</span>
-						</p>
-					<p class ="caption">\${content}</p>
+					
+					<p class="info">
+						<span class ="writer">\${writer}</span>
+						<span class ="photoDate">\${regDate}</span>
+					</p>
+					<p class ="product">\${product}</p>
+					<p class ="content">\${content}</p>
 				</div>
+				
+				
+				
 				`;
 			})
 		},
@@ -231,7 +225,6 @@ const getPage = (cpage) => {
 	
 }
 
-
 function deleteReview(reviewNo){
 	if(confirm("정말 리뷰를 삭제하시겠습니까?")){
 		document.getElementById("reviewNo").value = reviewNo;
@@ -240,9 +233,10 @@ function deleteReview(reviewNo){
 	}
 }
 
-const updateReview = () => {
-	location.href = "<%= request.getContextPath() %>/review/reviewCreate %>";
+function updateReview(reviewNo){
+	location.href = "<%= request.getContextPath() %>/review/reviewUpdate?reviewNo=" + reviewNo;
 }
+
 </script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

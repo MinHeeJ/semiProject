@@ -91,6 +91,81 @@ public class ReviewService {
 		return memberId;
 	}
 
-	
+	public int deleteReview(int reviewNo) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = reviewDao.deleteReview(conn, reviewNo);
+			System.out.println(" 서블릿리뷰번호호호ㅗㅎ = " + reviewNo);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
 	}
+
+	public Review findReviewById(int reviewNo) {
+		Connection conn = getConnection();
+		Review review = reviewDao.findReviewById(conn, reviewNo);
+		List<AttachmentReview> attachments = reviewDao.findAttachmentByReviewNo(conn, reviewNo);
+		review.setAttachments(attachments);
+		close(conn);
+		return review;
+	}
+
+	public int updateReview(Review review) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			
+			// board 테이블 추가
+			result = reviewDao.updateReview(conn, review);
+			
+			// attachment 테이블 추가
+			List<AttachmentReview> attachments = review.getAttachments();
+			if (attachments != null && !attachments.isEmpty()) {
+				for(AttachmentReview attach : attachments) {
+					result = reviewDao.insertReviewAttachment(conn, attach);					
+				}
+			}
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		
+		return result;
+	}
+
+	public AttachmentReview findAttachmentReviewById(int reviewNo) {
+		Connection conn = getConnection();
+		AttachmentReview attach = reviewDao.findAttachmentReviewById(conn, reviewNo);
+		close(conn);
+		return attach;
+	}
+
+	public int deleteAttachment(int attachNo) {
+		Connection conn = getConnection();
+		int result = 0;
+		try {
+			result = reviewDao.deleteAttachment(conn, attachNo);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	
+
+	
+}
 
