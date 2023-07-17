@@ -43,6 +43,6 @@ public class MemberLoginServlet extends HttpServlet {
             session.setAttribute("msg", "아이디 또는 비밀번호가 일치하지 않습니다.");
         }
         
-        response.sendRedirect(request.getContextPath() + "/semiProject/");
+        response.sendRedirect(request.getContextPath() );
     }
 }

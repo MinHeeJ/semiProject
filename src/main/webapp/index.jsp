@@ -2,6 +2,42 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
+<%
+	String msg = (String) session.getAttribute("msg");
+	if(msg != null) session.removeAttribute("msg"); // 1회용
+	// System.out.println("msg = " + msg);
+	
+%>
+
+<script>
+window.onload = () => {
+	
+<% 	if(msg != null) { %>
+	alert('<%= msg %>');
+<% 	} %>	
+	
+<% 	if(loginMember == null) { %>	
+	document.loginFrm.onsubmit = (e) => {
+		// 아이디
+		const memberId = e.target.memberId;
+		if(!/^\w{4,}$/.test(memberId.value)) {
+			alert("아이디는 4글자 이상 입력하세요.");
+			e.preventDefault();
+			return;
+		}
+		
+		// 비밀번호
+		const password = e.target.password;
+		if(!/^.{4,}$/.test(password.value)) {
+			alert("비밀번호는 4글자 이상 입력하세요.");
+			e.preventDefault();
+			return;
+		}
+	}
+<% 	} %>
+};
+</script>
+
 <div class="account_wrapper">
     <!-- 로그인 전 -->
     <ul class="account_list">
@@ -14,7 +50,7 @@
         <span>***님, 환영합니다!</span>
         <ul class="account_list">
             <li><a href="">장바구니</a></li>
-            <li><a href="">마이페이지</a></li>
+            <li><a href="<%= request.getContextPath() %>/member/memberDetail">마이페이지</a></li>
             <li><a href="">로그아웃</a></li>
         </ul>
     </div>

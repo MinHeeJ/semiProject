@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <section id="login-container">
     <h2>로그인</h2>
-    <form name="memberLoginFrm" action="${pageContext.request.contextPath}/member/login" method="POST">
+    <form name="memberLoginFrm" action="${pageContext.request.contextPath}/member/memberLogin" method="POST">
         <div>
             <label for="memberId">아이디:</label>
             <input type="text" id="memberId" name="memberId" required>

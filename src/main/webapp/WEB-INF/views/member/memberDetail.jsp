@@ -47,10 +47,16 @@
 					<input type="tel" placeholder="(-없이)01012345678" name="phone" id="phone" maxlength="11" value="<%= phone %>" required><br>
 				</td>
 			</tr>
-
+			<tr>
+                <th>주소<sup>: </sup></th>
+                <td>    
+                    <input type="text" placeholder="시/도" name="city" id="city"  required>
+                    <input type="text" placeholder="구/군" name="district" id="district"  required>
+                    <input type="text" placeholder="상세주소" name="address" id="address"  required><br>
+                </td>
+            </tr>            
 		</table>
         <input type="submit" value="정보수정"/>
-        <input type="button" onclick="deleteMember();" value="탈퇴"/>
 	</form>
 </section>
 

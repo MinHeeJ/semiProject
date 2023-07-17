@@ -125,4 +125,21 @@ public class MemberDao {
 
 	    return result;
 	}
+
+	public int updateMember(Connection conn, Member member) {
+		int result = 0;
+		String sql = prop.getProperty("updateMember");
+		// update member set name = ?, gender = ?, birthday = ?, email = ?, phone = ?, hobby = ? where member_id = ?
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, member.getName());
+			pstmt.setString(2, member.getGender() != null ? member.getGender().name() : null);
+			pstmt.setString(3, member.getPhone());
+			pstmt.setString(4, member.getMemberId());	
+			pstmt.setString(5, member.getAddress());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new MemberException(e);
+		}
+		return result;
+	}
 }
