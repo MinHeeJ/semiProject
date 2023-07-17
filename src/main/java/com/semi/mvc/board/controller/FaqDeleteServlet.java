@@ -23,7 +23,7 @@ public class FaqDeleteServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		
-		int result = faqService.faqDelete("boardNo");
+		int result = faqService.faqDelete(boardNo);
 		
 		response.sendRedirect(request.getContextPath() + "/board/faqList");
 	}
