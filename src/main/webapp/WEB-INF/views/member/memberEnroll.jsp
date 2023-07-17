@@ -79,15 +79,23 @@ document.querySelector("#_memberId").onchange = () => {
  * 아이디 중복검사 함수
  * - 팝업창으로 폼을 제출
  */
-const checkIdDuplicate = () => {
-    const title = "checkIdDuplicatePopup";
-    const popup = open("", title, "width=500px, height=300px");
-    
-    const frm = document.checkIdDuplicateFrm;
-    frm.target = title; // 폼의 제출대상으로 팝업창으로 연결
-    frm.memberId.value = document.querySelector("#_memberId").value;
-    frm.submit();
-}
+ const checkIdDuplicate = () => {
+	    const memberId = document.querySelector("#_memberId").value;
+	    
+	    if (!/^\w{4,}$/.test(memberId)) {
+	        alert("아이디는 영문자/숫자 4글자 이상이어야 합니다.");
+	        return false;
+	    }
+	    
+	    const title = "checkIdDuplicatePopup";
+	    const popup = open("", title, "width=500px, height=300px");
+	    
+	    const frm = document.checkIdDuplicateFrm;
+	    frm.target = title; // 폼의 제출대상으로 팝업창으로 연결
+	    frm.memberId.value = memberId;
+	    frm.submit();
+	}
+
 
 // 비밀번호 일치여부
 document.querySelector("#passwordConfirmation").onblur = (e) => {
