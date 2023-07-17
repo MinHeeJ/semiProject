@@ -6,10 +6,23 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <script src="<%=request.getContextPath()%>/js/jquery-3.7.0.js"></script>
 <style>
-.polaroid {border: 2px solid black; padding: 20px; margine: 1% 0; width:850px;}
+ div{vertical-align: middle;}
+.polaroid {border-bottom: 4px solid #F57A46; padding: 20px; margine: 5% 0; width:850px; background-color: #FFF1E4; border-radius: 25px; margin-bottom: 1%;}
 .textArea {width: 73%; display: inline-block; height: 100%;}
-.imageArea {width: 20%; display: inline-block; border: 1px solid grey; height: 100%;}
+.imageArea {width: 25%; height: 200px; display: inline-block; border: 1px solid #F57A46; border-radius: 25px;background-size: cover;}
 .imageArea img {width: 100%;}
+#balloon{width: 20%; vertical-align: middle; animation: opacityAnimation 0.4s linear 3;}
+#choiceBallon{width: 100%}
+
+@font-face {font-family: 'GmarketSansMedium';src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');font-weight: normal;font-style: normal;}
+@font-face {font-family: 'NanumSquareNeo-Variable'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');font-weight: normal;font-style: normal;}
+@font-face { font-family: 'yg-jalnan'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff'); font-weight: normal; font-style: normal;}
+
+#textAreaTitle{font-size: 25px; font-family: 'yg-jalnan'; font-weight: bold; color: rgb(59, 61, 60);}
+.textArea p {font-size: 16px; font-family: 'NanumSquareNeo-Variable';}
+@keyframes opacityAnimation {0% {opacity: 1;} 50% {opacity: 0.3;} 100% {opacity: 1;}}
+.reviewInfo { font-weight: bold;}
+
 </style>
 
 	<div class="account_wrapper">
@@ -50,6 +63,7 @@
             <div class="swiper-slide" style="background-image: url('<%= request.getContextPath() %>/images/index/banner2.jpg');"></div>
             <div class="swiper-slide" style="background-image: url('<%= request.getContextPath() %>/images/index/banner3.jpg');"></div>
         </div>
+       
         <div class="slide_pagination">
             <div class="slide_prev">
                 <
@@ -68,65 +82,19 @@
     <!-- 로그인 전 -->
     <div class="recommend_contents">
         <div id="balloon">
-            <img src="<%= request.getContextPath() %>/images/balloon.png" alt="balloon"/>
+            <img src="<%= request.getContextPath() %>/images/index/balloon.png" id="choiceBallon"/>
             <span>고르기 힘들다면?</span>
         </div>
-
-        <h1>추천 조합</h1>
-        
+		<br>
+        <h1 id="recommend">리뷰 베스트</h1>
+        <br>
         <div id="reviewBestPrint">
         	
         </div>
-        
-        
-        <div class="contents_lists">
-            <div class="contents_image_wrapper">
-                <a href="링크 주소"> <!-- 추천 조합 링크 -->
-                    <div class="contents_image">
-                        <img src="<%= request.getContextPath() %>/images/강선모.jpg" alt="강선모의 이미지" style="max-width: 100%;">
-                    </div>
-                </a>
-                <span class="contents_title"></span>
-            </div>
-            <div style="overflow: auto;">
-                <p style="float: right;">
-                    청춘의 피가 뜨거운지라 인간의 동산에는 사랑의 풀이 돋고 이상의 꽃이 피고 희망의 놀이 뜨고 열락의 새가 운다사랑의 풀이 없으면 인간은 사막이다 오아이스도 없는 사막이다 보이는 끝까지 찾아다녀도 목숨이 있는 때까지 방황하여도 보이는
-                </p>
-            </div>
-        </div>
-        <div class="contents_lists">
-            <div class="contents_image_wrapper">
-                <a href="링크 주소"> <!-- 추천 조합 링크 -->
-                    <div class="contents_image">
-                        <img src="<%= request.getContextPath() %>/images/강선모.jpg" alt="강선모의 이미지" style="max-width: 100%;">
-                    </div>
-                </a>
-                <span class="contents_title"></span>
-            </div>
-            <div style="overflow: auto;">
-                <p style="float: right;">
-                    청춘의 피가 뜨거운지라 인간의 동산에는 사랑의 풀이 돋고 이상의 꽃이 피고 희망의 놀이 뜨고 열락의 새가 운다사랑의 풀이 없으면 인간은 사막이다 오아이스도 없는 사막이다 보이는 끝까지 찾아다녀도 목숨이 있는 때까지 방황하여도 보이는
-                </p>
-            </div>
-        </div>
-        <div class="contents_lists">
-            <div class="contents_image_wrapper">
-                <a href="링크 주소"> <!-- 추천 조합 링크 -->
-                    <div class="contents_image">
-                        <img src="<%= request.getContextPath() %>/images/강선모.jpg" alt="강선모의 이미지" style="max-width: 100%;">
-                    </div>
-                </a>
-                <span class="contents_title"></span>
-            </div>
-            <div style="overflow: auto;">
-                <p style="float: right;">
-                    청춘의 피가 뜨거운지라 인간의 동산에는 사랑의 풀이 돋고 이상의 꽃이 피고 희망의 놀이 뜨고 열락의 새가 운다사랑의 풀이 없으면 인간은 사막이다 오아이스도 없는 사막이다 보이는 끝까지 찾아다녀도 목숨이 있는 때까지 방황하여도 보이는
-                </p>
-                </p>
-            </div>
-		</div>
+                
+	</div>
 		
-		<script>
+	<script>
 		
 		document.addEventListener("DOMContentLoaded", function(){
 
@@ -192,7 +160,7 @@
 	        success(responseData){
 	            
 	        	const container = document.querySelector("#reviewBestPrint");
-				
+				let rank = 1;
 				responseData.forEach((review)=>{
 					const {reviewNo,writer, content, regDate, product, attachments} = review;
 					let renamedFile = "";
@@ -204,18 +172,20 @@
 					container.innerHTML += `
 						<div class="polaroid">
 							<div class="textArea">
-								<p>구매한 조합 : \${product}</p>
-								<p class="info">
-									<span class ="writer">\${writer}</span>
-									<span class ="photoDate">\${regDate}</span>
+								<p id="textAreaTitle">🧡 좋아요 \${rank}위 🧡</p><br>
+								<p class="reviewInfo">\${product}</p><br>
+								<p>
+									<span class ="writer">작성자 : \${writer}</span><br><br>
+									<span class ="photoDate">작성일 : \${regDate}</span><br><br>
 								</p>
-								<p class ="caption">\${content}</p>
+								<p class ="caption">내 &nbsp&nbsp&nbsp용 : \${content}</p>
 							</div>
-							<div class="imageArea">
-								<img src ="<%= request.getContextPath()%>/upload/review/\${renamedFile}">
+							<div class="imageArea" style="background-image: url('<%= request.getContextPath()%>/upload/review/\${renamedFile}')";>
+								
 							</div>
 						</div>
 					`;
+					rank++;
 				})
 	        	
 	        },
