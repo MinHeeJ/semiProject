@@ -121,14 +121,13 @@ public class ReviewDao {
 	}
 
 	private Review handleReviewResultSet(ResultSet rset) throws SQLException {
-		int reviewNo = rset.getInt("review_no");
-		String writer = rset.getString("writer");
-		String title = rset.getString("title");
-		String content = rset.getString("content");
-		Date regDate = rset.getDate("reg_date");
-		return new Review(reviewNo, writer, title, content, regDate);
-				
-				
+		Review review = new Review();
+		review.setReviewNo(rset.getInt("review_no"));
+		review.setWriter(rset.getString("writer"));
+		review.setTitle(rset.getString("title"));
+		review.setContent(rset.getString("content"));
+		review.setRegDate(rset.getDate("reg_date"));
+		return review;
 	}
 
 	public int getTotalContent(Connection conn) {
@@ -236,10 +235,10 @@ public class ReviewDao {
 		//select * from review where review_no = ?
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setInt(1, reviewNo);
-			
 			try (ResultSet rset = pstmt.executeQuery()) {
 				if (rset.next())
 					review = handleReviewResultSet(rset);
+				
 			}
 		} catch (SQLException e) {
 			throw new ReviewException(e);
@@ -247,6 +246,128 @@ public class ReviewDao {
 		return review;
 	}
 
+	public List<AttachmentReview> findAttachmentByReviewNo(Connection conn, int reviewNo) {
+		List<AttachmentReview> attachments = new ArrayList<>();
+		String sql = prop.getProperty("findAttachmentByReviewNo");
+		
+		//select * from attachment_review where review_no = ?
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, reviewNo);
+			try (ResultSet rset = pstmt.executeQuery()) {
+				while (rset.next()) {
+					AttachmentReview attach = handleAttachmentResultSet(rset);
+					attachments.add(attach);
+				}
+			}
+		} catch (Exception e) {
+			throw new ReviewException(e);
+		}
+		return attachments;
+	}
+
+	private AttachmentReview handleAttachmentResultSet(ResultSet rset) throws SQLException {
+		int attachNo = rset.getInt("no");
+		int reviewNo = rset.getInt("review_no");
+	    String originalFilename = rset.getString("original_filename");
+	    String renamedFilename = rset.getString("renamed_filename");
+	    Date regDate = rset.getDate("reg_date");
+	    
+	    AttachmentReview attach = new AttachmentReview();
+	    attach.setNo(attachNo);
+	    attach.setReviewNo(reviewNo);
+	    attach.setOriginalFilename(originalFilename);
+	    attach.setRenamedFilename(renamedFilename);
+	    attach.setRegDate(regDate);
+	    
+	    return attach;
+	
+	}
+
+
+	public int updateReview(Connection conn, Review r) {
+		int result = 0;
+		String query = prop.getProperty("updateReview");
+		//update review set content = ? where review_no = ?
+		try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+			pstmt.setString(1, r.getContent());
+			pstmt.setInt(2, r.getReviewNo());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new ReviewException(e);
+		} 
+		return result;
+	}
+
+	public int insertReviewAttachment(Connection conn, AttachmentReview attach) {
+		int result = 0;
+		String sql = prop.getProperty("insertReviewAttachment");
+		// insert into attachment(no, board_no, original_filename, renamed_filename) values(seq_attachment_no.nextval, ?, ?, ?)
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, attach.getReviewNo());
+			pstmt.setString(2, attach.getOriginalFilename());
+			pstmt.setString(3, attach.getRenamedFilename());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new ReviewException(e);
+		}
+		return result;
+	}
+
+	public AttachmentReview findAttachmentReviewById(Connection conn, int reviewNo) {
+		AttachmentReview attach = null;
+		String sql = prop.getProperty("findAttachmentReviewById");
+		//select * from attachment_review where review_no = ?
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, reviewNo);
+			try (ResultSet rset = pstmt.executeQuery()) {
+				if (rset.next()) {
+
+				    attach = new AttachmentReview();
+				    attach.setNo(rset.getInt("no"));
+				    attach.setReviewNo(rset.getInt("review_no"));
+				    attach.setOriginalFilename(rset.getString("original_filename"));
+				    attach.setRenamedFilename(rset.getString("renamed_filename"));
+				    attach.setRegDate(rset.getDate("reg_date"));
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new ReviewException(e);
+		}
+		return attach;
+	}
+
+	public int deleteAttachment(Connection conn, int attachNo) {
+		int result = 0;
+		System.out.println("attachNo 맞니니니니니? = " + attachNo);
+		String sql = prop.getProperty("deleteAttachment");
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, attachNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new ReviewException(e);
+		}
+		return result;
+	}
+
+	
+	
+
+//	private Order handleOrderResultSet(ResultSet rset) throws SQLException {
+//		int orderSerialNo = rset.getInt("order_serial_no");
+//		String product = rset.getString("product");
+//		Date orderDate = rset.getDate("order_date");
+//		int count = rset.getInt("count");
+//		int price = rset.getInt("price");
+//		Order order = new Order(orderSerialNo, product, orderDate, count, price);
+//		Order order = rset.getString("product");
+//		return order;
+//	}
+
+	
 	public List<Review> findAllReview(Connection conn) {
 		List<Review> reviews = new ArrayList<>();
 		
@@ -385,19 +506,5 @@ public class ReviewDao {
 		return isLike;
 	}
 
-	
-
-//	private Order handleOrderResultSet(ResultSet rset) throws SQLException {
-//		int orderSerialNo = rset.getInt("order_serial_no");
-//		String product = rset.getString("product");
-//		Date orderDate = rset.getDate("order_date");
-//		int count = rset.getInt("count");
-//		int price = rset.getInt("price");
-//		Order order = new Order(orderSerialNo, product, orderDate, count, price);
-//		Order order = rset.getString("product");
-//		return order;
-//	}
-
-
-
 }
+

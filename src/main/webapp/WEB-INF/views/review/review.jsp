@@ -98,63 +98,38 @@
 				for(Review review : reviews){
 					List<AttachmentReview> files = review.getAttachments();
 		%>
-		<tr>
-			<div class="polaroid">
-				<p class="photo"></p>
-				<%for(AttachmentReview file : files){ %>
-				<img
-					src="<%= request.getContextPath()%>/upload/review/<%=file.getRenamedFilename() %>">
-				<%} %>
-				</p>
-				<p class="info">
-
-					<span class="writer"><%= review.getWriter() %></span> <span
-						class="photoDate"><%= review.getRegDate() %></span>
-				</p>
-				<p class="product"><%= review.getProduct() %></p>
-				<p class="content"><%= review.getContent() %></p>
-
-			</div>
-		<tr>
-			<th colspan="2">
-				<div>
-					<input type="hidden" name="reviewNo"
-						value="<%= review.getReviewNo() %>" /> <input type="image"
-						src="<%= request.getContextPath() %>/images/review/emptyheart.png"
-						alt="" style="width: 30px;" class="heart"
-						value="<%= review.getReviewNo() %>">
-					<p id="p">0</p>
-				</div> <%-- 첨부파일이 없는 게시물 수정 --%> <input type="button" value="수정하기"
-				onclick="updateReview()"> <input type="button" value="삭제하기"
-				onclick="deleteReview('<%= review.getReviewNo()%>');">
-			</th>
-		</tr>
-		</tr>
-		<% 		
+				<tr>
+				
+				
+					<div class="polaroid">
+						
+						
+					<!-- ajax -->
+						
+						
+				   </div>  
+			</tr>
+			<% 		
 				}
 			} 
 		%>
-	</div>
-
-	<hr />
-
+	  </div>  
+	
 	<div id='btn-more-container'>
 		<button id="btn-more" value="">
 			더보기(<span id="cpage"><%= cpage %></span>/<span id="totalPage"><%= totalPage %></span>)
 		</button>
 	</div>
+	
 </section>
-<form action="<%= request.getContextPath() %>/review/reviewDelete"
-	name="reviewDelFrm" method="POST">
-	<input type="hidden" name="reviewNo" id="reviewNo" value="" />
-
+</section>
+<form action="<%= request.getContextPath() %>/review/reviewDelete" name="reviewDelFrm" method="POST" >
+	<input type="hidden" name="reviewNo" id="reviewNo" value=""/>
 </form>
 
+
 <script>
-// 좋아요
-window.onload = function() {
-  like();
-};
+//좋아요
 
 function like() {
   const reviewNo = document.querySelectorAll(".heart");
@@ -236,10 +211,12 @@ function love(e) {
     }
   });
 }
-
 /**
-* reviewCreateFrm 유효성 검사
+* 
 */
+
+
+
 document.querySelector("#btn-more").onclick = () =>{
 	const cpage = Number(document.querySelector("#cpage").innerHTML);
 	const nextPage = cpage + 1;
@@ -251,24 +228,48 @@ window.addEventListener('load', () => {
 });
 
 const getPage = (cpage) => {
-	
 	$.ajax({
 		url : "<%=request.getContextPath()%>/review/reviewMore",
 		data : {cpage},
 		success(reviews) {
 			console.log(reviews);
-			const container = document.querySelector("#photo-review-container");
+			const container = document.querySelector(".polaroid");
+			
 			reviews.forEach((Review)=>{
-				const {reviewNo,writer, title, content, regDate,product} =Review;
-				container.innerHTML += `
-					<div class="polaroid">
-						<img src ="<%= request.getContextPath()%>/upload/photo/\${renamedFilename}">
-							<p class="info">
-								<span class ="writer">\${writer}</span>
-								<span class ="photoDate">\${regDate}</span>
-							</p>
-						<p class ="caption">\${content}</p>
-					</div>
+				const {reviewNo,writer, content, regDate,product,attachments} =Review;
+				let renamedFile = "";
+				let imgElements = "";
+				
+				for (let i = 0; i < attachments.length; i++) {
+				    const attachment = attachments[i];
+				    const { renamedFilename } = attachment;
+				    renamedFile = renamedFilename;
+
+				    imgElements += `<img src="<%= request.getContextPath()%>/upload/review/\${renamedFile}">`;
+				  }
+				
+				
+				container.innerHTML += imgElements + `
+					<p class="info">
+							<span class ="writer">\${writer}</span>
+							<span class ="photoDate">\${regDate}</span>
+						</p>
+					<p class ="product">\${product}</p>
+					<p class ="caption">\${content}</p>
+				
+					<tr>			
+					<th colspan="2" id="th">
+						<div>
+				            <input type="hidden" name="reviewNo" value="\${reviewNo}"/>
+				            <input type="image" src="<%= request.getContextPath() %>/images/review/heart.png" alt="heart.png" style="width: 30px;" class="heart" value="\${reviewNo}">
+				            <p id="p">0</p>
+		          	 	</div>
+						<%-- 첨부파일이 없는 게시물 수정 --%>
+							<input type="button" value="수정하기" onclick="updateReview('\${reviewNo}');">
+								
+							<input type="button" value="삭제하기" onclick="deleteReview('\${reviewNo}');">
+					</th>
+				</tr>
 				`;
 			})
 		},
@@ -280,9 +281,9 @@ const getPage = (cpage) => {
 				btn.disabled = true;
 				btn.style.cursor = "not-allowed";
 			}
+			like();
 		}
 	});
-	
 }
 
 
@@ -294,8 +295,8 @@ function deleteReview(reviewNo){
 	}
 }
 
-const updateReview = () => {
-	location.href = "<%=request.getContextPath()%>/review/reviewCreate %>";
+function updateReview(reviewNo){
+	location.href = "<%= request.getContextPath() %>/review/reviewUpdate?reviewNo=" + reviewNo;
 }
 </script>
 
