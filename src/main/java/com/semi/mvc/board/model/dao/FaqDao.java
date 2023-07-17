@@ -93,4 +93,22 @@ public class FaqDao {
 		return faqs;
 	}
 
+	public FaqBoard findByBoardNo(Connection conn, int boardNo) {
+		FaqBoard faq = new FaqBoard();
+		String sql = prop.getProperty("findByBoardNo");
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setInt(1, boardNo);
+			try (ResultSet rset = pstmt.executeQuery()){
+				faq.setBoardNo(rset.getInt("board_no"));
+				faq.setWriter(rset.getString("writer"));
+				faq.setTitle(rset.getString("title"));
+				faq.setContent(rset.getString("content"));
+				faq.setRegDate(rset.getDate("reg_date"));
+			}
+		} catch (SQLException e) {
+			throw new FaqException(e);
+		}
+		return faq;
+	}
+
 }

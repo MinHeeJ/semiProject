@@ -4,7 +4,7 @@
 <%@ page import="com.semi.mvc.board.model.vo.Attachment" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%
-	FaqBoard faq = (FaqBoard) request.getAttribute("board");
+	FaqBoard faq = (FaqBoard) request.getAttribute("faq");
 	List<Attachment> attachments = faq.getAttachments();
 %>
 <section class="faqCreateContainer">

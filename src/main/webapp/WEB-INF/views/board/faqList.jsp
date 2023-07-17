@@ -25,6 +25,9 @@
 			<form action="<%= request.getContextPath() %>/board/faqDelete" name="faqDeleteFrm" method="POST">
 				<input type="hidden" name="boardNo" value="<%= faq.getBoardNo() %>" />
 			</form>
+			<form action="<%= request.getContextPath() %>/board/faqUpdate" name="faqUpdateFrm" method="POST">
+				<input type="hidden" name="boardNo" value="<%= faq.getBoardNo() %>" />
+			</form>
 			<% } %>
 		<% } %>
 	<% } %>
@@ -35,13 +38,13 @@
 		$(e.target).next().slideToggle().siblings('p.content').slideUp();
 	});
 
-	const deleteFaqBoard = (e) => {
+	const deleteFaqBoard = () => {
 		if(confirm("정말 이 게시글을 삭제하시겠습니까?"))
 			document.forms["faqDeleteFrm"].submit();
 	};
 	
-	const updateFaqBoard = (e) => {
-<%-- 		location.href = "<%= request.getContextPath() %>/board/faqUpdate?no=<%= faq.getBoardNo() %>"; --%>
+	const updateFaqBoard = () => {
+			document.forms["faqUpdateFrm"].submit();
 	}
 
 </script>

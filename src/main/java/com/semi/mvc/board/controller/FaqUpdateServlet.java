@@ -30,8 +30,9 @@ public class FaqUpdateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int BoardNo = Integer.parseInt(request.getParameter("BoardNo"));
-		FaqBoard faq = faqService.findById(BoardNo);
+		int boardNo = Integer.parseInt(request.getParameter("BoardNo"));
+		System.out.println("BoardNo = " + boardNo);
+		FaqBoard faq = faqService.findByBoardNo(boardNo);
 		request.setAttribute("faq", faq);
 		request.getRequestDispatcher("/WEB-INF/views/board/faqUpdate.jsp")
 		.forward(request, response);
@@ -41,22 +42,27 @@ public class FaqUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ServletContext application = getServletContext();
-		String saveDirectory = application.getRealPath("/upload/faq");
-		System.out.println("saveDirectory = " + saveDirectory);
-		int maxPostSize = 1024 * 1024 * 10; 
-		String encoding = "utf-8";
+//		ServletContext application = getServletContext();
+//		String saveDirectory = application.getRealPath("/upload/faq");
+//		System.out.println("saveDirectory = " + saveDirectory);
+//		int maxPostSize = 1024 * 1024 * 10; 
+//		String encoding = "utf-8";
+//		
+//		FileRenamePolicy policy = new HelloMvcFileRenamePolicy();
+//		
+//		MultipartRequest multiReq = new MultipartRequest(request, saveDirectory, maxPostSize, encoding, policy);
+//		
+//		int boardNo = Integer.parseInt(multiReq.getParameter("boardNo"));
+//		String title = multiReq.getParameter("title");
+//		String writer = multiReq.getParameter("writer");
+//		String content = multiReq.getParameter("content");
+//		
+//		String[] delFiles = multiReq.getParameterValues("delFile");
 		
-		FileRenamePolicy policy = new HelloMvcFileRenamePolicy();
-		
-		MultipartRequest multiReq = new MultipartRequest(request, saveDirectory, maxPostSize, encoding, policy);
-		
-		int boardNo = Integer.parseInt(multiReq.getParameter("boardNo"));
-		String title = multiReq.getParameter("title");
-		String writer = multiReq.getParameter("writer");
-		String content = multiReq.getParameter("content");
-		
-		String[] delFiles = multiReq.getParameterValues("delFile");
+		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		String title = request.getParameter("title");
+		String writer = request.getParameter("writer");
+		String content = request.getParameter("content");
 		
 		FaqBoard faq = new FaqBoard();
 		faq.setBoardNo(boardNo);
