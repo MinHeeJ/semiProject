@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin.css" />
 <body>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/orderList.css" />
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/list.css" />
 <style>
 .btncalendar{display:inline-block;width:31px;height:20px;background:url("<%= request.getContextPath() %>/images/order/calendar.png") center center no-repeat; background-size: 31px 20px; text-indent:-999em}
 </style>
@@ -16,7 +16,7 @@
 <!-- datepicker 한국어로 -->
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
 
-<section id="orderListSection">
+<section id="salesLookUpSection">
 	<form name="salesLookUpFrm">
 	    
 	<!-- search -->
@@ -99,7 +99,7 @@
 	
     <div class="wrapper">
 	<h1>매출조회</h1>
-        <table id="tbl-orderList">
+        <table id="tbl-salesLookUp">
             <thead>
             	<tr>
    	              	<th>주문번호</th>
@@ -244,7 +244,6 @@
     			const {result, orders} = responseData;
     			console.log(orders);
     			
-    			const thead = document.querySelector(".wrapper table thead");
     			const tbody = document.querySelector(".wrapper table tbody");
     			const tfoot = document.querySelector(".wrapper table tfoot");
     			tbody.innerHTML = "";
@@ -255,16 +254,6 @@
     				sum += temp.price;
     				console.log(sum);
     				
-    				thead.innerHTML = `
-    					<tr>
-	    	              	<th>주문번호</th>
-	    	                <th>회원아이디</th>
-	    	                <th>상품</th>
-	    	                <th>수량</th>
-	    	                <th>주문일자</th>
-	    	                <th>금액</th>
-    	              	</tr>
-    				`;
                     tbody.innerHTML += `
                         <tr>
                             <td>\${temp.orderNo}</td>

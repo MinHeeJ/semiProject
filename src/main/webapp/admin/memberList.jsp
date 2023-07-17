@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin.css" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/list.css" />
 <script src="<%= request.getContextPath() %>/js/jquery-3.7.0.js"></script>
 
 <section id="memberListSection">
 	<div class="wrapper">
 		<h1>회원 전체 조회</h1>
+	</div>
 	
     <div id="memberList-wrapper">
     <form id="memberList">
@@ -26,8 +27,7 @@
 		</table>
 		<button id="delete">삭제</button>
     </form>
-	</div>
-	</div>
+    <div>
 	<!-- 회원권한 수정 -->
 	<form
 		name="memberRoleUpdateFrm"
@@ -104,7 +104,7 @@ const findAll = () => {
 
 
 // 삭제하기
-document.querySelector("#deleteMember").onclick = (e) => {
+document.querySelector("#delete").onclick = (e) => {
 	if(confirm('삭제하시겠습니까?')) {
 		
 		document.querySelector("#memberList").onsubmit = (e) => {
@@ -126,6 +126,24 @@ document.querySelector("#deleteMember").onclick = (e) => {
 		}
 	}
 }
+
+//선택한 회원 없으면 삭제 x
+document.querySelector("#delete").onclick = (e) => {
+	
+	let flag = true;
+	 
+	const checkboxes = document.querySelectorAll("input[name=checkedOrNot]");
+	  
+    checkboxes.forEach((checkbox) => {
+		if (checkbox.checked) 		   
+		    flag = false;
+	});
+    if(flag){
+    	 alert('선택하신 회원이 없습니다.');
+		    e.preventDefault();
+    }
+
+};
 
 </script>
 

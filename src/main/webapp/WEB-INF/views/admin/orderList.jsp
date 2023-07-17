@@ -5,6 +5,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/orderList.css" />
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/list.css" />
 <%
 	List<Order> orders = (List<Order>) request.getAttribute("orders");
 %>
@@ -45,7 +46,7 @@
 		                <td><%= order.getProduct() %></td>
 		                <td><%= order.getCount() %></td>
 		                <td><%= order.getOrderDate() %></td>
-		                <td><%= order.getPrice() %></td>
+		                <td><%= order.getPrice() %>원</td>
 		                <td>
 		                  <select class="state" data-order-no="<%= order.getOrderNo() %>">
 		                    <option value="주문접수완료" <%= order.getState().equals(State.orderComplete.getState()) ? "selected" : "" %>>주문접수완료</option>
