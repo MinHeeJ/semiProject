@@ -14,6 +14,7 @@
 	String product = (String) request.getAttribute("product");
 	List<Review> reviews = (List<Review>)request.getAttribute("reviews");
 	String memberId = (String) request.getAttribute("memberId");
+	
 %>
 <script src="<%= request.getContextPath() %>/js/jquery-3.7.0.js"></script>
  <link rel="stylesheet" href="<%=request.getContextPath()%>/css/review.css" />
@@ -94,81 +95,128 @@
 	
 	<div id="photo-review-container">
 	<% 	if(reviews == null || reviews.isEmpty()) { %>
-			<tr>
-				<td>리뷰가 없습니다.</td>
-			</tr>
-			<%	
-				} 
-				else { 
-					for(Review review : reviews){
-						List<AttachmentReview> files = review.getAttachments();
-			%>
+		<tr>
+			<td>리뷰가 없습니다.</td>
+		</tr>
+		<%	
+			} 
+			else { 
+				for(Review review : reviews){
+					List<AttachmentReview> files = review.getAttachments();
+		%>
 				<tr>
-					
-				<div class="polaroid">
-						<p class="photo"></p>
-							<%for(AttachmentReview file : files){ %>
-								<img src ="<%= request.getContextPath()%>/upload/review/<%=file.getRenamedFilename() %>">
-							<%} %>
-						</p>
-						<p class="info">
-							
-							<span class ="writer"><%= review.getWriter() %></span>
-							<span class ="photoDate"><%= review.getRegDate() %></span>
-						</p>
-						<p class ="product"><%= review.getProduct() %></p>
-						<p class ="content"><%= review.getContent() %></p>
+				
+				
+					<div class="polaroid">
 						
 						
-					</div>
-					<tr>			
-						<th colspan="2">
-							<%-- 첨부파일이 없는 게시물 수정 --%>
-							<input type="button" value="수정하기" onclick="updateReview('<%= review.getReviewNo()%>');">
-							
-							<input type="button" value="삭제하기" onclick="deleteReview('<%= review.getReviewNo()%>');">
-							
-							
-						</th>
-					</tr>
-				</tr>
-				<% 		
-					}
-				} 
-			%>
-	
-	
-	<!--  <div class="polaroid">
-	<img src ="">
-	<p class="info">
-	<span class ="writer"></span>
-	<span class ="photoDate"></span>
-	</p>
-	<p class ="caption"></p>
-	</div>
-	 -->
-	</div>
-	
-	<hr />
-	
+					<!-- ajax -->
+						
+						
+				   </div>  
+			</tr>
+			<% 		
+				}
+			} 
+		%>
+	  </div>  
 	
 	<div id='btn-more-container'>
 		<button id="btn-more" value="">더보기(<span id="cpage"><%= cpage %></span>/<span id="totalPage"><%= totalPage %></span>)</button>
 	</div>
-
-
+	
+</section>
 </section>
 <form action="<%= request.getContextPath() %>/review/reviewDelete" name="reviewDelFrm" method="POST" >
 	<input type="hidden" name="reviewNo" id="reviewNo" value=""/>
-
 </form>
 
 
-
 <script>
+// 좋아요
+window.onload = () => {
+  like();
+};
+
+const like = () => {
+  const reviewNoElements = document.querySelectorAll('input[name="reviewNo"]');
+  reviewNoElements.forEach((reviewNoElement) => {
+    const reviewNo = reviewNoElement.value;
+
+    $.ajax({
+      url: "<%= request.getContextPath() %>/review/like",
+      method: "POST",
+      data: {
+        reviewNo: reviewNo,
+      },
+      success(responseData) {
+        console.log(responseData);
+        const { likeCount, isLike } = responseData;
+        console.log(likeCount);
+        console.log(isLike);
+
+        const thElements = document.querySelectorAll(".th");
+        thElements.forEach((thElement) => {
+          if (thElement.dataset.reviewNo === reviewNo) {
+            if (isLike) {
+              thElement.innerHTML = `
+                <img src="<%= request.getContextPath() %>/images/review/heart.png" alt="heart.png" style="width: 30px;">
+                <p>${likeCount}</p>
+              `;
+            } else {
+              thElement.innerHTML = `
+                <img src="<%= request.getContextPath() %>/images/review/emptyheart.png" alt="emptyheart.png" style="width: 30px;">
+                <p>${likeCount}</p>
+              `;
+            }
+          }
+        });
+      },
+    });
+  });
+};
+
+document.querySelectorAll(".heart").forEach((heart) => {
+  heart.addEventListener("click", (e) => {
+    console.log(e.target.value);
+    e.preventDefault();
+    $.ajax({
+      url: "<%= request.getContextPath() %>/review/like",
+      method: "POST",
+      data: {
+        reviewNo: e.target.value,
+      },
+      success(responseData) {
+        console.log(responseData);
+        const { likeCount, isLike } = responseData;
+        console.log(likeCount);
+        console.log(isLike);
+
+        const thElements = document.querySelectorAll(".th");
+        thElements.forEach((thElement) => {
+          if (thElement.dataset.reviewNo === e.target.value) {
+            if (isLike) {
+              thElement.innerHTML = `
+                <input type="image" src="<%= request.getContextPath() %>/images/review/heart.png" alt="heart.png" style="width: 30px;" class="heart" value="${e.target.value}">
+                <p>${likeCount}</p>
+              `;
+            } else {
+              thElement.innerHTML = `
+                <input type="image" src="<%= request.getContextPath() %>/images/review/emptyheart.png" alt="emptyheart.png" style="width: 30px;" class="heart" value="${e.target.value}">
+                <p>${likeCount}</p>
+              `;
+            }
+          }
+        });
+      },
+    });
+  });
+});
 /**
-* reviewCreateFrm 유효성 검사
+* 
 */
+
+
 
 document.querySelector("#btn-more").onclick = () =>{
 	const cpage = Number(document.querySelector("#cpage").innerHTML);
@@ -187,28 +235,43 @@ const getPage = (cpage) => {
 		data : {cpage},
 		success(reviews) {
 			console.log(reviews);
-			const container = document.querySelector("#photo-review-container");
-			reviews.forEach((review)=>{
-				const {reviewNo, writer, content, regDate, product} =review;
+			const container = document.querySelector(".polaroid");
+			
+			reviews.forEach((Review)=>{
+				const {reviewNo,writer, content, regDate,product,attachments} =Review;
+				let renamedFile = "";
+				let imgElements = "";
+				
+				for (let i = 0; i < attachments.length; i++) {
+				    const attachment = attachments[i];
+				    const { renamedFilename } = attachment;
+				    renamedFile = renamedFilename;
+
+				    imgElements += `<img src="<%= request.getContextPath()%>/upload/review/\${renamedFile}">`;
+				  }
 				
 				
-				
-				container.innerHTML += `
-				
-				
-				
-					<div class="polaroid">
-					
+				container.innerHTML += imgElements + `
 					<p class="info">
-						<span class ="writer">\${writer}</span>
-						<span class ="photoDate">\${regDate}</span>
-					</p>
+							<span class ="writer">\${writer}</span>
+							<span class ="photoDate">\${regDate}</span>
+						</p>
 					<p class ="product">\${product}</p>
-					<p class ="content">\${content}</p>
-				</div>
+					<p class ="caption">\${content}</p>
 				
-				
-				
+					<tr>			
+					<th colspan="2" id="th">
+						<div>
+				            <input type="hidden" name="reviewNo" value="\${reviewNo}"/>
+				            <input type="image" src="<%= request.getContextPath() %>/images/review/heart.png" alt="heart.png" style="width: 30px;" class="heart" value="\${reviewNo}">
+				            <p>0</p>
+		          	 	</div>
+						<%-- 첨부파일이 없는 게시물 수정 --%>
+							<input type="button" value="수정하기" onclick="updateReview('\${reviewNo}');">
+								
+							<input type="button" value="삭제하기" onclick="deleteReview('\${reviewNo}');">
+					</th>
+				</tr>
 				`;
 			})
 		},
@@ -225,6 +288,7 @@ const getPage = (cpage) => {
 	
 }
 
+
 function deleteReview(reviewNo){
 	if(confirm("정말 리뷰를 삭제하시겠습니까?")){
 		document.getElementById("reviewNo").value = reviewNo;
@@ -236,7 +300,6 @@ function deleteReview(reviewNo){
 function updateReview(reviewNo){
 	location.href = "<%= request.getContextPath() %>/review/reviewUpdate?reviewNo=" + reviewNo;
 }
-
 </script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

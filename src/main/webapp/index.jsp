@@ -1,6 +1,14 @@
+<%@page import="com.semi.mvc.review.model.vo.Review"%>
+<%@page import="com.semi.mvc.review.model.vo.AttachmentReview"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<script src="<%=request.getContextPath()%>/js/jquery-3.7.0.js"></script>
+<style>
+.polaroid {border: 2px solid black; padding: 20px; margine: 1% 0;}
+.polaroid img{width: 300px; }
+</style>
 
 	<div class="account_wrapper">
 
@@ -63,6 +71,12 @@
         </div>
 
         <h1>추천 조합</h1>
+        
+        <div id="reviewBestPrint">
+        	
+        </div>
+        
+        
         <div class="contents_lists">
             <div class="contents_image_wrapper">
                 <a href="링크 주소"> <!-- 추천 조합 링크 -->
@@ -115,6 +129,7 @@
 		document.addEventListener("DOMContentLoaded", function(){
 
 			 console.log('Load후 동작하는 함수입니다.');
+			 getReview();
 			 
 
 		});
@@ -164,6 +179,48 @@
             swiper_wrapper.style.left = -1200 * slide_index + 'px';
             slide_page_number[slide_index].classList.add('slide_active');
         }, 3000)
+        
+        
+     
+	const getReview = () => {
+
+	    $.ajax({
+	        url: "<%= request.getContextPath()%>/main/likeBest",
+	        dataType: "json",
+	        success(responseData){
+	            
+	        	const container = document.querySelector("#reviewBestPrint");
+				
+				responseData.forEach((review)=>{
+					const {reviewNo,writer, content, regDate, product, attachments} = review;
+					let renamedFile = "";
+					attachments.forEach((attachment)=>{
+						const {renamedFilename} = attachment;
+						renamedFile = renamedFilename;
+					})
+		
+					container.innerHTML += `
+						<div class="polaroid">
+						<p>구매한 조합 : \${product}</p>
+						<img src ="<%= request.getContextPath()%>/upload/review/\${renamedFile}">
+							<p class="info">
+								<span class ="writer">\${writer}</span>
+								<span class ="photoDate">\${regDate}</span>
+							</p>
+						<p class ="caption">\${content}</p>
+						</div>
+					`;
+				})
+	        	
+	        },
+	        complete(){
+	            console.log("완료");
+	        }
+	    });
+	};
+	
+  
+	
     </script>
     
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

@@ -33,7 +33,7 @@ table#tbl-orderList td {
 	List<Order> orders = (List<Order>) request.getAttribute("orders");
 %>
 <section>
-	<h1>주문내역 전체조회</h1>
+	<h1>주문내역 전체조회(관리자용)</h1>
 	<div>
 		<input type="checkbox" value="주문접수완료" checked>
 		<label for="state">주문접수완료</label>

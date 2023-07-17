@@ -55,14 +55,11 @@ create table order_tbl (
     constraints fk_order_member_id foreign key(member_id) references member(member_id) on delete cascade,
     constraints ck_order_state check(state in ('주문접수완료', '주문처리완료'))
 );
-insert into order_tbl values(1, 'honggd', default, default);
-insert into order_tbl values(2, 'honggd', default, default);
-insert into order_tbl values(3, 'admin', '2023-06-11', default);
 --drop table order_tbl;
 select * from order_tbl;
 create sequence seq_order_no;
 --drop sequence seq_order_no;
---update order_tbl set state = '준비완료' where order_no = 2;
+
 create table cart_tbl (
     cart_no number,
 	product	varchar2(1000),
@@ -72,9 +69,6 @@ create table cart_tbl (
     constraints pk_cart_no_product primary key(cart_no, product),
     constraints fk_cart_member_id foreign key(member_id) references member(member_id) on delete cascade
 );
-insert into cart_tbl values(1, '양상추 닭가슴살 콜라', 'honggd', 1, 5000);
-insert into cart_tbl values(2, '루꼴라 연어 콜라', 'honggd', 1, 7000);
-insert into cart_tbl values(4, '양파 고기 콜라', 'admin', 1, 4000);
 --drop table cart_tbl;
 select * from cart_tbl;
 create sequence seq_cart_no;
@@ -113,7 +107,6 @@ create table order_detail (
     price number,
     constraints pk_order_detail_order_serial_no primary key(order_serial_no)
 );
-insert into order_detail values(1,1,호밀빵 [치커리(1), 연어(1), 홀스래디쉬(1), 아메리카노(1)], 3 ,10000);
 --drop table order_detail;
 select * from order_detail;
 create sequence seq_order_serial_no;
@@ -192,18 +185,20 @@ create table faq_board (
 create table review (
     review_no number,
     order_serial_no number,
-	writer varchar2(20),
-	title varchar2(200),
-	content	varchar2(1000) not null,
-	reg_date date default sysdate,
+    writer varchar2(20),
+    title varchar2(200)    not null,
+    content    varchar2(1000) not null,
+    reg_date date default sysdate,
     constraints pk_review_no primary key(review_no),
     constraints fk_review_writer foreign key(writer) references member(member_id) on delete cascade,
     constraints fk_order_serial_no foreign key(order_serial_no) references order_detail(order_serial_no) on delete cascade
 );
+alter table review modify title null;
+alter table review modify content null;
 create sequence seq_review_no;
+--drop sequence seq_review_no;
 --drop table review;
 select * from review;
-insert into attachment_review(no, review_no, original_filename, renamed_filename) values(seq_attachment_review_no.nextval, 43 , '' , '');
 
 create table attachment_review (
     no number, 
@@ -218,7 +213,6 @@ create sequence seq_attachment_review_no;
 select * from attachment_review;
 --drop table attachment_review;
 
-
 create table like_tbl (
 	like_no	number,
 	member_id varchar2(20),
@@ -228,8 +222,12 @@ create table like_tbl (
     constraints fk_like_member_id foreign key(member_id) references member(member_id) on delete cascade,
     constraints fk_like_review_no foreign key(review_no) references review(review_no) on delete cascade
 );
-create sequence seq_like_tbl_like_no;
 --drop table like_tbl;
+create sequence seq_like_no;
+select * from like_tbl;
+select * from like_tbl where member_id = ? and review_no = ?;
+insert into like_tbl values (seq_like_no.nextval, 'qwerty', 8, 1);
+select count(like_count)  from like_tbl where review_no = 8;
 
 create table selected_option (
 	serial_no number,
@@ -244,6 +242,7 @@ create table selected_option (
 );
 --drop table selected_option;
 create sequence seq_option_no;
--- drop sequence seq_option_no;
+--drop sequence seq_option_no;
 select * from selected_option;
+>>>>>>> branch 'master' of https://github.com/MinHeeJ/semiProject
 -- delete from selected_option;

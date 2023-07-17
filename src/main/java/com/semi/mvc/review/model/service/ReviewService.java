@@ -90,7 +90,7 @@ public class ReviewService {
 	  close(conn);
 		return memberId;
 	}
-
+	
 	public int deleteReview(int reviewNo) {
 		int result = 0;
 		Connection conn = getConnection();
@@ -105,8 +105,28 @@ public class ReviewService {
 			close(conn);
 		}
 		return result;
+		
+	}
+	public List<Review> findAllReview() {
+		Connection conn = getConnection();
+		List<Review> reviews = reviewDao.findAllReview(conn);
+			
+		for(int i = 0; i<reviews.size(); i++) {
+			int reviewNo = reviews.get(i).getReviewNo();
+			List<AttachmentReview> attachments = reviewDao.findAttachment(conn, reviewNo);
+			
+			for(int j = 0 ; j < attachments.size() ; j++) {
+				System.out.println(attachments.get(j));
+			}
+			reviews.get(i).setAttachments(attachments);
+		}
+		
+		close(conn);
+		return reviews;
 	}
 
+
+	
 	public Review findReviewById(int reviewNo) {
 		Connection conn = getConnection();
 		Review review = reviewDao.findReviewById(conn, reviewNo);
@@ -165,7 +185,53 @@ public class ReviewService {
 	}
 
 	
+	public int findLikeCount(int reviewNo) {
+		Connection conn = getConnection();
+		int countLike = reviewDao.findLikeCount(conn, reviewNo);
+		close(conn);
+		return countLike;
+	}
 
-	
+	public int LikeCount(String memberId, int reviewNo) {
+		int likeCount = 0;
+		int result = 0;
+		
+		Connection conn = getConnection();
+		try {
+			// 1. 로그인된 아이디가 해당게시물에 좋아요 있는지 확인
+			likeCount = reviewDao.LikeCount(conn, memberId, reviewNo);
+
+			if(likeCount == 0) {
+				// 2. 해당게시물에 좋아요가 존재하지않는다면 해당게시물 좋아요 추가
+				result = reviewDao.insertLike(conn, memberId, reviewNo);
+				// 3. 해당게시물 좋아요 갯수 들고 가기
+				likeCount = reviewDao.findAllLikeCount(conn, reviewNo);
+			}
+			else {
+				// 2. 해당게시물에 좋아요가 존재한다면 해당게시물 좋아요 삭제
+				result = reviewDao.deleteLike(conn, memberId, reviewNo);
+				// 3. 해당게시물 좋아요 갯수 들고 가기
+				likeCount = reviewDao.findAllLikeCount(conn, reviewNo);
+			}
+			commit(conn);
+			
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return likeCount;
+	}
+
+	public boolean isLike(String memberId, int reviewNo) {
+		Connection conn = getConnection();
+		boolean isLike = reviewDao.isLike(conn, memberId, reviewNo);
+		close(conn);
+		return isLike;
+	}
 }
 
+
+
+	

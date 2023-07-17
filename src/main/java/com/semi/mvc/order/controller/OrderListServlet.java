@@ -31,32 +31,21 @@ public class OrderListServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 0. MultipartRequest객체 생성
-		String saveDirectory = getServletContext().getRealPath("/images");
-		int maxPostSize = 1024 * 1024 * 10;
-		String encoding = "utf-8";
-		FileRenamePolicy policy = new DefaultFileRenamePolicy();
-		MultipartRequest multiReq = new MultipartRequest(request, saveDirectory, maxPostSize, encoding, policy);
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 1. 사용자 입력값 처리
 //		HttpSession session = request.getSession();
 //		Member loginMember = (Member) session.getAttribute("loginMember");
 //		String memberId = loginMember.getMemberId();
-		String memberId = multiReq.getParameter("memberId");
+		String memberId = request.getParameter("memberId");
 		
 		// 2. 업무로직
 		List<Order> orders = orderService.findById(memberId);
 		
-		// 3. 응답처리
-		// 헤더
-		response.setContentType("application/json; charset=utf-8");
+		request.setAttribute("orders", orders);
 		
-		// 바디
-		Map<String, Object> map = new HashMap<>();
-		map.put("result", "성공");
-		map.put("orders", orders);
-		System.out.println(map);
-		new Gson().toJson(map, response.getWriter());
+		// 3. 응답처리
+		request.getRequestDispatcher("/WEB-INF/views/order/orderList.jsp")
+			.forward(request, response);
 	}
 
 }
