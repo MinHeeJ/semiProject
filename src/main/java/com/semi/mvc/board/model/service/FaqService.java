@@ -8,6 +8,10 @@ public class FaqService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	public int insertFaq(FaqBoard faq) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 	public int faqUpdate(FaqBoard faq) {
 		// TODO Auto-generated method stub

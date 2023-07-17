@@ -1,11 +1,12 @@
 <%@ page import="com.semi.mvc.member.model.vo.Member" %>
 <%@ page import="com.semi.mvc.member.model.vo.MemberRole" %>
+<%@ page import="com.semi.mvc.member.model.vo.Gender" %>
 <%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	Member loginMember = new Member();
+	Member loginMember = new Member("a", "1234", "a", "010", "a", Gender.valueOf("M"), MemberRole.valueOf("A"));
 %>
 <!DOCTYPE html>
 <html>

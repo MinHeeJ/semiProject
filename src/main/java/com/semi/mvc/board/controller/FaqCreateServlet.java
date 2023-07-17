@@ -64,19 +64,20 @@ public class FaqCreateServlet extends HttpServlet {
 		faq.setWriter(writer);
 		faq.setContent(content);
 		
-		Enumeration<String> filenames = multiReq.getFileNames(); // upFile1, upFile2
-		while(filenames.hasMoreElements()) {
-			String name = filenames.nextElement(); // input:file[name]
-			File upFile = multiReq.getFile(name);
-			if(upFile != null) {
-				Attachment attach = new Attachment();
-				attach.setOriginalFilename(multiReq.getOriginalFileName(name));
-				attach.setRenamedFilename(multiReq.getFilesystemName(name)); // renamedFilename
-				faq.addAttachment(attach);
-			}
-		}
+		// Attachment 작성
+//		Enumeration<String> filenames = multiReq.getFileNames(); // upFile1, upFile2
+//		while(filenames.hasMoreElements()) {
+//			String name = filenames.nextElement(); // input:file[name]
+//			File upFile = multiReq.getFile(name);
+//			if(upFile != null) {
+//				Attachment attach = new Attachment();
+//				attach.setOriginalFilename(multiReq.getOriginalFileName(name));
+//				attach.setRenamedFilename(multiReq.getFilesystemName(name)); // renamedFilename
+//				faq.addAttachment(attach);
+//			}
+//		}
 		
-//		int result = faqService.insertFaq(faq);
+		int result = faqService.insertFaq(faq);
 		
 		response.sendRedirect(request.getContextPath() + "/board/faqList");
 	}
