@@ -19,6 +19,10 @@ public class MemberLoginServlet extends HttpServlet {
     
     private final MemberService memberService = new MemberService();
     
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher("/WEB-INF/views/member/memberLogin.jsp")
+			.forward(request, response);
+	}
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         
@@ -39,6 +43,6 @@ public class MemberLoginServlet extends HttpServlet {
             session.setAttribute("msg", "아이디 또는 비밀번호가 일치하지 않습니다.");
         }
         
-        response.sendRedirect(request.getContextPath() + "/");
+        response.sendRedirect(request.getContextPath() + "/semiProject/");
     }
 }
