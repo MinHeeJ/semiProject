@@ -244,4 +244,5 @@ create table selected_option (
 create sequence seq_option_no;
 --drop sequence seq_option_no;
 select * from selected_option;
+>>>>>>> branch 'master' of https://github.com/MinHeeJ/semiProject
 -- delete from selected_option;
