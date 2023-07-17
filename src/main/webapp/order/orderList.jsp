@@ -275,15 +275,9 @@ table#tbl-salesLookUp td {
     	e.preventDefault();
     	
     	console.log(e.target);
-    	const frmData = new FormData(e.target);
     	
     	$.ajax({
     		url : "<%= request.getContextPath() %>/order/orderList",
-    		data : frmData,
-    		processData : false,
-    		contentType : false,
-    		method : "POST",
-    		dataType : "json",
     		success (responseData) {
     			const {result, orders} = responseData;
     			console.log(orders);

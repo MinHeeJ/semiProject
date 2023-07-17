@@ -44,9 +44,9 @@
 	
     <div class="swiper slide_wrapper">
         <div class="swiper-wrapper">
-            <div class="swiper-slide"></div>
-            <div class="swiper-slide"></div>
-            <div class="swiper-slide"></div>
+            <div class="swiper-slide" style="background-image: url('<%= request.getContextPath() %>/images/index/banner1.jpg');"></div>
+            <div class="swiper-slide" style="background-image: url('<%= request.getContextPath() %>/images/index/banner2.jpg');"></div>
+            <div class="swiper-slide" style="background-image: url('<%= request.getContextPath() %>/images/index/banner3.jpg');"></div>
         </div>
         <div class="slide_pagination">
             <div class="slide_prev">

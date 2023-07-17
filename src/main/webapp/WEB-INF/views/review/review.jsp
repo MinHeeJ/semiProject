@@ -3,9 +3,9 @@
 <%@page import="com.semi.mvc.order.model.vo.Order"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-<%@ include file="/WEB-INF/views/common/header.jsp" %>
+	pageEncoding="UTF-8"%>
+
+<%@ include file="/WEB-INF/views/common/header.jsp"%>
 
 <% 
 	int totalPage = (int) request.getAttribute("totalPage");  
@@ -17,74 +17,68 @@
 	
 %>
 <script src="<%= request.getContextPath() %>/js/jquery-3.7.0.js"></script>
- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/review.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/review.css" />
 <section id="review-container">
 	<h2>리뷰작성</h2>
-	<form
-		name="reviewOrderListFrm"
-		action="<%=request.getContextPath() %>/review/reviewOrderList" 
-		method="POST"
-		enctype="multipart/form-data">
-	
+	<form name="reviewOrderListFrm"
+		action="<%=request.getContextPath() %>/review/reviewOrderList"
+		method="POST" enctype="multipart/form-data">
+
 		<table id="tbl-order-review">
-		<thead>
-			<tr>
-				
-				<th>주문상품</th>
-			
-			
-			</tr>
-		</thead>
-		
-		<tbody>
-			<% 	if(orders == null || orders.isEmpty()) { %>
-			<tr>
-				<td colspan="4">작성할 리뷰가 없습니다.</td>
-			</tr>
-			<%	
+			<thead>
+				<tr>
+
+					<th>주문상품</th>
+
+
+				</tr>
+			</thead>
+
+			<tbody>
+				<% 	if(orders == null || orders.isEmpty()) { %>
+				<tr>
+					<td colspan="4">작성할 리뷰가 없습니다.</td>
+				</tr>
+				<%	
 				} 
 				else { 
 					for(Order order : orders) {
 			%>
 				<tr>
-					<td>
-						<input type="radio" name="orderSerialNo" value="<%= order.getOrderSerialNo() %>"/> <%= order.getProduct() %>
+					<td><input type="radio" name="orderSerialNo"
+						value="<%= order.getOrderSerialNo() %>" /> <%= order.getProduct() %>
 					</td>
 				</tr>
 				<% 		
 					}
 				} 
 			%>
-		</tbody>
-	</table>
-	
-	
+			</tbody>
+		</table>
+
+
 		<% 	if(!(orders == null || orders.isEmpty())) { %>
 		<table id="tbl-board-view">
-		<tr>
-			<th>작성자</th>
-			<td>
-				<input type="text" name="writer" id="writer" value="<%=memberId%>"readonly/>
-			</td>
-		</tr>
-		<tr>
-			<th>첨부파일</th>
-			<td>			
-				<input type="file" name="upFile1">
-				<input type="file" name="upFile2">
-			</td>
-		</tr>
-		<tr>
-			<th>내 용</th>
-			<td><textarea rows="5" cols="40" id = "content" name="content"></textarea></td>
-		</tr>
-		<tr>
-			<th colspan="2">
-				<input type="submit" value="등록하기" >
-			</th>
-		</tr>
-	</table>
-	<%}%>
+			<tr>
+				<th>작성자</th>
+				<td><input type="text" name="writer" id="writer"
+					value="<%=memberId%>" readonly /></td>
+			</tr>
+			<tr>
+				<th>첨부파일</th>
+				<td><input type="file" name="upFile1"> <input
+					type="file" name="upFile2"></td>
+			</tr>
+			<tr>
+				<th>내 용</th>
+				<td><textarea rows="5" cols="40" id="content" name="content"></textarea></td>
+			</tr>
+			<tr>
+				<th colspan="2"><input type="submit" value="등록하기"></th>
+			</tr>
+		</table>
+		<%}%>
 	</form>
 </section>
 
@@ -92,9 +86,9 @@
 
 <section id="photo-review-wrapper">
 	<h2>리뷰게시판</h2>
-	
+
 	<div id="photo-review-container">
-	<% 	if(reviews == null || reviews.isEmpty()) { %>
+		<% 	if(reviews == null || reviews.isEmpty()) { %>
 		<tr>
 			<td>리뷰가 없습니다.</td>
 		</tr>
@@ -122,7 +116,9 @@
 	  </div>  
 	
 	<div id='btn-more-container'>
-		<button id="btn-more" value="">더보기(<span id="cpage"><%= cpage %></span>/<span id="totalPage"><%= totalPage %></span>)</button>
+		<button id="btn-more" value="">
+			더보기(<span id="cpage"><%= cpage %></span>/<span id="totalPage"><%= totalPage %></span>)
+		</button>
 	</div>
 	
 </section>
@@ -133,85 +129,88 @@
 
 
 <script>
-// 좋아요
-window.onload = () => {
-  like();
-};
+//좋아요
 
-const like = () => {
-  const reviewNoElements = document.querySelectorAll('input[name="reviewNo"]');
-  reviewNoElements.forEach((reviewNoElement) => {
-    const reviewNo = reviewNoElement.value;
+function like() {
+  const reviewNo = document.querySelectorAll(".heart");
+  reviewNo.forEach(function(e) {
+    console.log(e);
 
     $.ajax({
-      url: "<%= request.getContextPath() %>/review/like",
-      method: "POST",
-      data: {
-        reviewNo: reviewNo,
+      url : "<%= request.getContextPath() %>/review/likeCount",
+      method : "POST",
+      data : {
+        reviewNo : e.value
       },
       success(responseData) {
         console.log(responseData);
-        const { likeCount, isLike } = responseData;
-        console.log(likeCount);
-        console.log(isLike);
+        const {likeCount, isLike} = responseData;
 
-        const thElements = document.querySelectorAll(".th");
-        thElements.forEach((thElement) => {
-          if (thElement.dataset.reviewNo === reviewNo) {
-            if (isLike) {
-              thElement.innerHTML = `
-                <img src="<%= request.getContextPath() %>/images/review/heart.png" alt="heart.png" style="width: 30px;">
-                <p>${likeCount}</p>
-              `;
+        const hearts = document.querySelectorAll(".heart");
+        const p = document.querySelectorAll("#p");
+        for(let i=0; i<hearts.length; i++) {
+          if(e.value == hearts[i].value) {
+            if(isLike) {
+              console.log(e.value);
+              console.log(likeCount);
+              console.log(isLike);
+              console.log(123456);
+              hearts[i].src = "<%= request.getContextPath() %>/images/review/heart.png"
+              p[i].innerHTML = `\${likeCount}`;
             } else {
-              thElement.innerHTML = `
-                <img src="<%= request.getContextPath() %>/images/review/emptyheart.png" alt="emptyheart.png" style="width: 30px;">
-                <p>${likeCount}</p>
-              `;
+              console.log(e.value);
+              console.log(likeCount);
+              console.log(isLike);
+              console.log(123123);
+              hearts[i].src = "<%= request.getContextPath() %>/images/review/emptyheart.png"
+              p[i].innerHTML = `\${likeCount}`;
             }
           }
-        });
-      },
+
+        }
+      }
     });
   });
-};
+}
 
-document.querySelectorAll(".heart").forEach((heart) => {
-  heart.addEventListener("click", (e) => {
-    console.log(e.target.value);
-    e.preventDefault();
-    $.ajax({
-      url: "<%= request.getContextPath() %>/review/like",
-      method: "POST",
-      data: {
-        reviewNo: e.target.value,
-      },
-      success(responseData) {
-        console.log(responseData);
-        const { likeCount, isLike } = responseData;
-        console.log(likeCount);
-        console.log(isLike);
+document.querySelector("#photo-review-wrapper").onclick = (e) => {
+	love(e);
+}
 
-        const thElements = document.querySelectorAll(".th");
-        thElements.forEach((thElement) => {
-          if (thElement.dataset.reviewNo === e.target.value) {
-            if (isLike) {
-              thElement.innerHTML = `
-                <input type="image" src="<%= request.getContextPath() %>/images/review/heart.png" alt="heart.png" style="width: 30px;" class="heart" value="${e.target.value}">
-                <p>${likeCount}</p>
-              `;
-            } else {
-              thElement.innerHTML = `
-                <input type="image" src="<%= request.getContextPath() %>/images/review/emptyheart.png" alt="emptyheart.png" style="width: 30px;" class="heart" value="${e.target.value}">
-                <p>${likeCount}</p>
-              `;
-            }
+function love(e) {
+  console.log(11111111, e.target.value);
+  e.preventDefault();
+  $.ajax({
+    url : "<%= request.getContextPath() %>/review/like",
+    method : "POST",
+    data : {
+      reviewNo : e.target.value
+    },
+    success(responseData) {
+      console.log(responseData);
+      const {likeCount, isLike} = responseData;
+      console.log(likeCount);
+      console.log(isLike);
+
+      const hearts = document.querySelectorAll(".heart");
+      const p = document.querySelectorAll("#p");
+      for(let i=0; i<hearts.length; i++) {
+        if(e.target.value == hearts[i].value) {
+          if(isLike) {
+            console.log(123456);
+            hearts[i].src = "<%= request.getContextPath() %>/images/review/heart.png"
+            p[i].innerHTML = `\${likeCount}`;
+          } else {
+            console.log(123123);
+            hearts[i].src = "<%= request.getContextPath() %>/images/review/emptyheart.png"
+            p[i].innerHTML = `\${likeCount}`;
           }
-        });
-      },
-    });
+        }
+      }
+
+    }
   });
-});
+}
 /**
 * 
 */
@@ -229,9 +228,8 @@ window.addEventListener('load', () => {
 });
 
 const getPage = (cpage) => {
-	
 	$.ajax({
-		url : "<%= request.getContextPath() %>/review/reviewMore",
+		url : "<%=request.getContextPath()%>/review/reviewMore",
 		data : {cpage},
 		success(reviews) {
 			console.log(reviews);
@@ -264,7 +262,7 @@ const getPage = (cpage) => {
 						<div>
 				            <input type="hidden" name="reviewNo" value="\${reviewNo}"/>
 				            <input type="image" src="<%= request.getContextPath() %>/images/review/heart.png" alt="heart.png" style="width: 30px;" class="heart" value="\${reviewNo}">
-				            <p>0</p>
+				            <p id="p">0</p>
 		          	 	</div>
 						<%-- 첨부파일이 없는 게시물 수정 --%>
 							<input type="button" value="수정하기" onclick="updateReview('\${reviewNo}');">
@@ -278,14 +276,14 @@ const getPage = (cpage) => {
 		complete(){
 			document.querySelector("#cpage").innerHTML = cpage;
 			
-			if(cpage === <%= totalPage%>){
+			if(cpage === <%=totalPage%>){
 				const btn = document.querySelector("#btn-more");
 				btn.disabled = true;
 				btn.style.cursor = "not-allowed";
 			}
+			like();
 		}
 	});
-	
 }
 
 
@@ -302,4 +300,4 @@ function updateReview(reviewNo){
 }
 </script>
 
-<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+<%@ include file="/WEB-INF/views/common/footer.jsp"%>
