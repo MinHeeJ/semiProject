@@ -13,7 +13,7 @@ import com.semi.mvc.common.util.HelloMvcUtils;
 import com.semi.mvc.member.model.service.MemberService;
 import com.semi.mvc.member.model.vo.Member;
 
-@WebServlet("/member/memberLogin")
+@WebServlet("/member/login")
 public class MemberLoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     
@@ -37,6 +37,7 @@ public class MemberLoginServlet extends HttpServlet {
         HttpSession session = request.getSession();
         
         if(member != null && password.equals(member.getPassword())) {
+        	
             session.setAttribute("loginMember", member);
         }
         else {

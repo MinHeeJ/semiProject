@@ -39,33 +39,43 @@ window.onload = () => {
 </script>
 
 <div class="account_wrapper">
+
+ <div class="account_wrapper">
+
+    <% if (loginMember == null) { %>
     <!-- 로그인 전 -->
     <ul class="account_list">
         <li><a href="<%= request.getContextPath() %>/member/memberLogin">로그인</a></li>
         <li><a href="<%= request.getContextPath() %>/member/memberEnroll">회원가입</a></li>
     </ul>
-
+    <% } else { %>
     <!-- 로그인 후 -->
     <div class="user_info_container">
-        <span>***님, 환영합니다!</span>
+        <span><%= loginMember.getName() %>님, 환영합니다!</span>
+
         <ul class="account_list">
             <li><a href="">장바구니</a></li>
             <li><a href="<%= request.getContextPath() %>/member/memberDetail">마이페이지</a></li>
-            <li><a href="">로그아웃</a></li>
+            <li><a href="<%= request.getContextPath() %>/member/logout">로그아웃</a></li>
         </ul>
     </div>
+    <% } %>
+
+</div>
 
     <!-- 관리자일 경우 로그인 -->
-    <div class="user_info_container">
-        <span>님, 환영합니다!</span>
-        <ul class="account_list">
+    <% if (loginMember != null && loginMember.getMemberRole() == MemberRole.A) { %>
+    <div class="admin">
+        <span><%= loginMember.getName() %>님, 환영합니다!</span>
+        <ul>
             <li><a href="<%= request.getContextPath() %>/admin/salesLookUp">매출조회</a></li>
             <li><a href="<%= request.getContextPath() %>/admin/orderList">전체주문내역</a></li>
             <li><a href="<%= request.getContextPath() %>/admin/memberList">전체회원조회</a></li>
-            <li><a href="">로그인</a></li>
         </ul>
     </div>
+    <% } %>
 </div>
+
 
 <div class="swiper slide_wrapper">
     <div class="swiper-wrapper">
