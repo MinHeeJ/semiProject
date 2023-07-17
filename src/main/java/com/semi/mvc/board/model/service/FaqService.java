@@ -20,20 +20,19 @@ public class FaqService {
 			result = faqDao.insertFaq(conn, faq);
 			
 			// Attachment
-//			// 발급된 board.no를 조회
-//			int boardNo = boardDao.getLastBoardNo(conn);
-//			board.setNo(boardNo); // servlet에서 redirect시 사용
-//			System.out.println("boardNo = " + boardNo);
-//			
-//			// attachment 테이블 추가
-//			List<Attachment> attachments = board.getAttachments();
-//			if (attachments != null && !attachments.isEmpty()) {
-//				for(Attachment attach : attachments) {
-//					attach.setBoardNo(boardNo); // fk컬럼값 세팅
-//					result = boardDao.insertAttachment(conn, attach);					
-//				}
-//			}
+			// 발급된 board.no를 조회
+			int boardNo = faqDao.getLastBoardNo(conn);
+			faq.setBoardNo(boardNo); // servlet에서 redirect시 사용
+			System.out.println("boardNo = " + boardNo);
 			
+			// attachment 테이블 추가
+			List<Attachment> attachments = faq.getAttachments();
+			if (attachments != null && !attachments.isEmpty()) {
+				for(Attachment attach : attachments) {
+					attach.setBoardNo(boardNo); // fk컬럼값 세팅
+					result = faqDao.insertAttachment(conn, attach);					
+				}
+			}
 			commit(conn);
 		} catch (Exception e) {
 			rollback(conn);
@@ -51,12 +50,12 @@ public class FaqService {
 			result = faqDao.faqUpdate(conn, faq);
 			
 			// attachment 테이블 추가
-//			List<Attachment> attachments = board.getAttachments();
-//			if (attachments != null && !attachments.isEmpty()) {
-//				for(Attachment attach : attachments) {
-//					result = boardDao.insertAttachment(conn, attach);					
-//				}
-//			}
+			List<Attachment> attachments = faq.getAttachments();
+			if (attachments != null && !attachments.isEmpty()) {
+				for(Attachment attach : attachments) {
+					result = faqDao.insertAttachment(conn, attach);					
+				}
+			}
 			
 			commit(conn);
 		} catch (Exception e) {
@@ -93,10 +92,22 @@ public class FaqService {
 	public FaqBoard findByBoardNo(int boardNo) {
 		Connection conn = getConnection();
 		FaqBoard faq = faqDao.findByBoardNo(conn, boardNo);
-//		List<Attachment> faqAttachments = FaqDao.findAttachmentByBoardNo(conn, boardNo);
-//		board.setAttachments(attachments);
+		List<Attachment> faqAttachments = faqDao.findAttachmentByBoardNo(conn, boardNo);
+		faq.setAttachments(faqAttachments);
 		close(conn);
 		return faq;
+	}
+
+	public Attachment findAttachmentById(int attachNo) {
+		Connection conn = getConnection();
+		Attachment attach = faqDao.findAttachmentById(conn, attachNo);
+		close(conn);
+		return attach;
+	}
+
+	public int deleteAttachment(int attachNo) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

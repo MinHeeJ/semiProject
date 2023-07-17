@@ -42,7 +42,7 @@ public class FaqCreateServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 업로드파일 저장경로 C:\\Workspaces\\web_server_workspace\\hello-mvc\\src\\main\\webapp\\upload\\board
 		ServletContext application = getServletContext();
-		String saveDirectory = application.getRealPath("/upload/board");
+		String saveDirectory = application.getRealPath("/upload/faq");
 		System.out.println("saveDirectory = " + saveDirectory);
 		// 파일하나당 최대크기 10MB 
 		int maxPostSize = 1024 * 1024 * 10; 
@@ -65,17 +65,18 @@ public class FaqCreateServlet extends HttpServlet {
 		faq.setContent(content);
 		
 		// Attachment 작성
-//		Enumeration<String> filenames = multiReq.getFileNames(); // upFile1, upFile2
-//		while(filenames.hasMoreElements()) {
-//			String name = filenames.nextElement(); // input:file[name]
-//			File upFile = multiReq.getFile(name);
-//			if(upFile != null) {
-//				Attachment attach = new Attachment();
-//				attach.setOriginalFilename(multiReq.getOriginalFileName(name));
-//				attach.setRenamedFilename(multiReq.getFilesystemName(name)); // renamedFilename
-//				faq.addAttachment(attach);
-//			}
-//		}
+		Enumeration<String> filenames = multiReq.getFileNames(); // upFile1, upFile2
+		while(filenames.hasMoreElements()) {
+			String name = filenames.nextElement(); // input:file[name]
+			File upFile = multiReq.getFile(name);
+			if(upFile != null) {
+				Attachment attach = new Attachment();
+				attach.setOriginalFilename(multiReq.getOriginalFileName(name));
+				attach.setRenamedFilename(multiReq.getFilesystemName(name)); // renamedFilename
+				faq.addAttachment(attach);
+				System.out.println("faq.attachment = " + faq.getAttachments());
+			}
+		}
 		
 		int result = faqService.insertFaq(faq);
 		

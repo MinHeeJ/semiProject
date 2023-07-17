@@ -19,18 +19,26 @@
 		<% for(FaqBoard faq : faqs){ %>
 			<div class="title"><%= faq.getTitle() %></div>
 			<p class="content"><%= faq.getContent() %></p>
+			<p><%= faq.getBoardNo() %></p>
 			<% if(admin){ %>
-				<input type="button" value="수정하기" onclick="updateFaqBoard()">
-				<input type="button" value="삭제하기" onclick="deleteFaqBoard()">
-			<form action="<%= request.getContextPath() %>/board/faqDelete" name="faqDeleteFrm" method="POST">
-				<input type="hidden" name="boardNo" value="<%= faq.getBoardNo() %>" />
-			</form>
-			<form action="<%= request.getContextPath() %>/board/faqUpdate" name="faqUpdateFrm" method="POST">
-				<input type="hidden" name="boardNo" value="<%= faq.getBoardNo() %>" />
-			</form>
+				<button class="btn-update" value="<%= faq.getBoardNo() %>">수정</button>
+				<button class="btn-delete" value="<%= faq.getBoardNo() %>">삭제</button>
 			<% } %>
 		<% } %>
 	<% } %>
+	<form 
+		action="<%= request.getContextPath() %>/board/faqDelete" 
+		name="FaqDelFrm"
+		method="POST">
+		<input type="hidden" name="boardNo" />
+	</form>
+		<form 
+		action="<%= request.getContextPath() %>/board/faqUpdate" 
+		name="FaqUpFrm"
+		method=""
+		enctype="multipart/form-data">
+		<input type="hidden" name="boardNo" />
+	</form>
 </section>
 
 <script>
@@ -38,15 +46,30 @@
 		$(e.target).next().slideToggle().siblings('p.content').slideUp();
 	});
 
-	const deleteFaqBoard = () => {
-		if(confirm("정말 이 게시글을 삭제하시겠습니까?"))
-			document.forms["faqDeleteFrm"].submit();
-	};
+	document.querySelectorAll(".btn-delete").forEach((button) => {
+		button.onclick = (e) => {
+			if(confirm("해당 글을 삭제하시겠습니까?")){
+				const frm = FaqDelFrm;
+				const {value} = e.target;
+				console.log(value);
+				frm.boardNo.value = value;
+				frm.submit();
+			}
+		}
+	});
 	
-	const updateFaqBoard = () => {
-			document.forms["faqUpdateFrm"].submit();
-	}
-
+	document.querySelectorAll(".btn-update").forEach((button) => {
+		button.onclick = (e) => {
+			if(confirm("해당 글을 수정하시겠습니까?")){
+				const frm = document.FaqUpFrm;
+				const {value} = e.target;
+				console.log(value);
+				frm.boardNo.value = value;
+				frm.submit();
+			}
+		}
+	});
+	
 </script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
