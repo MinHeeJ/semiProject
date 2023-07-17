@@ -5,17 +5,24 @@
         font-size: 40px;
         text-align: center;
         font-weight: 600;
-        padding: 50px;
+        padding: 100px;
+        color: red;
+   }
+   h1{
+   font-size: 40px;
+    text-align: center;
+     font-weight: 200;
+      padding-bottom: 80px;
    }
    
-   /*전체 리뷰콘테이너 ( 리뷰게시판 빼고 )*/
+   /*주문상품+게시글작성테이블*/
    #review-container {
-       margin : 160px;
-       border: 2px solid #086528;
+   		margin : auto;
+       text-align: center;
        border-radius: 20px;
        border-collapse: collapse;
-       width: 60%;
-       padding: 50px;
+       width: 70%;
+       padding : 50px;
        background-color:rgb(217, 250, 217); 
         
      }
@@ -31,17 +38,17 @@
    #tbl-order-review{
        margin : auto;
        color : green;
-       
+      
        border-radius: 10px;
        border-collapse: collapse;
        width: 80%;
        padding: 100px;
        text-align: center;
        background-color: white;
-        box-shadow: 2px 2px 2px 2px;
+        box-shadow: 2px 2px 4px 1px grey;
    }
    
-   /*주문내역테이블*/
+   /*게시글작성테이블*/
    #tbl-board-view{
        margin : auto;
       color : green;
@@ -52,26 +59,31 @@
        text-align: center;
        background-color: white;
        border-radius: 10px;
+       box-shadow: 1px 1px 4px 1px grey;
    }
    
    /*리뷰게시판테이블*/
    #photo-review-container{
-       border: 3px solid red;
-        width: 70%;
-        text-align: left;
-        margin : auto;
-       
+     
+     
+       text-align: left;
+       margin : auto;
+       width: 120%;
+       background-color:rgb(217, 250, 217); 
+       border-radius: 10px;
    }
    
-	#photo{
+	.photo{
        margin-right: 30px;
-  	   width: 30px;
+  	  
        margin:10px auto;
-       width : 100px;
-       height : 100px;
+       width : 200px;
+       height : 200px;
        background-color:#fff;
        box-shadow: 2px 2px 3px rgba(135, 139, 133, 0.4);
        transition: 0.5s;
+       border : 1px solid red;
+ 
    }
    
     #btn-more-container{
@@ -79,4 +91,18 @@
 	 
    }
    
- 
+   
+   .content-container{
+   margin: 30px;
+   border : 1px solid black;
+    background-color:#fff;
+    text-align: center;
+     border-radius: 12px;
+     width: 70%;
+       display: inline-block;
+   }
+
+ .info{
+  margin: 30px;
+  border : 1px solid red;
+ }

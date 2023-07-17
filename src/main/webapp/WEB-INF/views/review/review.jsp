@@ -19,21 +19,15 @@
 <script src="<%= request.getContextPath() %>/js/jquery-3.7.0.js"></script>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/review.css" />
-<section id="review-container">
 	<h2>리뷰작성</h2>
+<section id="review-container">
 	<form name="reviewOrderListFrm"
 		action="<%=request.getContextPath() %>/review/reviewOrderList"
 		method="POST" enctype="multipart/form-data">
 
 		<table id="tbl-order-review">
-			<thead>
-				<tr>
-
-					<th>주문상품</th>
-
-				</tr>
-			</thead>
-
+			<h1>주문상품</h1>
+			
 			<tbody>
 				<% 	if(orders == null || orders.isEmpty()) { %>
 				<tr>
@@ -262,18 +256,19 @@ const getPage = (cpage) => {
 				    const { renamedFilename } = attachment;
 				    renamedFile = renamedFilename;
 
-				    imgElements += `<img src="<%= request.getContextPath()%>/upload/review/\${renamedFile}" id="photo">`;
+				    imgElements += `<img src="<%= request.getContextPath()%>/upload/review/\${renamedFile}" class="photo">`;
 				  }
 				
 				
 				container.innerHTML += imgElements + `
-					<p class="info">
-							<span class ="writer">\${writer}</span>
-							<span class ="photoDate">\${regDate}</span>
-					</p>
-					<p class ="product">\${product}</p>
-					<p class ="caption">\${content}</p>
-				
+					<div class = "content-container">
+						<div class="info">
+							<p class ="writer">✍ 작성자\${writer}</p>
+							<p class ="photoDate">\${regDate}</p>
+						</div>
+						<p class ="product">\${product}</p>
+						<p class ="caption">\${content}</p>
+					
 					<tr>			
 					<th colspan="2" id="th">
 						<div>
@@ -287,6 +282,7 @@ const getPage = (cpage) => {
 							<input type="button" value="삭제하기" onclick="deleteReview('\${reviewNo}');">
 					</th>
 				</tr>
+				</div>
 				`;
 			})
 		},
