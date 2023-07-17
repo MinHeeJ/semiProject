@@ -3,8 +3,10 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin.css" />
 <script src="<%= request.getContextPath() %>/js/jquery-3.7.0.js"></script>
-<section id="memberList-container">
-	<h1>회원 전체 조회</h1>
+
+<section id="memberListSection">
+	<div class="wrapper">
+		<h1>회원 전체 조회</h1>
 	
     <div id="memberList-wrapper">
     <form id="memberList">
@@ -22,10 +24,10 @@
             </thead>
 			<tbody></tbody>
 		</table>
-		<button id="deleteMember">삭제</button>
+		<button id="delete">삭제</button>
     </form>
 	</div>
-	
+	</div>
 	<!-- 회원권한 수정 -->
 	<form
 		name="memberRoleUpdateFrm"

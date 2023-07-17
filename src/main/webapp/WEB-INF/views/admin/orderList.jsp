@@ -4,42 +4,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin.css" />
-<style>
-h1 {
-	font-size: 50px;
-	text-align: center;
-}
-table#tbl-orderList {
-	width: 990px;
-	margin: 0 auto;
-	border: 1px solid black;
-	border-collapse: collapse;
-	text-align: center;
-}
-table#tbl-orderList th {
-	width: 150px; 
-	border: 1px solid; 
-	padding: 10px; 
-	text-align: center; 
-}
-table#tbl-orderList td {
-	border: 1px solid; 
-	padding: 10px; 
-	text-align: center;
-}
-</style>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/orderList.css" />
 <%
 	List<Order> orders = (List<Order>) request.getAttribute("orders");
 %>
-<section>
-	<h1>주문내역 전체조회(관리자용)</h1>
-	<div>
-		<input type="checkbox" value="주문접수완료" checked>
-		<label for="state">주문접수완료</label>
-		<input type="checkbox" value="주문처리완료" checked>
-		<label for="state">주문처리완료</label>
-	</div>
+<section id="orderListSection">
+	<div class="wrapper">
+		<h1>주문내역 전체조회(관리자용)</h1>
+		<div class="checkbox">
+			<input type="checkbox" value="주문접수완료" checked>
+			<label for="state">주문접수완료</label>
+			<input type="checkbox" value="주문처리완료" checked>
+			<label for="state">주문처리완료</label>
+		</div>
     <div>
         <table id="tbl-orderList">
             <thead>
@@ -82,6 +59,7 @@ table#tbl-orderList td {
             %>
             </tbody>
           </table>
+    </div>
     </div>
 </section>
 <!-- 처리상태 수정 -->
