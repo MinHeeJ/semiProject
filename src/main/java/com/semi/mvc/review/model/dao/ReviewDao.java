@@ -296,9 +296,9 @@ public class ReviewDao {
 		return countLike;
 	}
 
-	public int LikeCount(Connection conn, String memberId, int reviewNo) {
+	public int likeCount(Connection conn, String memberId, int reviewNo) {
 		int likeCount = 0;
-		String sql = prop.getProperty("LikeCount");
+		String sql = prop.getProperty("likeCount");
 		// findLikeCount = select like_count from like_tbl where member_id = ? and review_no = ?
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, memberId);
