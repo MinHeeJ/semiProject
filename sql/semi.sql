@@ -180,7 +180,10 @@ create table faq_board (
     constraints pk_faq_board_board_no primary key(board_no),
     constraints fk_faq_board_writer foreign key(writer) references member(member_id) on delete cascade
 );
+select * from faq_board;
 --drop table faq_board;
+create sequence seq_faq_no;
+--drop sequence seq_faq_no;
 
 create table review (
     review_no number,

@@ -1,6 +1,7 @@
 package com.semi.mvc.board.model.service;
 
 import static com.semi.mvc.common.JdbcTemplate.*;
+
 import java.sql.Connection;
 import java.util.List;
 
@@ -14,13 +15,27 @@ public class FaqService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	// Attachment
+//			int boardNo = boardDao.getLastBoardNo(conn);
+//			board.setNo(boardNo); // servlet에서 redirect시 사용
+//			System.out.println("boardNo = " + boardNo);
+//			
+//			// attachment 테이블 추가
+//			List<Attachment> attachments = board.getAttachments();
+//			if (attachments != null && !attachments.isEmpty()) {
+//				for(Attachment attach : attachments) {
+//					attach.setBoardNo(boardNo); // fk컬럼값 세팅
+//					result = boardDao.insertAttachment(conn, attach);					
+//				}
+//			}
 	public int insertFaq(FaqBoard faq) {
 		int result = 0;
 		Connection conn = getConnection();
 		try {
 			result = faqDao.insertFaq(conn, faq);
 			
-			// Attachment
+//			// 발급된 board.no를 조회
 //			int boardNo = boardDao.getLastBoardNo(conn);
 //			board.setNo(boardNo); // servlet에서 redirect시 사용
 //			System.out.println("boardNo = " + boardNo);
@@ -81,6 +96,13 @@ public class FaqService {
 			close(conn);
 		}
 		return 0;
+	}
+
+	public List<FaqBoard> findFaqBoard() {
+		Connection conn = getConnection();
+		List<FaqBoard> faqs = faqDao.findFaqBoard(conn);
+		close(conn);
+		return faqs;
 	}
 
 }
