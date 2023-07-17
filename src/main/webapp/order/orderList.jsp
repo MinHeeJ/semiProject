@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin.css" />
 <body>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/orderList.css" />
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/list.css" />
 <style>
 .btncalendar{display:inline-block;width:31px;height:20px;background:url("<%= request.getContextPath() %>/images/order/calendar.png") center center no-repeat; background-size: 31px 20px; text-indent:-999em}
 </style>
@@ -236,29 +236,18 @@
     			const {result, orders} = responseData;
     			console.log(orders);
     			
-    			const thead = document.querySelector(".wrapper table thead");
     			const tbody = document.querySelector(".wrapper table tbody");
-    			
     			tbody.innerHTML = "";
     			
     			orders.forEach((temp) => {
     				
-    				thead.innerHTML = `
-    					<tr>
-	    	              	<th>주문번호</th>
-	    	                <th>상품</th>
-	    	                <th>수량</th>
-	    	                <th>주문일자</th>
-	    	                <th>금액</th>
-    	              	</tr>
-    				`;
                     tbody.innerHTML += `
                         <tr>
                             <td>\${temp.orderNo}</td>
                             <td>\${temp.product}</td>
                             <td>\${temp.count}</td>
                             <td>\${temp.orderDate}</td>
-                            <td>\${temp.price}</td>
+                            <td>\${temp.price}원</td>
                         </tr> 
                    	 `;
                 });
