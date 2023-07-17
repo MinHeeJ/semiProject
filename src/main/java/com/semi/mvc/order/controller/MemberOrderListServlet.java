@@ -10,24 +10,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-import com.oreilly.servlet.multipart.FileRenamePolicy;
-import com.semi.mvc.member.model.vo.Member;
 import com.semi.mvc.order.model.service.OrderService;
 import com.semi.mvc.order.model.vo.Order;
 
 /**
- * Servlet implementation class OrderListServlet
+ * Servlet implementation class MemberOrderListServlet
  */
-@WebServlet("/order/orderList")
-public class OrderListServlet extends HttpServlet {
+@WebServlet("/member/orderList")
+public class MemberOrderListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final OrderService orderService = new OrderService();
-	// 주문내역확인 누르면 나오는 서블릿
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -41,13 +36,17 @@ public class OrderListServlet extends HttpServlet {
 		
 		// 2. 업무로직
 		List<Order> orders = orderService.findById(memberId);
-		System.out.println("orders : " + orders);
+		System.out.println("orders111 : " + orders);
 		
-		request.setAttribute("orders", orders);
+		// 헤더
+		response.setContentType("application/json; charset=utf-8");
 		
-		// 3. 응답처리
-		request.getRequestDispatcher("/WEB-INF/views/order/orderList.jsp")
-			.forward(request, response);
+		// 바디
+		Map<String, Object> map = new HashMap<>();
+		map.put("result", "성공");
+		map.put("orders", orders);
+		System.out.println(map);
+		new Gson().toJson(map, response.getWriter());
 	}
 
 }

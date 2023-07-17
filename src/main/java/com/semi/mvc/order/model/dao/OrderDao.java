@@ -81,7 +81,7 @@ public class OrderDao {
 		// where order_date between ? and ?
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, startDate);
-			pstmt.setString(2, endDate);
+			pstmt.setString(2, endDate+1);
 			
 			try (ResultSet rset = pstmt.executeQuery()) {
 				while(rset.next()) {
