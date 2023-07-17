@@ -278,7 +278,7 @@ const getPage = (cpage) => {
 		complete(){
 			document.querySelector("#cpage").innerHTML = cpage;
 			
-			if(cpage === <%= totalPage%>){
+			if(cpage === <%= totalPage%>|| cpage == 1){
 				const btn = document.querySelector("#btn-more");
 				btn.disabled = true;
 				btn.style.cursor = "not-allowed";
