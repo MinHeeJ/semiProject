@@ -11,10 +11,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.FileRenamePolicy;
 import com.semi.mvc.common.HelloMvcFileRenamePolicy;
+import com.semi.mvc.member.model.vo.Member;
 import com.semi.mvc.order.model.vo.Order;
 import com.semi.mvc.review.model.service.ReviewService;
 import com.semi.mvc.review.model.vo.AttachmentReview;
@@ -33,11 +35,9 @@ public class ReviewOrderListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 1. 사용자 입력값 처리
-//		HttpSession session = request.getSession();
-//		Member loginMember = (Member) session.getAttribute("loginMember");
-//		String memberId = loginMember.getMemberId();
-//		String memberId = request.getParameter("memberId");
-		String memberId = "honggd";
+		HttpSession session = request.getSession();
+		Member loginMember = (Member) session.getAttribute("loginMember");
+
 		
 		// 2. 업무로직
 		

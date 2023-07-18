@@ -53,7 +53,7 @@
 			<div class="account_wrapper">
 				<ul class="account_list">
 				    <li>
-				    	<a href="">로그인</a>
+				    	<a href="<%= request.getContextPath() %>/member/memberLogin">로그인</a>
 				    	<img src="<%= request.getContextPath() %>/images/main/login.png"/>
 				    </li>
 				    <li>
@@ -86,7 +86,7 @@
 	                <li><a href="<%= request.getContextPath() %>/admin/salesLookUp.jsp">매출조회</a></li>
 	                <li><a href="<%= request.getContextPath() %>/admin/orderList">전체주문내역</a></li>
 	                <li><a href="<%= request.getContextPath() %>/admin/memberList.jsp">전체회원조회</a></li>
-	                <li><a href="">로그아웃</a></li>
+	                <li><a href="<%= request.getContextPath() %>/member/logout">로그아웃</a></li>
 	            </ul>
 	        </div>
         </div>
