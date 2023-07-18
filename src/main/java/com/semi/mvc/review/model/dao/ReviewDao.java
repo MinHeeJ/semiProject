@@ -142,7 +142,7 @@ public class ReviewDao {
 		List<Order> orders = new ArrayList<>();
 		String sql = prop.getProperty("reviewOrderList");
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setString(1,memberId);
+			pstmt.setString(1, memberId);
 			System.out.println("memberId++++++++==" + memberId);
 			try (ResultSet rset = pstmt.executeQuery()) {
 				while(rset.next()) {

@@ -37,10 +37,14 @@ public class ReviewCreateServlet extends HttpServlet {
 		int limit = 5;
 		int totalPage = (int) Math.ceil((double) totalContent / limit); 
 		request.setAttribute("totalPage", totalPage);
+//		memberId
+		String memberId =reviewService.findbyId();
+		request.setAttribute("memberId", memberId);
 		
-		List<Order> orders = reviewService.reviewOrderList("memberId");
-		System.out.println("memberId++++++++==orders" + orders);
+//		List<Order> orders = reviewService.reviewOrderList("honggd");
+		List<Order> orders = reviewService.reviewOrderList(memberId);
 		request.setAttribute("orders", orders);
+		System.out.println("memberId++++++++==22" + orders);
 		
 		int cpage=1;
 		
@@ -53,9 +57,6 @@ public class ReviewCreateServlet extends HttpServlet {
 		
 		int start = (cpage - 1) * limit + 1; 
 		int end = cpage * limit;
-		
-		String memberId =reviewService.findbyId();
-		request.setAttribute("memberId", memberId);
 		
 		
 		
