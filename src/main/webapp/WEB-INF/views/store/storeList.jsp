@@ -41,9 +41,9 @@
 				<th>매장명</th>
 				<th>주소</th>
 				<th>연락처</th>
-				
+				 <%	if (admin) { %>
 				<th>매장삭제</th>
-			
+			 <%	}%>
 			</tr>
 		</thead>
 		
@@ -62,11 +62,11 @@
 					<td><%= store.getStoreName() %></td>
 					<td><%= store.getAddress() %></td> 
 					<td><%= store.getPhone() %></td> 
-					<td>
 			 <%	if (admin) { %>
+					<td>
 						<input class="button" type="button" onclick="deleteStore('<%=store.getStoreNo()%>');" value="매장삭제">
-					 <%} %>
 					</td> 
+					 <%} %>
 				</tr>
 				<% 		
 						}

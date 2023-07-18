@@ -14,11 +14,19 @@
 	String product = (String) request.getAttribute("product");
 	List<Review> reviews = (List<Review>)request.getAttribute("reviews");
 	String memberId = (String) request.getAttribute("memberId");
+	Review reviews1 = (Review) request.getAttribute("review");
 	
 %>
 <script src="<%= request.getContextPath() %>/js/jquery-3.7.0.js"></script>
+
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/review.css" />
+	
+<% boolean canEdit =loginMember != null 
+&& (loginMember.getMemberId().equals(reviews1.getWriter()) 
+		|| loginMember.getMemberRole() == MemberRole.A); %>	
+		
+		
 	<h2>✨리뷰작성✨</h2>
 <section id="review-container">
 	<form name="reviewOrderListFrm"

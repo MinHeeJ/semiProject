@@ -109,9 +109,7 @@ public class ReviewService {
 		for(int i = 0; i<reviews.size(); i++) {
 			int reviewNo = reviews.get(i).getReviewNo();
 			List<AttachmentReview> attachments = reviewDao.findAttachment(conn, reviewNo);
-			for(int j = 0 ; j < attachments.size() ; j++) {
-				System.out.println(attachments.get(j));
-			}
+			
 			reviews.get(i).setAttachments(attachments);
 		}
 		
