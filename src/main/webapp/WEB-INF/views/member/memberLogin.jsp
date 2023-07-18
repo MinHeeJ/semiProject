@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+
+
+
 <section id="login-container">
     <h2>로그인</h2>
     <form name="memberLoginFrm" action="${pageContext.request.contextPath}/member/memberLogin" method="POST">
@@ -38,4 +41,3 @@
         }
     }
 %>
-

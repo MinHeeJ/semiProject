@@ -17,8 +17,8 @@
 	<h2>회원 정보</h2>
 	<form 
 		name="memberUpdateFrm"
-		action="<%= request.getContextPath() %>/member/memberUpdate" 
-		method="post">
+		action="<%= request.getContextPath() %>/member/memberUpdate" method="post">
+    </form>
 		<table>
 			<tr>
 				<th>아이디<sup>*</sup></th>
@@ -58,20 +58,6 @@
 		</table>
         <input type="submit" value="정보수정"/>
 	</form>
-	</section>
-	
-	<section>
-	const deleteMember = () => {
-		if(confirm("정말 탈퇴하시겠습니까?"))
-		document.memberDelFrm.submit();
-	}
-
 </section>
 
-
-
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
-
-
-
-
