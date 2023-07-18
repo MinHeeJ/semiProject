@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/memberEnroll.css" />
 <section id="enroll-container">
-    <h2>회원 가입 정보 입력</h2>
+    <h2>킥킥! 건강합시다!</h2>
     <form 
         name="checkIdDuplicateFrm" 
         action="<%= request.getContextPath() %>/member/checkIdDuplicate">
