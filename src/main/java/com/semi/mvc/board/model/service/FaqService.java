@@ -98,7 +98,7 @@ public class FaqService {
 		return faq;
 	}
 
-	public Attachment findAttachmentById(int attachNo) {
+	public Attachment findAttachmentByBoardNo(int attachNo) {
 		Connection conn = getConnection();
 		Attachment attach = faqDao.findAttachmentById(conn, attachNo);
 		close(conn);
@@ -106,8 +106,18 @@ public class FaqService {
 	}
 
 	public int deleteAttachment(int attachNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		Connection conn = getConnection();
+		int result = 0;
+		try {
+			result = faqDao.deleteAttachment(conn, attachNo);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
 	}
 
 }

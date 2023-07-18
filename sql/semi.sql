@@ -57,31 +57,13 @@ create table member (
 );
 
 insert into member values ('admin', 1234, '관리자', '010-1234-5678', '서울시 역삼동', 'F', 'A');
-<<<<<<< HEAD
-
-insert into member values ('honggd', 1234, '홍지디', '010-1234-5678', '서울시 역삼동', 'M', 'U');
-
-=======
 insert into member values ('honggd', 1234, '홍지디', '010-1234-5678', '서울시 역삼동', 'M', default);
->>>>>>> branch 'master' of https://github.com/MinHeeJ/semiProject.git
 insert into member values ('qwerty', 1234, '쿼티', '010-1122-3344', '경기도 안산시', 'F', default);
-<<<<<<< HEAD
 
---delete from member where member_id = 'honggd';
-
-=======
->>>>>>> branch 'master' of https://github.com/MinHeeJ/semiProject.git
 select * from member;
-<<<<<<< HEAD
-
---alter table member modify member_role default 'U';
 
 --drop table member;
 
-
-=======
---drop table member;
->>>>>>> branch 'master' of https://github.com/MinHeeJ/semiProject.git
 
 create table category (
 
@@ -116,27 +98,13 @@ create table order_tbl (
     member_id varchar2(20),
 
 	order_date date default sysdate,
-<<<<<<< HEAD
-
-	state varchar(40) default '주문접수완료',
-
-=======
 	state varchar(50) default '주문접수완료',
->>>>>>> branch 'master' of https://github.com/MinHeeJ/semiProject.git
+
     constraints pk_order_no primary key(order_no),
-
     constraints fk_order_member_id foreign key(member_id) references member(member_id) on delete cascade,
-<<<<<<< HEAD
-
     constraints ck_order_state check(state in ('주문접수완료', '주문처리완료'))
-
-=======
-    constraints ck_order_state check(state in ('주문접수완료', '주문처리완료'))
->>>>>>> branch 'master' of https://github.com/MinHeeJ/semiProject.git
 );
 
---drop table order_tbl;
-<<<<<<< HEAD
 
 --alter table order_tbl modify state varchar2(50);
 
@@ -156,8 +124,7 @@ insert into order_tbl values(3, 'admin', '2023-06-11', default);
 
 --update order_tbl set state = '준비완료' where order_no = 2;
 
-=======
->>>>>>> branch 'master' of https://github.com/MinHeeJ/semiProject.git
+
 select * from order_tbl;
 create sequence seq_order_no;
 --drop sequence seq_order_no;
@@ -167,13 +134,12 @@ create sequence seq_order_no;
 create table cart_tbl (
 
     cart_no number,
-<<<<<<< HEAD
 
 	product	varchar2(100),
 
-=======
+
 	product	varchar2(1000),
->>>>>>> branch 'master' of https://github.com/MinHeeJ/semiProject.git
+
 	member_id varchar2(20),
 
 	count number default 1,
@@ -187,16 +153,7 @@ create table cart_tbl (
 );
 
 --drop table cart_tbl;
-<<<<<<< HEAD
 
-insert into cart_tbl values(1, '양상추 닭가슴살 콜라', 'honggd', 1, 5000);
-
-insert into cart_tbl values(2, '루꼴라 연어 콜라', 'honggd', 1, 7000);
-
-insert into cart_tbl values(4, '양파 고기 콜라', 'admin', 1, 4000);
-
-=======
->>>>>>> branch 'master' of https://github.com/MinHeeJ/semiProject.git
 select * from cart_tbl;
 create sequence seq_cart_no;
 --drop sequence seq_cart_no;
@@ -258,56 +215,21 @@ create table order_detail (
 	order_serial_no number,
 
     order_no number,
-<<<<<<< HEAD
-
-    cart_no number,
-
-    product varchar2(100),
-
-=======
     product varchar2(1000),
->>>>>>> branch 'master' of https://github.com/MinHeeJ/semiProject.git
     count number,
 
     price number,
-<<<<<<< HEAD
-
-    constraints pk_order_detail_order_serial_no primary key(order_serial_no),
-
-    constraints fk_order_detail_order_no foreign key(order_no) references order_tbl(order_no) on delete cascade,
-
-    constraints fk_order_detail_cart_no_product foreign key(cart_no, product) references cart_tbl(cart_no, product) on delete cascade
-
-=======
     constraints pk_order_detail_order_serial_no primary key(order_serial_no)
->>>>>>> branch 'master' of https://github.com/MinHeeJ/semiProject.git
 );
 
 --drop table order_detail;
-<<<<<<< HEAD
-
-insert into order_detail values(1, 1, 1, '양상추 닭가슴살 콜라', 1, 5000);
-
-insert into order_detail values(2, 1, 2, '루꼴라 연어 콜라', 1, 7000);
-
-insert into order_detail values(4, 3, 4, '양파 고기 콜라', 1, 4000);
-
-=======
->>>>>>> branch 'master' of https://github.com/MinHeeJ/semiProject.git
 select * from order_detail;
 create sequence seq_order_serial_no;
 --drop sequence seq_order_serial_no;
 --select * from (select * from order_tbl t left join order_detail d on t.order_no = d.order_no) where order_date between '2023-07-01' and '2023-07-16' order by order_date;
 --select * from order_detail d join order_tbl t on d.order_no = t.order_no;
 
-<<<<<<< HEAD
 
-
---select * from (select * from order_tbl t left join order_detail d on t.order_no = d.order_no) where order_date between '2023-07-01' and '2023-07-14' order by order_date;
-
-
-
-=======
 create table store (
 	store_no number,
 	store_name varchar2(30) not null,
@@ -322,7 +244,6 @@ create sequence seq_store_no;
 insert into store values(seq_store_no.nextval, '킥킥샐러드 역삼역점', '서울 강남구 강남대로94길 66 지상1층', '02-123-4567');
 insert into store values(seq_store_no.nextval, '킥킥샐러드 강남역점', '서울 강남구 강남대로84길 23 1층', '02-111-2222');
 select * from store;
->>>>>>> branch 'master' of https://github.com/MinHeeJ/semiProject.git
 
 create table ingredient (
 	ingredient_no number,
@@ -456,6 +377,7 @@ create table attachment_faq(
 );
 create sequence seq_attachment_faq_no;
 select * from attachment_faq;
+select seq_attachment_faq_no.currval from dual;
 --drop table attachment_faq;
 --drop sequence seq_attachment_faq_no;
 
@@ -472,11 +394,12 @@ create sequence seq_attachment_board_no;
 select * from attachment_board;
 --drop table attachment_board;
 --drop sequence seq_attachment_board_no;
-=======
+
 --=============================
 -- semi계정 생성 @관리자
 --=============================
-alter session set "_oracle_script" = true;
+alter session set "_oracle_script" = true;<<<<<<< seonmo
+=======
 
 create user semi
 identified by semi
@@ -726,44 +649,26 @@ create table faq_board (
 
 
 create table review (
-<<<<<<< HEAD
 
-	review_no number,
-
-	writer varchar2(20),
-
-	title varchar2(200)	not null,
-
-	content	varchar2(1000) not null,
-
-	reg_date date default sysdate,
-
-=======
     review_no number,
     order_serial_no number,
     writer varchar2(20),
     title varchar2(200)    not null,
     content    varchar2(1000) not null,
     reg_date date default sysdate,
->>>>>>> branch 'master' of https://github.com/MinHeeJ/semiProject.git
+
     constraints pk_review_no primary key(review_no),
-<<<<<<< HEAD
 
-    constraints fk_review_writer foreign key(writer) references member(member_id) on delete cascade
-
-=======
     constraints fk_review_writer foreign key(writer) references member(member_id) on delete cascade,
     constraints fk_order_serial_no foreign key(order_serial_no) references order_detail(order_serial_no) on delete cascade
->>>>>>> branch 'master' of https://github.com/MinHeeJ/semiProject.git
-);
-<<<<<<< HEAD
 
-=======
+);
+
 alter table review modify title null;
 alter table review modify content null;
 create sequence seq_review_no;
 --drop sequence seq_review_no;
->>>>>>> branch 'master' of https://github.com/MinHeeJ/semiProject.git
+
 --drop table review;
 select * from review;
 
@@ -866,20 +771,14 @@ create table selected_option (
 --drop table selected_option;
 
 create sequence seq_option_no;
-<<<<<<< HEAD
 
--- drop sequence seq_option_no;
-
-=======
 --drop sequence seq_option_no;
->>>>>>> branch 'master' of https://github.com/MinHeeJ/semiProject.git
 select * from selected_option;
 
 -- delete from selected_option;
 
-<<<<<<< HEAD
 select * from ingredient;
-=======
+
 
 
 
@@ -962,5 +861,5 @@ create table attachment_board (
 );
 
 create sequence seq_attachment_board_no;
->>>>>>> branch 'master' of https://github.com/MinHeeJ/semiProject.git
+
 

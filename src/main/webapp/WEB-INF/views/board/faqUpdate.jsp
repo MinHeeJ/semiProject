@@ -7,8 +7,8 @@
 	FaqBoard faq = (FaqBoard) request.getAttribute("faq");
 	List<Attachment> attachments = faq.getAttachments();
 %>
-<section class="faqCreateContainer">
-	<form name="faqCreateFrm" action="<%=request.getContextPath() %>/board/faqUpdate" method="post" enctype="multipart/form-data">
+<section class="faqUpdateContainer">
+	<form name="faqUpdateFrm" action="<%= request.getContextPath() %>/board/faqUpdate" method="POST" enctype="multipart/form-data">
 		<input type="hidden" name="boardNo" value="<%= faq.getBoardNo() %>" />
 		<table id="faqUpdateTable">
 		<tr>
@@ -42,7 +42,7 @@
 	</form>
 </section>
 <script>
-	document.faqCreateFrm.onsubmit = (e) => {
+	document.faqUpdateFrm.onsubmit = (e) => {
 		const frm = e.target;
 		const title = e.target.title;
 		

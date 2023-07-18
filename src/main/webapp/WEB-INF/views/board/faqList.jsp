@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.semi.mvc.board.model.vo.FaqBoard" %>
+<%@ page import="com.semi.mvc.board.model.vo.Attachment" %>
 <%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="java.util.List"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/faq.css" />
 <%
 	List<FaqBoard> faqs = (List<FaqBoard>) request.getAttribute("faqs");
+	
 %>
 <% boolean admin = loginMember != null && (loginMember.getMemberRole() == MemberRole.A); %>
 <section class="faqContainer">
@@ -18,8 +20,17 @@
 	<% if(faqs != null) { %>
 		<% for(FaqBoard faq : faqs){ %>
 			<div class="title"><%= faq.getTitle() %></div>
-			<p class="content"><%= faq.getContent() %></p>
-			<p><%= faq.getBoardNo() %></p>
+			<% if(faq.getAttachments() != null && !faq.getAttachments().isEmpty()) { %>
+			<% List<Attachment> attachs = faq.getAttachments(); %>
+				<div class="content">
+					<% for(Attachment attach : attachs){ %>
+						<img src="<%= request.getContextPath() %>/upload/faq/<%= attach.getRenamedFilename() %>">
+					<% } %>
+				<p><%= faq.getContent() %></p>
+				</div>
+			<% }else{ %>
+				<p class="content"><%= faq.getContent() %></p>
+			<% } %>
 			<% if(admin){ %>
 				<button class="btn-update" value="<%= faq.getBoardNo() %>">수정</button>
 				<button class="btn-delete" value="<%= faq.getBoardNo() %>">삭제</button>
@@ -35,7 +46,7 @@
 		<form 
 		action="<%= request.getContextPath() %>/board/faqUpdate" 
 		name="FaqUpFrm"
-		method=""
+		method="GET"
 		enctype="multipart/form-data">
 		<input type="hidden" name="boardNo" />
 	</form>
@@ -43,7 +54,7 @@
 
 <script>
 	$('div.title').click((e) => {
-		$(e.target).next().slideToggle().siblings('p.content').slideUp();
+		$(e.target).next().slideToggle().siblings('.content').slideUp();
 	});
 
 	document.querySelectorAll(".btn-delete").forEach((button) => {
