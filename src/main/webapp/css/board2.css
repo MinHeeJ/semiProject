@@ -37,7 +37,10 @@ table#tbl-board-view td {
 	padding: 5px 0 5px 15px; 
 	text-align:left;
 }
-table#tbl-board-view img {width: 16px;}
+table#tbl-board-view img {
+	width: 200px;
+  	height: auto;
+}
 table#tbl-board-view input[type=file] {margin: 3px 0;}
 
 /*게시글 수정하기*/
