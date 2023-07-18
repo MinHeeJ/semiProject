@@ -27,7 +27,7 @@ import com.semi.mvc.order.model.vo.Order;
 public class OrderListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final OrderService orderService = new OrderService();
-
+	// 주문내역확인 누르면 나오는 서블릿
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -36,10 +36,12 @@ public class OrderListServlet extends HttpServlet {
 //		HttpSession session = request.getSession();
 //		Member loginMember = (Member) session.getAttribute("loginMember");
 //		String memberId = loginMember.getMemberId();
-		String memberId = request.getParameter("memberId");
+//		String memberId = multiReq.getParameter("memberId");
+		String memberId = "honggd";
 		
 		// 2. 업무로직
 		List<Order> orders = orderService.findById(memberId);
+		System.out.println("orders : " + orders);
 		
 		request.setAttribute("orders", orders);
 		

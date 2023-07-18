@@ -14,7 +14,7 @@
 			<tr>
 				<th>매장명<sup>*</sup></th>
 				<td>
-					<input type="text" placeholder="○○점의 ○○만 입력해주세요" name="storeName" id="_storeName" required>
+					<input type="text" placeholder="지점명만 입력해주세요." name="storeName" id="_storeName" required>
 					<input type="button" value="중복검사" onclick="checkNameDuplicate();"/>
 					<input type="hidden" id="nameValid" value="0"/>
 					<%-- id검사여부 확인용: 0-유효하지않음, 1-유효한 아이디 --%>

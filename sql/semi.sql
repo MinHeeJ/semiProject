@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 --=============================
 -- semi계정 생성 @관리자
 --=============================
@@ -609,3 +608,4 @@ create table attachment_board (
 );
 
 create sequence seq_attachment_board_no;
+

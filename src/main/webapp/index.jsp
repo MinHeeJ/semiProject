@@ -5,10 +5,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <script src="<%=request.getContextPath()%>/js/jquery-3.7.0.js"></script>
-<style>
-.polaroid {border: 2px solid black; padding: 20px; margine: 1% 0;}
-.polaroid img{width: 300px; }
-</style>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/index.css" />
 
 
         <!-- 로그인 전 -->
@@ -43,11 +40,12 @@
 	
 
     <div class="swiper slide_wrapper">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide"></div>
-            <div class="swiper-slide"></div>
-            <div class="swiper-slide"></div>
+       	<div class="swiper-wrapper">
+            <div class="swiper-slide" style="background-image: url('<%= request.getContextPath() %>/images/index/banner1.jpg');"></div>
+            <div class="swiper-slide" style="background-image: url('<%= request.getContextPath() %>/images/index/banner2.jpg');"></div>
+            <div class="swiper-slide" style="background-image: url('<%= request.getContextPath() %>/images/index/banner3.jpg');"></div>
         </div>
+       
         <div class="slide_pagination">
             <div class="slide_prev">
                 <
@@ -66,12 +64,12 @@
     <!-- 로그인 전 -->
     <div class="recommend_contents">
         <div id="balloon">
-            <img src="<%= request.getContextPath() %>/images/balloon.png" alt="balloon"/>
+            <img src="<%= request.getContextPath() %>/images/index/balloon.png" id="choiceBallon"/>
             <span>고르기 힘들다면?</span>
         </div>
-
-        <h1>추천 조합</h1>
-        
+		<br>
+        <h1 id="recommend">리뷰 베스트</h1>
+        <br>
         <div id="reviewBestPrint">
         	
         </div>
@@ -124,8 +122,10 @@
             </div>
 		</div>
 
+                
+	</div>
 		
-		<script>
+	<script>
 		
 		document.addEventListener("DOMContentLoaded", function(){
 
@@ -191,7 +191,7 @@
 	        success(responseData){
 	            
 	        	const container = document.querySelector("#reviewBestPrint");
-				
+				let rank = 1;
 				responseData.forEach((review)=>{
 					const {reviewNo,writer, content, regDate, product, attachments} = review;
 					let renamedFile = "";
@@ -202,15 +202,21 @@
 		
 					container.innerHTML += `
 						<div class="polaroid">
-						<p>구매한 조합 : \${product}</p>
-						<img src ="<%= request.getContextPath()%>/upload/review/\${renamedFile}">
-							<p class="info">
-								<span class ="writer">\${writer}</span>
-								<span class ="photoDate">\${regDate}</span>
-							</p>
-						<p class ="caption">\${content}</p>
+							<div class="textArea">
+								<p id="textAreaTitle">🧡 좋아요 \${rank}위 🧡</p><br>
+								<p class="reviewInfo">\${product}</p><br>
+								<p>
+									<span class ="writer">작성자 : \${writer}</span><br><br>
+									<span class ="photoDate">작성일 : \${regDate}</span><br><br>
+								</p>
+								<p class ="caption">내 &nbsp&nbsp&nbsp용 : \${content}</p>
+							</div>
+							<div class="imageArea" style="background-image: url('<%= request.getContextPath()%>/upload/review/\${renamedFile}')";>
+								
+							</div>
 						</div>
 					`;
+					rank++;
 				})
 	        	
 	        },

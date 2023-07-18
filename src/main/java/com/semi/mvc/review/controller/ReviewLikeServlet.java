@@ -38,7 +38,7 @@ public class ReviewLikeServlet extends HttpServlet {
 		System.out.println("reviewNo = " + reviewNo);
 		
 		// 2. 업무로직
-		int likeCount = reviewService.LikeCount(memberId, reviewNo);
+		int likeCount = reviewService.likeCount(memberId, reviewNo);
 		boolean isLike = reviewService.isLike(memberId, reviewNo);
 		
 		// 3. 응답처리

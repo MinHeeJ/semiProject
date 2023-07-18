@@ -1,0 +1,25 @@
+@CHARSET "UTF-8";
+@font-face {font-family: 'NanumSquareNeo-Variable'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');font-weight: normal;font-style: normal;}
+
+body { font-family: 'NanumSquareNeo-Variable'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');font-weight: normal;font-style: normal; width: 1024px; margin: 0 auto; text-align: center; }
+.title-wrapper { font-size: 60px; font-weight: bolder; margin-top: 100px; }
+.introduce-wrapper { margin-top: 150px; }
+.introduce-wrapper span { font-size: 30px; }
+.introduce-wrapper img { width: 300px; margin-top: 45px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); border-radius: 30px; }
+#span1 { font-size: 40px; font-weight: bolder; }
+#span2 { font-size: 40px; font-weight: bolder; color: green; }
+#span3 { display: inline-block; margin-top: 45px; }
+#span4 { cursor: pointer; }
+#span5 { font-weight: bolder; color: orange; }
+.promise-wrapper { display: flex; justify-content: center; align-items: center; margin-top: 100px; }
+.promise-wrapper #span1 { font-weight: bolder; font-size: 30px; }
+#img1 { width: 290px; margin-right: 45px; display: inline-block; border-radius: 10px; }
+#img2 { width: 50px; }
+#img3 { width: 290px; margin-left: 45px; display: inline-block; border-radius: 10px; }
+#div1 { width: 500px; margin-top: 20px; }
+
+#howToUse-container { width: 1000px; margin: 10% 0; text-align:center}
+#howToUse-container div {width: 45%; display: inline-block; margin: 2%;}
+.howToUse {border: 2px solid black; }
+.howToUse img{width: 100%;} 
+.howToUse p {font-family: 'NanumSquareNeo-Variable'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');font-weight: normal;font-style: normal; font-size : 20px; margin: 3% 0;}
