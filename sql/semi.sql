@@ -597,6 +597,8 @@ create table attachment_faq (
 
 create sequence seq_attachment_faq_no;
 
+select * from attachment_faq;
+
 create table attachment_board (
     no number, 
     review_no number not null,
