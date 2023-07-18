@@ -85,7 +85,6 @@ public class Member {
 	public String toString() {
 		return "Member [memberId=" + memberId + ", password=" + password + ", name=" + name + ", phone=" + phone
 				+ ", address=" + address + ", gender=" + gender + ", memberRole=" + memberRole + "]";
-	
 	}
 	
 }

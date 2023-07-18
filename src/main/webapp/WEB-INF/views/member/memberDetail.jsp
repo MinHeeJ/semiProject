@@ -17,8 +17,8 @@
 	<h2>회원 정보</h2>
 	<form 
 		name="memberUpdateFrm"
-		action="<%= request.getContextPath() %>/member/memberUpdate" method="post">
-    </form>
+		action="<%= request.getContextPath() %>/member/memberUpdate" 
+		method="post">
 		<table>
 			<tr>
 				<th>아이디<sup>*</sup></th>
