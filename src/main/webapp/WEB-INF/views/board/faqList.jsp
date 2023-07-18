@@ -6,7 +6,7 @@
 <%@ page import="java.util.List"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%@ include file="/WEB-INF/views/board/boardTap.jsp" %>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/faq.css" />
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/faq2.css"/>
 <%
 	List<FaqBoard> faqs = (List<FaqBoard>) request.getAttribute("faqs");
 	

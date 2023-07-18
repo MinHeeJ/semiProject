@@ -9,7 +9,7 @@
 <%
 	List<Board> boards = (List<Board>) request.getAttribute("boards");
 %>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/board.css" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/board2.css" />
 <section id="board-container">
 	<h2>게시판 </h2>
 	

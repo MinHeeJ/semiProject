@@ -12,7 +12,7 @@
 	List<Attachment> attachments = board.getAttachments();
 	List<BoardComment> boardComments = (List<BoardComment>) request.getAttribute("boardComments");
 %>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/board.css" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/board2.css" />
 <section id="board-container">
 	<h2>게시판</h2>
 	<table id="tbl-board-view">
@@ -36,7 +36,6 @@
 						<th>첨부파일</th>
 						<td>
 							<%-- 첨부파일이 있을경우만, 이미지와 함께 original파일명 표시 --%>
-							<img alt="첨부파일" src="<%=request.getContextPath() %>/images/file.png" width=16px>
 							<a href="<%= request.getContextPath() %>/board/fileDownload?no=<%= attach.getBoardNo() %>"><%= attach.getOriginalFilename() %></a>
 						</td>
 					</tr>

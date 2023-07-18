@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.semi.mvc.board.model.service.BoardService;
+import com.semi.mvc.board.model.vo.Attachment;
 import com.semi.mvc.board.model.vo.Board;
 import com.semi.mvc.board.model.vo.BoardComment;
 import com.semi.mvc.common.util.HelloMvcUtils;

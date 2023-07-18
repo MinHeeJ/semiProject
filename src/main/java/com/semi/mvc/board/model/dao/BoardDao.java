@@ -194,8 +194,11 @@ public class BoardDao {
 		// insert into attachment(no, board_no, original_filename, renamed_filename) values(seq_attachment_no.nextval, ?, ?, ?)
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setInt(1, attach.getBoardNo());
+			System.out.println("attach board_no = " + attach.getBoardNo());
 			pstmt.setString(2, attach.getOriginalFilename());
+			System.out.println("attach oN = " + attach.getOriginalFilename());
 			pstmt.setString(3, attach.getRenamedFilename());
+			System.out.println("attach rN = " + attach.getRenamedFilename());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

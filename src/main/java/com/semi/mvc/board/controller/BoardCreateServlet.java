@@ -82,6 +82,7 @@ public class BoardCreateServlet extends HttpServlet {
 				attach.setOriginalFilename(multiReq.getOriginalFileName(name));
 				attach.setRenamedFilename(multiReq.getFilesystemName(name)); // renamedFilename
 				board.addAttachment(attach);
+				System.out.println("board_attach = " + attach.getRenamedFilename());
 			}
 		}
 		
