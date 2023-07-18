@@ -4,6 +4,7 @@
 <%@ page import="com.semi.mvc.member.model.vo.MemberRole" %>
 <%@ page import="com.semi.mvc.member.model.vo.Gender" %>
 <%@ page import="java.text.SimpleDateFormat"%>
+
 <%@ page import="java.util.List"%>
 
 <%
@@ -103,4 +104,3 @@
 		<br>
 		<br>
     </header>
-
