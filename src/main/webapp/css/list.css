@@ -38,7 +38,9 @@ header,footer,aside,nav,section,article{display:block}
 .demi{display:inline-block;margin:0 1px;vertical-align:middle}
 .inpType{padding-left:6px;height:24px;line-height:24px;border:1px solid #dbdbdb}
 .dest { display: flex; align-items: center; }
-.wrapper{text-align: center; margin-bottom: 12%;}
+.wrapper{text-align: center; margin-bottom: 12%; }
+.member_wrapper { margin-bottom: 0%; }
+.member_wrapper h1 { color: black; margin-top : 10%; font-size: 40px; font-weight: bold; font-family: 'NanumSquareNeo-Variable'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2'); }
 .checkbox{float: right; font-size: 17px; font-family: 'NanumSquareNeo-Variable'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');font-weight: normal;font-style: normal;}
 
 #orderListSection, #salesLookUpSection, #memberListSection { width : 1200px; text-align: center; }

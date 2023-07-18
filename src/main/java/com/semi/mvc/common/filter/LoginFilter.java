@@ -17,15 +17,9 @@ import javax.servlet.http.HttpSession;
 import com.semi.mvc.member.model.vo.Member;
 
 @WebFilter({ 
-	"/member/memberDetail", 
-	"/member/memberUpdate", 
-	"/member/memberDelete",
-	"/board/boardCreate",
-	"/board/boardUpdate",
-	"/board/boardDelete",
-	"/board/boardCommentCreate",
-	"/board/boardCommentUpdate",
-	"/chat/chat"
+	"/member/orderList", 
+	"/order/orderList", 
+	"/order/cart",
 })
 public class LoginFilter extends HttpFilter implements Filter {
        
