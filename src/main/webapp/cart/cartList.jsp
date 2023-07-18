@@ -30,7 +30,7 @@
 #allCheck {float:left;}
 </style>
 <script src="<%= request.getContextPath() %>/js/jquery-3.7.0.js"></script>
-<% loginMember = "honggd"; %>
+
 <body>
 	<section id="CartListSection">
 	<h1>장 바 구 니</h1>

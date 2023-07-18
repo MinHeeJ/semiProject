@@ -109,8 +109,9 @@ header > nav > ul > li > a{
 img{
     width: 200px;  
 }
+
 </style>
-<% loginMember = "honggd"; %>
+
 <body>
     
     <div class="wrapper">	
