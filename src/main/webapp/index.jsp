@@ -130,15 +130,15 @@
                     container.innerHTML += `
                         <div class="polaroid">
                             <div class="textArea">
-                                <p id="textAreaTitle">🧡 좋아요 ${rank}위 🧡</p><br>
-                                <p class="reviewInfo">${product}</p><br>
+                                <p id="textAreaTitle">🧡 좋아요 \${rank}위 🧡</p><br>
+                                <p class="reviewInfo">\${product}</p><br>
                                 <p>
-                                    <span class="writer">작성자 : ${writer}</span><br><br>
-                                    <span class="photoDate">작성일 : ${regDate}</span><br><br>
+                                    <span class="writer">작성자 : \${writer}</span><br><br>
+                                    <span class="photoDate">작성일 : \${regDate}</span><br><br>
                                 </p>
-                                <p class="caption">내 &nbsp&nbsp&nbsp용 : ${content}</p>
+                                <p class="caption">내 &nbsp&nbsp&nbsp용 : \${content}</p>
                             </div>
-                            <div class="imageArea" style="background-image: url('<%= request.getContextPath()%>/upload/review/${renamedFile}')">
+                            <div class="imageArea" style="background-image: url('<%= request.getContextPath()%>/upload/review/\${renamedFile}')">
                             </div>
                         </div>
                     `;
