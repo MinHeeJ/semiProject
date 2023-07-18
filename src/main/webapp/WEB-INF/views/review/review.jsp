@@ -172,7 +172,7 @@ function like() {
               console.log(likeCount);
               console.log(isLike);
               console.log(123456);
-              hearts[i].src = "<%= request.getContextPath() %>/images/review/heart.png"
+              hearts[i].src = "<%= request.getContextPath() %>/images/review/greenheart.png"
               p[i].innerHTML = `\${likeCount}`;
             } else {
               console.log(e.value);
@@ -215,7 +215,7 @@ function love(e) {
         if(e.target.value == hearts[i].value) {
           if(isLike) {
             console.log(123456);
-            hearts[i].src = "<%= request.getContextPath() %>/images/review/heart.png"
+            hearts[i].src = "<%= request.getContextPath() %>/images/review/greenheart.png"
             p[i].innerHTML = `\${likeCount}`;
           } else {
             console.log(123123);

@@ -7,38 +7,7 @@
 <script src="<%=request.getContextPath()%>/js/jquery-3.7.0.js"></script>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/index.css" />
 
-	<div class="account_wrapper">
 
-        <!-- 로그인 전 -->
-<ul class="account_list">
-    <li><a href="<%= request.getContextPath() %>/member/memberEnroll">회원가입</a></li>
-    <li><a href="">로그인</a></li>
-</ul>
-
-        <!-- 로그인 후 -->
-        <div class="user_info_container">
-            <span>***님, 환영합니다!</span>
-            <ul class="account_list">
-                <li><a href="<%= request.getContextPath()%>/cart/cartList.jsp">장바구니</a></li>
-                <li><a href="<%= request.getContextPath()%>/order/orderList.jsp">주문내역</a></li>
-                <li><a href="">마이페이지</a></li>
-                <li><a href="">로그아웃</a></li>
-            </ul>
-        </div>
-        
-        <!-- 관리자일 경우 로그인 -->
-        <div class="user_info_container">
-            <span>님, 환영합니다!</span>
-            <ul class="account_list">
-                <li><a href="<%= request.getContextPath() %>/admin/salesLookUp.jsp">매출조회</a></li>
-                <li><a href="<%= request.getContextPath() %>/admin/orderList">전체주문내역</a></li>
-                <li><a href="<%= request.getContextPath() %>/admin/memberList.jsp">전체회원조회</a></li>
-                <li><a href="">로그인</a></li>
-            </ul>
-        </div>
-        
-    </div>
-	
     <div class="swiper slide_wrapper">
        	<div class="swiper-wrapper">
             <div class="swiper-slide" style="background-image: url('<%= request.getContextPath() %>/images/index/banner1.jpg');"></div>
@@ -140,7 +109,7 @@
 	        url: "<%= request.getContextPath()%>/main/likeBest",
 	        dataType: "json",
 	        success(responseData){
-	            
+	            console.log(responseData);
 	        	const container = document.querySelector("#reviewBestPrint");
 				let rank = 1;
 				responseData.forEach((review)=>{
@@ -150,7 +119,7 @@
 						const {renamedFilename} = attachment;
 						renamedFile = renamedFilename;
 					})
-		
+					
 					container.innerHTML += `
 						<div class="polaroid">
 							<div class="textArea">
