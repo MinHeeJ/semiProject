@@ -6,6 +6,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <%
 	Member loginMember = new Member("admin", "1234", "관리자", "010-1234-5678", "서울시 역삼동", Gender.valueOf("F"), MemberRole.valueOf("A"));
 %>
