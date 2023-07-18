@@ -9,8 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.semi.mvc.member.model.vo.Member;
 import com.semi.mvc.review.model.service.ReviewService;
 
 /**
@@ -26,10 +28,9 @@ public class ReviewLikeCountServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 1. 사용자 입력값 처리
-//		HttpSession session = request.getSession();
-//		Member loginMember = (Member) session.getAttribute("loginMember");
-//		String memberId = loginMember.getMemberId();
-		String memberId = "honggd";
+		HttpSession session = request.getSession();
+		Member loginMember = (Member) session.getAttribute("loginMember");
+		String memberId = loginMember.getMemberId();
 		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
 		
 		// 2. 업무로직

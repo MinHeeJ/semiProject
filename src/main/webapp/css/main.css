@@ -91,7 +91,7 @@ header > nav > ul > li > a{
 .account_wrapper{ margin: 50px 0; text-align: right; font-size: 20px; }
 .account_list li { display: flex; align-items: center; }
 .account_list img { width: 50px; margin-left: 11px; position: absolute; margin-top: -87px; }
-.admin_info_container span { margin-left: -129px; }
+.admin_info_container span { margin-left: -159px; }
 .header-wrapper div { color: green; }
 .user_info_container div { float: right; }
 .admin_info_container div { float: right; margin-right: -5% }
@@ -182,6 +182,7 @@ header > nav > ul > li > a{
     max-width: 900px;
     margin: 0 auto;
     margin-top: 7.5rem;
+    margin-bottom : 12%;
     position:relative;
 }
 @font-face {

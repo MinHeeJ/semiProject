@@ -4,7 +4,6 @@
 <%@ page import="com.semi.mvc.member.model.vo.MemberRole" %>
 <%@ page import="com.semi.mvc.member.model.vo.Gender" %>
 <%@ page import="java.text.SimpleDateFormat"%>
-
 <%@ page import="java.util.List"%>
 
 <%
@@ -28,7 +27,6 @@
 	}
 %>
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,13 +45,13 @@
             <img src="<%= request.getContextPath() %>/images/main/logo.png" alt="main_image" />
         </a>
         
-        <% if(loginMember == null) {  %>
         <div class="header-wrapper">
+        <% if(loginMember == null) {  %>
 			<!-- 로그인 전 -->
 			<div class="account_wrapper">
 				<ul class="account_list">
 				    <li>
-				    	<a href="">로그인</a>
+				    	<a href="<%= request.getContextPath() %>/member/memberLogin">로그인</a>
 				    	<img src="<%= request.getContextPath() %>/images/main/login.png"/>
 				    </li>
 				    <li>
@@ -62,33 +60,36 @@
 				    </li>
 				</ul>
 		    </div>
-			<% }  %>
-	        <!-- 로그인 후 -->
+	<% }  else { 
+
+	        if(loginMember.getMemberRole() == MemberRole.U) { %>
 	        <div class="user_info_container">
 		        <div>
-				    <span>님, 환영합니다!</span>
+				    <span><%= loginMember.getMemberId() %>님, 환영합니다!</span>
 		        </div>
-		        <br>
+		        <br><br>
 	            <ul class="account_list">
 	                <li><a href="<%= request.getContextPath()%>/cart/cartList.jsp">장바구니</a></li>
 	                <li><a href="<%= request.getContextPath()%>/order/orderList.jsp">주문내역</a></li>
-	                <li><a href="">마이페이지</a></li>
-	                <li><a href="">로그아웃</a></li>
+	                <li><a href="<%= request.getContextPath()%>/member/memberDetail">마이페이지</a></li>
+	                <li><a href="<%= request.getContextPath()%>/member/logout">로그아웃</a></li>
 	            </ul>
 	        </div>
+	       <% } else if(loginMember.getMemberRole() == MemberRole.A) { %> 
 	        <!-- 관리자일 경우 로그인 -->
 	        <div class="admin_info_container">
 		        <div>
-		            <span>관리자()님</span>
+		            <span>관리자(<%= loginMember.getMemberId() %>)님</span>
 		        </div>
-		        <br>
+		        <br><br><br>
 	            <ul class="account_list">
 	                <li><a href="<%= request.getContextPath() %>/admin/salesLookUp.jsp">매출조회</a></li>
 	                <li><a href="<%= request.getContextPath() %>/admin/orderList">전체주문내역</a></li>
 	                <li><a href="<%= request.getContextPath() %>/admin/memberList.jsp">전체회원조회</a></li>
-	                <li><a href="">로그아웃</a></li>
+	                <li><a href="<%= request.getContextPath()%>/member/logout">로그아웃</a></li>
 	            </ul>
 	        </div>
+	        <% }}%>
         </div>
         
         <nav>
