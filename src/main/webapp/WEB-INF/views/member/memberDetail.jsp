@@ -13,6 +13,7 @@
 	String phone = loginMember.getPhone();
 		
 %>
+
 <section id="enroll-container">
 	<h2>회원 정보</h2>
 	<form 
@@ -58,6 +59,39 @@
 		</table>
         <input type="submit" value="정보수정"/>
 	</form>
+    <form 
+        name="memberDelFrm"
+        action="<%= request.getContextPath() %>/member/memberDelete" 
+        method="post"
+        onsubmit="return confirm('정말로 탈퇴하시겠습니까?')">
+        <input type="submit" value="탈퇴하기"/>
+    </form>
 </section>
 
+<form name="memberDelFrm" action="<%= request.getContextPath() %>/member/memberDelete" method="post"></form>
+<script>
+//폼 유효성검사
+document.memberUpdateFrm.onsubmit = (e) => {
+	const frm = e.target;
+	const name = e.target.name;
+	const phone = e.target.phone;
+
+	// 이름 검사 - 한글2글자 이상
+	if (!/^[가-힣]{2,}$/.test(name.value)) {
+		alert("이름은 한글2글자 이상이어야 합니다.");
+		return false;
+	}
+	// 전화번호 검사 - 01012345678 010으로 시작하고 숫자8자리 여부 확인
+	if (!/^010\d{8}$/.test(phone.value)) {
+		alert("전화번호는 010으로 시작하고 숫자8자리여야 합니다.");
+		return false;
+	}
+	
+};
+
+const deleteMember = () => {
+	if(confirm("정말 탈퇴하시겠습니까?"))
+		document.memberDelFrm.submit();
+}
+</script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

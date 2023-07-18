@@ -31,8 +31,6 @@ public class ReviewLikeCountServlet extends HttpServlet {
 //		String memberId = loginMember.getMemberId();
 		String memberId = "honggd";
 		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
-		System.out.println("memberId = " + memberId);
-		System.out.println("reviewNo = " + reviewNo);
 		
 		// 2. 업무로직
 		int likeCount = reviewService.onloadLikeCount(memberId, reviewNo);
@@ -47,7 +45,6 @@ public class ReviewLikeCountServlet extends HttpServlet {
 		map.put("result", "성공");
 		map.put("likeCount", likeCount);
 		map.put("isLike", isLike);
-		System.out.println(map);
 		new Gson().toJson(map, response.getWriter());
 	}
 

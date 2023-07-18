@@ -17,10 +17,18 @@ import javax.servlet.http.HttpSession;
 import com.semi.mvc.member.model.vo.Member;
 
 @WebFilter({ 
-	"/member/memberDetail", 
+	"/store/storeDelete", 
+	"/store/storeFinder",
 	"/member/memberUpdate", 
 	"/member/memberDelete",
-	"/chat/chat"
+	"/chat/chat",
+	"/board/boardCreate",
+	"/board/boardUpdate",
+	"/board/boardDelete",
+	"/board/boardCommentCreate",
+	"/board/boardCommentUpdate",
+	"/add/to/cart",
+	"/OnlinOrder"
 })
 public class LoginFilter extends HttpFilter implements Filter {
        

@@ -9,9 +9,7 @@ public class Member {
 	private Gender gender;
 	private MemberRole memberRole;
 	
-	public Member() {
-		// TODO Auto-generated constructor stub
-	}
+
 
 	public Member(String memberId, String password, String name, String phone, String address, Gender gender,
 			MemberRole memberRole) {
@@ -23,6 +21,10 @@ public class Member {
 		this.address = address;
 		this.gender = gender;
 		this.memberRole = memberRole;
+	}
+
+	public Member() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public String getMemberId() {

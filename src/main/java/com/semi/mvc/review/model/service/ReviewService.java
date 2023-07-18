@@ -28,8 +28,6 @@ public class ReviewService {
 					int reviewNo = reviewDao.getLastReviewNo(conn);
 					review.setReviewNo(reviewNo); // servlet에서 redirect시 사용
 					
-					System.out.println("reviewNo = " + reviewNo);
-					
 					// attachment 테이블 추가
 					List<AttachmentReview> attachments = review.getAttachments();
 					if (attachments != null && !attachments.isEmpty()) {
@@ -57,7 +55,6 @@ public class ReviewService {
 		
 		for(int i = 0; i<reviews.size(); i++) {
 			int reviewNo = reviews.get(i).getReviewNo();
-			System.out.println("reviewNo : " + reviewNo);
 			List<AttachmentReview> attachments = reviewDao.findAttachment(conn, reviewNo);
 			
 			for(int j = 0 ; j < attachments.size() ; j++) {
@@ -79,7 +76,6 @@ public class ReviewService {
 	public List<Order> reviewOrderList(String memberId) {
 		Connection conn = getConnection();
 		List<Order> orders = reviewDao.reviewOrderList(conn,memberId);
-		System.out.println("씨이이이이"+ orders);
 		close(conn);
 		return orders;
 	}
@@ -96,7 +92,6 @@ public class ReviewService {
 		Connection conn = getConnection();
 		try {
 			result = reviewDao.deleteReview(conn, reviewNo);
-			System.out.println(" 서블릿리뷰번호호호ㅗㅎ = " + reviewNo);
 			commit(conn);
 		} catch (Exception e) {
 			rollback(conn);
@@ -115,9 +110,6 @@ public class ReviewService {
 			int reviewNo = reviews.get(i).getReviewNo();
 			List<AttachmentReview> attachments = reviewDao.findAttachment(conn, reviewNo);
 			
-			for(int j = 0 ; j < attachments.size() ; j++) {
-				System.out.println(attachments.get(j));
-			}
 			reviews.get(i).setAttachments(attachments);
 		}
 		

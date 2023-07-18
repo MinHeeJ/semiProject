@@ -13,23 +13,8 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
-
-<style>
-@font-face {font-family: 'NanumSquareNeo-Variable'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');font-weight: normal;font-style: normal;}
-#CartListSection { width : 1200px; text-align: center;}
-#cartListTable{ border-top:3px solid rgb(217, 250, 217); border-bottom:3px solid rgb(217, 250, 217); border-collapse:collapse; margin: 2% auto 3% auto; text-align:center;}
-#printCartList th {width: 80px; border-top:3px solid rgb(217, 250, 217); border-bottom:3px solid rgb(217, 250, 217); padding: 10px 0; text-align:center; background-color: rgb(217, 250, 217); height : 50px; font-size: 20px; font-weight: bold; vertical-align: middle;} 
-#printCartList td {border-top:3px solid rgb(217, 250, 217);border-bottom:3px solid rgb(217, 250, 217); padding: 5px; text-align:left; text-align:center; height : 50px; font-size: 15px; vertical-align: middle;}
-#productCol {width: 750px !important;}
-#CartListSection h1{margin-top : 10%; font-size: 40px; font-weight: bold; font-family: 'NanumSquareNeo-Variable'}
-#cartbuttons {width : 1166px; margin-top : 2%;}
-#CartListSection button{display: inline-block; width: 9%; padding: 6px; font-size: 18px; background-color: rgb(217, 250, 217); border-radius: 10px; border:0px solid white;}
-#CartListSection button:hover {background-color: darkgreen; box-shadow: 1px 2px 0px gray; color: white; cursor: pointer;}
-#cartUpdate {margin-left: 76.2%; margin-right:0.2%}
-#allChecklabel {float:left; margin-left:5.5%;}
-#allCheck {float:left;}
-</style>
 <script src="<%= request.getContextPath() %>/js/jquery-3.7.0.js"></script>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/cartList.css" />
 
 <body>
 	<section id="CartListSection">
