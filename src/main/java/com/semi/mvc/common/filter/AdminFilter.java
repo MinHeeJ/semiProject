@@ -15,26 +15,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.semi.mvc.member.model.vo.Member;
+import com.semi.mvc.member.model.vo.MemberRole;
 
-@WebFilter({ 
-	"/store/storeDelete", 
-	"/store/storeFinder",
-	"/member/memberUpdate", 
-	"/member/memberDelete",
-	"/board/boardCreate",
-	"/board/boardUpdate",
-	"/board/boardDelete",
-	"/board/boardCommentCreate",
-	"/board/boardCommentUpdate",
-	"/add/to/cart",
-	"/OnlinOrder"
-})
-public class LoginFilter extends HttpFilter implements Filter {
+@WebFilter("/admin/*")
+public class AdminFilter extends HttpFilter implements Filter {
        
     /**
      * @see HttpFilter#HttpFilter()
      */
-    public LoginFilter() {
+    public AdminFilter() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -51,19 +40,19 @@ public class LoginFilter extends HttpFilter implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		
-		System.out.println("[Login 체크중...]");
-		
 		HttpServletRequest httpReq = (HttpServletRequest) request; 
 		HttpServletResponse httpRes = (HttpServletResponse) response; 
 		
-		HttpSession session = httpReq.getSession();
+		HttpSession session= httpReq.getSession();
 		Member loginMember = (Member) session.getAttribute("loginMember");
-		if(loginMember == null) {
-			session.setAttribute("msg", "로그인후 이용하실수 있습니다.");
+		
+		if (loginMember == null || loginMember.getMemberRole() != MemberRole.A) {
+			session.setAttribute("msg", "관리자만 사용할 수 있습니다.");
 			httpRes.sendRedirect(httpReq.getContextPath() + "/");
 			return;
 		}
 		
+		// pass the request along the filter chain
 		chain.doFilter(request, response);
 	}
 
