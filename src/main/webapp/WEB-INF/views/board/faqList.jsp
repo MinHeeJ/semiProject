@@ -20,8 +20,8 @@
 	<% if(faqs != null) { %>
 		<% for(FaqBoard faq : faqs){ %>
 			<div class="title"><%= faq.getTitle() %></div>
-			<% if(faq.getAttachments() != null && !faq.getAttachments().isEmpty()) { %>
 			<% List<Attachment> attachs = faq.getAttachments(); %>
+			<% if (attachs != null && !attachs.isEmpty()) { %>
 				<div class="content">
 					<% for(Attachment attach : attachs){ %>
 						<img src="<%= request.getContextPath() %>/upload/faq/<%= attach.getRenamedFilename() %>">

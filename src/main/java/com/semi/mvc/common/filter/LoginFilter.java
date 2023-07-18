@@ -20,11 +20,6 @@ import com.semi.mvc.member.model.vo.Member;
 	"/member/memberDetail", 
 	"/member/memberUpdate", 
 	"/member/memberDelete",
-	"/board/boardCreate",
-	"/board/boardUpdate",
-	"/board/boardDelete",
-	"/board/boardCommentCreate",
-	"/board/boardCommentUpdate",
 	"/chat/chat"
 })
 public class LoginFilter extends HttpFilter implements Filter {

@@ -84,20 +84,27 @@ create table board (
     constraints fk_board_writer foreign key(writer) references member(member_id)on delete cascade
 );
 --drop table board;
+create sequence seq_board_no;
+--drop sequence seq_board_no;
+insert into board values(seq_board_no.nextval, 'honggd', 'gd', 'gd', sysdate);
+select * from board;
+--SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY b.board_no DESC) rnum, b.*, (SELECT COUNT(*) FROM attachment_board WHERE board_no = b.board_no) attach_cnt, (SELECT COUNT(*) FROM board_comment WHERE board_no = b.board_no) comment_cnt FROM board b) b WHERE rnum BETWEEN ? AND ?;
 
 create table board_comment (
     comment_no number,
 	board_no number,
 	writer	varchar2(20),
 	content	varchar2(1000) not null,
-	comment_level number not null,
-	comment_ref	number not null,
 	reg_date date default sysdate,
     constraints pk_board_comment_no primary key(comment_no),
     constraints fk_board_comment_board_no foreign key(board_no) references board(board_no) on delete cascade,
     constraints fk_board_comment_writer foreign key(writer) references member(member_id) on delete cascade
 );
 --drop table board_comment;
+create sequence seq_board_comment_no;
+--drop sequence seq_board_comment_no;
+
+--select * from (select row_number() over (order by b.board_no desc) rnum, b.*, (select count(*) from attachment_board where board_no = b.board_no) attach_cnt, (select count(*) from board_comment where board_no = b.board_no) comment_cnt from board b) where rnum between ? and ?;
 
 create table order_detail (
 	order_serial_no number,

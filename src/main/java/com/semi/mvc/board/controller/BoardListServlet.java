@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.semi.mvc.board.model.service.BoardService;
+import com.semi.mvc.board.model.vo.Board;
+import com.semi.mvc.common.util.HelloMvcUtils;
 
 /**
  * Servlet implementation class BoardListServlet
@@ -34,21 +36,21 @@ public class BoardListServlet extends HttpServlet {
 		int start = (cpage - 1) * LIMIT + 1;
 		int end = cpage * LIMIT;
 		
-//		List<Board> boards = boardService.findAll(start, end);
-//		System.out.println("boards = " + boards);
-//		
-//		for(Board board : boards) {
-//			board.setTitle(HelloMvcUtils.escapeHtml(board.getTitle()));
-//		}
-//		
-//		int totalContent = boardService.getTotalContent();
-//		System.out.println("totalContent = " + totalContent);
-//		String url = request.getRequestURI(); // /mvc/board/boardList
-//		String pagebar = HelloMvcUtils.getPagebar(cpage, LIMIT, totalContent, url);
-//		System.out.println("pagebar = " + pagebar);
-//		
-//		request.setAttribute("boards", boards); 
-//		request.setAttribute("pagebar", pagebar);
+		List<Board> boards = boardService.findAll(start, end);
+		System.out.println("boards = " + boards);
+		
+		for(Board board : boards) {
+			board.setTitle(HelloMvcUtils.escapeHtml(board.getTitle()));
+		}
+		
+		int totalContent = boardService.getTotalContent();
+		System.out.println("totalContent = " + totalContent);
+		String url = request.getRequestURI(); // /mvc/board/boardList
+		String pagebar = HelloMvcUtils.getPagebar(cpage, LIMIT, totalContent, url);
+		System.out.println("pagebar = " + pagebar);
+		
+		request.setAttribute("boards", boards); 
+		request.setAttribute("pagebar", pagebar);
 		
 		request.getRequestDispatcher("/WEB-INF/views/board/boardList.jsp")
 		.forward(request, response);
