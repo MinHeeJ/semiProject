@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 import com.semi.mvc.cart.model.service.CartService;
 import com.semi.mvc.cart.model.vo.Cart;
+import com.semi.mvc.member.model.vo.Member;
 
 /**
  * Servlet implementation class CartListServlet
@@ -28,11 +29,9 @@ public class CartListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
-//		Member loginMember = (Member) session.getAttribute("loginMember");
-//		String memberId = loginMember.getMemberId();
-		
-		String memberId = "honggd";		
-		
+		Member loginMember = (Member) session.getAttribute("loginMember");
+		String memberId = loginMember.getMemberId();
+	
 		List<Cart> carts = cartService.findAllCart(memberId);
 //		request.setAttribute("carts", carts);
 		

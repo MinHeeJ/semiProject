@@ -129,13 +129,14 @@ public class MemberDao {
 	public int updateMember(Connection conn, Member member) {
 		int result = 0;
 		String sql = prop.getProperty("updateMember");
-		// update member set name = ?, gender = ?, birthday = ?, email = ?, phone = ?, hobby = ? where member_id = ?
+		// update member set name = ?, gender = ?, phone = ?, address = ? where member_id = ?
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, member.getName());
 			pstmt.setString(2, member.getGender() != null ? member.getGender().name() : null);
 			pstmt.setString(3, member.getPhone());
-			pstmt.setString(4, member.getMemberId());	
-			pstmt.setString(5, member.getAddress());
+			pstmt.setString(4, member.getAddress());
+			pstmt.setString(5, member.getMemberId());	
+			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new MemberException(e);
