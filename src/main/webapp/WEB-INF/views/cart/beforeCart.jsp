@@ -24,7 +24,7 @@ div {vertical-align: middle;}
 @font-face {font-family: 'SBAggroB'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff'); font-weight: normal; font-style: normal;}
 @font-face {font-family: 'PyeongChangPeace-Bold'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Bold.woff2') format('woff2');font-weight: 700;font-style: normal;}
 
-#beforeCartSection { width : 1200px; text-align: center; border: 4px solid darkgreen; margin: 3% 0; border-radius: 30px;  overflow: hidden;}
+#beforeCartSection { width : 1200px; text-align: center; border: 4px solid darkgreen; margin-top: 3%; border-radius: 30px;  overflow: hidden; margin-bottom: 12%}
 #receipt{ display: inline-block; width: 40%; border-left: 2.5px solid black; border-right: 2.5px solid black; margin : 3% 0 3% 0; animation: opacityAni 0.7s linear;}
 #receiptTitle {font-size : 43px !important; margin : 3% 0 20% 0; font-family: 'SBAggroB' !important; font-weight: bold; -webkit-text-stroke: 1px darkGreen;}
 h1#receiptTitle+h1{}
@@ -142,7 +142,7 @@ h1#receiptTitle+h1{}
 				dataType : "json",
 				success(responseData){
 					const {result, message} = responseData;
-					alert(message);
+
 					document.querySelector("#selectConfirm").style.display = "none";					
 					document.querySelector("#completeAddCart").style.display = "block";
 				}

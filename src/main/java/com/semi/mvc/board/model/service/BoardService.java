@@ -124,4 +124,49 @@ public class BoardService {
 		return result;
 	}
 
+	public int deleteBoard(int no) {
+		Connection conn = getConnection();
+		int result = 0;
+		try {
+			result = boardDao.deleteBoard(conn, no);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);			
+		}
+		return result;
+	}
+
+	public int insertBoardComment(BoardComment boardComment) {
+		Connection conn = getConnection();
+		int result = 0;
+		try {
+			result = boardDao.insertBoardComment(conn, boardComment);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public int deleteBoardComment(int no) {
+		Connection conn = getConnection();
+		int result = 0;
+		try {
+			result = boardDao.deleteBoardComment(conn, no);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
 }

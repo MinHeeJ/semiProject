@@ -1,4 +1,4 @@
-package com.semi.mvc.member.model.controller;
+package com.semi.mvc.member.controller;
 
 import java.io.IOException;
 

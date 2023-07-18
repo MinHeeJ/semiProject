@@ -117,7 +117,8 @@
 				</tr>
 				<% 	} %>
 			</table>
-		<% 	} %>
+			<% 	} %>
+		<% } %>
 	</div>
 	<form 
 		action="<%= request.getContextPath() %>/board/boardCommentDelete" 
@@ -219,6 +220,7 @@
 <form action="<%= request.getContextPath() %>/board/boardDelete" name="boardDeleteFrm" method="POST">
 	<input type="hidden" name="no" value="<%= board.getBoardNo() %>" />
 </form>
+<% } %>
 <script>
 /**
  * POST /board/boardDelete
@@ -239,8 +241,10 @@ const deleteComment = () => {
 };	
 
 const updateComment = () => {
+	<% if(boardComments != null && !boardComments.isEmpty()) { %>
 	location.href = "<%= request.getContextPath() %>/board/boardUpdate?no=<%= boardComments.get(0).getBoardNo() %>";
+	<% } %>
 };
 </script>
-<% }} %>
+
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

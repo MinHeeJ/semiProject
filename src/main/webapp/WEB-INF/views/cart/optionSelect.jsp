@@ -26,7 +26,7 @@ List<Ingredient> ingredients = (List) request.getAttribute("ingredients");
 #changeStep{width: 100%; height : 30%; margin : 5% 0 8% 0;}
 #changeStep button {color : white; background-color : darkgreen; font-size : 25px; font-weight : bold; width: 150px; height : 60px; border-radius: 10px; border-color: black; display: inline-block; cursor: pointer;}
 #changeStep div {width: 45%; display: inline-block}
-#optionSelectSection{width: 1200px; font-family:'GmarketSansMedium', Courier, monospace; vertical-align : middle;}
+#optionSelectSection{width: 1200px; font-family:'GmarketSansMedium', Courier, monospace; vertical-align : middle; margin-bottom: 12%}
 #optionSelectSection form div{text-align: center;}
 .selectTitle {font-size : 40px; font-weight : bold; margin-left : 1%;vertical-align : middle;}
 #bread {width:300px; height :300px; background-color: white; background-image: url('<%= request.getContextPath() %>/images/cart/bread.png'); background-repeat: no-repeat; background-size: contain; background-position-y : center;}
@@ -104,6 +104,7 @@ List<Ingredient> ingredients = (List) request.getAttribute("ingredients");
 		
 		document.querySelector("#optionSelectSection").onclick = () =>{
 			
+			  const saladOrBread = document.querySelector("[name=saladOrBread]");			
 			  const quantities = document.querySelectorAll("[name= quantity]");
 			  const totalCalorieElement = document.getElementById("totalCalorie");
 			  const totalPriceElement = document.getElementById("totalPrice");
@@ -111,8 +112,13 @@ List<Ingredient> ingredients = (List) request.getAttribute("ingredients");
 			  let totalPrice = 0;
 			  let totalCal = 0;
 			  
+			  if(saladOrBread.value == 1) {			  
+				  totalCal += 270;
+				  totalPrice += 2000;
+			  }
+
 			  quantities.forEach((quantity) => {
-				 
+
 			    	const calInput = quantity.nextElementSibling.nextElementSibling;
 					const cal = parseInt(calInput.value);
 					const quantityValue = parseInt(quantity.value);
@@ -148,14 +154,19 @@ List<Ingredient> ingredients = (List) request.getAttribute("ingredients");
 		let totalSteps = 5;
 		window.onload=()=>{
 			const buttons = document.querySelectorAll("#step1 button");
+			
+			
 			for(let i = 0; i <buttons.length; i++){
 				buttons[i].onclick =(e) =>{
 					document.querySelector(".selectSalad").value = i+1;
 					buttons[i].style.backgroundColor = "rgb(196, 230, 196)";
-					if(i == 0)
+					if(i == 0){
 						buttons[1].style.backgroundColor = "white";
-					else
+			
+					}
+					else 
 						buttons[0].style.backgroundColor = "white";
+						
 				};			
 			}		
 		};
