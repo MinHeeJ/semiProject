@@ -32,8 +32,8 @@
             <li><a href="<%= request.getContextPath() %>/member/logout">로그아웃</a></li>
         </ul>
     </div>
-<% } %>
 
+<% } %>
     <div class="swiper slide_wrapper">
        	<div class="swiper-wrapper">
             <div class="swiper-slide" style="background-image: url('<%= request.getContextPath() %>/images/index/banner1.jpg');"></div>
