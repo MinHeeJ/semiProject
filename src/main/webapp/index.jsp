@@ -95,8 +95,8 @@
 
         slide_prev.addEventListener('click', ()=>{
             slide_page_number[slide_index].classList.remove('slide_active');
-
             if(slide_index === 0){
+
                 slide_index = 2;
             }else{
                 slide_index -= 1;
