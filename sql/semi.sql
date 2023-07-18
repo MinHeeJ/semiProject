@@ -180,7 +180,11 @@ create table faq_board (
     constraints pk_faq_board_board_no primary key(board_no),
     constraints fk_faq_board_writer foreign key(writer) references member(member_id) on delete cascade
 );
+select * from faq_board;
 --drop table faq_board;
+create sequence seq_faq_no;
+--drop sequence seq_faq_no;
+
 
 create table review (
     review_no number,
@@ -224,12 +228,10 @@ create table like_tbl (
 );
 --drop table like_tbl;
 create sequence seq_like_no;
---drop sequence seq_like_no;
 select * from like_tbl;
 select * from like_tbl where member_id = ? and review_no = ?;
 insert into like_tbl values (seq_like_no.nextval, 'qwerty', 8, 1);
 select count(like_count)  from like_tbl where review_no = 8;
---delete from like_tbl where member_id = 'honggd';
 
 create table selected_option (
 	serial_no number,
@@ -247,3 +249,33 @@ create sequence seq_option_no;
 --drop sequence seq_option_no;
 select * from selected_option;
 -- delete from selected_option;
+
+create table attachment_faq(
+    no number,
+    board_no number,
+    original_filename varchar2(255) not null, -- 실제파일명
+    renamed_filename varchar2(255) not null, -- 저장파일명 (영문자/숫자)
+    reg_date date default sysdate,
+    constraints pk_attachment_faq_no primary key(no),
+    constraints fk_attachment_faq_no foreign key(board_no) references faq_board(board_no) on delete cascade
+);
+create sequence seq_attachment_faq_no;
+select * from attachment_faq;
+select seq_attachment_faq_no.currval from dual;
+--drop table attachment_faq;
+--drop sequence seq_attachment_faq_no;
+
+create table attachment_board(
+    no number,
+    board_no number,
+    original_filename varchar2(255) not null, -- 실제파일명
+    renamed_filename varchar2(255) not null, -- 저장파일명 (영문자/숫자)
+    reg_date date default sysdate,
+    constraints pk_attachment_board_no primary key(no),
+    constraints fk_attachment_board_no foreign key(board_no) references board(board_no) on delete cascade
+);
+create sequence seq_attachment_board_no;
+select * from attachment_board;
+--drop table attachment_board;
+--drop sequence seq_attachment_board_no;
+
