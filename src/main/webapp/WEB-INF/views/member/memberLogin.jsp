@@ -2,7 +2,6 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 <section id="login-container">
-    <h2>로그인</h2>
     
     <%-- 에러 메시지가 있는 경우 표시 --%>
     <% String errorMsg = (String) session.getAttribute("msg"); %>
@@ -16,10 +15,16 @@
         <p class="error-msg">존재하지 않는 아이디입니다: <%= invalidId %></p>
     <% } %>
     
+    <%-- 잘못된 비밀번호가 있는 경우 표시 --%>
+    <% String invalidPassword = (String) session.getAttribute("invalidPassword"); %>
+    <% if (invalidPassword != null && !invalidPassword.isEmpty()) { %>
+        <p class="error-msg">비밀번호가 일치하지 않습니다.</p>
+    <% } %>
+    
     <form name="loginFrm" action="${pageContext.request.contextPath}/member/memberLogin" method="POST">
         <div>
             <label for="memberId">아이디:</label>
-            <input type="text" id="memberId" name="memberId" value="<%= invalidId %>" required>
+            <input type="text" id="memberId" name="memberId" required>
         </div>
         <div>
             <label for="password">비밀번호:</label>
@@ -38,5 +43,37 @@
         <a href="${pageContext.request.contextPath}/member/memberEnroll">회원가입</a>
     </div>
 </section>
+
+<% if(loginMember != null) { %>
+    <script src="<%= request.getContextPath() %>/js/ws.js"></script>
+<% } %>
+
+<script>
+    window.onload = () => {
+        <% if(msg != null) { %>
+            alert('<%= msg %>');
+        <% } %>
+        
+        <% if(loginMember == null) { %>
+            document.loginFrm.onsubmit = (e) => {
+                // 아이디
+                const memberId = e.target.memberId;
+                if(!/^\w{4,}$/.test(memberId.value)) {
+                    alert("아이디는 4글자 이상 입력하세요.");
+                    e.preventDefault();
+                    return;
+                }
+                
+                // 비밀번호
+                const password = e.target.password;
+                if(!/^.{4,}$/.test(password.value)) {
+                    alert("비밀번호는 4글자 이상 입력하세요.");
+                    e.preventDefault();
+                    return;
+                }
+            };
+        <% } %>
+    };
+</script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
