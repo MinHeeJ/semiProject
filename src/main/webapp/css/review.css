@@ -15,6 +15,10 @@
       padding-bottom: 80px;
    }
    
+   .polaroid{
+   text-align: center;
+   }
+   
    /*주문상품+게시글작성테이블*/
    #review-container {
    		margin : auto;
@@ -23,7 +27,7 @@
        border-collapse: collapse;
        width: 70%;
        padding : 50px;
-       background-color:rgb(217, 250, 217); 
+       background-color: #E1ECC8; 
         
      }
      
@@ -65,18 +69,18 @@
    /*리뷰게시판테이블*/
    #photo-review-container{
      
-     
+    
        text-align: left;
        margin : auto;
-       width: 120%;
+       width: 80%;
        background-color:rgb(217, 250, 217); 
-       border-radius: 10px;
+       border-radius: 12px;
    }
    
 	.photo{
        margin-right: 30px;
-  	  
-       margin:10px auto;
+  	text-align: center;
+       margin:50px auto;
        width : 200px;
        height : 200px;
        background-color:#fff;
@@ -93,16 +97,44 @@
    
    
    .content-container{
-   margin: 30px;
+   text-align: left;
    border : 1px solid black;
-    background-color:#fff;
-    text-align: center;
-     border-radius: 12px;
-     width: 70%;
-       display: inline-block;
+   background-color:#fff;
+   border-radius: 12px;
+   width: 70%;
+   height: 70%;
+  
    }
 
- .info{
-  margin: 30px;
+ .info-container{
+  border : 1px solid yellow;
+ 
+ }
+ .writer{
+ margin: 8px;
+ font-size: 15px;
+ }
+ .photoDate{
+   margin: 8px;
+   	 text-align: right;
+ }
+ .content{
+  margin: 8px;
+  font-size: 15px;
+ }
+ .product {
+  margin: 14px;
+  font-weight: bold;
+ }
+ 
+
+ .heart-container{
+  text-align:right;
   border : 1px solid red;
+  
+ }
+ 
+ .button-container{
+  	 text-align: center;
+  	 
  }

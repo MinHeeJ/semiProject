@@ -238,5 +238,4 @@
 
 </body>
 </html>
->>>>>>> branch 'master' of https://github.com/MinHeeJ/semiProject
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

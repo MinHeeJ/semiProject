@@ -99,7 +99,7 @@
 						
 					<!-- ajax -->
 						
-						
+					
 				   </div>  
 			</tr>
 			<% 		
@@ -262,27 +262,30 @@ const getPage = (cpage) => {
 				
 				container.innerHTML += imgElements + `
 					<div class = "content-container">
-						<div class="info">
-							<p class ="writer">✍ 작성자\${writer}</p>
-							<p class ="photoDate">\${regDate}</p>
-						</div>
 						<p class ="product">\${product}</p>
-						<p class ="caption">\${content}</p>
-					
+						<div class="info-container">
+							<p class ="photoDate">\${regDate}</p>
+							<p class ="writer">✍작성자 : \${writer}</p></p>
+						<p class ="content">내용 : \${content}</p>
+						</div>
 					<tr>			
 					<th colspan="2" id="th">
-						<div>
+						<div class="heart-container">
 				            <input type="hidden" name="reviewNo" value="\${reviewNo}"/>
 				            <input type="image" src="<%= request.getContextPath() %>/images/review/heart.png" alt="heart.png" style="width: 30px;" class="heart" value="\${reviewNo}">
 				            <p id="p">0</p>
 		          	 	</div>
 						<%-- 첨부파일이 없는 게시물 수정 --%>
+						<div class = "button-container">
 							<input type="button" value="수정하기" onclick="updateReview('\${reviewNo}');">
 								
 							<input type="button" value="삭제하기" onclick="deleteReview('\${reviewNo}');">
+						</div>
 					</th>
 				</tr>
+						
 				</div>
+				
 				`;
 			})
 		},
