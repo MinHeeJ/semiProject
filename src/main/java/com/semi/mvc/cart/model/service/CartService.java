@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.semi.mvc.cart.model.dao.CartDao;
+import com.semi.mvc.cart.model.vo.Cart;
 import com.semi.mvc.cart.model.vo.Ingredient;
 import com.semi.mvc.cart.model.vo.SelectedOption;
 
@@ -37,6 +38,66 @@ public class CartService {
 		Connection conn = getConnection();
 		try {
 			result = cartDao.insertSelectedOption(conn, selected);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public int insertCart(String confirmOptions, String totalPrice, String memberId) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = cartDao.insertCart(conn, confirmOptions, totalPrice, memberId);
+			result = cartDao.deleteSelectedOption(conn, memberId);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public List<Cart> findAllCart(String memberId) {
+		List<Cart> carts = new ArrayList<>();
+		
+		Connection conn = getConnection();
+		
+		carts = cartDao.findAllCart(conn, memberId);
+		
+		close(conn);
+		
+		return carts;
+	}
+
+	public int updateCart(int cartNo, int updateQuentity) {
+		int result = 0;
+		Cart cart = null;
+		Connection conn = getConnection();
+		try {
+			cart = cartDao.findByCartNo(conn, cartNo);
+			result = cartDao.updateCart(conn, cart, updateQuentity);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public int deleteCart(int cartNo) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = cartDao.deleteCart(conn, cartNo);
 			commit(conn);
 		} catch (Exception e) {
 			rollback(conn);

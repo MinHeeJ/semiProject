@@ -5,25 +5,34 @@ import java.sql.Date;
 import com.semi.mvc.cart.model.vo.Cart;
 
 public class Order extends Cart {
-	private int orderSerialNo;
 	private int orderNo;
 	private Date orderDate;
 	private String state;
+	private int orderSerialNo;
 	
 	public Order() {
 		super();
 	}
 	
-	public Order(int cartNo, String product, String memberId, int count, int price) {
-		super(cartNo, product, memberId, count, price);
+	public Order(String product, String memberId, int count, int price) {
+		super(product, memberId, count, price);
 	}
 
-	public Order(int orderSerialNo, int orderNo, String memberId, int cartNo, String product, Date orderDate, String state, int count, int price) {
-		super(cartNo, product, memberId, count, price);
-		this.orderSerialNo = orderSerialNo;
+	public Order(int orderNo, String memberId, String product, Date orderDate, String state, int count, int price) {
+		super(product, memberId, count, price);
 		this.orderNo = orderNo;
 		this.orderDate = orderDate;
 		this.state = state;
+	}
+	
+	
+	
+	public int getOrderSerialNo() {
+		return orderSerialNo;
+	}
+
+	public void setOrderSerialNo(int orderSerialNo) {
+		this.orderSerialNo = orderSerialNo;
 	}
 
 	public int getOrderNo() {
@@ -49,20 +58,14 @@ public class Order extends Cart {
 	public void setState(String state) {
 		this.state = state;
 	}
-	
-	public int getOrderSerialNo() {
-		return orderSerialNo;
-	}
-
-	public void setOrderSerialNo(int orderSerialNo) {
-		this.orderSerialNo = orderSerialNo;
-	}
 
 	@Override
 	public String toString() {
 		return "Order [orderNo=" + orderNo + ", orderDate=" + orderDate + ", state=" + state + ", orderSerialNo="
-				+ orderSerialNo + ", toString()=" + super.toString() + "]";
+				+ orderSerialNo + "]";
 	}
 
-
+	
+	
+	
 }

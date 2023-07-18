@@ -165,19 +165,19 @@ header > nav > ul > li > a{
 }
 
 .slide_wrapper > .swiper-wrapper > .swiper-slide:nth-child(1){
-    background-image: url('../image/image1.avif');
+    background-image: url('<%= request.getContextPath() %>/images/index/banner1.jpg');
     background-size:cover;
     background-position: center;
 }
 
 .slide_wrapper > .swiper-wrapper > .swiper-slide:nth-child(2){
-    background-image: url('../image/image2.avif');
+    background-image: url('<%= request.getContextPath() %>/images/index/banner2.jpg');
     background-size:cover;
     background-position: center;
 }
 
 .slide_wrapper > .swiper-wrapper > .swiper-slide:nth-child(3){
-    background-image: url('../image/image3.avif');
+    background-image: url('<%= request.getContextPath() %>/images/index/banner3.jpg');
     background-size:cover;
     background-position: center;
 }

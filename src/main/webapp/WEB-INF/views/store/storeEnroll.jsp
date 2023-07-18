@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/store.css" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/storeEnroll.css" />
 <section id=enroll-container>
 	<h2>매장 추가 정보 입력</h2>
 	<form 
@@ -14,7 +14,7 @@
 			<tr>
 				<th>매장명<sup>*</sup></th>
 				<td>
-					<input type="text" placeholder="4글자이상" name="storeName" id="_storeName" required>
+					<input type="text" placeholder="지점명만 입력해주세요." name="storeName" id="_storeName" required>
 					<input type="button" value="중복검사" onclick="checkNameDuplicate();"/>
 					<input type="hidden" id="nameValid" value="0"/>
 					<%-- id검사여부 확인용: 0-유효하지않음, 1-유효한 아이디 --%>
@@ -34,13 +34,15 @@
 			<tr>
 				<th>연락처<sup>*</sup></th>
 				<td>	
-					<input type="tel" placeholder="(-없이)01012345678" name="phone" id="phone" maxlength="11" value="01012341234" required><br>			
+					<input type="tel" placeholder="- 넣어 작성해주세요" name="phone" id="phone" maxlength="13" required><br>			
 				</td>
 			</tr>
 			
 		</table>
+		<div id = button-container>
 		<input type="submit" value="매장등록" >
 		<input type="reset" value="취소">
+		</div>
 	</form>
 </section>
 <script>
@@ -72,9 +74,6 @@ document.storeEnrollFrm.onsubmit = (e) => {
 	const frm = e.target;
 	const storeName = e.target.storeName;
 	const address = e.target.address;
-	//const tel1 = document.getElementById("tel1");
-//	const tel2 = document.getElementById("tel2");
-	//const tel3 = document.getElementById("tel3");
 	const phone = e.target.phone;
 
 	// 아이디 중복검사 
@@ -84,11 +83,12 @@ document.storeEnrollFrm.onsubmit = (e) => {
 		return false;
 	}
 	
-	// 전화번호 검사 - 01012345678 010으로 시작하고 숫자8자리 여부 확인
-	if (!/^010\d{8}$/.test(phone.value)) {
-		alert("전화번호는 010으로 시작하고 숫자8자리여야 합니다.");
+	// 전화번호 검사 - 숫자8자리 여부 확인
+	if (!/^(070|02|0[3-9]{1}[0-9]{1})-[0-9]{3,4}-[0-9]{4}$/.test(phone.value)) {
+		alert("숫자9자리이상여야 합니다.");
 		return false;
 	}
+	
 	
 	
 	

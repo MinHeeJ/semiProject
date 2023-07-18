@@ -28,7 +28,7 @@ public class StoreDeleteServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//1. 사용자 입력값 처리
 		int storeNo = Integer.parseInt(request.getParameter("storeNo"));
-	
+		System.out.println("storeNo = " + storeNo);
 		//2. 서비스로직호출
 		int result = storeService.deleteStore(storeNo);
 				

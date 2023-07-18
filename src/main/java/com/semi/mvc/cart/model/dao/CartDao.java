@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.semi.mvc.cart.model.exception.CartException;
+import com.semi.mvc.cart.model.vo.Cart;
 import com.semi.mvc.cart.model.vo.Ingredient;
 import com.semi.mvc.cart.model.vo.SelectedOption;
 
@@ -56,6 +57,7 @@ private Properties prop = new Properties();
 		String sql = prop.getProperty("insertSelectedOption");
 		// insert into selected_option values (seq_option_no.nextval, ?, ?, ?, ?, ?)
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			
 			pstmt.setString(1, selected.getMemberId());
 			pstmt.setInt(2, selected.getIngredientNo());
 			pstmt.setInt(3, selected.getCount());
@@ -68,6 +70,123 @@ private Properties prop = new Properties();
 			throw new CartException(e);
 		}
 		return result;
+	}
+
+	public int insertCart(Connection conn, String confirmOptions, String totalPrice, String memberId) {
+		int result = 0;
+		String sql = prop.getProperty("insertCart");
+		// insert into cart_tbl values (seq_cart_no.nextval, ?, ?, default, ?)
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, confirmOptions);
+			pstmt.setString(2, memberId);
+			pstmt.setInt(3, Integer.parseInt(totalPrice));			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new CartException(e);
+		}
+		return result;
+	}
+
+	public int deleteSelectedOption(Connection conn, String memberId) {
+		int result = 0;
+		String sql = prop.getProperty("deleteSelectedOption");
+		// delete from selected_option where member_id = ?
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, memberId);		
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new CartException(e);
+		}
+		return result;
+	}
+
+	public List<Cart> findAllCart(Connection conn, String memberId) {
+		List<Cart> carts = new ArrayList<>();
+		String sql = prop.getProperty("findAllCart");
+		
+		// select * from cart_tbl where member_id = ?
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, memberId);
+			
+			try(ResultSet rset = pstmt.executeQuery()) {
+				while(rset.next()) {				
+					Cart cart = new Cart();
+					cart.setCartNo(rset.getInt("cart_no"));
+					cart.setProduct(rset.getString("product"));
+					cart.setCount(rset.getInt("count"));
+					cart.setPrice(rset.getInt("price"));
+					cart.setMemberId(memberId);
+					carts.add(cart);
+				}
+		
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new CartException(e);
+		}
+				
+		return carts;
+	}
+
+	public int updateCart(Connection conn, Cart cart, int updateQuentity) {
+		int result = 0;
+		int updatePrice = cart.getPrice() / cart.getCount() * updateQuentity;
+		String sql = prop.getProperty("updateQuentity");
+		// update cart_tbl set count = ?, price= ? where cart_no = ?;
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, updateQuentity);		
+			pstmt.setInt(2, updatePrice);				
+			pstmt.setInt(3, cart.getCartNo());		
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new CartException(e);
+		}
+		return result;
+	}
+
+	
+	public int deleteCart(Connection conn, int cartNo) {
+		int result = 0;
+		String sql = prop.getProperty("deleteCart");
+		// delete from cart_tbl where cart_no = ?
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, cartNo);				
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new CartException(e);
+		}
+		return result;
+	}
+
+	public Cart findByCartNo(Connection conn, int cartNo) {
+		Cart cart = new Cart();
+		String sql = prop.getProperty("findByCartNo");
+		
+		// select * from cart_tbl where cart_no = ?
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setInt(1, cartNo);
+			
+			try(ResultSet rset = pstmt.executeQuery()) {
+				while(rset.next()) {				
+					cart.setCartNo(rset.getInt("cart_no"));
+					cart.setProduct(rset.getString("product"));
+					cart.setCount(rset.getInt("count"));
+					cart.setPrice(rset.getInt("price"));
+					cart.setMemberId(rset.getString("member_id"));
+				}		
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new CartException(e);
+		}
+				
+		return cart;
 	}
 	
 	

@@ -38,7 +38,7 @@ public class StoreService {
 		int result = 0;
 		Connection conn = getConnection();
 		try {
-			result = storeDao.insertMember(conn, newStore);
+			result = storeDao.insertStore(conn, newStore);
 			commit(conn);
 		} catch (Exception e) {
 			rollback(conn);
@@ -61,6 +61,7 @@ public class StoreService {
 		Connection conn = getConnection();
 		try {
 			result = storeDao.deleteStore(conn, storeNo);
+			
 			commit(conn);
 		} catch (Exception e) {
 			rollback(conn);

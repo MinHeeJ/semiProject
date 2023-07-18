@@ -4,7 +4,7 @@
 
     <!-- 고객센터 -->
     <div class="serviceCenter">
-        <a href="#">고객센터</a>
+        <a href="<%= request.getContextPath()%>/board/faqList">고객센터</a>
     </div>
 
     <footer>

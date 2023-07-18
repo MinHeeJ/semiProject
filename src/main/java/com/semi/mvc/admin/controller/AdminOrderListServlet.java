@@ -30,6 +30,7 @@ public class AdminOrderListServlet extends HttpServlet {
 		List<Order> orders = orderService.findAll();
 		
 		request.setAttribute("orders", orders);
+		System.out.println("orders" + orders);
 		
 		// 3. 응답처리
 		request.getRequestDispatcher("/WEB-INF/views/admin/orderList.jsp")

@@ -11,21 +11,21 @@
 	String searchKeyword = request.getParameter("searchKeyword");
 %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/store.css" />
+
 <section id="storeList-container">
 	<h2>매장조회</h2>
 	
-		 
-        <div id="search-name">
+			
+        	<div id="search-name">
             <form action="<%=request.getContextPath()%>/store/storeFinder">
                 <input type="text" name="searchKeyword" size="25" placeholder="검색할 매장명을 입력하세요."/>
-                <button type="submit">검색</button>			
+                <button class="searchbutton" type="submit">검색</button>			
             </form>	
-		<div id="search-container">
-       <input 
-		type="button" value="매장등록"
-		onclick="location.href='<%= request.getContextPath() %>/store/storeEnroll';">
-		</div>
+			<div id="search-container">
+	       <input class="button" type="button" value="매장등록" onclick="location.href='<%= request.getContextPath() %>/store/storeEnroll';">
+			</div>
         </div>
+            
         
        
 
@@ -38,8 +38,6 @@
 				<th>주소</th>
 				<th>연락처</th>
 				<th>매장삭제</th>
-				
-				
 			</tr>
 		</thead>
 		
@@ -60,7 +58,7 @@
 					<td><%= store.getPhone() %></td> 
 					
 					<td>
-					<input type="button" onclick="deleteStore();" value="매장삭제">
+						<input class="button" type="button" onclick="deleteStore('<%=store.getStoreNo()%>');" value="매장삭제">
 					</td> 
 				</tr>
 				<% 		
@@ -75,16 +73,29 @@
 	
 </section>
 
-<form action="<%= request.getContextPath() %>/store/storeDelete" name="storeDelFrm" method="POST">
-<% for(Store store : stores) { %>
+<form action="<%= request.getContextPath() %>/store/storeDelete" name="storeDelFrm" method="POST" >
+	<input type="hidden" name="storeNo" id="storeNo" value=""/>
+
+ 	<%-- <% for(Store store : stores) { %>
 		<input type="hidden" name="storeNo" value="<%= store.getStoreNo() %>"/>
-	<% } %>
+ 	<% } %> --%>
 </form>
 <script>
 	
-const deleteStore = () => {
-	if(confirm("정말 매장을 삭제하시겠습니까?"))
+/* const deleteStore(storeNo) = (button) => {
+	if(confirm("정말 매장을 삭제하시겠습니까?")){
+		document.getElementById("storeNo").value = storeNo;
+     
+		//document.storeDelFrm.submit();
+	}
+} */
+
+function deleteStore(storeNo){
+	if(confirm("정말 매장을 삭제하시겠습니까?")){
+		document.getElementById("storeNo").value = storeNo;
+     
 		document.storeDelFrm.submit();
+	}
 }
 </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

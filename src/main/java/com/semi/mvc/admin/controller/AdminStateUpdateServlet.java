@@ -27,12 +27,12 @@ public class AdminStateUpdateServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		
 		// 1. 사용자 입력값 처리
-		int orderSerialNo = Integer.parseInt(request.getParameter("orderSerialNo"));
+		int orderNo = Integer.parseInt(request.getParameter("orderNo"));
 		String state = request.getParameter("state");
 		System.out.println(state);
 		
 		// 2. 업무로직
-		int result = orderService.stateUpdate(orderSerialNo, state);
+		int result = orderService.stateUpdate(orderNo, state);
 		
 		// 3. 응답처리
 		response.sendRedirect(request.getContextPath() + "/admin/orderList");
