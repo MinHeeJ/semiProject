@@ -5,24 +5,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <script src="<%=request.getContextPath()%>/js/jquery-3.7.0.js"></script>
-<style>
- div{vertical-align: middle;}
-.polaroid {border-bottom: 4px solid #F57A46; padding: 20px; margine: 5% 0; width:850px; background-color: #FFF1E4; border-radius: 25px; margin-bottom: 1%;}
-.textArea {width: 73%; display: inline-block; height: 100%;}
-.imageArea {width: 25%; height: 200px; display: inline-block; border: 1px solid #F57A46; border-radius: 25px;background-size: cover;}
-.imageArea img {width: 100%;}
-#balloon{width: 20%; vertical-align: middle; animation: opacityAnimation 0.4s linear 3;}
-#choiceBallon{width: 100%}
-
-@font-face {font-family: 'GmarketSansMedium';src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');font-weight: normal;font-style: normal;}
-@font-face {font-family: 'NanumSquareNeo-Variable'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');font-weight: normal;font-style: normal;}
-@font-face { font-family: 'yg-jalnan'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff'); font-weight: normal; font-style: normal;}
-
-#textAreaTitle{font-size: 25px; font-family: 'yg-jalnan'; font-weight: bold; color: rgb(59, 61, 60);}
-.textArea p {font-size: 16px; font-family: 'NanumSquareNeo-Variable';}
-@keyframes opacityAnimation {0% {opacity: 1;} 50% {opacity: 0.3;} 100% {opacity: 1;}}
-.reviewInfo { font-weight: bold;}
-</style>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/index.css" />
 
 	<div class="account_wrapper">
 
