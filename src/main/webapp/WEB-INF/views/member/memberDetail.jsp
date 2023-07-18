@@ -65,8 +65,8 @@
 		if(confirm("정말 탈퇴하시겠습니까?"))
 		document.memberDelFrm.submit();
 	}
-</section>
 
+</section>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 
 
