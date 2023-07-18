@@ -40,14 +40,9 @@ public class ReviewOrderListServlet extends HttpServlet {
 		String memberId = "honggd";
 		
 		// 2. 업무로직
-		/*
-		 * List<Order> orders = reviewService.reviewOrderList(memberId);
-		 * request.setAttribute("orders", orders); System.out.println("여여여영여 = " +
-		 * orders);
-		 */
+		
 		
 		int totalContent = reviewService.getTotalContent();
-		System.out.println("totalContent = " + totalContent);
 		int limit = 5;
 		int totalPage = (int) Math.ceil((double) totalContent / limit); 
 		request.setAttribute("totalPage", totalPage);
@@ -68,28 +63,25 @@ public class ReviewOrderListServlet extends HttpServlet {
 		// 2. 업무로직
 		List<Review> reviews = reviewService.findReview(start, end);
 		request.setAttribute("reviews", reviews);
-		System.out.println("reviews어아아아" + reviews);
 		
 		// 3. 응답처리 forward jsp
 		request.getRequestDispatcher("/WEB-INF/views/review/review.jsp")
 					.forward(request, response);
 	}
 	
-protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
 		// 업로드파일 저장경로 C:\\Workspaces\\web_server_workspace\\hello-mvc\\src\\main\\webapp\\upload\\board
 		ServletContext application = getServletContext();
 		String saveDirectory = application.getRealPath("/upload/review");
-		System.out.println("saveDirectory = " + saveDirectory);
+		
 		// 파일하나당 최대크기 10MB 
 		int maxPostSize = 1024 * 1024 * 10; 
 		// 인코딩
 		String encoding = "utf-8";
 		
 		// 파일명 재지정 정책객체
-		// 한글.txt --> 20230629_160430123_999.txt
-//		FileRenamePolicy policy = new DefaultFileRenamePolicy(); // a.txt, a1.txt, a2.txt, ...
 		FileRenamePolicy policy = new HelloMvcFileRenamePolicy();
 		
 		MultipartRequest multiReq = new MultipartRequest(request, saveDirectory, maxPostSize, encoding, policy);
@@ -98,9 +90,6 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		String writer = multiReq.getParameter("writer");
 		String content = multiReq.getParameter("content");
 	    String orderSerialNo = multiReq.getParameter("orderSerialNo");
-		System.out.println("writer = " + writer);
-		System.out.println("content = " + content);
-		System.out.println("orderSerialNoㅋㅋㅋㅋㅋ = " + orderSerialNo);
 		Review review = new Review();
 		review.setContent(content);
 		review.setWriter(writer);

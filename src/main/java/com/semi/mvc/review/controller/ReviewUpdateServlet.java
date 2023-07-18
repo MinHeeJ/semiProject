@@ -30,7 +30,6 @@ public class ReviewUpdateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 				// 1. 사용자입력값 처리
 				int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
-				System.out.println("reviewNo = " + reviewNo);
 				// 2. 업무로직
 				Review review = reviewService.findReviewById(reviewNo);
 				request.setAttribute("review", review);
@@ -45,7 +44,6 @@ public class ReviewUpdateServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 				ServletContext application = getServletContext();
 				String saveDirectory = application.getRealPath("/upload/review");
-				System.out.println("saveDirectory = " + saveDirectory);
 				// 파일하나당 최대크기 10MB 
 				int maxPostSize = 1024 * 1024 * 10; 
 				// 인코딩
@@ -69,7 +67,6 @@ public class ReviewUpdateServlet extends HttpServlet {
 				review.setWriter(writer);
 				review.setContent(content);
 			
-				System.out.println(review);
 				
 				
 				
@@ -100,7 +97,6 @@ public class ReviewUpdateServlet extends HttpServlet {
 						File delFile = new File(saveDirectory, attach.getRenamedFilename());
 						if(delFile.exists())
 							delFile.delete();
-						System.out.println(attach.getRenamedFilename() + " : " + delFile.exists());
 						
 						// b. db attachment 행 삭제
 						result = reviewService.deleteAttachment(attachNo);

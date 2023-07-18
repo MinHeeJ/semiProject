@@ -13,23 +13,8 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
-
-<style>
-@font-face {font-family: 'NanumSquareNeo-Variable'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');font-weight: normal;font-style: normal;}
-#CartListSection { width : 1200px; text-align: center;}
-#cartListTable{ border-top:3px solid rgb(217, 250, 217); border-bottom:3px solid rgb(217, 250, 217); border-collapse:collapse; margin: 2% auto 3% auto; text-align:center;}
-#printCartList th {width: 80px; border-top:3px solid rgb(217, 250, 217); border-bottom:3px solid rgb(217, 250, 217); padding: 10px 0; text-align:center; background-color: rgb(217, 250, 217); height : 50px; font-size: 20px; font-weight: bold; vertical-align: middle;} 
-#printCartList td {border-top:3px solid rgb(217, 250, 217);border-bottom:3px solid rgb(217, 250, 217); padding: 5px; text-align:left; text-align:center; height : 50px; font-size: 15px; vertical-align: middle;}
-#productCol {width: 750px !important;}
-#CartListSection h1{margin-top : 10%; font-size: 40px; font-weight: bold; font-family: 'NanumSquareNeo-Variable'}
-#cartbuttons {width : 1166px; margin-top : 2%;}
-#CartListSection button{display: inline-block; width: 9%; padding: 6px; font-size: 18px; background-color: rgb(217, 250, 217); border-radius: 10px; border:0px solid white;}
-#CartListSection button:hover {background-color: darkgreen; box-shadow: 1px 2px 0px gray; color: white; cursor: pointer;}
-#cartUpdate {margin-left: 76.2%; margin-right:0.2%}
-#allChecklabel {float:left; margin-left:5.5%;}
-#allCheck {float:left;}
-</style>
 <script src="<%= request.getContextPath() %>/js/jquery-3.7.0.js"></script>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/cartList.css" />
 
 <body>
 	<section id="CartListSection">
@@ -117,9 +102,8 @@
 		                <td>\${price}</td>
 		           		</tr>
 					`;
-					index++;
-					
-					
+					 index++;
+
 				});	
 
 				document.querySelectorAll("input[name=checkedOrNot]").forEach((checkbox) => {	
@@ -156,48 +140,52 @@
 	}
 	
 
-	
 	document.querySelector("#cartDelete").onclick =(e) =>{
-		
+
+		const checkboxes = document.querySelectorAll("input[name=checkedOrNot]");
+		  
 		let flag = true;
-		document.querySelectorAll("input[name=checkedOrNot]").forEach((checkbox) => {			
-			if(checkbox.checked)
-				flag = false;			
+		
+	    checkboxes.forEach((checkbox) => {
+			if (checkbox.checked) 		   
+			    flag = false;
 		});
-				
-		if(flag){
+	    if(flag){
+	    	 alert('선택하신 상품이 없습니다.');
+			 e.preventDefault();
+			 return;
+	    }
 			
-			alert("선택된 값이 없습니다.");
-			
-			e.preventDefault();
-			
-		} else if(confirm('정말 삭제하시겠습니까?')) {
-			document.querySelector("#printCartList").onsubmit =(e) =>{
-			
-				e.preventDefault();
-			
-				const frmData = new FormData(e.target); 
-				$.ajax({				
-					url : "<%= request.getContextPath()%>/delete/cart",
-					data : frmData,
-					processData : false, 
-					contentType : false, 
-					method : "POST",
-					dataType : "json",
-					success(responseData){
-						const {result, message} = responseData;
-						alert(message);				
-					},
-					complete(){
-						findAllCart();
-					}
-				});
-			
-			}	
-		} 
-	}	
+        if(!flag && confirm('정말 삭제하시겠습니까?')) {
+            document.querySelector("#printCartList").onsubmit =(e) =>{
+
+                e.preventDefault();
+
+                const frmData = new FormData(e.target); 
+                $.ajax({
+                    url : "<%= request.getContextPath()%>/delete/cart",
+                    data : frmData,
+                    processData : false, 
+                    contentType : false, 
+                    method : "POST",
+                    dataType : "json",
+                    success(responseData){
+                        const {result, message} = responseData;
+                        alert(message);
+                    },
+                    complete(){
+                        findAllCart();
+                    }
+                });
+
+            }
+
+        }
+    }
 	
 	document.querySelector("#cartUpdate").onclick =(e) =>{
+		
+		checkckeck(e);
 		
 		document.querySelector("#printCartList").onsubmit =(e) =>{
 			
@@ -229,23 +217,32 @@
 	// 선택한 상품 없으면 주문 x
 	document.querySelector("#order").onclick = (e) => {
 		
-		let flag = true;
-		 
+		checkckeck(e);
+		
+	};
+	
+	const checkckeck = (e) => {
+		
 		const checkboxes = document.querySelectorAll("input[name=checkedOrNot]");
 		  
+		let flag = true;
 	    checkboxes.forEach((checkbox) => {
 			if (checkbox.checked) 		   
 			    flag = false;
 		});
 	    if(flag){
 	    	 alert('선택하신 상품이 없습니다.');
-			    e.preventDefault();
+			 e.preventDefault();
+			 return;
 	    }
-
 	};
+	
+	
+	
+	
 	</script>
 
 </body>
 </html>
->>>>>>> branch 'master' of https://github.com/MinHeeJ/semiProject
+
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

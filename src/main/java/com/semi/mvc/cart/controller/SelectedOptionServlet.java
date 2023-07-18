@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import com.semi.mvc.cart.model.service.CartService;
 import com.semi.mvc.cart.model.vo.Ingredient;
 import com.semi.mvc.cart.model.vo.SelectedOption;
+import com.semi.mvc.member.model.vo.Member;
 
 /**
  * Servlet implementation class SelectedOptionServlet
@@ -34,10 +35,10 @@ public class SelectedOptionServlet extends HttpServlet {
 		String[] optionName = request.getParameterValues("optionName");
 		
 		HttpSession session = request.getSession();
-//		Member loginMember = (Member) session.getAttribute("loginMember");
-//		String memberId = loginMember.getMemberId();
+		Member loginMember = (Member) session.getAttribute("loginMember");
+		String memberId = loginMember.getMemberId();
 		
-		String memberId = "honggd";		
+			
 		List<Ingredient> ingredients = cartService.findAll();
 		List<SelectedOption> selectedOption = new ArrayList<>();
 		if(optionName != null && quantity != null) {

@@ -1,20 +1,40 @@
-
+/* 글씨체*/
+@font-face {font-family: 'NanumSquareNeo-Variable'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');font-weight: normal;font-style: normal;}
+@font-face {
+    font-family: 'yg-jalnan';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+   
+   
+   
     /*메인*/
 
-    h2{
+   h2{
         font-size: 40px;
         text-align: center;
         font-weight: 600;
         padding: 100px;
-        color: red;
-   }
-   h1{
-   font-size: 40px;
-    text-align: center;
-     font-weight: 200;
-      padding-bottom: 80px;
+        color:#606C5D;
+        font-family: 'yg-jalnan';
+        
    }
    
+   h1{
+   	font-size: 40px;
+    text-align: center;
+    font-weight: 200;
+    padding-bottom: 80px;
+    color:#606C5D;
+    font-family: 'yg-jalnan';
+   }
+   
+   .polaroid{
+   text-align: center;
+   padding: 15px;
+   }
+  
    /*주문상품+게시글작성테이블*/
    #review-container {
    		margin : auto;
@@ -23,7 +43,8 @@
        border-collapse: collapse;
        width: 70%;
        padding : 50px;
-       background-color:rgb(217, 250, 217); 
+       background-color: rgb(217, 250, 217); 
+      
         
      }
      
@@ -37,8 +58,8 @@
    /*주문상품 테이블*/
    #tbl-order-review{
        margin : auto;
-       color : green;
-      
+       color : #606C5D;
+      font-family: 'NanumSquareNeo-Variable';
        border-radius: 10px;
        border-collapse: collapse;
        width: 80%;
@@ -51,7 +72,7 @@
    /*게시글작성테이블*/
    #tbl-board-view{
        margin : auto;
-      color : green;
+       color : #606C5D;
        border-radius: 12px;
        border-collapse: collapse;
        width: 80%;
@@ -60,31 +81,34 @@
        background-color: white;
        border-radius: 10px;
        box-shadow: 1px 1px 4px 1px grey;
+   		font-family: 'NanumSquareNeo-Variable';
    }
    
    /*리뷰게시판테이블*/
    #photo-review-container{
      
-     
+    
        text-align: left;
        margin : auto;
-       width: 120%;
-       background-color:rgb(217, 250, 217); 
-       border-radius: 10px;
+       width: 80%;
+       
+       background-color: rgb(217, 250, 217); 
+       border-radius: 12px;
    }
    
 	.photo{
        margin-right: 30px;
-  	  
-       margin:10px auto;
+  	   text-align: center;
+       margin:50px auto;
        width : 200px;
        height : 200px;
        background-color:#fff;
        box-shadow: 2px 2px 3px rgba(135, 139, 133, 0.4);
        transition: 0.5s;
-       border : 1px solid red;
- 
+      
+ 	   padding:1px;
    }
+   
    
     #btn-more-container{
 	 text-align: center;
@@ -93,16 +117,65 @@
    
    
    .content-container{
-   margin: 30px;
-   border : 1px solid black;
-    background-color:#fff;
-    text-align: center;
-     border-radius: 12px;
-     width: 70%;
-       display: inline-block;
+   box-shadow: 2px 2px 4px 1px grey;
+   text-align: left;
+   background-color:#fff;
+   border-radius: 12px;
+   width: 90%;
+   height: 70%;
+   margin-left: 130px;
+   margin: auto;
+   padding: 28px;
+   color:#606C5D;
+    font-weight: bold;
+  
+   }
+   .photo-container{
+  margin: 10px;
+  
    }
 
- .info{
-  margin: 30px;
-  border : 1px solid red;
+ .info-container{
+  font-family: 'NanumSquareNeo-Variable';
+ 
+ }
+ .writer{
+ margin: 8px;
+ font-size: 15px;
+ 
+ 
+ }
+ .photoDate{
+   margin: 8px;
+   	 text-align: right;
+  
+ }
+ .content{
+  margin: 8px;
+  font-size: 15px;
+
+ }
+ .product {
+  margin: 14px;
+  font-weight: bold;
+  color: #41644A;
+ 
+ }
+ 
+
+ .heart-container{
+  text-align:right; 
+ }
+  
+ .button-container{
+  	 text-align: center;
+ 
+ }
+ #btn-more-container{
+ padding: 15px;
+ }
+ #btn-more{
+ color:#606C5D;
+ width: 1000px;
+ margin-bottom: 12%;
  }

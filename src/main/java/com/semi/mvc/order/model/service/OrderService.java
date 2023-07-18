@@ -6,6 +6,7 @@ import static com.semi.mvc.common.JdbcTemplate.getConnection;
 import static com.semi.mvc.common.JdbcTemplate.rollback;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.util.List;
 
 import com.semi.mvc.cart.model.dao.CartDao;
@@ -41,7 +42,7 @@ public class OrderService {
 		return result;
 	}
 
-	public List<Order> findByDate(String startDate, String endDate) {
+	public List<Order> findByDate(Date startDate, Date endDate) {
 		Connection conn = getConnection();
 		List<Order> orders = orderDao.findByDate(conn, startDate, endDate);
 		close(conn);
