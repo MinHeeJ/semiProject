@@ -453,8 +453,7 @@ public class ReviewDao {
 	}
 
 	public int findAllLikeCount(Connection conn, int reviewNo) {
-		int result = 0;
-		int likeCount = 0;
+		int allLikeCount = 0;
 		String sql = prop.getProperty("findAllLikeCount");
 		// select like_count from like_tbl where review_no = ?
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -462,33 +461,14 @@ public class ReviewDao {
 			
 			try (ResultSet rset = pstmt.executeQuery()) {
 				while(rset.next()) {
-					likeCount = rset.getInt("count(like_count)");
+					allLikeCount = rset.getInt("count(like_count)");
 				}
 			}
 		} catch (SQLException e) {
 			throw new ReviewException(e);
 		}
 		
-		return likeCount;
-	}
-
-	public boolean isLike(Connection conn, String memberId, int reviewNo) {
-		boolean isLike = false;
-		String sql = prop.getProperty("isLike");
-		
-		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setString(1, memberId);
-			pstmt.setInt(2, reviewNo);
-			
-			try (ResultSet rset = pstmt.executeQuery()) {
-				while(rset.next()) {
-					isLike = true;
-				}
-			}
-		} catch (SQLException e) {
-			throw new ReviewException(e);
-		}
-		return isLike;
+		return allLikeCount;
 	}
 
 }

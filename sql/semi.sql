@@ -61,7 +61,11 @@ insert into member values ('honggd', 1234, '홍지디', '010-1234-5678', '서울
 insert into member values ('qwerty', 1234, '쿼티', '010-1122-3344', '경기도 안산시', 'F', default);
 Insert into semi.MEMBER (MEMBER_ID,PASSWORD,NAME,PHONE, ADDRESS,GENDER,MEMBER_ROLE,) values ('admin1','b5fMEM1PXQznhG6q+YA+t03cAhGSXAXwvU53Nn1BGiX3ta1Io+OBrDdcMSO0FNsGHq2F2yFZuDM0o4VMRct05Q==','암호화','A','M',to_date('91/02/03','RR/MM/DD'),null,'01012341243',null,1000);
 select * from member;
+
 update member set member_role = 'A' where member_id = 'asdf';
+
+
+update member set member_role = 'A' where member_id = 'aaaaa';
 
 --drop table member;
 

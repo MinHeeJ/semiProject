@@ -82,7 +82,7 @@
 		            <span>관리자(<%= loginMember.getMemberId() %>)님</span>
 		        </div>
 		        <br><br><br>
-	            <ul class="account_list">
+	            <ul class="account_list1">
 	                <li><a href="<%= request.getContextPath() %>/admin/salesLookUp.jsp">매출조회</a></li>
 	                <li><a href="<%= request.getContextPath() %>/admin/orderList">전체주문내역</a></li>
 	                <li><a href="<%= request.getContextPath() %>/admin/memberList.jsp">전체회원조회</a></li>
