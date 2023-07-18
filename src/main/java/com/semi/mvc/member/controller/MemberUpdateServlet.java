@@ -30,6 +30,8 @@ public class MemberUpdateServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// 1. 사용자입력값 처리
 		String memberId = request.getParameter("memberId");
+		String currentPassword = request.getParameter("currentPassword"); 
+	    String newPassword = request.getParameter("newPassword"); 
 		String name = request.getParameter("name");
 		String _gender = request.getParameter("gender");
 		String phone = request.getParameter("phone");
