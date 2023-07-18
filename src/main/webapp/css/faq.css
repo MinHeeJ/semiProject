@@ -1,8 +1,6 @@
 @CHARSET "UTF-8";
 .faqContainer{
 	display: flex;
-    align-items: center;
-    flex-direction: column;
 }
 .title {
 	display: flex;
@@ -25,4 +23,15 @@
     border: 1px solid #086528;
     border-radius: 10px;
     display: none;
+}
+.content img{
+	width: 600px;
+}
+div.btnAddWrapper {
+	display: flex;
+	align-items:flex-end;
+	background-color: red;
+}
+div.btnWrapper{
+	
 }

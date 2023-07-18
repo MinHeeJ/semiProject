@@ -63,6 +63,7 @@ public class BoardCreateServlet extends HttpServlet {
 		// 1. 사용자 입력값 처리
 		String title = multiReq.getParameter("title");
 		String writer = multiReq.getParameter("writer");
+		System.out.println("writer = " + writer);
 		String content = multiReq.getParameter("content");
 		Board board = new Board();
 		board.setTitle(title);

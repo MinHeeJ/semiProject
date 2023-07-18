@@ -5,6 +5,7 @@
 <%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="java.util.List"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<%@ include file="/WEB-INF/views/board/boardTap.jsp" %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/faq.css" />
 <%
 	List<FaqBoard> faqs = (List<FaqBoard>) request.getAttribute("faqs");
@@ -13,9 +14,11 @@
 <% boolean admin = loginMember != null && (loginMember.getMemberRole() == MemberRole.A); %>
 <section class="faqContainer">
 	<%	if (admin) { %>
+		<div class="btnAddWrapper">
 		<input 
 			type="button" id="btn-add" value="글쓰기" 
 			onclick="location.href = '<%= request.getContextPath() %>/board/faqCreate';"/>
+		</div>
 	<%  } %>
 	<% if(faqs != null) { %>
 		<% for(FaqBoard faq : faqs){ %>
@@ -32,8 +35,10 @@
 				<p class="content"><%= faq.getContent() %></p>
 			<% } %>
 			<% if(admin){ %>
+				<div class="btnWrapper">
 				<button class="btn-update" value="<%= faq.getBoardNo() %>">수정</button>
 				<button class="btn-delete" value="<%= faq.getBoardNo() %>">삭제</button>
+				</div>
 			<% } %>
 		<% } %>
 	<% } %>
