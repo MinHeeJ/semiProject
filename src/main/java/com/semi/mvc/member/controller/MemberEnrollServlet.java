@@ -46,9 +46,11 @@ public class MemberEnrollServlet extends HttpServlet {
 	    String password = HelloMvcUtils.getEncryptedPassword(request.getParameter("password"), memberId);
 	    String name = request.getParameter("name");
 	    String phone = request.getParameter("phone");
-	    String address = request.getParameter("address");
+	    String city = request.getParameter("city"); // 시/도 입력 값 가져오기
+	    String district = request.getParameter("district"); // 구/군 입력 값 가져오기
+	    String addressDetail = request.getParameter("address"); // 상세주소 입력 값 가져오기
+	    String address = city + " " + district + " " + addressDetail; // 시/도, 구/군, 상세주소 조합하여 주소 생성
 	    String _gender = request.getParameter("gender");
-	    
 	    Gender gender = _gender != null ? Gender.valueOf(_gender) : null;
 	    
 	 
