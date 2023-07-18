@@ -24,20 +24,4 @@
 </section>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 
-<%
-    // Login Logic
-    String memberId = request.getParameter("memberId");
-    String password = request.getParameter("password");
 
-    if (memberId != null && password != null) {
-        // Perform login authentication logic here
-        // Example:
-        if (memberId.equals("admin") && password.equals("admin123")) {
-            // Successful login, redirect to home page or desired destination
-            response.sendRedirect(request.getContextPath() + "/home");
-        } else {
-            // Invalid credentials, display error message
-            out.println("Invalid credentials. Please try again.");
-        }
-    }
-%>
