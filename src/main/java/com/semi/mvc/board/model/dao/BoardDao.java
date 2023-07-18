@@ -8,6 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Properties;
 
@@ -37,7 +39,12 @@ public class BoardDao {
 			pstmt.setInt(2, end);
 			try(ResultSet rset = pstmt.executeQuery()) {
 				while(rset.next()) {
-					Board board = handleBoardResultSet(rset);
+					Board board = new Board();
+					board.setBoardNo(rset.getInt("board_no"));
+					board.setTitle(rset.getString("title"));
+					board.setWriter(rset.getString("writer"));
+					board.setContent(rset.getString("content"));
+					board.setRegDate(rset.getDate("reg_date"));
 					board.setAttachCnt(rset.getInt("attach_cnt"));
 					board.setCommentCnt(rset.getInt("comment_cnt"));
 					boards.add(board);
@@ -119,7 +126,9 @@ public class BoardDao {
 			try (ResultSet rset = pstmt.executeQuery()) {
 				while (rset.next()) {
 					Attachment attach = handleAttachmentResultSet(rset);
-					attachments.add(attach);
+					if(attach != null) {
+						attachments.add(attach);						
+					}
 				}
 			}
 		} catch (Exception e) {
@@ -139,7 +148,7 @@ public class BoardDao {
 	}
 	
 	private BoardComment handleBoardCommentResultSet(ResultSet rset) throws SQLException {
-		int no = rset.getInt("no");
+		int no = rset.getInt("comment_no");
 		String writer = rset.getString("writer");
 		String content = rset.getString("content");
 		int boardNo = rset.getInt("board_no");
@@ -276,6 +285,21 @@ public class BoardDao {
 		} catch (SQLException e) {
 			throw new BoardException(e);
 		}
+		return result;
+	}
+
+	public int updateComment(Connection conn, BoardComment bc) {
+		int result = 0;
+		String query = prop.getProperty("updateComment");
+
+		try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+			pstmt.setString(1, bc.getWriter());
+			pstmt.setString(2, bc.getContent());
+			pstmt.setInt(3, bc.getBoardNo());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new BoardException(e);
+		} 
 		return result;
 	}
 }

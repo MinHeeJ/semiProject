@@ -169,4 +169,20 @@ public class BoardService {
 		return result;
 	}
 
+	public int updateComment(BoardComment bc) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = boardDao.updateComment(conn, bc);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		
+		return result;
+	}
+
 }

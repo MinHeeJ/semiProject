@@ -47,7 +47,16 @@
 		<tr>
 			<th>내 용</th>
 			<td>
-				<textarea readonly style="resize: none;" rows="10"><%= board.getContent() %></textarea>
+				<% if (attachments != null && !attachments.isEmpty()) { %>
+					<div class="content">
+						<% for(Attachment attach : attachments){ %>
+							<img src="<%= request.getContextPath() %>/upload/board/<%= attach.getRenamedFilename() %>">
+						<% } %>
+					<textarea readonly style="resize: none;" rows="10"><%= board.getContent() %></textarea>
+					</div>
+				<% }else{ %>
+					<textarea readonly style="resize: none;" rows="10"><%= board.getContent() %></textarea>
+				<% } %>
 			</td>
 		</tr>
 		<%-- 작성자와 관리자만 마지막행 수정/삭제버튼이 보일수 있게 할 것 --%>
@@ -103,7 +112,7 @@
 				<tr>
 					<th>내 용</th>
 					<td>
-						<textarea readonly style="resize: none;" rows="10"><%= board.getContent() %></textarea>
+						<textarea readonly style="resize: none;" rows="10"><%= bc.getContent() %></textarea>
 					</td>
 				</tr>
 				<%-- 작성자와 관리자만 마지막행 수정/삭제버튼이 보일수 있게 할 것 --%>
@@ -120,68 +129,7 @@
 			<% 	} %>
 		<% } %>
 	</div>
-	<form 
-		action="<%= request.getContextPath() %>/board/boardCommentDelete" 
-		name="boardCommentDelFrm"
-		method="POST">
-		<input type="hidden" name="no" />
-		<input type="hidden" name="boardNo" value="<%= board.getBoardNo() %>"/>
-	</form>
 	<script>
-	document.querySelectorAll(".btn-delete").forEach((button) => {
-		button.onclick = (e) => {
-			if(confirm("해당 댓글을 삭제하시겠습니까?")){
-				const frm = document.boardCommentDelFrm;
-				const {value} = e.target;
-				console.log(value);
-				frm.no.value = value;
-				frm.submit();
-			}
-		}
-	});
-	
-	document.querySelectorAll(".btn-reply").forEach((button) => {
-		button.onclick = (e) => {
-			const {value} = e.target;
-			const parentTr = e.target.parentElement.parentElement;
-			console.log(parentTr);
-			
-			const tr = `
-				<tr>
-					<td colspan="2">
-						<form
-							action="<%=request.getContextPath()%>/board/boardCommentCreate" 
-							method="post"
-							name="boardCommentFrm">
-			                <input type="hidden" name="boardNo" value="<%= board.getBoardNo() %>" />
-			                <input type="hidden" name="writer" value="<%= loginMember != null ? loginMember.getMemberId() : "" %>" />
-			                <input type="hidden" name="commentLevel" value="2" />
-			                <input type="hidden" name="commentRef" value="\${value}" />    
-							<textarea name="content" cols="60" rows="1"></textarea>
-			                <button type="submit" class="btn-comment-enroll2">등록</button>
-			            </form>
-					</td>
-				</tr>
-			`;
-			// beforebegin 시작태그전 - 이전형제요소로 추가
-			// afterbegin 시작태그후 - 첫자식요소로 추가
-			// beforeend 종료태그전 - 마지막요소로 추가
-			// afterend 종료태그후 - 다음형제요소로 추가
-			parentTr.insertAdjacentHTML('afterend', tr);
-			
-			button.onclick = null; // 이벤트핸들러 제거 (1회용)
-		};
-	});
-	
-	// 이벤트버블링을 이용한 textarea focus핸들러
-	// focus, blur 버블링되지 않음. 대신 focusin, focusout 사용.
-	document.addEventListener("focusin", (e) => {
-		if(e.target.matches("form[name=boardCommentFrm] textarea")) {
-			<% 	if (loginMember == null) { %>
-				loginAlert();
-			<% 	} %>
-		}
-	});
 	
 	// 이벤트버블링을 이용한 폼유효성 검사 
 	document.addEventListener("submit", (e) => {
@@ -220,6 +168,22 @@
 <form action="<%= request.getContextPath() %>/board/boardDelete" name="boardDeleteFrm" method="POST">
 	<input type="hidden" name="no" value="<%= board.getBoardNo() %>" />
 </form>
+<form action="<%= request.getContextPath() %>/board/boardCommentDelete" name="boardCommentDeleteFrm" method="POST">
+	<% if (!boardComments.isEmpty()) { %>
+	<input type="hidden" name="no" value="<%= boardComments.get(0).getCommentNo() %>" />
+	<input type="hidden" name="boardNo" value="<%= boardComments.get(0).getBoardNo() %>"/>
+	<% } %>
+</form>
+	</form>
+		<form 
+		action="<%= request.getContextPath() %>/board/boardCommentUpdate" 
+		name="boardCommentUpdateFrm"
+		method="GET">
+		<% if (!boardComments.isEmpty()) { %>
+		<input type="hidden" name="no" value="<%= boardComments.get(0).getCommentNo() %>" />
+		<input type="hidden" name="boardNo" value="<%= boardComments.get(0).getBoardNo() %>"/>
+		<% } %>
+	</form>
 <% } %>
 <script>
 /**
@@ -237,12 +201,12 @@ const updateBoard = () => {
 };
 const deleteComment = () => {
 	if(confirm("정말 이 게시글을 삭제하시겠습니까?"))
-		document.boardDeleteFrm.submit();
+		document.boardCommentDeleteFrm.submit();
 };	
 
 const updateComment = () => {
 	<% if(boardComments != null && !boardComments.isEmpty()) { %>
-	location.href = "<%= request.getContextPath() %>/board/boardUpdate?no=<%= boardComments.get(0).getBoardNo() %>";
+		location.href = "<%= request.getContextPath() %>/board/boardCommentUpdate?no=<%= boardComments.get(0).getBoardNo() %>";
 	<% } %>
 };
 </script>

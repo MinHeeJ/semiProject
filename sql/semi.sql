@@ -183,7 +183,7 @@ create sequence seq_board_no;
 --drop sequence seq_board_no;
 insert into board values(seq_board_no.nextval, 'honggd', 'gd', 'gd', sysdate);
 select * from board;
---SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY b.board_no DESC) rnum, b.*, (SELECT COUNT(*) FROM attachment_board WHERE board_no = b.board_no) attach_cnt, (SELECT COUNT(*) FROM board_comment WHERE board_no = b.board_no) comment_cnt FROM board b) b WHERE rnum BETWEEN ? AND ?;
+--SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY b.board_no ASC) rnum, b.*, (SELECT COUNT(*) FROM attachment_board WHERE board_no = b.board_no) attach_cnt, (SELECT COUNT(*) FROM board_comment WHERE board_no = b.board_no) comment_cnt FROM board b) b WHERE rnum BETWEEN 1 AND 10;
 
 
 
