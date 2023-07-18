@@ -3,36 +3,6 @@
 <script src="<%=request.getContextPath()%>/js/jquery-3.7.0.js"></script>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/index.css" />
 
-<%-- 로그인 전에는 회원가입과 로그인 버튼 표시 --%>
-<% if (loginMember == null) { %>
-    <ul class="account_list">
-        <li><a href="<%= request.getContextPath() %>/member/memberLogin">로그인</a></li>
-        <li><a href="<%= request.getContextPath() %>/member/memberEnroll">회원가입</a></li>
-    </ul>
-<% } else { %>
-    <%-- 로그인 후에는 회원 정보와 로그아웃 버튼 표시 --%>
-    <div class="user_info_container">
-        <span><%= loginMember.getName() %>님, 환영합니다!</span>
-        <ul class="account_list">
-            <li><a href="<%= request.getContextPath()%>/cart/cartList.jsp">장바구니</a></li>
-            <li><a href="<%= request.getContextPath()%>/order/orderList.jsp">주문내역</a></li>
-            <li><a href="<%= request.getContextPath() %>/member/memberDetail">마이페이지</a></li>
-            <li><a href="<%= request.getContextPath() %>/member/logout">로그아웃</a></li>
-        </ul>
-    </div>
-    
-    <%-- 관리자일 경우 관리자 메뉴 표시 --%>
-    <% if (loginMember.getMemberRole() == MemberRole.A) { %>
-        <div class="user_info_container">
-            <span><%= loginMember.getName() %>님, 환영합니다!</span>
-            <ul class="account_list">
-                <li><a href="<%= request.getContextPath() %>/admin/salesLookUp.jsp">매출조회</a></li>
-                <li><a href="<%= request.getContextPath() %>/admin/orderList">전체주문내역</a></li>
-                <li><a href="<%= request.getContextPath() %>/admin/memberList.jsp">전체회원조회</a></li>
-            </ul>
-        </div>
-    <% } %>
-<% } %>
 
 <div class="swiper slide_wrapper">
     <div class="swiper-wrapper">
@@ -120,6 +90,8 @@
             success(responseData) {
                 const container = document.querySelector("#reviewBestPrint");
                 let rank = 1;
+                console.log("이거 왜 안돼");
+                console.log(responseData);
                 responseData.forEach((review) => {
                     const {reviewNo, writer, content, regDate, product, attachments} = review;
                     let renamedFile = "";
@@ -131,7 +103,7 @@
                         <div class="polaroid">
                             <div class="textArea">
                                 <p id="textAreaTitle">🧡 좋아요 \${rank}위 🧡</p><br>
-                                <p class="reviewInfo">\${product}</p><br>
+                                <p class="reviewInfo">${product}</p><br>
                                 <p>
                                     <span class="writer">작성자 : \${writer}</span><br><br>
                                     <span class="photoDate">작성일 : \${regDate}</span><br><br>
