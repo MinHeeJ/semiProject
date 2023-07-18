@@ -58,6 +58,17 @@
 		</table>
         <input type="submit" value="정보수정"/>
 	</form>
-</section>
+	</section>
+	
+	<section>
+	const deleteMember = () => {
+		if(confirm("정말 탈퇴하시겠습니까?"))
+		document.memberDelFrm.submit();
+	}
 
+</section>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
+
+
+
+
