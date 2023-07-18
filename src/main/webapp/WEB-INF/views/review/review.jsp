@@ -19,14 +19,14 @@
 <script src="<%= request.getContextPath() %>/js/jquery-3.7.0.js"></script>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/review.css" />
-	<h2>리뷰작성</h2>
+	<h2>✨리뷰작성✨</h2>
 <section id="review-container">
 	<form name="reviewOrderListFrm"
 		action="<%=request.getContextPath() %>/review/reviewOrderList"
 		method="POST" enctype="multipart/form-data">
 
 		<table id="tbl-order-review">
-			<h1>주문상품</h1>
+			<h1>상품</h1>
 			
 			<tbody>
 				<% 	if(orders == null || orders.isEmpty()) { %>
@@ -78,7 +78,7 @@
 
 
 <section id="photo-review-wrapper">
-	<h2>리뷰게시판</h2>
+	<h2>✨리뷰게시판✨</h2>
 
 	<div id="photo-review-container">
 		<% 	if(reviews == null || reviews.isEmpty()) { %>
@@ -95,12 +95,13 @@
 				
 				
 					<div class="polaroid">
-						
-						
+					
 					<!-- ajax -->
 						
 					
-				   </div>  
+				   </div>
+				   
+				   <br/>  
 			</tr>
 			<% 		
 				}
@@ -261,8 +262,8 @@ const getPage = (cpage) => {
 				
 				
 				container.innerHTML += imgElements + `
-					<div class = "content-container">
-						<p class ="product">\${product}</p>
+				<div class = "content-container">
+						<p class ="product">🥗\${product}</p>
 						<div class="info-container">
 							<p class ="photoDate">\${regDate}</p>
 							<p class ="writer">✍작성자 : \${writer}</p></p>

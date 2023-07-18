@@ -39,9 +39,6 @@ public class ReviewMoreServlet extends HttpServlet {
 		
 		// 2. 업무로직
 		List<Review> reviews = reviewService.findReview(start, end);
-//		List<AttachmentReview> attachmentReview = reviewService.findAttachmentReview(start, end);
-		System.out.println("reviews111111111 = " + reviews);
-		
 		request.setAttribute("reviews", reviews);
 		
 		// 3. 응답처리 (json)
