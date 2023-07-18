@@ -104,6 +104,13 @@ public class FaqService {
 		close(conn);
 		return attach;
 	}
+	
+	public List<Attachment> findAttachmentListByBoardNo(int boardNo){
+		Connection conn = getConnection();
+		List<Attachment> faqAttachments = faqDao.findAttachmentByBoardNo(conn, boardNo);
+		close(conn);
+		return faqAttachments;
+	}
 
 	public int deleteAttachment(int attachNo) {
 		Connection conn = getConnection();

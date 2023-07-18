@@ -3,33 +3,39 @@ package com.semi.mvc.board.model.vo;
 import java.sql.Date;
 
 public class BoardComment {
-	private int commentNO;
+	private int commentNo;
+	private int boardNo;
 	private String writer;
 	private String content;
-	private int commentLevel;
-	private int commentRef;
 	private Date regDate;
 	
 	public BoardComment() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public BoardComment(int commentNO, String writer, String content, int commentLevel, int commentRef, Date regDate) {
+	public BoardComment(int commentNo, int boardNo, String writer, String content, Date regDate) {
 		super();
-		this.commentNO = commentNO;
+		this.commentNo = commentNo;
+		this.boardNo = boardNo;
 		this.writer = writer;
 		this.content = content;
-		this.commentLevel = commentLevel;
-		this.commentRef = commentRef;
 		this.regDate = regDate;
 	}
 
-	public int getCommentNO() {
-		return commentNO;
+	public int getCommentNo() {
+		return commentNo;
 	}
 
-	public void setCommentNO(int commentNO) {
-		this.commentNO = commentNO;
+	public void setCommentNo(int commentNo) {
+		this.commentNo = commentNo;
+	}
+
+	public int getBoardNo() {
+		return boardNo;
+	}
+
+	public void setBoardNo(int boardNo) {
+		this.boardNo = boardNo;
 	}
 
 	public String getWriter() {
@@ -48,22 +54,6 @@ public class BoardComment {
 		this.content = content;
 	}
 
-	public int getCommentLevel() {
-		return commentLevel;
-	}
-
-	public void setCommentLevel(int commentLevel) {
-		this.commentLevel = commentLevel;
-	}
-
-	public int getCommentRef() {
-		return commentRef;
-	}
-
-	public void setCommentRef(int commentRef) {
-		this.commentRef = commentRef;
-	}
-
 	public Date getRegDate() {
 		return regDate;
 	}
@@ -74,9 +64,11 @@ public class BoardComment {
 
 	@Override
 	public String toString() {
-		return "BoardComment [commentNO=" + commentNO + ", writer=" + writer + ", content=" + content
-				+ ", commentLevel=" + commentLevel + ", commentRef=" + commentRef + ", regDate=" + regDate + "]";
+		return "BoardComment [commentNo=" + commentNo + ", boardNo=" + boardNo + ", writer=" + writer + ", content="
+				+ content + ", regDate=" + regDate + ", getCommentNo()=" + getCommentNo() + ", getBoardNo()="
+				+ getBoardNo() + ", getWriter()=" + getWriter() + ", getContent()=" + getContent() + ", getRegDate()="
+				+ getRegDate() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
+				+ super.toString() + "]";
 	}
-	
-	
+
 }

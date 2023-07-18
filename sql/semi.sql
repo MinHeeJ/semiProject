@@ -61,7 +61,12 @@ insert into member values ('honggd', 1234, '홍지디', '010-1234-5678', '서울
 insert into member values ('qwerty', 1234, '쿼티', '010-1122-3344', '경기도 안산시', 'F', default);
 Insert into semi.MEMBER (MEMBER_ID,PASSWORD,NAME,PHONE, ADDRESS,GENDER,MEMBER_ROLE,) values ('admin1','b5fMEM1PXQznhG6q+YA+t03cAhGSXAXwvU53Nn1BGiX3ta1Io+OBrDdcMSO0FNsGHq2F2yFZuDM0o4VMRct05Q==','암호화','A','M',to_date('91/02/03','RR/MM/DD'),null,'01012341243',null,1000);
 select * from member;
+
+update member set member_role = 'A' where member_id = 'asdf';
+
+
 update member set member_role = 'A' where member_id = 'aaaaa';
+
 --drop table member;
 
 
@@ -179,6 +184,11 @@ create table board (
 );
 
 --drop table board;
+create sequence seq_board_no;
+--drop sequence seq_board_no;
+insert into board values(seq_board_no.nextval, 'honggd', 'gd', 'gd', sysdate);
+select * from board;
+--SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY b.board_no ASC) rnum, b.*, (SELECT COUNT(*) FROM attachment_board WHERE board_no = b.board_no) attach_cnt, (SELECT COUNT(*) FROM board_comment WHERE board_no = b.board_no) comment_cnt FROM board b) b WHERE rnum BETWEEN 1 AND 10;
 
 
 
@@ -192,10 +202,6 @@ create table board_comment (
 
 	content	varchar2(1000) not null,
 
-	comment_level number not null,
-
-	comment_ref	number not null,
-
 	reg_date date default sysdate,
 
     constraints pk_board_comment_no primary key(comment_no),
@@ -207,6 +213,10 @@ create table board_comment (
 );
 
 --drop table board_comment;
+create sequence seq_board_comment_no;
+--drop sequence seq_board_comment_no;
+
+--select * from (select row_number() over (order by b.board_no desc) rnum, b.*, (select count(*) from attachment_board where board_no = b.board_no) attach_cnt, (select count(*) from board_comment where board_no = b.board_no) comment_cnt from board b) where rnum between ? and ?;
 
 
 
@@ -388,7 +398,7 @@ create table attachment_board(
     renamed_filename varchar2(255) not null, -- 저장파일명 (영문자/숫자)
     reg_date date default sysdate,
     constraints pk_attachment_board_no primary key(no),
-    constraints fk_attachment_board_no foreign key(board_no) references board(board_no) on delete cascade
+    constraints fk_attachment_board_no2 foreign key(board_no) references board(board_no) on delete cascade
 );
 create sequence seq_attachment_board_no;
 select * from attachment_board;
@@ -488,8 +498,6 @@ create table board_comment (
 	board_no number,
 	writer	varchar2(20),
 	content	varchar2(1000) not null,
-	comment_level number not null,
-	comment_ref	number not null,
 	reg_date date default sysdate,
     constraints pk_board_comment_no primary key(comment_no),
     constraints fk_board_comment_board_no foreign key(board_no) references board(board_no) on delete cascade,
@@ -778,88 +786,4 @@ select * from selected_option;
 -- delete from selected_option;
 
 select * from ingredient;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-create table attachment_faq (
-    no number, 
-    review_no number not null,
-    original_filename varchar2(255) not null, -- 실제파일명
-    renamed_filename varchar2(255) not null, -- 저장파일명 (영문자/숫자)
-    reg_date date default sysdate,
-    constraints pk_attachment_no primary key(no),
-    constraints fk_attachment_faq_no foreign key(review_no) references faq_board(board_no) on delete cascade
-);
-
-create sequence seq_attachment_faq_no;
-
-create table attachment_board (
-    no number, 
-    review_no number not null,
-    original_filename varchar2(255) not null, -- 실제파일명
-    renamed_filename varchar2(255) not null, -- 저장파일명 (영문자/숫자)
-    reg_date date default sysdate,
-    constraints pk_attachment_no primary key(no),
-    constraints fk_attachment_board_no foreign key(board_no) references board(board_no) on delete cascade
-);
-
-create sequence seq_attachment_board_no;
-
 

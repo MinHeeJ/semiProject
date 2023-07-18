@@ -1,0 +1,22 @@
+.boardButton {
+  display: flex;
+  justify-content: center;
+}
+.boardButton > div {
+	margin: 3px 30px;
+    line-height: 3.125rem;
+    background-color:#086528;
+    border-radius: 5px;
+    width: 150px;
+}
+.boardButton > div > a{
+	display: inline-block;
+    height: 100%;
+    padding: 0 30px;
+    color: #fff;
+    font-weight: bold;
+    font-size:25px;
+     display: flex;
+  	justify-content: center; 
+  	align-items: center; 
+}
