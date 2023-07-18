@@ -1,6 +1,7 @@
 package com.semi.mvc.admin.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,8 +38,10 @@ public class AdminSalesLookUpServlet extends HttpServlet {
 		FileRenamePolicy policy = new DefaultFileRenamePolicy();
 		MultipartRequest multiReq = new MultipartRequest(request, saveDirectory, maxPostSize, encoding, policy);
 		// 1. 사용자 입력값 처리
-		String startDate = multiReq.getParameter("searchStartDate");
-		String endDate = multiReq.getParameter("searchEndDate");
+		String _startDate = multiReq.getParameter("searchStartDate");
+		String _endDate = multiReq.getParameter("searchEndDate");
+		Date startDate = Date.valueOf(_startDate);
+		Date endDate = Date.valueOf(_endDate);
 		System.out.println("startDate, endDate = " + startDate + ", " + endDate);
 				
 		// 2. 업무로직

@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 @font-face {font-family: 'NanumSquareNeo-Variable'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');font-weight: normal;font-style: normal;}
 
-body { font-family: 'NanumSquareNeo-Variable'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');font-weight: normal;font-style: normal; width: 1024px; margin: 0 auto; text-align: center; }
+body { margin: 0 auto; text-align: center; width: 1200px; }
 .title-wrapper { font-size: 60px; font-weight: bolder; margin-top: 100px; }
 .introduce-wrapper { margin-top: 150px; }
 .introduce-wrapper span { font-size: 30px; }
@@ -22,4 +22,4 @@ body { font-family: 'NanumSquareNeo-Variable'; src: url('https://cdn.jsdelivr.ne
 #howToUse-container div {width: 45%; display: inline-block; margin: 2%;}
 .howToUse {border: 2px solid black; }
 .howToUse img{width: 100%;} 
-.howToUse p {font-family: 'NanumSquareNeo-Variable'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');font-weight: normal;font-style: normal; font-size : 20px; margin: 3% 0;}
+.howToUse p {font-family: 'NanumSquareNeo-Variable'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');font-weight: normal;font-style: normal; font-size : 19px; margin: 3% 0;}
