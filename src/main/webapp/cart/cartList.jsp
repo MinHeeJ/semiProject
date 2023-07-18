@@ -117,9 +117,8 @@
 		                <td>\${price}</td>
 		           		</tr>
 					`;
-					index++;
-					
-					
+					 index++;
+
 				});	
 
 				document.querySelectorAll("input[name=checkedOrNot]").forEach((checkbox) => {	
@@ -156,48 +155,52 @@
 	}
 	
 
-	
 	document.querySelector("#cartDelete").onclick =(e) =>{
-		
+
+		const checkboxes = document.querySelectorAll("input[name=checkedOrNot]");
+		  
 		let flag = true;
-		document.querySelectorAll("input[name=checkedOrNot]").forEach((checkbox) => {			
-			if(checkbox.checked)
-				flag = false;			
+		
+	    checkboxes.forEach((checkbox) => {
+			if (checkbox.checked) 		   
+			    flag = false;
 		});
-				
-		if(flag){
+	    if(flag){
+	    	 alert('선택하신 상품이 없습니다.');
+			 e.preventDefault();
+			 return;
+	    }
 			
-			alert("선택된 값이 없습니다.");
-			
-			e.preventDefault();
-			
-		} else if(confirm('정말 삭제하시겠습니까?')) {
-			document.querySelector("#printCartList").onsubmit =(e) =>{
-			
-				e.preventDefault();
-			
-				const frmData = new FormData(e.target); 
-				$.ajax({				
-					url : "<%= request.getContextPath()%>/delete/cart",
-					data : frmData,
-					processData : false, 
-					contentType : false, 
-					method : "POST",
-					dataType : "json",
-					success(responseData){
-						const {result, message} = responseData;
-						alert(message);				
-					},
-					complete(){
-						findAllCart();
-					}
-				});
-			
-			}	
-		} 
-	}	
+        if(!flag && confirm('정말 삭제하시겠습니까?')) {
+            document.querySelector("#printCartList").onsubmit =(e) =>{
+
+                e.preventDefault();
+
+                const frmData = new FormData(e.target); 
+                $.ajax({
+                    url : "<%= request.getContextPath()%>/delete/cart",
+                    data : frmData,
+                    processData : false, 
+                    contentType : false, 
+                    method : "POST",
+                    dataType : "json",
+                    success(responseData){
+                        const {result, message} = responseData;
+                        alert(message);
+                    },
+                    complete(){
+                        findAllCart();
+                    }
+                });
+
+            }
+
+        }
+    }
 	
 	document.querySelector("#cartUpdate").onclick =(e) =>{
+		
+		checkckeck(e);
 		
 		document.querySelector("#printCartList").onsubmit =(e) =>{
 			
@@ -229,22 +232,32 @@
 	// 선택한 상품 없으면 주문 x
 	document.querySelector("#order").onclick = (e) => {
 		
-		let flag = true;
-		 
+		checkckeck(e);
+		
+	};
+	
+	const checkckeck = (e) => {
+		
 		const checkboxes = document.querySelectorAll("input[name=checkedOrNot]");
 		  
+		let flag = true;
 	    checkboxes.forEach((checkbox) => {
 			if (checkbox.checked) 		   
 			    flag = false;
 		});
 	    if(flag){
 	    	 alert('선택하신 상품이 없습니다.');
-			    e.preventDefault();
+			 e.preventDefault();
+			 return;
 	    }
-
 	};
+	
+	
+	
+	
 	</script>
 
 </body>
 </html>
+
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

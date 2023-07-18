@@ -1,4 +1,4 @@
-package com.semi.mvc.member.model.controller;
+package com.semi.mvc.member.controller;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -49,13 +49,12 @@ public class MemberEnrollServlet extends HttpServlet {
 	    String address = request.getParameter("address");
 	    String _gender = request.getParameter("gender");
 	    
-	    Gender gender = null;
-	    if (_gender != null) {
-	        gender = Gender.valueOf(_gender);
-	    }
-	    // Member객체로 변환
-	    // insert into member values (?, ?, ?, default, ?, ?, ?, ?, ?, default, default)
+	    Gender gender = _gender != null ? Gender.valueOf(_gender) : null;
+	    
+	 
+//	    insert into member values (?, ?, ?, ?, ?, ?, default
 	    Member newMember = new Member(memberId, password, name, phone, address, gender, null);
+	    System.out.println(newMember);
 	    // 다른 속성 초기화 등...
 	
 	
