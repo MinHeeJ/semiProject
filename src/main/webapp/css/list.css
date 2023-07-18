@@ -52,12 +52,12 @@ table#tbl-salesLookUp { border-top:3px solid rgb(217, 250, 217); border-bottom:3
 table#tbl-salesLookUp th { width: 80px; border-top:3px solid rgb(217, 250, 217); border-bottom:3px solid rgb(217, 250, 217); padding: 10px 0; text-align:center; background-color: rgb(217, 250, 217); height : 50px; font-size: 20px; font-weight: bold; vertical-align: middle; }
 table#tbl-salesLookUp td {border-top:3px solid rgb(217, 250, 217);border-bottom:3px solid rgb(217, 250, 217); padding: 5px; text-align:left; text-align:center; height : 50px; font-size: 15px; vertical-align: middle;}
 
-table#tbl-member { border-top:3px solid rgb(217, 250, 217); border-bottom:3px solid rgb(217, 250, 217); border-collapse:collapse; margin: 2% auto 10% auto; text-align:center; }
+table#tbl-member { border-top:3px solid rgb(217, 250, 217); border-bottom:3px solid rgb(217, 250, 217); border-collapse:collapse; margin: 2% auto 2% auto; text-align:center; }
 table#tbl-member th { width: 80px; border-top:3px solid rgb(217, 250, 217); border-bottom:3px solid rgb(217, 250, 217); padding: 10px 0; text-align:center; background-color: rgb(217, 250, 217); height : 50px; font-size: 20px; font-weight: bold; vertical-align: middle; }
 table#tbl-member td {border-top:3px solid rgb(217, 250, 217);border-bottom:3px solid rgb(217, 250, 217); padding: 5px; text-align:left; text-align:center; height : 50px; font-size: 15px; vertical-align: middle;}
 
 #search { width : 75px; background-color: #73b673; padding: 5px; border-radius: 10px; margin-left: 15px; font-family: 'NanumSquareNeo-Variable'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2'); font-size: 16px;}
-#delete { width : 113px; background-color: #73b673; padding: 5px; border-radius: 10px; margin-left: 189px; font-family: 'NanumSquareNeo-Variable'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2'); font-size: 31px; position: absolute; top: 93%; left: 190px; }
+#delete { width : 113px; background-color: #73b673; padding: 5px; border-radius: 10px; margin-left: -188px; font-family: 'NanumSquareNeo-Variable'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2'); font-size: 31px; float: left; margin-bottom: 12%; position: relative; top: 93%; left: 190px; }
 
 
 

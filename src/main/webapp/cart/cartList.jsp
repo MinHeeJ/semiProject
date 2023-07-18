@@ -15,7 +15,7 @@
 <title></title>
 <script src="<%= request.getContextPath() %>/js/jquery-3.7.0.js"></script>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/cartList.css" />
-<% loginMember = "honggd"; %>
+
 <body>
 	<section id="CartListSection">
 	<h1>장 바 구 니</h1>
@@ -61,22 +61,10 @@
 	}
 	document.querySelector("#allCheck").onclick=(e)=>{	
 		const checkBoxes = document.querySelectorAll("[name=checkedOrNot]");
-		let sum = 0;
 		checkBoxes.forEach((checkBox)=>{
 			checkBox.checked = e.target.checked;			
-			const tfoot = document.querySelector("#cartListTable tfoot");
-			if(checkBox.checked) {
-				const tr = checkBox.closest("tr"); 
-			    const price = parseFloat(tr.querySelector('td:last-child').innerHTML);
-			    sum += price;
-			}
-			
-			tfoot.innerHTML = `
-				<tr>
-					<td colspan="6">총금액 : \${sum}원</td>
-				</tr>
-			`;
 		});
+		totalSum();
 	}
 	
 	
@@ -114,30 +102,13 @@
 		                <td>\${price}</td>
 		           		</tr>
 					`;
-					index++;
-					
-					
+					 index++;
+
 				});	
-				const tfoot = document.querySelector("#cartListTable tfoot");
-				let sum = 0;
-				document.querySelectorAll("input[name=checkedOrNot]").forEach((checkbox) => {
-	
+
+				document.querySelectorAll("input[name=checkedOrNot]").forEach((checkbox) => {	
 					checkbox.addEventListener('change', () => {
-						if(checkbox.checked) {
-							const tr = checkbox.closest("tr"); // checkbox중 가장 가까운 tr
-						    const price = parseFloat(tr.querySelector('td:last-child').innerHTML);
-						    sum += price;
-						}
-						else {
-							const tr = checkbox.closest('tr');
-						    const price = parseFloat(tr.querySelector('td:last-child').innerHTML);
-						    sum -= price;
-						}
-						tfoot.innerHTML = `
-							<tr>
-								<td colspan="6">총금액 : \${sum}원</td>
-							</tr>
-						`;
+						totalSum();
 					});
 				});				
 			}
@@ -145,35 +116,76 @@
 		});
 	};
 	
-	document.querySelector("#cartDelete").onclick =(e) =>{
-		if(confirm('정말 삭제하시겠습니까?')) {
-			document.querySelector("#printCartList").onsubmit =(e) =>{
-			
-				e.preventDefault();
-			
-				const frmData = new FormData(e.target); 
-				$.ajax({				
-					url : "<%= request.getContextPath()%>/delete/cart",
-					data : frmData,
-					processData : false, 
-					contentType : false, 
-					method : "POST",
-					dataType : "json",
-					success(responseData){
-						const {result, message} = responseData;
-						alert(message);				
-					},
-					complete(){
-						findAllCart();
-					}
-				});
-			
-			}
+	
+	const totalSum =() =>{
 		
-		}
-	}	
+		let sum = 0;
+		const tfoot = document.querySelector("#cartListTable tfoot");
+		document.querySelectorAll("input[name=checkedOrNot]").forEach((checkbox) => {
+			
+			if(checkbox.checked) {
+				const tr = checkbox.closest("tr"); 
+			    const price = parseFloat(tr.querySelector('td:last-child').innerHTML);
+			    sum += price;
+			}
+			
+			tfoot.innerHTML = `
+				<tr>
+					<td colspan="6">총금액 : \${sum}원</td>
+				</tr>
+			`;
+			
+		});	
+		
+	}
+	
+
+	document.querySelector("#cartDelete").onclick =(e) =>{
+
+		const checkboxes = document.querySelectorAll("input[name=checkedOrNot]");
+		  
+		let flag = true;
+		
+	    checkboxes.forEach((checkbox) => {
+			if (checkbox.checked) 		   
+			    flag = false;
+		});
+	    if(flag){
+	    	 alert('선택하신 상품이 없습니다.');
+			 e.preventDefault();
+			 return;
+	    }
+			
+        if(!flag && confirm('정말 삭제하시겠습니까?')) {
+            document.querySelector("#printCartList").onsubmit =(e) =>{
+
+                e.preventDefault();
+
+                const frmData = new FormData(e.target); 
+                $.ajax({
+                    url : "<%= request.getContextPath()%>/delete/cart",
+                    data : frmData,
+                    processData : false, 
+                    contentType : false, 
+                    method : "POST",
+                    dataType : "json",
+                    success(responseData){
+                        const {result, message} = responseData;
+                        alert(message);
+                    },
+                    complete(){
+                        findAllCart();
+                    }
+                });
+
+            }
+
+        }
+    }
 	
 	document.querySelector("#cartUpdate").onclick =(e) =>{
+		
+		checkckeck(e);
 		
 		document.querySelector("#printCartList").onsubmit =(e) =>{
 			
@@ -205,22 +217,32 @@
 	// 선택한 상품 없으면 주문 x
 	document.querySelector("#order").onclick = (e) => {
 		
-		let flag = true;
-		 
+		checkckeck(e);
+		
+	};
+	
+	const checkckeck = (e) => {
+		
 		const checkboxes = document.querySelectorAll("input[name=checkedOrNot]");
 		  
+		let flag = true;
 	    checkboxes.forEach((checkbox) => {
 			if (checkbox.checked) 		   
 			    flag = false;
 		});
 	    if(flag){
 	    	 alert('선택하신 상품이 없습니다.');
-			    e.preventDefault();
+			 e.preventDefault();
+			 return;
 	    }
-
 	};
+	
+	
+	
+	
 	</script>
 
 </body>
 </html>
+
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

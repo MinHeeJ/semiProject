@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/order.css" />
-<% loginMember = "honggd"; %>
 <body>
     
     <div class="veg-wrapper">	

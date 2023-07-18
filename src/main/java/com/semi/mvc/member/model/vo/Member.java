@@ -23,6 +23,10 @@ public class Member {
 		this.memberRole = memberRole;
 	}
 
+	public Member() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getMemberId() {
 		return memberId;
 	}

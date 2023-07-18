@@ -275,9 +275,7 @@ header > nav > ul > li > a{
 }
 
 
-footer{ 
-background-color:#086528; clear:both; height:75px; text-align:center;padding-top:40px;
-}
+footer{ background-color:#086528; clear:both; height:75px; text-align:center;padding-top:40px; }
 
 footer p {
 	display: flex;

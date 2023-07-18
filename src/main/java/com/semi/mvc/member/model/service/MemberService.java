@@ -11,6 +11,10 @@ import com.semi.mvc.member.model.vo.MemberRole;
 public class MemberService {
 	private final MemberDao memberDao = new MemberDao();
 	
+	
+
+	
+	
 	public List<Member> findAll() {
 		Connection conn = getConnection();
 		List<Member> members = memberDao.findAll(conn);
@@ -67,4 +71,20 @@ public class MemberService {
 		}
 		return result;
 	}
+
+	public int updateMember(Member member) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = memberDao.updateMember(conn, member);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
 }

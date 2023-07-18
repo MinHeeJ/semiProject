@@ -19,21 +19,15 @@
 <script src="<%= request.getContextPath() %>/js/jquery-3.7.0.js"></script>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/review.css" />
+	<h2>✨리뷰작성✨</h2>
 <section id="review-container">
-	<h2>리뷰작성</h2>
 	<form name="reviewOrderListFrm"
 		action="<%=request.getContextPath() %>/review/reviewOrderList"
 		method="POST" enctype="multipart/form-data">
 
 		<table id="tbl-order-review">
-			<thead>
-				<tr>
-
-					<th>주문상품</th>
-
-				</tr>
-			</thead>
-
+			<h1>상품</h1>
+			
 			<tbody>
 				<% 	if(orders == null || orders.isEmpty()) { %>
 				<tr>
@@ -84,7 +78,7 @@
 
 
 <section id="photo-review-wrapper">
-	<h2>리뷰게시판</h2>
+	<h2>✨리뷰게시판✨</h2>
 
 	<div id="photo-review-container">
 		<% 	if(reviews == null || reviews.isEmpty()) { %>
@@ -101,12 +95,13 @@
 				
 				
 					<div class="polaroid">
-						
-						
+					
 					<!-- ajax -->
 						
-						
-				   </div>  
+					
+				   </div>
+				   
+				   <br/>  
 			</tr>
 			<% 		
 				}
@@ -262,31 +257,36 @@ const getPage = (cpage) => {
 				    const { renamedFilename } = attachment;
 				    renamedFile = renamedFilename;
 
-				    imgElements += `<img src="<%= request.getContextPath()%>/upload/review/\${renamedFile}" id="photo">`;
+				    imgElements += `<img src="<%= request.getContextPath()%>/upload/review/\${renamedFile}" class="photo">`;
 				  }
 				
 				
 				container.innerHTML += imgElements + `
-					<p class="info">
-							<span class ="writer">\${writer}</span>
-							<span class ="photoDate">\${regDate}</span>
-					</p>
-					<p class ="product">\${product}</p>
-					<p class ="caption">\${content}</p>
-				
+				<div class = "content-container">
+						<p class ="product">🥗\${product}</p>
+						<div class="info-container">
+							<p class ="photoDate">\${regDate}</p>
+							<p class ="writer">✍작성자 : \${writer}</p></p>
+						<p class ="content">내용 : \${content}</p>
+						</div>
 					<tr>			
 					<th colspan="2" id="th">
-						<div>
+						<div class="heart-container">
 				            <input type="hidden" name="reviewNo" value="\${reviewNo}"/>
 				            <input type="image" src="<%= request.getContextPath() %>/images/review/heart.png" alt="heart.png" style="width: 30px;" class="heart" value="\${reviewNo}">
 				            <p id="p">0</p>
 		          	 	</div>
 						<%-- 첨부파일이 없는 게시물 수정 --%>
+						<div class = "button-container">
 							<input type="button" value="수정하기" onclick="updateReview('\${reviewNo}');">
 								
 							<input type="button" value="삭제하기" onclick="deleteReview('\${reviewNo}');">
+						</div>
 					</th>
 				</tr>
+						
+				</div>
+				
 				`;
 			})
 		},

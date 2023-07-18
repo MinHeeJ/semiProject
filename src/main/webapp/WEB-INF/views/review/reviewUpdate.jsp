@@ -3,6 +3,9 @@
 <%@page import="com.semi.mvc.review.model.vo.Review"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ include file="/WEB-INF/views/common/header.jsp"%>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/reviewUpdate.css" />
 <%
 	Review r = (Review) request.getAttribute("review");
 	List<AttachmentReview> attachments = r.getAttachments();
@@ -41,18 +44,20 @@
 			<input type="file" name="upFile1" />
 			<input type="file" name="upFile2" />
 		</td>
-	</tr>
-	<tr>
-		<th>내 용</th>
-		<td><textarea rows="5" cols="50" name="content"><%= r.getContent() %></textarea></td>
-	</tr>
-	<tr>
-		<th colspan="2">
-			<input type="submit" value="수정하기">
-			<input type="button" value="취소" onclick="history.go(-1);">
 		</th>
 	</tr>
+	<tr>
+		<th>수정내용</th>
+		<td><textarea rows="5" cols="50" name="content"><%= r.getContent() %></textarea></td>
+	</th>
+	</tr>
 </table>
+	
+	<div class="button-container">
+			<input type="submit" value="수정하기">
+			<input type="button" value="취소" onclick="history.go(-1);">
+	</div>	
+	
 </form>
 </section>
 <script>
@@ -68,3 +73,4 @@ document.reviewUpdateFrm.onsubmit = (e) => {
 	}
 }
 </script>
+<%@ include file="/WEB-INF/views/common/footer.jsp"%>
