@@ -7,7 +7,6 @@
 <script src="<%=request.getContextPath()%>/js/jquery-3.7.0.js"></script>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/index.css" />
 
-	<div class="account_wrapper">
 
         <!-- 로그인 전 -->
 <ul class="account_list">
@@ -39,6 +38,7 @@
         
     </div>
 	
+
     <div class="swiper slide_wrapper">
        	<div class="swiper-wrapper">
             <div class="swiper-slide" style="background-image: url('<%= request.getContextPath() %>/images/index/banner1.jpg');"></div>
@@ -73,6 +73,55 @@
         <div id="reviewBestPrint">
         	
         </div>
+        
+        
+        <div class="contents_lists">
+            <div class="contents_image_wrapper">
+                <a href="링크 주소"> <!-- 추천 조합 링크 -->
+                    <div class="contents_image">
+                        <img src="<%= request.getContextPath() %>/images/강선모.jpg" alt="강선모의 이미지" style="max-width: 100%;">
+                    </div>
+                </a>
+                <span class="contents_title"></span>
+            </div>
+            <div style="overflow: auto;">
+                <p style="float: right;">
+                    청춘의 피가 뜨거운지라 인간의 동산에는 사랑의 풀이 돋고 이상의 꽃이 피고 희망의 놀이 뜨고 열락의 새가 운다사랑의 풀이 없으면 인간은 사막이다 오아이스도 없는 사막이다 보이는 끝까지 찾아다녀도 목숨이 있는 때까지 방황하여도 보이는
+                </p>
+            </div>
+        </div>
+        <div class="contents_lists">
+            <div class="contents_image_wrapper">
+                <a href="링크 주소"> <!-- 추천 조합 링크 -->
+                    <div class="contents_image">
+                        <img src="<%= request.getContextPath() %>/images/강선모.jpg" alt="강선모의 이미지" style="max-width: 100%;">
+                    </div>
+                </a>
+                <span class="contents_title"></span>
+            </div>
+            <div style="overflow: auto;">
+                <p style="float: right;">
+                    청춘의 피가 뜨거운지라 인간의 동산에는 사랑의 풀이 돋고 이상의 꽃이 피고 희망의 놀이 뜨고 열락의 새가 운다사랑의 풀이 없으면 인간은 사막이다 오아이스도 없는 사막이다 보이는 끝까지 찾아다녀도 목숨이 있는 때까지 방황하여도 보이는
+                </p>
+            </div>
+        </div>
+        <div class="contents_lists">
+            <div class="contents_image_wrapper">
+                <a href="링크 주소"> <!-- 추천 조합 링크 -->
+                    <div class="contents_image">
+                        <img src="<%= request.getContextPath() %>/images/강선모.jpg" alt="강선모의 이미지" style="max-width: 100%;">
+                    </div>
+                </a>
+                <span class="contents_title"></span>
+            </div>
+            <div style="overflow: auto;">
+                <p style="float: right;">
+                    청춘의 피가 뜨거운지라 인간의 동산에는 사랑의 풀이 돋고 이상의 꽃이 피고 희망의 놀이 뜨고 열락의 새가 운다사랑의 풀이 없으면 인간은 사막이다 오아이스도 없는 사막이다 보이는 끝까지 찾아다녀도 목숨이 있는 때까지 방황하여도 보이는
+                </p>
+                </p>
+            </div>
+		</div>
+
                 
 	</div>
 		
