@@ -40,8 +40,10 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        console.log('Load후 동작하는 함수입니다.');
         getReview();
+        <% if(msg != null){ %>
+    		alert('<%= msg %>');
+   		<%  } %>
     });
 
     let slide_index = 0;
