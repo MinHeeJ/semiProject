@@ -13,6 +13,7 @@
 	String phone = loginMember.getPhone();
 		
 %>
+
 <section id="enroll-container">
 	<h2>회원 정보</h2>
 	<form 
@@ -58,7 +59,15 @@
 		</table>
         <input type="submit" value="정보수정"/>
 	</form>
+    <form 
+        name="memberDelFrm"
+        action="<%= request.getContextPath() %>/member/memberDelete" 
+        method="post"
+        onsubmit="return confirm('정말로 탈퇴하시겠습니까?')">
+        <input type="submit" value="탈퇴하기"/>
+    </form>
 </section>
+
 <form name="memberDelFrm" action="<%= request.getContextPath() %>/member/memberDelete" method="post"></form>
 <script>
 //폼 유효성검사
