@@ -35,7 +35,7 @@
 		<form 
 		action="<%= request.getContextPath() %>/board/faqUpdate" 
 		name="FaqUpFrm"
-		method=""
+		method="GET"
 		enctype="multipart/form-data">
 		<input type="hidden" name="boardNo" />
 	</form>

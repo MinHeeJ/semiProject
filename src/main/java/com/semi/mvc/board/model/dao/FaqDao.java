@@ -193,4 +193,16 @@ public class FaqDao {
 		attach.setRegDate(rset.getDate("reg_date"));
 		return attach;
 	}
+
+	public int deleteAttachment(Connection conn, int attachNo) {
+		int result = 0;
+		String sql = prop.getProperty("deleteAttach");
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setInt(1, attachNo);
+			result = pstmt.executeUpdate();
+		} catch(SQLException e) {
+			throw new FaqException(e);
+		}
+		return result;
+	}
 }

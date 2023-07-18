@@ -60,7 +60,11 @@ public class FaqUpdateServlet extends HttpServlet {
 		
 		String[] delFiles = multiReq.getParameterValues("delFile");
 		
-		FaqBoard faq = faqService.findByBoardNo(boardNo);
+		FaqBoard faq = new FaqBoard();
+		faq.setBoardNo(boardNo);
+		faq.setTitle(title);
+		faq.setContent(content);
+		faq.setWriter(writer);
 		System.out.println("faq = " + faq);
 		
 		Enumeration<String> filenames = multiReq.getFileNames(); // upFile1, upFile2
