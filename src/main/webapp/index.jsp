@@ -9,7 +9,7 @@
 
 
 
-<% } %>
+
     <div class="swiper slide_wrapper">
        	<div class="swiper-wrapper">
             <div class="swiper-slide" style="background-image: url('<%= request.getContextPath() %>/images/index/banner1.jpg');"></div>
