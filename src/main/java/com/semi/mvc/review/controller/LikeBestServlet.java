@@ -63,7 +63,6 @@ public class LikeBestServlet extends HttpServlet {
 		
 		Gson gson = new Gson();
 		String jsonStr = gson.toJson(reviewBest); 
-		System.out.println("jsonStr = " + jsonStr);
 		response.getWriter().append(jsonStr);
 	}
 

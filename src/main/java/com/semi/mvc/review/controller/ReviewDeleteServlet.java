@@ -22,9 +22,6 @@ public class ReviewDeleteServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
-		System.out.println("reviewNo 여기기기기기= " + reviewNo);
-		
-		
 		int result = reviewService.deleteReview(reviewNo);
 		
 		request.getSession().setAttribute("msg", "리뷰를 성공적으로 삭제했습니다.");

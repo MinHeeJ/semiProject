@@ -86,17 +86,13 @@ public class ReviewDao {
 
 	public List<Review> findReview(Connection conn, int start, int end) {
 		List<Review> reviews = new ArrayList<>();
-		List<Review> re = new ArrayList<>();
+		//List<Review> re = new ArrayList<>();
 		String sql = prop.getProperty("findReview");
-		System.out.println("sql = " + sql);
-		System.out.println("start = "+ start);
-		System.out.println("end = "+ end);
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setInt(1, start);
 			pstmt.setInt(2, end);
 			
 			try(ResultSet rset = pstmt.executeQuery()) {
-				System.out.println("rset = " + rset);
 				while(rset.next()) {
 					Review result = new Review();
 					result.setReviewNo(rset.getInt("review_no"));
@@ -105,7 +101,6 @@ public class ReviewDao {
 					result.setContent(rset.getString("content"));
 					result.setRegDate(rset.getDate("reg_date"));
 					result.setProduct(rset.getString("product"));
-					System.out.println(result);
 					reviews.add(result);
 							
  					//reviews.add(handleReviewResultSet(rset));
@@ -116,7 +111,6 @@ public class ReviewDao {
 		} catch (SQLException e) {
 			throw new ReviewException(e);
 		}
-		System.out.println("reviews = " + reviews);
 		return reviews;
 	}
 
@@ -147,13 +141,11 @@ public class ReviewDao {
 	public List<Order> reviewOrderList(Connection conn,String memberId) {
 		List<Order> orders = new ArrayList<>();
 		String sql = prop.getProperty("reviewOrderList");
-		System.out.println(sql);
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 		
 			
 			try (ResultSet rset = pstmt.executeQuery()) {
 				while(rset.next()) {
-					System.out.println("여여여영여 =");
 //					Order order = handleOrderResultSet(rset);
 //					orders.add(order);
 					Order order = new Order();
@@ -190,14 +182,12 @@ public class ReviewDao {
 	public List<AttachmentReview> findAttachment(Connection conn, int reviewNo) {
 		List<AttachmentReview> attachments = new ArrayList<>();
 		String sql = prop.getProperty("findAttachment");
-		System.out.println("sql : " + sql);
 
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setInt(1, reviewNo);
 			
 			
 			try(ResultSet rset = pstmt.executeQuery()) {
-				System.out.println("rset = " + rset);
 				while(rset.next()) {
 					AttachmentReview attachmentReview = new AttachmentReview();
 				 	attachmentReview.setRenamedFilename(rset.getString("renamed_filename"));
@@ -220,7 +210,6 @@ public class ReviewDao {
 		// delete from review where review_no = ?
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setInt(1, reviewNo);
-			System.out.println(" DAO 리뷰넘 = " + reviewNo);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new ReviewException(e);
@@ -341,7 +330,6 @@ public class ReviewDao {
 
 	public int deleteAttachment(Connection conn, int attachNo) {
 		int result = 0;
-		System.out.println("attachNo 맞니니니니니? = " + attachNo);
 		String sql = prop.getProperty("deleteAttachment");
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setInt(1, attachNo);
@@ -376,7 +364,6 @@ public class ReviewDao {
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
 			try(ResultSet rset = pstmt.executeQuery()) {
-				System.out.println("rset = " + rset);
 				while(rset.next()) {
 					Review result = new Review();
 					result.setReviewNo(rset.getInt("review_no"));
@@ -385,7 +372,6 @@ public class ReviewDao {
 					result.setContent(rset.getString("content"));
 					result.setRegDate(rset.getDate("reg_date"));
 					result.setProduct(rset.getString("product"));
-					System.out.println(result);
 					reviews.add(result);
 							
 				}
@@ -395,7 +381,6 @@ public class ReviewDao {
 		} catch (SQLException e) {
 			throw new ReviewException(e);
 		}
-		System.out.println("reviews = " + reviews);
 		return reviews;
 	}
 
