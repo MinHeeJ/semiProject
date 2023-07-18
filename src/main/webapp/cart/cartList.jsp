@@ -76,22 +76,10 @@
 	}
 	document.querySelector("#allCheck").onclick=(e)=>{	
 		const checkBoxes = document.querySelectorAll("[name=checkedOrNot]");
-		let sum = 0;
 		checkBoxes.forEach((checkBox)=>{
 			checkBox.checked = e.target.checked;			
-			const tfoot = document.querySelector("#cartListTable tfoot");
-			if(checkBox.checked) {
-				const tr = checkBox.closest("tr"); 
-			    const price = parseFloat(tr.querySelector('td:last-child').innerHTML);
-			    sum += price;
-			}
-			
-			tfoot.innerHTML = `
-				<tr>
-					<td colspan="6">총금액 : \${sum}원</td>
-				</tr>
-			`;
 		});
+		totalSum();
 	}
 	
 	
@@ -133,26 +121,10 @@
 					
 					
 				});	
-				const tfoot = document.querySelector("#cartListTable tfoot");
-				let sum = 0;
-				document.querySelectorAll("input[name=checkedOrNot]").forEach((checkbox) => {
-	
+
+				document.querySelectorAll("input[name=checkedOrNot]").forEach((checkbox) => {	
 					checkbox.addEventListener('change', () => {
-						if(checkbox.checked) {
-							const tr = checkbox.closest("tr"); // checkbox중 가장 가까운 tr
-						    const price = parseFloat(tr.querySelector('td:last-child').innerHTML);
-						    sum += price;
-						}
-						else {
-							const tr = checkbox.closest('tr');
-						    const price = parseFloat(tr.querySelector('td:last-child').innerHTML);
-						    sum -= price;
-						}
-						tfoot.innerHTML = `
-							<tr>
-								<td colspan="6">총금액 : \${sum}원</td>
-							</tr>
-						`;
+						totalSum();
 					});
 				});				
 			}
@@ -160,8 +132,46 @@
 		});
 	};
 	
+	
+	const totalSum =() =>{
+		
+		let sum = 0;
+		const tfoot = document.querySelector("#cartListTable tfoot");
+		document.querySelectorAll("input[name=checkedOrNot]").forEach((checkbox) => {
+			
+			if(checkbox.checked) {
+				const tr = checkbox.closest("tr"); 
+			    const price = parseFloat(tr.querySelector('td:last-child').innerHTML);
+			    sum += price;
+			}
+			
+			tfoot.innerHTML = `
+				<tr>
+					<td colspan="6">총금액 : \${sum}원</td>
+				</tr>
+			`;
+			
+		});	
+		
+	}
+	
+
+	
 	document.querySelector("#cartDelete").onclick =(e) =>{
-		if(confirm('정말 삭제하시겠습니까?')) {
+		
+		let flag = true;
+		document.querySelectorAll("input[name=checkedOrNot]").forEach((checkbox) => {			
+			if(checkbox.checked)
+				flag = false;			
+		});
+				
+		if(flag){
+			
+			alert("선택된 값이 없습니다.");
+			
+			e.preventDefault();
+			
+		} else if(confirm('정말 삭제하시겠습니까?')) {
 			document.querySelector("#printCartList").onsubmit =(e) =>{
 			
 				e.preventDefault();
@@ -183,9 +193,8 @@
 					}
 				});
 			
-			}
-		
-		}
+			}	
+		} 
 	}	
 	
 	document.querySelector("#cartUpdate").onclick =(e) =>{
