@@ -74,14 +74,14 @@ public class OrderDao {
 		return result;
 	}
 
-	public List<Order> findByDate(Connection conn, String startDate, String endDate) {
+	public List<Order> findByDate(Connection conn, Date startDate, Date endDate) {
 		List<Order> orders = new ArrayList<>();
 		String sql = prop.getProperty("findByDate");
 		// select * from (select * from order_tbl t left join order_detail d on t.order_no = d.order_no) 
 		// where order_date between ? and ?
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setString(1, startDate);
-			pstmt.setString(2, endDate+1);
+			pstmt.setDate(1, startDate);
+			pstmt.setDate(2, endDate);
 			
 			try (ResultSet rset = pstmt.executeQuery()) {
 				while(rset.next()) {

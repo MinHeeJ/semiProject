@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/introduce.css" />
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/introduce.css" />
 <body>
     <div class="title-wrapper">
         <span id="span4" style="color: green;">소개</span>

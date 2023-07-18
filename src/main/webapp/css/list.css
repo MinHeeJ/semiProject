@@ -3,8 +3,8 @@
 
 /* Default */
 input[type=text],input[type=password]{font-family:"Malgun Gothic","맑은 고딕",Dotum,"돋움",Arial,sans-serif}
+body{font-size:12px;color:#black;background:transparent;-webkit-user-select:none;-moz-user-select:none;-webkit-text-size-adjust:none;-moz-text-size-adjust:none;-ms-text-size-adjust:none;}
 *{margin:0;padding:0;font-family:"Malgun Gothic","맑은 고딕",Dotum,"돋움",Arial,sans-serif}
-body{font-size:12px;color:#black;background:transparent;-webkit-user-select:none;-moz-user-select:none;-webkit-text-size-adjust:none;-moz-text-size-adjust:none;-ms-text-size-adjust:none}
 ol,ul{list-style:none} 
 table{table-layout:fixed;width:100%;border-collapse:collapse;border-spacing:0}
 caption{overflow:hidden;width:0;height:0;font-size:0;line-height:0;text-indent:-999em}
@@ -12,12 +12,12 @@ img,fieldset{border:0}
 legend{height:0;visibility:hidden}
 em,address{font-style:normal}
 img{border:0 none;vertical-align:middle}
-a{color:#555;text-decoration:none}
+.searchBox a{color:#555;text-decoration:none}
 input,select{margin:0;padding:0;vertical-align:middle}
 button{margin:0;padding:0;font-family:inherit;border:0 none;background:transparent;cursor:pointer}
 button::-moz-focus-inner{border:0;padding:0}
 header,footer,aside,nav,section,article{display:block}
-
+.header-wrapper { font-size: 16px; }
 .clearfix{*zoom:1}
 .clearfix:after{content:"";display:block;clear:both;overflow:hidden}
 
@@ -38,7 +38,7 @@ header,footer,aside,nav,section,article{display:block}
 .demi{display:inline-block;margin:0 1px;vertical-align:middle}
 .inpType{padding-left:6px;height:24px;line-height:24px;border:1px solid #dbdbdb}
 .dest { display: flex; align-items: center; }
-.wrapper{text-align: center;}
+.wrapper{text-align: center; margin-bottom: 12%;}
 .checkbox{float: right; font-size: 17px; font-family: 'NanumSquareNeo-Variable'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');font-weight: normal;font-style: normal;}
 
 #orderListSection, #salesLookUpSection, #memberListSection { width : 1200px; text-align: center; }
@@ -52,12 +52,12 @@ table#tbl-salesLookUp { border-top:3px solid rgb(217, 250, 217); border-bottom:3
 table#tbl-salesLookUp th { width: 80px; border-top:3px solid rgb(217, 250, 217); border-bottom:3px solid rgb(217, 250, 217); padding: 10px 0; text-align:center; background-color: rgb(217, 250, 217); height : 50px; font-size: 20px; font-weight: bold; vertical-align: middle; }
 table#tbl-salesLookUp td {border-top:3px solid rgb(217, 250, 217);border-bottom:3px solid rgb(217, 250, 217); padding: 5px; text-align:left; text-align:center; height : 50px; font-size: 15px; vertical-align: middle;}
 
-table#tbl-member { border-top:3px solid rgb(217, 250, 217); border-bottom:3px solid rgb(217, 250, 217); border-collapse:collapse; margin: 2% auto 10% auto; text-align:center; }
+table#tbl-member { border-top:3px solid rgb(217, 250, 217); border-bottom:3px solid rgb(217, 250, 217); border-collapse:collapse; margin: 2% auto 2% auto; text-align:center; }
 table#tbl-member th { width: 80px; border-top:3px solid rgb(217, 250, 217); border-bottom:3px solid rgb(217, 250, 217); padding: 10px 0; text-align:center; background-color: rgb(217, 250, 217); height : 50px; font-size: 20px; font-weight: bold; vertical-align: middle; }
 table#tbl-member td {border-top:3px solid rgb(217, 250, 217);border-bottom:3px solid rgb(217, 250, 217); padding: 5px; text-align:left; text-align:center; height : 50px; font-size: 15px; vertical-align: middle;}
 
-#search { width : 75px; background-color: #73b673;; padding: 5px; border-radius: 10px; margin-left: 15px; font-family: 'NanumSquareNeo-Variable'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2'); font-size: 16px;}
-#delete { width : 113px; background-color: #73b673;; padding: 5px; border-radius: 10px; margin-left: 189px; font-family: 'NanumSquareNeo-Variable'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2'); font-size: 31px; position: absolute; top: 106%; left: 0; }
+#search { width : 75px; background-color: #73b673; padding: 5px; border-radius: 10px; margin-left: 15px; font-family: 'NanumSquareNeo-Variable'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2'); font-size: 16px;}
+#delete { width : 113px; background-color: #73b673; padding: 5px; border-radius: 10px; margin-left: -188px; font-family: 'NanumSquareNeo-Variable'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2'); font-size: 31px; float: left; margin-bottom: 12%; position: relative; top: 93%; left: 190px; }
 
 
 

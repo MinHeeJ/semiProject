@@ -50,7 +50,6 @@ a, ul, li{
 
 body {
 	line-height: 1;
-    max-width:1200px;
     margin: 0 auto;
 }
 
@@ -86,7 +85,7 @@ header > nav > ul > li > a{
     padding: 0 30px;
     color: #fff;
     font-weight: bold;
-    font-size:20px;
+    font-size:25px;
 }
 
 .account_wrapper{
