@@ -21,7 +21,7 @@ public class FaqDao {
 	
 	public FaqDao() {
 		String filename = 
-				FaqDao.class.getResource("/sql/board/board-query.properties").getPath();
+				FaqDao.class.getResource("/sql/board/board-query2.properties").getPath();
 			try {
 				prop.load(new FileReader(filename));
 			} catch (IOException e) {
@@ -168,8 +168,8 @@ public class FaqDao {
 	}
 
 	public Attachment findAttachmentById(Connection conn, int attachNo) {
-		Attachment attach = null;
-		String sql = prop.getProperty("findAttachmentById");
+		Attachment attach = new Attachment();
+		String sql = prop.getProperty("findAttachmentByBoardNo");
 		
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setInt(1, attachNo);

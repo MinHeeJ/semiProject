@@ -98,7 +98,7 @@ public class FaqService {
 		return faq;
 	}
 
-	public Attachment findAttachmentById(int attachNo) {
+	public Attachment findAttachmentByBoardNo(int attachNo) {
 		Connection conn = getConnection();
 		Attachment attach = faqDao.findAttachmentById(conn, attachNo);
 		close(conn);

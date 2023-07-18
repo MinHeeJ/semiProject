@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.semi.mvc.board.model.service.FaqService;
+import com.semi.mvc.board.model.vo.Attachment;
 import com.semi.mvc.board.model.vo.FaqBoard;
 import com.semi.mvc.common.util.HelloMvcUtils;
 
@@ -31,6 +32,9 @@ public class FaqListServlet extends HttpServlet {
 		for(FaqBoard faq : faqs) {
 			faq.setTitle(HelloMvcUtils.escapeHtml(faq.getTitle()));
 			faq.setContent(HelloMvcUtils.escapeHtml(faq.getContent()));
+			Attachment attach = faqService.findAttachmentByBoardNo(faq.getBoardNo());
+			faq.addAttachment(attach);
+//			System.out.println(faq.getBoardNo());
 		}
 		
 		request.setAttribute("faqs", faqs);
