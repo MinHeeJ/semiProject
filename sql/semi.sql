@@ -59,7 +59,7 @@ create table member (
 insert into member values ('admin', 1234, '관리자', '010-1234-5678', '서울시 역삼동', 'F', 'A');
 insert into member values ('honggd', 1234, '홍지디', '010-1234-5678', '서울시 역삼동', 'M', default);
 insert into member values ('qwerty', 1234, '쿼티', '010-1122-3344', '경기도 안산시', 'F', default);
-Insert into semi.MEMBER (MEMBER_ID,PASSWORD,NAME,PHONE, ADDRESS,GENDER,MEMBER_ROLE,) values ('admin1','b5fMEM1PXQznhG6q+YA+t03cAhGSXAXwvU53Nn1BGiX3ta1Io+OBrDdcMSO0FNsGHq2F2yFZuDM0o4VMRct05Q==','암호화','A','M',to_date('91/02/03','RR/MM/DD'),null,'01012341243',null,1000);
+update member set member_role = 'A' where member_id ='aaaa';
 select * from member;
 
 --drop table member;
@@ -342,6 +342,8 @@ create table like_tbl (
     constraints fk_like_member_id foreign key(member_id) references member(member_id) on delete cascade,
     constraints fk_like_review_no foreign key(review_no) references review(review_no) on delete cascade
 );
+
+
 --drop table like_tbl;
 create sequence seq_like_no;
 select * from like_tbl;

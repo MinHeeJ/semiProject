@@ -38,9 +38,9 @@ public class ReviewCreateServlet extends HttpServlet {
 		int totalPage = (int) Math.ceil((double) totalContent / limit); 
 		request.setAttribute("totalPage", totalPage);
 		
-		List<Order> orders = reviewService.reviewOrderList(" honggd");
+		List<Order> orders = reviewService.reviewOrderList("memberId");
+		System.out.println("memberId++++++++==orders" + orders);
 		request.setAttribute("orders", orders);
-		
 		
 		int cpage=1;
 		

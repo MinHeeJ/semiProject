@@ -14,18 +14,14 @@
 	String product = (String) request.getAttribute("product");
 	List<Review> reviews = (List<Review>)request.getAttribute("reviews");
 	String memberId = (String) request.getAttribute("memberId");
-	Review reviews1 = (Review) request.getAttribute("review");
-	
+	Review review = (Review) request.getAttribute("review");
 %>
 <script src="<%= request.getContextPath() %>/js/jquery-3.7.0.js"></script>
 
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/review.css" />
 	
-<% boolean canEdit =loginMember != null 
-&& (loginMember.getMemberId().equals(reviews1.getWriter()) 
-		|| loginMember.getMemberRole() == MemberRole.A); %>	
-		
+
 		
 	<h2>✨리뷰작성✨</h2>
 <section id="review-container">
@@ -96,8 +92,8 @@
 		<%	
 			} 
 			else { 
-				for(Review review : reviews){
-					List<AttachmentReview> files = review.getAttachments();
+				for(Review reviewss : reviews){
+					List<AttachmentReview> files = reviewss.getAttachments();
 		%>
 				<tr>
 				
@@ -269,7 +265,9 @@ const getPage = (cpage) => {
 				  }
 				
 				
+				
 				container.innerHTML += imgElements + `
+				<% boolean admin = loginMember != null && (loginMember.getMemberId().equals(memberId) || loginMember.getMemberRole() == MemberRole.A); %>
 				<div class = "content-container">
 						<p class ="product">🥗\${product}</p>
 						<div class="info-container">
@@ -285,11 +283,15 @@ const getPage = (cpage) => {
 				            <p id="p">0</p>
 		          	 	</div>
 						<%-- 첨부파일이 없는 게시물 수정 --%>
+					   
 						<div class = "button-container">
+						<%if(admin){%>
 							<input type="button" value="수정하기" onclick="updateReview('\${reviewNo}');">
 								
 							<input type="button" value="삭제하기" onclick="deleteReview('\${reviewNo}');">
-						</div>
+							<%}%>
+							</div>
+					    
 					</th>
 				</tr>
 						

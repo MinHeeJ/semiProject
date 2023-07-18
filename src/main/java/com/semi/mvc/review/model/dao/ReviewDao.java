@@ -142,14 +142,16 @@ public class ReviewDao {
 		List<Order> orders = new ArrayList<>();
 		String sql = prop.getProperty("reviewOrderList");
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-		
-			
+			pstmt.setString(1,memberId);
+			System.out.println("memberId++++++++==" + memberId);
 			try (ResultSet rset = pstmt.executeQuery()) {
 				while(rset.next()) {
 //					Order order = handleOrderResultSet(rset);
 //					orders.add(order);
+					
 					Order order = new Order();
 					order.setProduct(rset.getString("product"));
+					order.setMemberId(memberId);
 					order.setOrderSerialNo(rset.getInt("order_serial_no"));
 					orders.add(order);
 					
@@ -165,7 +167,9 @@ public class ReviewDao {
 		String memberId = null;
 		String sql = prop.getProperty("findbyId");
 		
-		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {	
+			pstmt.setString(1,memberId);
+			System.out.println("memberId + "  +memberId);
 			try(ResultSet rset = pstmt.executeQuery()) {
 				while(rset.next()) {
 					memberId = rset.getString("member_id");	

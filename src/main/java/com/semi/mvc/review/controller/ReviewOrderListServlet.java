@@ -30,45 +30,7 @@ public class ReviewOrderListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final ReviewService reviewService = new ReviewService();
 	
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 1. 사용자 입력값 처리
-		HttpSession session = request.getSession();
-		Member loginMember = (Member) session.getAttribute("loginMember");
 
-		
-		// 2. 업무로직
-		
-		
-		int totalContent = reviewService.getTotalContent();
-		int limit = 5;
-		int totalPage = (int) Math.ceil((double) totalContent / limit); 
-		request.setAttribute("totalPage", totalPage);
-		List<Order> orders = reviewService.reviewOrderList(" honggd");
-		request.setAttribute("orders", orders);
-		
-		
-		int cpage=1;
-		
-		try {
-			cpage = Integer.parseInt(request.getParameter("cpage"));			
-		} catch (NumberFormatException e) {       
-		}
-		
-		int start = (cpage - 1) * limit + 1; 
-		int end = cpage * limit;
-		
-		// 2. 업무로직
-		List<Review> reviews = reviewService.findReview(start, end);
-		request.setAttribute("reviews", reviews);
-		
-		// 3. 응답처리 forward jsp
-		request.getRequestDispatcher("/WEB-INF/views/review/review.jsp")
-					.forward(request, response);
-	}
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
