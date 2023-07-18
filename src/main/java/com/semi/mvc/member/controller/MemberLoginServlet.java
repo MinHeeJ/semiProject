@@ -40,29 +40,25 @@ public class MemberLoginServlet extends HttpServlet {
         HttpSession session = request.getSession();
         
         if(member != null && password.equals(member.getPassword())) {
-        	
             session.setAttribute("loginMember", member);
             
-        Cookie cookie = new Cookie("saveId", memberId);
-		cookie.setPath(request.getContextPath()); // 쿠키를 사용할 url
-		if(saveId != null) {
-		cookie.setMaxAge(60 * 60 * 24 * 7); // 쿠키 유효기간 7일    
+            Cookie cookie = new Cookie("saveId", memberId);
+            cookie.setPath(request.getContextPath());
+            if(saveId != null) {
+                cookie.setMaxAge(60 * 60 * 24 * 7); // 7일 유효기간 설정
+            }
+            else {
+                cookie.setMaxAge(0); // 쿠키 삭제
+            }
+            response.addCookie(cookie);
+            
+            response.sendRedirect(request.getContextPath()); // 로그인 후 홈 화면으로 이동
         }
         else {
-        	cookie.setMaxAge(0);
+            session.setAttribute("msg", "아이디 또는 비밀번호가 일치하지 않습니다.");
+            session.setAttribute("invalidId", memberId); // 잘못된 아이디를 세션에 저장
+            
+            response.sendRedirect(request.getContextPath() + "/member/memberLogin"); // 로그인 실패 시 로그인 페이지로 이동
         }
-		response.addCookie(cookie);
-        }
-        else {
-        	session.setAttribute("msg", "아이디 또는 비밀번호가 일치하지 않습니다.");
-        }
-        
-     
-    	String referer = request.getHeader("Referer");
-		System.out.println("referer = " + referer);
-		response.sendRedirect(referer);
-
-
-
     }
 }
