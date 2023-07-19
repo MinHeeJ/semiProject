@@ -33,11 +33,9 @@ public class OrderListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 1. 사용자 입력값 처리
-//		HttpSession session = request.getSession();
-//		Member loginMember = (Member) session.getAttribute("loginMember");
-//		String memberId = loginMember.getMemberId();
-//		String memberId = multiReq.getParameter("memberId");
-		String memberId = "honggd";
+		HttpSession session = request.getSession();
+		Member loginMember = (Member) session.getAttribute("loginMember");
+		String memberId = loginMember.getMemberId();
 		
 		// 2. 업무로직
 		List<Order> orders = orderService.findById(memberId);

@@ -77,7 +77,7 @@
 	<hr style="margin-top:30px;" />	
     
 	<div class="comment-container">
-		<%	if(boardComments == null || boardComments.isEmpty()) { %>
+		<%	if(loginMember != null && loginMember.getMemberRole() == MemberRole.A && (boardComments == null || boardComments.isEmpty())) { %>
         <div class="comment-editor">
             <form
 				action="<%=request.getContextPath()%>/board/boardCommentCreate" 
@@ -111,7 +111,7 @@
 				<tr>
 					<th>내 용</th>
 					<td>
-						<textarea readonly style="resize: none;" rows="10"><%= bc.getContent() %></textarea>
+						<p><%= bc.getContent() %><p>
 					</td>
 				</tr>
 				<%-- 작성자와 관리자만 마지막행 수정/삭제버튼이 보일수 있게 할 것 --%>
@@ -126,7 +126,7 @@
 				<% } %>
 			</table>
 			
-			<% if(loginMember.getMemberId().equals(board.getWriter()) && (boardComments != null && !boardComments.isEmpty())) { %>
+			<% if(loginMember != null && loginMember.getMemberId().equals(board.getWriter()) && (boardComments != null && !boardComments.isEmpty())) { %>
 				<div class="addQuestion">
 					<input 
 					type="button" id="btn-add" value="추가질문하기" 
@@ -137,6 +137,7 @@
 			<% } %>
 		<% } %>
 	</div>
+	<br>
 	<br>
 	<br>
 	<br>

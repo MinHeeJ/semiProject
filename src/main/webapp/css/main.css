@@ -95,7 +95,7 @@ header > nav > ul > li > a{
     font-weight: bold;
     font-size:25px;
 }
-.header-wrapper { margin-top: 5%; margin-right: 60px; width: 500px; float: right; margin-top: 60px; font-family: 'yg-jalnan'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff'); font-weight: normal; font-style: normal; }
+.header-wrapper { margin-top: 6%; margin-right: 60px; width: 500px; float: right; font-family: 'yg-jalnan'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff'); font-weight: normal; font-style: normal; }
 .account_wrapper{ margin: 50px 0; text-align: right; font-size: 20px; }
 .account_list li { display: flex; align-items: center; } 
 .account_list img { width: 50px; margin-left: 11px; position: absolute; margin-top: -87px; }
@@ -103,6 +103,10 @@ header > nav > ul > li > a{
 .header-wrapper div { font-size: 20px; color: green; }
 .user_info_container div { float: right; }
 .admin_info_container div { float: right; margin-right: -5% }
+.account_wrapper > .user_info_container > span{
+    display: inline-block;
+    margin-bottom: 5px;
+}
 .account_list{
     text-align: right;
     display:flex;

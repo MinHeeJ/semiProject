@@ -30,13 +30,13 @@ public class BoardDetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 1. 사용자입력값 처리 ?no=12
 				int no = Integer.parseInt(request.getParameter("no"));
-				System.out.println("no = " + no);
+//				System.out.println("no = " + no);
 				
 				// 2. 업무로직
 				Board board = boardService.findById(no); // Board, List<Attachment>
 				List<BoardComment> boardComments = boardService.findBoardCommentByBoardNo(no);
-				System.out.println("board = " + board);
-				System.out.println("boardComments = " + boardComments);
+//				System.out.println("board = " + board);
+//				System.out.println("boardComments = " + boardComments);
 				
 				// secure coding처리 
 				String unsecureTitle = board.getTitle();

@@ -7,7 +7,6 @@
 
 <%
 // List<Cart> carts = (List)request.getAttribute("carts");
-
 %>
 <html>
 <head>
