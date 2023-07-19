@@ -26,10 +26,10 @@ public class ReviewLikeCountServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 1. 사용자 입력값 처리
-//		HttpSession session = request.getSession();
-//		Member loginMember = (Member) session.getAttribute("loginMember");
-//		String memberId = loginMember.getMemberId();
-		String memberId = "honggd";
+		HttpSession session = request.getSession();
+		Member loginMember = (Member) session.getAttribute("loginMember");
+		String memberId = loginMember.getMemberId();
+	
 		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
 		
 		// 2. 업무로직

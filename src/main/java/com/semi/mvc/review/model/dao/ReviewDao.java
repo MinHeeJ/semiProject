@@ -151,9 +151,10 @@ public class ReviewDao {
 					
 					Order order = new Order();
 					order.setProduct(rset.getString("product"));
-					order.setMemberId(memberId);
+					order.setMemberId(rset.getString("memberId"));
 					order.setOrderSerialNo(rset.getInt("order_serial_no"));
 					orders.add(order);
+					System.out.println("order 여기기기기기" + orders);
 					
 				}
 			}
@@ -168,8 +169,7 @@ public class ReviewDao {
 		String sql = prop.getProperty("findbyId");
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {	
-			pstmt.setString(1,memberId);
-			System.out.println("memberId + "  +memberId);
+//			pstmt.setString(1,memberId);
 			try(ResultSet rset = pstmt.executeQuery()) {
 				while(rset.next()) {
 					memberId = rset.getString("member_id");	

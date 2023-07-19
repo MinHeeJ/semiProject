@@ -15,6 +15,7 @@
 	List<Review> reviews = (List<Review>)request.getAttribute("reviews");
 	String memberId = (String) request.getAttribute("memberId");
 	Review review = (Review) request.getAttribute("review");
+
 %>
 <script src="<%= request.getContextPath() %>/js/jquery-3.7.0.js"></script>
 
@@ -61,6 +62,7 @@
 				<th>작성자</th>
 				<td><input type="text" name="writer" id="writer"
 					value="<%=memberId%>" readonly /></td>
+					
 			</tr>
 			<tr>
 				<th>첨부파일</th>
@@ -252,7 +254,7 @@ const getPage = (cpage) => {
 			const container = document.querySelector(".polaroid");
 			
 			reviews.forEach((Review)=>{
-				const {reviewNo,writer, content, regDate,product,attachments} =Review;
+				const {reviewNo, writer, content, regDate, product, attachments} =Review;
 				let renamedFile = "";
 				let imgElements = "";
 				
@@ -264,10 +266,10 @@ const getPage = (cpage) => {
 				    imgElements += `<img src="<%= request.getContextPath()%>/upload/review/\${renamedFile}" class="photo">`;
 				  }
 				
-				
-				
 				container.innerHTML += imgElements + `
-				<% boolean admin = loginMember != null && (loginMember.getMemberId().equals(memberId) || loginMember.getMemberRole() == MemberRole.A); %>
+				
+				
+				
 				<div class = "content-container">
 						<p class ="product">🥗\${product}</p>
 						<div class="info-container">
@@ -285,11 +287,12 @@ const getPage = (cpage) => {
 						<%-- 첨부파일이 없는 게시물 수정 --%>
 					   
 						<div class = "button-container">
-						<%if(admin){%>
+						
+						
 							<input type="button" value="수정하기" onclick="updateReview('\${reviewNo}');">
-								
 							<input type="button" value="삭제하기" onclick="deleteReview('\${reviewNo}');">
-							<%}%>
+						
+							
 							</div>
 					    
 					</th>
