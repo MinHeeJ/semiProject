@@ -11,7 +11,6 @@ List<Ingredient> ingredients = (List) request.getAttribute("ingredients");
 <head>
 <meta charset="UTF-8">
 <title></title>
-
 <style>
 @font-face {font-family: 'Giants-Inline'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Giants-Inline.woff2') format('woff2'); font-weight: normal; font-style: normal;}
 @font-face {font-family: 'GongGothicMedium'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff'); font-weight: normal; font-style: normal;}
@@ -35,14 +34,14 @@ List<Ingredient> ingredients = (List) request.getAttribute("ingredients");
 #step1 button:hover{background-color: rgb(217, 250, 217); cursor: pointer;}
 .labels{display: inline-block; font-size : 25px; font-weight : bold; width:300px; margin: 0% 4%;}
 #optionselct-container { border: 4px solid darkgreen; margin-top: 3%; border-radius: 30px; }
-.optionContainer {font-size:20px; display: inline-block; background-color: rgb(217, 250, 217); margin-top: 1%; border-radius: 50px; width: 250px; height: 45px; vertical-align: middle;}
-.optionContainer label{display: inline-block; vertical-align: middle; width: 120px; margin-top: 2%;}
+.optionContainer {font-size:20px; display: inline-block; background-color: rgb(217, 250, 217); margin-top: 1%; border-radius: 50px; width: 320px; height: 45px; vertical-align: middle;}
+.optionContainer label{display: inline-block; vertical-align: middle; width: 200px; margin-top: 2%;}
 .optionContainer input{height: 25px; display: inline-block; margin-top: 3.3%; }
 #totals {width: 100%; margin-top: 5%; text-align: center;}
 #totals p{margin: 0.5%; background-color: rgb(217, 250, 217); width: 28%; display: inline-block; font-size: 20px;}
 
 </style>
-
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/cart.css" />
 <body>
 	<section id="optionSelectSection">
 	<div id="optionselct-container">
@@ -71,7 +70,7 @@ List<Ingredient> ingredients = (List) request.getAttribute("ingredients");
 				Ingredient ingredient = ingredients.get(z);
 				if (ingredient.getCategoryNo() == i) {
 			%>		<div class="optionContainer">
-					<label for="<%=ingredient.getIngredientName()%>"><%=ingredient.getIngredientName()%></label>
+					<label for="<%=ingredient.getIngredientName()%>"><%=ingredient.getIngredientName()%> (<%= ingredient.getWeight() %>)</label>
 					<input type="number" id="<%=ingredient.getIngredientName()%>" name="quantity" min="0" step="1" max="10" value="0"> 
 					<input type="hidden" name="optionName" value = "<%=ingredient.getIngredientName()%>">
 					<input type="hidden" name="cal" value = "<%=ingredient.getCalorie()%>">
