@@ -3,6 +3,7 @@
 <%@ page import="com.semi.mvc.board.model.vo.FaqBoard" %>
 <%@ page import="com.semi.mvc.board.model.vo.Attachment" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<%@ include file="/WEB-INF/views/board/boardTap.jsp" %>
 <%
 	FaqBoard faq = (FaqBoard) request.getAttribute("faq");
 	List<Attachment> attachments = faq.getAttachments();
