@@ -47,7 +47,7 @@ public class BoardCreateServlet extends HttpServlet {
 		// 업로드파일 저장경로 C:\\Workspaces\\web_server_workspace\\hello-mvc\\src\\main\\webapp\\upload\\board
 		ServletContext application = getServletContext();
 		String saveDirectory = application.getRealPath("/upload/board");
-		System.out.println("saveDirectory = " + saveDirectory);
+//		System.out.println("saveDirectory = " + saveDirectory);
 		// 파일하나당 최대크기 10MB 
 		int maxPostSize = 1024 * 1024 * 10; 
 		// 인코딩
@@ -63,14 +63,14 @@ public class BoardCreateServlet extends HttpServlet {
 		// 1. 사용자 입력값 처리
 		String title = multiReq.getParameter("title");
 		String writer = multiReq.getParameter("writer");
-		System.out.println("writer = " + writer);
+//		System.out.println("writer = " + writer);
 		String content = multiReq.getParameter("content");
 		Board board = new Board();
 		board.setTitle(title);
 		board.setWriter(writer);
-		System.out.println("writer = " + writer);
+//		System.out.println("writer = " + writer);
 		board.setContent(content);
-		System.out.println(board);
+//		System.out.println(board);
 		
 		// Attachment객체 생성 (Board 추가)
 		Enumeration<String> filenames = multiReq.getFileNames(); // upFile1, upFile2
@@ -82,7 +82,7 @@ public class BoardCreateServlet extends HttpServlet {
 				attach.setOriginalFilename(multiReq.getOriginalFileName(name));
 				attach.setRenamedFilename(multiReq.getFilesystemName(name)); // renamedFilename
 				board.addAttachment(attach);
-				System.out.println("board_attach = " + attach.getRenamedFilename());
+//				System.out.println("board_attach = " + attach.getRenamedFilename());
 			}
 		}
 		
