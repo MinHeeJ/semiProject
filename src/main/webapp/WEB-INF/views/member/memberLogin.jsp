@@ -11,13 +11,13 @@
   <%-- 잘못된 아이디가 있는 경우 표시 --%>
   <% String invalidId = (String) session.getAttribute("invalidId"); %>
   <% if (invalidId != null && !invalidId.isEmpty()) { %>
-      <p class="error-msg">존재하지 않는 아이디입니다: <%= invalidId %></p>
+     
   <% } %>
   
   <%-- 잘못된 비밀번호가 있는 경우 표시 --%>
   <% String invalidPassword = (String) session.getAttribute("invalidPassword"); %>
   <% if (invalidPassword != null && !invalidPassword.isEmpty()) { %>
-      <p class="error-msg">비밀번호가 일치하지 않습니다.</p>
+  
   <% } %>
   
   <form name="loginFrm" action="${pageContext.request.contextPath}/member/memberLogin" method="POST">
