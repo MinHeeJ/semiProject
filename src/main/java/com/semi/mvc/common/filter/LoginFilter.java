@@ -31,6 +31,7 @@ import com.semi.mvc.member.model.vo.Member;
 	"/board/boardCommentUpdate",
 	"/add/to/cart",
 	"/OnlinOrder"
+	
 })
 public class LoginFilter extends HttpFilter implements Filter {
        

@@ -28,10 +28,12 @@ import com.semi.mvc.review.model.vo.Review;
  */
 @WebServlet("/review/reviewCreate")
 public class ReviewCreateServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L; 
+	private static final long serialVersionUID = 1L;
 	private final ReviewService reviewService = new ReviewService();
+
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//1.사용자요청
@@ -39,23 +41,20 @@ public class ReviewCreateServlet extends HttpServlet {
 		int limit = 5;
 		int totalPage = (int) Math.ceil((double) totalContent / limit); 
 		request.setAttribute("totalPage", totalPage);
-//		memberId
 		
 		HttpSession session = request.getSession();
 		Member loginMember = (Member) session.getAttribute("loginMember");
-		
-		String memberId = loginMember.getMemberId();
-		System.out.println("loginMember ㅇㅇㅇㅇ = " + loginMember);
-		System.out.println("(SDS)memberId: " + memberId);
-		request.setAttribute("memberId", memberId);
-		
-//		String memberId =reviewService.findbyId();
-//		System.out.println("(SDS)memberId: " + memberId);
-//		request.setAttribute("memberId", memberId);
-		
-//		List<Order> orders = reviewService.reviewOrderList("honggd");
+		 
+		String memberId;
+		    if(loginMember != null) {
+		        memberId = loginMember.getAddress();
+		    } else {
+		        memberId = "guest"; // 로그인하지 않은 사용자의 memberId는 "guest"로 설정
+		        request.setAttribute("memberId", memberId);
+		    }
+		    
+
 		List<Order> orders = reviewService.reviewOrderList(memberId);
-		System.out.println("memberId++++++++==22" + orders);
 		request.setAttribute("orders", orders);
 		
 		int cpage=1;
@@ -84,49 +83,52 @@ public class ReviewCreateServlet extends HttpServlet {
 		
 		
 	}
-
+	
+	
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-				ServletContext application = getServletContext();
-				String saveDirectory = application.getRealPath("/upload/review");
-				int maxPostSize = 1024 * 1024 * 10; 
-				String encoding = "utf-8";
-				
-				// 파일명 재지정 정책객체
-				FileRenamePolicy policy = new HelloMvcFileRenamePolicy();
-				
-				MultipartRequest multiReq = new MultipartRequest(request, saveDirectory, maxPostSize, encoding, policy);
-				
-				// 1. 사용자 입력값 처리
-				String title = multiReq.getParameter("title");
-				String writer = multiReq.getParameter("writer");
-				String content = multiReq.getParameter("content");
-				Review review = new Review();
-				review.setTitle(title);
-				review.setWriter(writer);
-				review.setContent(content);
-			
-				// Attachment객체 생성 (review 추가)
-				Enumeration<String> filenames = multiReq.getFileNames(); // upFile1, upFile2
-				while(filenames.hasMoreElements()) {
-					String name = filenames.nextElement(); // input:file[name]
-					File upFile = multiReq.getFile(name);
-					if(upFile != null) {
-						AttachmentReview attach = new AttachmentReview();
-						attach.setOriginalFilename(multiReq.getOriginalFileName(name));
-						attach.setRenamedFilename(multiReq.getFilesystemName(name)); // renamedFilename
-						review.addAttachment(attach);
-					}
-				}
-				
-				// 2. 업무로직
-				int result = reviewService.insertReview(review);
-				
-				// 3. 응답처리 (목록페이지로 redirect) - POST방식 DML처리후 url변경을 위해 redirect처리
-				request.getSession().setAttribute("msg", "게시글이 성공적으로 등록되었습니다.");
-				response.sendRedirect(request.getContextPath() + "/review/reviewCreate"); 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		ServletContext application = getServletContext();
+		String saveDirectory = application.getRealPath("/upload/review");
+		int maxPostSize = 1024 * 1024 * 10;
+		String encoding = "utf-8";
+
+		// 파일명 재지정 정책객체
+		FileRenamePolicy policy = new HelloMvcFileRenamePolicy();
+
+		MultipartRequest multiReq = new MultipartRequest(request, saveDirectory, maxPostSize, encoding, policy);
+
+		// 1. 사용자 입력값 처리
+		String title = multiReq.getParameter("title");
+		String writer = multiReq.getParameter("writer");
+		String content = multiReq.getParameter("content");
+		Review review = new Review();
+		review.setTitle(title);
+		review.setWriter(writer);
+		review.setContent(content);
+
+		// Attachment객체 생성 (review 추가)
+		Enumeration<String> filenames = multiReq.getFileNames(); // upFile1, upFile2
+		while (filenames.hasMoreElements()) {
+			String name = filenames.nextElement(); // input:file[name]
+			File upFile = multiReq.getFile(name);
+			if (upFile != null) {
+				AttachmentReview attach = new AttachmentReview();
+				attach.setOriginalFilename(multiReq.getOriginalFileName(name));
+				attach.setRenamedFilename(multiReq.getFilesystemName(name)); // renamedFilename
+				review.addAttachment(attach);
+			}
+		}
+
+		// 2. 업무로직
+		int result = reviewService.insertReview(review);
+
+		// 3. 응답처리 (목록페이지로 redirect) - POST방식 DML처리후 url변경을 위해 redirect처리
+		request.getSession().setAttribute("msg", "게시글이 성공적으로 등록되었습니다.");
+		response.sendRedirect(request.getContextPath() + "/review/reviewCreate");
 	}
 
 }

@@ -14,7 +14,9 @@
 %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/store.css" />
 <% boolean admin = loginMember != null && (loginMember.getMemberRole() == MemberRole.A); %>
+
 <section id="storeList-container">
+
 	<h2>매장조회</h2>
 	
 			
