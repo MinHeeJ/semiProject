@@ -77,7 +77,7 @@
 	<hr style="margin-top:30px;" />	
     
 	<div class="comment-container">
-		<%	if(boardComments == null || boardComments.isEmpty()) { %>
+		<%	if((boardComments == null || boardComments.isEmpty()) && (loginMember != null && loginMember.getMemberRole() == MemberRole.A)) { %>
         <div class="comment-editor">
             <form
 				action="<%=request.getContextPath()%>/board/boardCommentCreate" 
