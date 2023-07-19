@@ -47,7 +47,7 @@ const showImages = () => {
 	let i = 0;
 	const images = document.querySelectorAll("img");
 	const interval = setInterval(() => {
-		images[i].style.display = 'inline-block';
+		images[i].style.opacity = 1;
 		i++;
 		if(i >= images.length) {
 			clearInterval(interval);

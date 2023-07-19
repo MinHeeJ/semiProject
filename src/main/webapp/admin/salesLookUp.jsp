@@ -260,12 +260,12 @@
                             <td>\${temp.product}</td>
                             <td>\${temp.count}</td>
                             <td>\${temp.orderDate}</td>
-                            <td>\${temp.price}</td>
+                            <td>\${temp.price}원</td>
                         </tr> 
                    	 `;
                    	 tfoot.innerHTML = `
                    	 	<tr>
-                   	 		<td colspan="6">총매출 : \${sum}</td>
+                   	 		<td colspan="6">총매출 : \${sum}원</td>
                    	 	</tr>
                    	 `;
                 });
