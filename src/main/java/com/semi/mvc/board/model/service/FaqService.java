@@ -23,7 +23,7 @@ public class FaqService {
 			// 발급된 board.no를 조회
 			int boardNo = faqDao.getLastBoardNo(conn);
 			faq.setBoardNo(boardNo); // servlet에서 redirect시 사용
-			System.out.println("boardNo = " + boardNo);
+//			System.out.println("boardNo = " + boardNo);
 			
 			// attachment 테이블 추가
 			List<Attachment> attachments = faq.getAttachments();
