@@ -72,5 +72,12 @@ public class StoreService {
 		return result;
 	}
 
+	public Store findByStoreNo(int storeNo) {
+		Connection conn = getConnection();
+		Store store = storeDao.findByStoreNo(conn, storeNo);
+		close(conn);
+		return store;
+	}
+
 	
 }
