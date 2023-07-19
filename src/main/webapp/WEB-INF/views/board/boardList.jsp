@@ -22,11 +22,11 @@
 	<table id="tbl-board">
 		<thead>
 			<tr>
-				<th>번호</th>
-				<th>제목</th>
-				<th>작성자</th>
-				<th>작성일</th>
-				<th>첨부파일</th><%--첨부파일이 있는 경우 /images/file.png 표시 width:16px --%>
+				<th class="t1">번호</th>
+				<th class="t2">제목</th>
+				<th class="t3">작성자</th>
+				<th class="t4">작성일</th>
+				<th class="t5">첨부파일</th><%--첨부파일이 있는 경우 /images/file.png 표시 width:16px --%>
 			</tr>
 		</thead>
 		<tbody>
@@ -35,17 +35,17 @@
 					for(Board board : boards){					
 			%>
 						<tr>
-							<td><%= board.getBoardNo() %></td>
-							<td>
+							<td class="t1"><%= board.getBoardNo() %></td>
+							<td class="t2">
 								<a href="<%= request.getContextPath() %>/board/boardDetail?no=<%= board.getBoardNo() %>"><%= board.getTitle() %></a>
 								<%	if(board.getCommentCnt() > 0) { %>
 								<%-- [<%= board.getCommentCnt() %>] --%>
 								✉		
 								<% 	} %>
 							</td>
-							<td><%= board.getWriter() %></td>
-							<td><%= board.getRegDate() %></td>
-							<td>
+							<td class="t3"><%= board.getWriter() %></td>
+							<td class="t4"><%= board.getRegDate() %></td>
+							<td class="t5">
 								<%	if (board.getAttachCnt() > 0) { %>
 									<img src="<%= request.getContextPath() %>/images/board/file.png" alt="" style="width:16px;" />
 								<% 	} %>
