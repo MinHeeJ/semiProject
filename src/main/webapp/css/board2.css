@@ -1,8 +1,8 @@
 @CHARSET "UTF-8";
 /*게시판*/
-section#board-container{width:600px; margin:0 auto; text-align:center;}
+section#board-container{width:600px; margin:0 auto; text-align:center; overflow: hidden;}
 section#board-container h2{margin:10px 0;}
-table#tbl-board{width:100%; margin:0 auto; border:1px solid #086528; border-collapse:collapse; clear:both;}
+table#tbl-board{width:100%; margin:0 auto; border:1px solid #086528; border-collapse:collapse; clear:both; table-layout: fixed;}
 table#tbl-board th {
 	border:1px solid #086528; padding: 5px 0; text-align:center;
 	background-color: rgb(217, 250, 217);
@@ -10,6 +10,11 @@ table#tbl-board th {
 table#tbl-board td {
 	border:1px solid #086528; padding: 5px 0; text-align:center;
 } 
+.t1 {width: 70px; overflow: hidden;}
+.t2 {width: 200px; overflow: hidden;}
+.t3 {width: 120px; overflow: hidden;}
+.t4 {width: 120px; overflow: hidden;}
+.t5 {width: 70px; overflow: hidden;}
 
 /*글쓰기버튼*/
 input#btn-add{float:right; margin: 0 0 15px;}
@@ -24,7 +29,8 @@ table#tbl-board-view {
 	width:500px; 
 	margin:0 auto; 
 	border:1px solid #086528; 
-	border-collapse:collapse;  
+	border-collapse:collapse; 
+	overflow: hidden;
 }
 table#tbl-board-view th {
 	width: 150px; 
