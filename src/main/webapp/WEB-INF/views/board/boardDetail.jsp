@@ -7,6 +7,7 @@
 <%@ page import="com.semi.mvc.board.model.vo.BoardComment" %>
 <%@ page import="com.semi.mvc.board.model.vo.Attachment" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<%@ include file="/WEB-INF/views/board/boardTap.jsp" %>
 <%
 	Board board = (Board) request.getAttribute("board");
 	List<Attachment> attachments = board.getAttachments();
