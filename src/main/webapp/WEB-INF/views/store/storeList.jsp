@@ -14,6 +14,7 @@
 %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/store.css" />
 <% boolean admin = loginMember != null && (loginMember.getMemberRole() == MemberRole.A); %>
+
 <style>
 #map { width:500px; height:400px; }
 </style>
@@ -82,6 +83,7 @@
   });
 </script>
 <section id="storeList-container">
+
 	<h2>매장조회</h2>
 	
 			

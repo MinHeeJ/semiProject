@@ -32,6 +32,7 @@ import com.semi.mvc.member.model.vo.Member;
 	"/OnlinOrder",
 	"/myCart/list",
 	"/complete/select"
+
 })
 public class LoginFilter extends HttpFilter implements Filter {
        

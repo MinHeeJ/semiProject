@@ -4,12 +4,13 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/storeEnroll.css" />
 <section id=enroll-container>
 	<h2>매장 추가 정보 입력</h2>
+	<div class="table-container">
 	<form 
 		name="checkNameDuplicateFrm" 
-		action="<%= request.getContextPath() %>/store/checkNameDuplicate">
+		action="<%= request.getContextPath() %>/store/checkNameDuplicate" id="checkNameDuplicateFrm">
 		<input type="hidden" name="storeName"/>
 	</form>
-	<form name="storeEnrollFrm" action="" method="POST">
+	<form name="storeEnrollFrm" action="" method="POST" >
 		<table>
 			<tr>
 				<th>매장명<sup>*</sup></th>
@@ -39,10 +40,12 @@
 			</tr>
 			
 		</table>
+		
 		<div id = button-container>
-		<input type="submit" value="매장등록" >
-		<input type="reset" value="취소">
+			<input type="submit" value="매장등록" >
+			<input type="reset" value="취소">
 		</div>
+	</div>	
 	</form>
 </section>
 <script>
@@ -96,3 +99,5 @@ document.storeEnrollFrm.onsubmit = (e) => {
 
 
 </script>
+
+<%@ include file="/WEB-INF/views/common/footer.jsp" %>
