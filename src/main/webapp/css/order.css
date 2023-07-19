@@ -3,6 +3,6 @@
 @font-face {font-family: 'NanumSquareNeo-Variable'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');font-weight: normal;font-style: normal;}
 .veg-wrapper{ text-align: center; color: black; margin-top : 2%; font-size: 40px; font-weight: bold; font-family: 'NanumSquareNeo-Variable'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2'); }
 .text{ font-size: 40px; font-weight: 600; padding: 50px; }
-.veg-wrapper img{ width: 50px; margin-top: -3%; width: 185px; opacity: 0; }
+.veg-wrapper img{ width: 50px; margin-top: 4%; width: 185px; opacity: 0; }
 .veg-wrapper .image img{ width: 60px; margin-bottom: 2%; }
 button { font-family: 'NanumSquareNeo-Variable'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');font-weight: normal;font-style: normal; width : 205px; height: 70px; border-radius: 10px; background-color: #73b67363; margin-bottom: 12%; font-size: 31px; cursor:pointer }
