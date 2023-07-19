@@ -5,6 +5,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/memberDetail.css" />
+<section id="login-container">
+
+
+
 <%
 
 	String memberId = loginMember.getMemberId(); 
@@ -67,6 +72,10 @@
         <input type="submit" value="탈퇴하기"/>
     </form>
 </section>
+  <br>
+  <br>
+  <br>
+  <br>
 
 <form name="memberDelFrm" action="<%= request.getContextPath() %>/member/memberDelete" method="post"></form>
 <script>

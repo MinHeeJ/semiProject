@@ -55,11 +55,11 @@
 				<ul class="account_list">
 				    <li>
 				    	<a href="<%= request.getContextPath() %>/member/memberLogin">로그인</a>
-				    	<img src="<%= request.getContextPath() %>/images/main/login.png"/>
+				    	<img class="clickImg" src="<%= request.getContextPath() %>/images/main/login.png"/>
 				    </li>
 				    <li>
 				    	<a href="<%= request.getContextPath() %>/member/memberEnroll">회원가입</a>
-				    	<img src="<%= request.getContextPath() %>/images/main/signup.png"/>
+				    	<img class="clickImg" src="<%= request.getContextPath() %>/images/main/signup.png"/>
 				    </li>
 				</ul>
 		    </div>
@@ -104,6 +104,17 @@
                 <li><a href="<%= request.getContextPath() %>/review/reviewCreate">리뷰</a></li>
             </ul>
         </nav>
+        <script>
+        const clickImages = document.querySelectorAll(".clickImg");
+        clickImages.forEach((image) => {
+        	image.addEventListener('click', () => {
+        		const link = image.parentNode.querySelector('a');
+        	      if (link) {
+        	          window.location.href = link.href;
+        	        }
+        	});
+        });
+        </script>
 		<br>
 		<br>
 		<br>

@@ -36,7 +36,9 @@ input#btn-add{
 	float:right; margin-right: 0px;
 }
 div.btnWrapper {
-	width: 600px;
+	display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
 input.btn-update {
 	margin-left: 0px;
@@ -77,4 +79,22 @@ table#faqUpdateTable td {
 	border:1px solid rgb(217, 250, 217); 
 	padding: 5px 0 5px 15px; 
 	text-align:left;
+}
+input[type="button"]{
+	background-color: #086528;
+	color: white;
+	border:1px solid #086528; 
+	border-radius: 5px;
+}
+input[type="submit"]{
+	background-color: #086528;
+	color: white;
+	border:1px solid #086528; 
+	border-radius: 5px;
+}
+button{
+	background-color: #086528;
+	color: white;
+	border:1px solid #086528; 
+	border-radius: 5px;
 }
