@@ -123,7 +123,7 @@ header > nav > ul > li > a{
 }
 
 .slide_wrapper{
-    width: 300%;
+    width: 100%;
     height: 450px;
     position:relative;
     overflow: hidden;
@@ -292,6 +292,7 @@ header > nav > ul > li > a{
 
 }
 
+.clickImg { cursor: pointer; }
 
 footer{ background-color:#086528; clear:both; height:75px; text-align:center;padding-top:40px; }
 footer p { display: flex; justify-content: center; align-items: center; font-family: 'NanumSquareNeo-Variable'; }
@@ -303,8 +304,8 @@ footer p { display: flex; justify-content: center; align-items: center; font-fam
 	width: 326px;
     height: 80px;
     position: fixed;
-    bottom: 100px;
-    left: 76%;
+    bottom: 6%;
+    left: 81%;
     border-radius: 36px;
     display: flex;
 	justify-content: center;
