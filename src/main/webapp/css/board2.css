@@ -81,9 +81,18 @@ table#tbl-comment td {
 table#tbl-comment textarea{margin: 4px 0 0 0;}
 table#tbl-comment button.btn-comment-enroll2{width:60px; height:23px; color:white; background:#086528; position:relative; top:-5px; left:10px;}
 
-button {color:white; background:#086528;}
-input[type="submit"]{color:white; background:#086528;}
-input[type="button"]{color:white; background:#086528;}
+input[type="button"]{
+	background-color: #086528;
+	color: white;
+}
+input[type="submit"]{
+	background-color: #086528;
+	color: white;
+}
+button{
+	background-color: #086528;
+	color: white;
+}
 
 div.addQuestion {
 	width:500px;
