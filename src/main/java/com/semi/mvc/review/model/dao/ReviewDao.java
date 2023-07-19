@@ -140,16 +140,17 @@ public class ReviewDao {
 
 	public List<Order> reviewOrderList(Connection conn,String memberId) {
 		List<Order> orders = new ArrayList<>();
+		
 		String sql = prop.getProperty("reviewOrderList");
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-		
+			pstmt.setString(1, memberId);
 			
 			try (ResultSet rset = pstmt.executeQuery()) {
 				while(rset.next()) {
-//					Order order = handleOrderResultSet(rset);
-//					orders.add(order);
+					
 					Order order = new Order();
 					order.setProduct(rset.getString("product"));
+				
 					order.setOrderSerialNo(rset.getInt("order_serial_no"));
 					orders.add(order);
 					
@@ -157,6 +158,7 @@ public class ReviewDao {
 			}
 		} catch (SQLException e) {
 			throw new OrderException(e);
+			
 		}
 		return orders;
 	}
@@ -165,7 +167,8 @@ public class ReviewDao {
 		String memberId = null;
 		String sql = prop.getProperty("findbyId");
 		
-		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {	
+//			pstmt.setString(1,memberId);
 			try(ResultSet rset = pstmt.executeQuery()) {
 				while(rset.next()) {
 					memberId = rset.getString("member_id");	

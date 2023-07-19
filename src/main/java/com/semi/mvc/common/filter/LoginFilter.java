@@ -21,7 +21,6 @@ import com.semi.mvc.member.model.vo.Member;
 	"/order/orderList", 
 	"/order/cart",
 	"/store/storeDelete", 
-	"/store/storeFinder",
 	"/member/memberUpdate", 
 	"/member/memberDelete",
 	"/chat/chat",

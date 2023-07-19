@@ -23,7 +23,7 @@
 		id ="printCartList"
 		action="<%= request.getContextPath() %>/order/cart"
 		method="POST">
-	<input type="hidden" name="memberId" value="honggd"/>
+	<input type="hidden" name="memberId" value="<%= loginMember %>>"/>
 	<div id = "cartbuttons">
 		<button id="cartUpdate">수량 수정</button>
 		<button id="cartDelete">삭제</button>	
