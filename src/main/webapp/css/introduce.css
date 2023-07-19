@@ -1,24 +1,25 @@
 @CHARSET "UTF-8";
 @font-face {font-family: 'NanumSquareNeo-Variable'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');font-weight: normal;font-style: normal;}
 
-body { margin: 0 auto; text-align: center; width: 1200px; }
-.title-wrapper { font-size: 60px; font-weight: bolder; margin-top: 100px; }
-.introduce-wrapper { margin-top: 150px; }
-.introduce-wrapper span { font-size: 30px; }
-.introduce-wrapper img { width: 300px; margin-top: 45px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); border-radius: 30px; }
-#span1 { font-size: 40px; font-weight: bolder; }
+body { margin: auto; }
+.title-wrapper { font-size: 60px; font-weight: bolder; margin-top: 100px; text-align: center; }
+.introduce-wrapper { margin-top: 10%; text-align: center; }
+.introduce-wrapper span { font-family: 'NanumSquareNeo-Variable'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');font-weight: normal;font-style: normal; font-size: 30px; }
+.introduce-wrapper img { width: 300px; margin-top: 5%; margin-bottom: 5%; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); border-radius: 30px; }
+#span1 { font-size: 40px; font-weight: bolder; text-align: center; }
 #span2 { font-size: 40px; font-weight: bolder; color: green; }
-#span3 { display: inline-block; margin-top: 45px; }
+#span3 { display: inline-block; }
 #span4 { cursor: pointer; }
 #span5 { font-weight: bolder; color: orange; }
 .promise-wrapper { display: flex; justify-content: center; align-items: center; margin-top: 100px; }
+.introduce-container span { font-family: 'NanumSquareNeo-Variable'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');font-weight: normal;font-style: normal; }
 .promise-wrapper #span1 { font-weight: bolder; font-size: 30px; }
 #img1 { width: 290px; margin-right: 45px; display: inline-block; border-radius: 10px; }
 #img2 { width: 50px; }
 #img3 { width: 290px; margin-left: 45px; display: inline-block; border-radius: 10px; }
 #div1 { width: 500px; margin-top: 20px; }
 
-#howToUse-container { width: 1000px; margin: 10% 0; text-align:center}
+#howToUse-container { width: 1000px; margin: 10% 0; text-align:center; margin: auto; margin-top: 10%;}
 #howToUse-container div {width: 45%; display: inline-block; margin: 2%;}
 .howToUse {border: 2px solid black; }
 .howToUse img{width: 100%;} 
