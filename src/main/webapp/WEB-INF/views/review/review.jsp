@@ -15,7 +15,7 @@
 	List<Review> reviews = (List<Review>)request.getAttribute("reviews");
 	String memberId = (String) request.getAttribute("memberId");
 	Review review = (Review) request.getAttribute("review");
-	String reviewWriter = "";
+
 %>
 <script src="<%= request.getContextPath() %>/js/jquery-3.7.0.js"></script>
 
@@ -45,7 +45,7 @@
 			%>
 				<tr>
 					<td><input type="radio" name="orderSerialNo"
-						value="<%= order.getOrderSerialNo() %>" /> <%= order.getProduct() %>
+						value="<%= order.getOrderSerialNo() %>" required /> <%= order.getProduct() %>
 					</td>
 				</tr>
 				<% 		
@@ -54,6 +54,7 @@
 			%>
 			</tbody>
 		</table>
+	
 		<br>
 		<br>
 		<br>
@@ -81,8 +82,8 @@
 		</table>
 		<%}%>
 	</form>
-</section>
 
+</section>
 
 
 <section id="photo-review-wrapper">
@@ -124,9 +125,9 @@
 			더보기(<span id="cpage"><%= cpage %></span>/<span id="totalPage"><%= totalPage %></span>)
 		</button>
 	</div>
+</section>
 
-</section>
-</section>
+
 <form action="<%= request.getContextPath() %>/review/reviewDelete"
 	name="reviewDelFrm" method="POST">
 	<input type="hidden" name="reviewNo" id="reviewNo" value="" />
@@ -354,7 +355,7 @@ const getPage = (cpage) => {
 			document.querySelector("#cpage").innerHTML = cpage;
 			
 
-			if(cpage === <%=totalPage%>|| cpage == 1){
+			if(cpage === <%=totalPage%>){
 
 				const btn = document.querySelector("#btn-more");
 				btn.disabled = true;
@@ -377,8 +378,9 @@ function deleteReview(reviewNo){
 }
 
 function updateReview(reviewNo){
-	location.href = "<%=request.getContextPath()%>/review/reviewUpdate?reviewNo=" + reviewNo;
+	location.href = "<%= request.getContextPath()%>/review/reviewUpdate?reviewNo=" + reviewNo;
 }
+
 </script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
