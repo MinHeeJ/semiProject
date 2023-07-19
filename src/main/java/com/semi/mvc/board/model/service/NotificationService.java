@@ -2,6 +2,7 @@ package com.semi.mvc.board.model.service;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.websocket.RemoteEndpoint.Basic;
@@ -9,6 +10,7 @@ import javax.websocket.Session;
 
 import com.google.gson.Gson;
 import com.semi.mvc.board.model.vo.Board;
+import com.semi.mvc.order.model.vo.Order;
 import com.semi.mvc.ws.HelloWebSocket;
 import com.semi.mvc.ws.MessageType;
 
@@ -44,6 +46,34 @@ public class NotificationService {
 				payload.put("receiver", board.getWriter());
 				payload.put("createdAt", System.currentTimeMillis());
 				payload.put("message", board.getTitle() + "(" + board.getBoardNo() + ") 게시글에 댓글이 달렸습니다.");
+				basic.sendText(new Gson().toJson(payload));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return 0;
+	}
+
+	public int notifyNewBoardComment(List<Order> orderList) {
+		
+		String orderMember = "";
+		int orderNum = 0;
+		String orderState = "";
+		for(Order order : orderList) {
+			orderMember = order.getMemberId();
+			orderNum = order.getOrderNo();
+			orderState = order.getState();
+		}
+		
+		Session wsSession = HelloWebSocket.clientMap.get(orderMember);
+		if(wsSession != null) {
+			Basic basic = wsSession.getBasicRemote();
+			try {
+				Map<String, Object> payload = new HashMap<>();
+				payload.put("messageType", MessageType.UPDATE_STATE);
+				payload.put("receiver", orderMember);
+				payload.put("createdAt", System.currentTimeMillis());
+				payload.put("message", "주문번호 " + orderNum + "의 주문 처리상태가 " + orderState + "로 변경되었습니다.");
 				basic.sendText(new Gson().toJson(payload));
 			} catch (IOException e) {
 				e.printStackTrace();

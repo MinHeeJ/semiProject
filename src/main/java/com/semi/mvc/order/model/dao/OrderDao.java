@@ -163,5 +163,24 @@ public class OrderDao {
 		return orders;
 	}
 
+	public List<Order> findByOrderNum(Connection conn, int orderNo) {
+		List<Order> orders = new ArrayList<>();
+		String sql = prop.getProperty("findByOrderNo");
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, orderNo);
+			
+			try (ResultSet rset = pstmt.executeQuery()) {
+				while(rset.next()) {
+					Order order = handleOrderResultSet(rset);
+					orders.add(order);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new OrderException(e);
+		}
+		return orders;
+	}
+
 
 }

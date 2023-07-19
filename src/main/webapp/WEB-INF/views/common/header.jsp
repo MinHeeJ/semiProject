@@ -32,9 +32,12 @@
 <head>
 <meta charset="UTF-8">
 <title>킥킥샐러드</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/main.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+<% 	if(loginMember != null) { %>
+	<script src="<%= request.getContextPath() %>/js/ws.js"></script>		
+<% 	} %>
 </head>
         
 <body>
@@ -65,7 +68,7 @@
 	        if(loginMember.getMemberRole() == MemberRole.U) { %>
 	        <div class="user_info_container">
 		        <div>
-				    <span><%= loginMember.getMemberId() %>님, 환영합니다!</span>
+				    <span id= notification> </span> <span> <%= loginMember.getMemberId() %>님, 환영합니다!</span>
 		        </div>
 		        <br><br>
 	            <ul class="account_list">
@@ -79,7 +82,7 @@
 	        <!-- 관리자일 경우 로그인 -->
 	        <div class="admin_info_container">
 		        <div>
-		            <span>관리자(<%= loginMember.getMemberId() %>)님</span>
+		            <span id= notification></span><span> 관리자(<%= loginMember.getMemberId() %>)님</span>
 		        </div>
 		        <br><br><br>
 	            <ul class="account_list1">

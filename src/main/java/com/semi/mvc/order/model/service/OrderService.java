@@ -107,5 +107,11 @@ public class OrderService {
 		return orders;
 	}
 
+	public List<Order> findByOrderNum(int orderNo) {
+		Connection conn = getConnection();
+		List<Order> orders = orderDao.findByOrderNum(conn, orderNo);
+		close(conn);
+		return orders;
 
+	}
 }
