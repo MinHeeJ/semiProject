@@ -84,14 +84,20 @@ table#tbl-comment button.btn-comment-enroll2{width:60px; height:23px; color:whit
 input[type="button"]{
 	background-color: #086528;
 	color: white;
+	border:1px solid #086528; 
+	border-radius: 5px;
 }
 input[type="submit"]{
 	background-color: #086528;
 	color: white;
+	border:1px solid #086528; 
+	border-radius: 5px;
 }
 button{
 	background-color: #086528;
 	color: white;
+	border:1px solid #086528; 
+	border-radius: 5px;
 }
 
 div.addQuestion {
