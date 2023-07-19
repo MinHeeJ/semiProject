@@ -2,7 +2,7 @@
 /*게시판*/
 section#board-container{width:600px; margin:0 auto; text-align:center;}
 section#board-container h2{margin:10px 0;}
-table#tbl-board{width:100%; margin:0 auto; border:1px solid #086528; border-collapse:collapse; clear:both; }
+table#tbl-board{width:100%; margin:0 auto; border:1px solid #086528; border-collapse:collapse; clear:both;}
 table#tbl-board th {
 	border:1px solid #086528; padding: 5px 0; text-align:center;
 	background-color: rgb(217, 250, 217);
@@ -81,9 +81,24 @@ table#tbl-comment td {
 table#tbl-comment textarea{margin: 4px 0 0 0;}
 table#tbl-comment button.btn-comment-enroll2{width:60px; height:23px; color:white; background:#086528; position:relative; top:-5px; left:10px;}
 
-button {color:white; background:#086528;}
-input[type="submit"]{color:white; background:#086528;}
-input[type="button"]{color:white; background:#086528;}
+input[type="button"]{
+	background-color: #086528;
+	color: white;
+	border:1px solid #086528; 
+	border-radius: 5px;
+}
+input[type="submit"]{
+	background-color: #086528;
+	color: white;
+	border:1px solid #086528; 
+	border-radius: 5px;
+}
+button{
+	background-color: #086528;
+	color: white;
+	border:1px solid #086528; 
+	border-radius: 5px;
+}
 
 div.addQuestion {
 	width:500px;

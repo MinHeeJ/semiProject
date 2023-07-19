@@ -6,7 +6,7 @@
 <%@ page import="java.util.List"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%@ include file="/WEB-INF/views/board/boardTap.jsp" %>
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/faq2.css"/>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/faq3.css"/>
 <%
 	List<FaqBoard> faqs = (List<FaqBoard>) request.getAttribute("faqs");
 	
@@ -27,7 +27,9 @@
 			<% if (attachs != null && !attachs.isEmpty()) { %>
 				<div class="content">
 					<% for(Attachment attach : attachs){ %>
-						<img src="<%= request.getContextPath() %>/upload/faq/<%= attach.getRenamedFilename() %>">
+						<a href="<%= request.getContextPath() %>/upload/faq/<%= attach.getRenamedFilename() %>">
+							<img src="<%= request.getContextPath() %>/upload/faq/<%= attach.getRenamedFilename() %>">
+						</a>
 					<% } %>
 				<p>
 				<%= faq.getContent() %>
@@ -97,7 +99,6 @@
 			}
 		}
 	});
-	
 </script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

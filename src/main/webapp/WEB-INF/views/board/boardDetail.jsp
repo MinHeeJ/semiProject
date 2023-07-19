@@ -7,6 +7,7 @@
 <%@ page import="com.semi.mvc.board.model.vo.BoardComment" %>
 <%@ page import="com.semi.mvc.board.model.vo.Attachment" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<%@ include file="/WEB-INF/views/board/boardTap.jsp" %>
 <%
 	Board board = (Board) request.getAttribute("board");
 	List<Attachment> attachments = board.getAttachments();
@@ -28,28 +29,15 @@
 			<th>작성자</th>
 			<td><%= board.getWriter() %></td>
 		</tr>
-		<% 	
-			if (attachments != null && !attachments.isEmpty()) { 
-				for(Attachment attach : attachments) {
-		%>
-					<tr>
-						<th>첨부파일</th>
-						<td>
-							<%-- 첨부파일이 있을경우만, 이미지와 함께 original파일명 표시 --%>
-							<a href="<%= request.getContextPath() %>/board/fileDownload?no=<%= attach.getBoardNo() %>"><%= attach.getOriginalFilename() %></a>
-						</td>
-					</tr>
-		<% 	
-				}
-			} 
-		%>
 		<tr>
 			<th>내 용</th>
 			<td>
 				<% if (attachments != null && !attachments.isEmpty()) { %>
 					<div class="content">
 						<% for(Attachment attach : attachments){ %>
-							<img src="<%= request.getContextPath() %>/upload/board/<%= attach.getRenamedFilename() %>">
+							<a href="<%= request.getContextPath() %>/upload/board/<%= attach.getRenamedFilename() %>">
+								<img src="<%= request.getContextPath() %>/upload/board/<%= attach.getRenamedFilename() %>">
+							</a>
 						<% } %>
 					<p><%= board.getContent() %><p>
 					</div>
