@@ -140,26 +140,25 @@ public class ReviewDao {
 
 	public List<Order> reviewOrderList(Connection conn,String memberId) {
 		List<Order> orders = new ArrayList<>();
+		
 		String sql = prop.getProperty("reviewOrderList");
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, memberId);
-			System.out.println("memberId++++++++==" + memberId);
+			
 			try (ResultSet rset = pstmt.executeQuery()) {
 				while(rset.next()) {
-//					Order order = handleOrderResultSet(rset);
-//					orders.add(order);
 					
 					Order order = new Order();
 					order.setProduct(rset.getString("product"));
-					order.setMemberId(rset.getString("memberId"));
+				
 					order.setOrderSerialNo(rset.getInt("order_serial_no"));
 					orders.add(order);
-					System.out.println("order 여기기기기기" + orders);
 					
 				}
 			}
 		} catch (SQLException e) {
 			throw new OrderException(e);
+			
 		}
 		return orders;
 	}

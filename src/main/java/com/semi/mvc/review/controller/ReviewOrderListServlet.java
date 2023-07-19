@@ -51,7 +51,8 @@ public class ReviewOrderListServlet extends HttpServlet {
 		// 1. 사용자 입력값 처리
 		String writer = multiReq.getParameter("writer");
 		String content = multiReq.getParameter("content");
-	    String orderSerialNo = multiReq.getParameter("orderSerialNo");
+		String orderSerialNo = multiReq.getParameter("orderSerialNo");
+
 		Review review = new Review();
 		review.setContent(content);
 		review.setWriter(writer);

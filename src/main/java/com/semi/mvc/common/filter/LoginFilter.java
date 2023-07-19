@@ -17,6 +17,9 @@ import javax.servlet.http.HttpSession;
 import com.semi.mvc.member.model.vo.Member;
 
 @WebFilter({ 
+	"/member/orderList", 
+	"/order/orderList", 
+	"/order/cart",
 	"/store/storeDelete", 
 	"/member/memberUpdate", 
 	"/member/memberDelete",

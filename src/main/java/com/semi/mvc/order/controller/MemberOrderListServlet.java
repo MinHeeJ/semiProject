@@ -33,7 +33,7 @@ public class MemberOrderListServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		String memberId = loginMember.getMemberId();
-//		String memberId = multiReq.getParameter("memberId");
+
 		
 		// 2. 업무로직
 		List<Order> orders = orderService.findById(memberId);
