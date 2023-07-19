@@ -15,6 +15,7 @@
 	List<Review> reviews = (List<Review>)request.getAttribute("reviews");
 	String memberId = (String) request.getAttribute("memberId");
 	Review review = (Review) request.getAttribute("review");
+	 HttpSession sessions = request.getSession(false);
 
 %>
 <script src="<%= request.getContextPath() %>/js/jquery-3.7.0.js"></script>
@@ -269,7 +270,6 @@ const getPage = (cpage) => {
 				let renamedFile = "";
 				let imgElements = "";
 				
-				
 				for (let i = 0; i < attachments.length; i++) {
 				    const attachment = attachments[i];
 				    const { renamedFilename } = attachment;
@@ -278,77 +278,38 @@ const getPage = (cpage) => {
 				    imgElements += `<img src="<%= request.getContextPath()%>/upload/review/\${renamedFile}" class="photo">`;
 				  }
 				
-				
-				<% 	boolean admin = loginMember != null && (loginMember.getMemberRole() == MemberRole.A); %>				
-				const writerOrNot = "<%= loginMember.getMemberId() %>"== writer;
 			
-				if(writerOrNot){
-					container.innerHTML += imgElements + `
-					<div class = "content-container">
-							<p class ="product">🥗\${product}</p>
-							<div class="info-container">
-								<p class ="photoDate">\${regDate}</p>
-								<p class ="writer">✍작성자 : \${writer}</p></p>
-							<p class ="content">내용 : \${content}</p>
-							</div>
-						<tr>			
-						<th colspan="2" id="th">
-							<div class="heart-container">
-					            <input type="hidden" name="reviewNo" value="\${reviewNo}"/>
-					            <input type="image" src="<%= request.getContextPath() %>/images/review/heart.png" alt="heart.png" style="width: 30px;" class="heart" value="\${reviewNo}">
-					            <p id="p">0</p>
-			          	 	</div>
-							<%-- 첨부파일이 없는 게시물 수정 --%>
-								
-							<div class = "button-container">
+				<% 	boolean admin = loginMember != null && (loginMember.getMemberRole() == MemberRole.A); %>
 				
-								<input type="button" value="수정하기" onclick="updateReview('\${reviewNo}');">
-									
-								<input type="button" value="삭제하기" onclick="deleteReview('\${reviewNo}');">
-							
-							</div>
-							</th>
-							</tr>
-									
-							</div>
-							
-					`;
-				} else {
-					container.innerHTML += imgElements + `
-					<div class = "content-container">
-							<p class ="product">🥗\${product}</p>
-							<div class="info-container">
-								<p class ="photoDate">\${regDate}</p>
-								<p class ="writer">✍작성자 : \${writer}</p></p>
-							<p class ="content">내용 : \${content}</p>
-							</div>
-						<tr>			
-						<th colspan="2" id="th">
-							<div class="heart-container">
-					            <input type="hidden" name="reviewNo" value="\${reviewNo}"/>
-					            <input type="image" src="<%= request.getContextPath() %>/images/review/heart.png" alt="heart.png" style="width: 30px;" class="heart" value="\${reviewNo}">
-					            <p id="p">0</p>
-			          	 	</div>
-							<%-- 첨부파일이 없는 게시물 수정 --%>
+				container.innerHTML += imgElements + `
+				<div class = "content-container">
+						<p class ="product">🥗\${product}</p>
+						<div class="info-container">
+							<p class ="photoDate">\${regDate}</p>
+							<p class ="writer">✍작성자 : \${writer}</p></p>
+						<p class ="content">내용 : \${content}</p>
+						</div>
+					<tr>			
+					<th colspan="2" id="th">
+						<div class="heart-container">
+				            <input type="hidden" name="reviewNo" value="\${reviewNo}"/>
+				            <input type="image" src="<%= request.getContextPath() %>/images/review/heart.png" alt="heart.png" style="width: 30px;" class="heart" value="\${reviewNo}">
+				            <p id="p">0</p>
+		          	 	</div>
+						<%-- 첨부파일이 없는 게시물 수정 --%>
+						<div class = "button-container">
+							<% 	if(admin){ %>
+							<input type="button" value="수정하기" onclick="updateReview('\${reviewNo}');">
 								
-							<div class = "button-container">
-								<% 	if(admin){ %>
-									
-								<input type="button" value="수정하기" onclick="updateReview('\${reviewNo}');">
-									
-								<input type="button" value="삭제하기" onclick="deleteReview('\${reviewNo}');">
-								<% 	} %>
-							</div>
-						</th>
-					</tr>
-							
-					</div>
-					
-					`;
-				}
-	
-		
+							<input type="button" value="삭제하기" onclick="deleteReview('\${reviewNo}');">
+							<% 	} %>
+						</div>
+					</th>
+				</tr>
+						
+				</div>
 				
+				`;
 			})
 		},
 		complete(){
