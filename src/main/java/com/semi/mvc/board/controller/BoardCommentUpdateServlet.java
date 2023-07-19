@@ -28,7 +28,7 @@ public class BoardCommentUpdateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int no = Integer.parseInt(request.getParameter("no"));
-		System.out.println("update get No = " + no);
+//		System.out.println("update get No = " + no);
 		
 		Board board = boardService.findById(no); // Board, List<Attachment>
 		List<BoardComment> boardComments = boardService.findBoardCommentByBoardNo(no);
@@ -50,7 +50,7 @@ public class BoardCommentUpdateServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 1. 사용자 입력값 처리		
 		int no = Integer.parseInt(request.getParameter("no"));
-		System.out.println("update post No = " + no);
+//		System.out.println("update post No = " + no);
 		String writer = request.getParameter("writer");
 		String content = request.getParameter("content");
 		

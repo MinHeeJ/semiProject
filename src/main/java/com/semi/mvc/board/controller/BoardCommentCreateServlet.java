@@ -37,7 +37,7 @@ public class BoardCommentCreateServlet extends HttpServlet {
 		String content = request.getParameter("content");
 		
 		BoardComment boardComment = new BoardComment(0, boardNo, writer, content, null);
-		System.out.println("boardComment = " + boardComment);
+//		System.out.println("boardComment = " + boardComment);
 		
 		// 2. 업무로직
 		// 댓글 등록

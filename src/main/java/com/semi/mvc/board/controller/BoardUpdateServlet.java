@@ -54,7 +54,7 @@ public class BoardUpdateServlet extends HttpServlet {
 		// 업로드파일 저장경로 C:\\Workspaces\\web_server_workspace\\hello-mvc\\src\\main\\webapp\\upload\\board
 		ServletContext application = getServletContext();
 		String saveDirectory = application.getRealPath("/upload/board");
-		System.out.println("saveDirectory = " + saveDirectory);
+//		System.out.println("saveDirectory = " + saveDirectory);
 		// 파일하나당 최대크기 10MB 
 		int maxPostSize = 1024 * 1024 * 10; 
 		// 인코딩
@@ -78,7 +78,7 @@ public class BoardUpdateServlet extends HttpServlet {
 		board.setTitle(title);
 		board.setWriter(writer);
 		board.setContent(content);
-		System.out.println(board);
+//		System.out.println(board);
 		
 		// Attachment객체 생성 (Board 추가)
 		Enumeration<String> filenames = multiReq.getFileNames(); // upFile1, upFile2
@@ -107,7 +107,7 @@ public class BoardUpdateServlet extends HttpServlet {
 				File delFile = new File(saveDirectory, attach.getRenamedFilename());
 				if(delFile.exists())
 					delFile.delete();
-				System.out.println(attach.getRenamedFilename() + " : " + delFile.exists());
+//				System.out.println(attach.getRenamedFilename() + " : " + delFile.exists());
 				
 				// b. db attachment 행 삭제
 				result = boardService.deleteAttachment(attachNo);

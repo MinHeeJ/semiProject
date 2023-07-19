@@ -32,7 +32,7 @@ public class FaqUpdateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
-		System.out.println("BoardNo = " + boardNo);
+//		System.out.println("BoardNo = " + boardNo);
 		FaqBoard faq = faqService.findByBoardNo(boardNo);
 		request.setAttribute("faq", faq);
 		request.getRequestDispatcher("/WEB-INF/views/board/faqUpdate.jsp").forward(request, response);
@@ -44,7 +44,7 @@ public class FaqUpdateServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServletContext application = getServletContext();
 		String saveDirectory = application.getRealPath("/upload/faq");
-		System.out.println("saveDirectory = " + saveDirectory);
+//		System.out.println("saveDirectory = " + saveDirectory);
 		int maxPostSize = 1024 * 1024 * 10; 
 		String encoding = "utf-8";
 		
@@ -53,7 +53,7 @@ public class FaqUpdateServlet extends HttpServlet {
 		MultipartRequest multiReq = new MultipartRequest(request, saveDirectory, maxPostSize, encoding, policy);
 		
 		int boardNo = Integer.parseInt(multiReq.getParameter("boardNo"));
-		System.out.println("BoardNo = " + boardNo);
+//		System.out.println("BoardNo = " + boardNo);
 		String title = multiReq.getParameter("title");
 		String writer = multiReq.getParameter("writer");
 		String content = multiReq.getParameter("content");
@@ -65,7 +65,7 @@ public class FaqUpdateServlet extends HttpServlet {
 		faq.setTitle(title);
 		faq.setContent(content);
 		faq.setWriter(writer);
-		System.out.println("faq = " + faq);
+//		System.out.println("faq = " + faq);
 		
 		Enumeration<String> filenames = multiReq.getFileNames(); // upFile1, upFile2
 		while(filenames.hasMoreElements()) {
@@ -92,7 +92,7 @@ public class FaqUpdateServlet extends HttpServlet {
 				File delFile = new File(saveDirectory, attach.getRenamedFilename());
 				if(delFile.exists())
 					delFile.delete();
-				System.out.println(attach.getRenamedFilename() + " : " + delFile.exists());
+//				System.out.println(attach.getRenamedFilename() + " : " + delFile.exists());
 				
 				// b. db attachment 행 삭제
 				result = faqService.deleteAttachment(attachNo);
