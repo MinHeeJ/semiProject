@@ -9,7 +9,8 @@
         <span>|</span>
         <span id="span4">이용방법</span>
     </div>
-    <form action="" name="introduce-container">
+    <div>
+    <form name="introduceFrm">
         <div class="introduce-wrapper">
             <span id="span1">저희 <span id="span2">킥킥샐러드</span>는</span><br>
             <span>커스텀 칼로리의 약자로 <span id="span5">ㅋㅋ</span>을 따서 왔습니다</span><br>
@@ -17,11 +18,12 @@
             <span id="span3">야채의 종류부터 토핑까지 내 선호에 맞게 고르는 것은 물론, <br> 1인분의 양에 구애받지 않고 원하는 만큼만 주문할 수 있는 <br> <span id="span5">맞춤형 샐러드</span> 주문 시스템입니다.</span>
         </div>
         <br><br><br><br><br><br><br><br><br>
-        <div style="border: 1px solid orange; border-radius: 20px; border-width: 5px;">
-	        <div style="margin-top: 75px">
+        <div style="border: 1px solid orange; border-radius: 20px; border-width: 5px; width: 1200px;
+    margin: auto;">
+	        <div style="text-align: center; margin-top: 3%;">
 	            <span id="span1">킥킥샐러드만의 <span id="span2" style="color: #f67957;">약속</span></span>
 	        </div>
-	        <div style="margin-top: 100px;">
+	        <div class="introduce-container">
 	            <div class="promise-wrapper">
 	                <div>
 	                    <img src="<%= request.getContextPath() %>/images/main/veg.jpg" id="img1">
@@ -67,7 +69,8 @@
 	        </div>
 	        <br><br><br><br>
         </div>
-        </form>
+    </form>
+        </div>
         
     	<form action="" id="howToUse-container" style="display: none;">
         <fieldset>  
@@ -97,7 +100,7 @@ for(let i=0; i<span.length; i++) {
 
     span[i].onclick = () => {
 
-        const frm1 = document.querySelector("[name=introduce-container]");
+        const frm1 = document.querySelector("[name=introduceFrm]");
         const frm2 = document.querySelector("#howToUse-container");
         if(i == 0) {
             frm1.style.display = "block";

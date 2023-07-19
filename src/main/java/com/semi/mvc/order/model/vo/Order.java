@@ -62,10 +62,10 @@ public class Order extends Cart {
 	@Override
 	public String toString() {
 		return "Order [orderNo=" + orderNo + ", orderDate=" + orderDate + ", state=" + state + ", orderSerialNo="
-				+ orderSerialNo + "]";
+				+ orderSerialNo + ", toString()=" + super.toString() + "]";
 	}
 
-	
+
 	
 	
 }

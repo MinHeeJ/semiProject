@@ -1,7 +1,7 @@
 @charset "UTF-8";
-
+@font-face {font-family: 'NanumSquareNeo-Variable'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');font-weight: normal;font-style: normal;}
 /*메인*/
-
+#storeList-container { margin-bottom: 12%; width: 1200px; margin: auto; font-family: 'NanumSquareNeo-Variable'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');font-weight: normal;font-style: normal; }
 h2{
 	 font-size: 40px;
 	 text-align: center;

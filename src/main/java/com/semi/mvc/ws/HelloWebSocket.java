@@ -40,6 +40,8 @@ public class HelloWebSocket {
 		Map<String, Object> configProperties = config.getUserProperties();
 		String memberId = (String) configProperties.get("memberId");
 		
+		System.out.println("11111111111111111111111111111111111111111111111" + memberId);
+		
 		// 1. clientMap에 저장
 		clientMap.put(memberId, session);
 		// 2. WebSocket Session객체 properties 맵 객체에 memberId 저장 (@OnClose에서 사용)

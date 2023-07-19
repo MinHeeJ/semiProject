@@ -103,7 +103,11 @@ List<Ingredient> ingredients = (List) request.getAttribute("ingredients");
 	<script>
 		
 		document.querySelector("#optionSelectSection").onclick = () =>{
-			
+			selectOptionControl();
+		};
+		
+		const selectOptionControl = () =>{
+		
 			  const saladOrBread = document.querySelector("[name=saladOrBread]");			
 			  const quantities = document.querySelectorAll("[name= quantity]");
 			  const totalCalorieElement = document.getElementById("totalCalorie");
@@ -129,20 +133,33 @@ List<Ingredient> ingredients = (List) request.getAttribute("ingredients");
 					totalCal += cal * quantityValue;
 					totalPrice += price * quantityValue;
 					
+					 quantity.onblur = (e) => {
+
+						if(e.target.value > 10){
+							alert("하나의 재료의 수량은 10개를 추가할 수 없습니다!");
+							e.target.value = 10;
+						}					
+						
+			         };
+		
 			  });
 			  
 			  totalCalorieElement.innerHTML = `총 칼로리 : \${totalCal}kcal`;
 			  totalPriceElement.innerHTML = `총 가격 : \${totalPrice}원`;
+		  
 		};
-		
-		
 
+		
+		
 		document.querySelector("#orderForm").onsubmit=(e)=>{			
 			const quantities = document.querySelectorAll("[name = quantity]");
 			let bool = true;
+			let over = true;
 			quantities.forEach((quantity)=>{
 				if(quantity.value != 0)
 					bool = false;
+				if(quantity.value > 10)
+					over = false;
 			})			
 			if(bool){
 				e.preventDefault();
