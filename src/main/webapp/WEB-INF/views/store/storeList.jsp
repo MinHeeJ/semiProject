@@ -14,6 +14,73 @@
 %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/store.css" />
 <% boolean admin = loginMember != null && (loginMember.getMemberRole() == MemberRole.A); %>
+<style>
+#map { width:500px; height:400px; }
+</style>
+</head>
+<body>
+	
+
+	
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=53ca7ba233962018a7a8996d89d2622a&libraries=services"></script>
+  <div id="map"></div>
+<script>
+  var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+	  mapOption = {
+	    center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+	    level: 3 // 지도의 확대 레벨
+	  };
+
+  // 지도를 생성합니다
+  var map = new kakao.maps.Map(mapContainer, mapOption);
+
+  // 주소-좌표 변환 객체를 생성합니다
+  var geocoder = new kakao.maps.services.Geocoder();
+
+  // 장소의 정보들을 담을 positions 배열
+  var positions = [
+    {
+      title: '카카오',
+      address: '제주특별자치도 제주시 첨단로 242'
+    },
+    {
+      title: '생태연못',
+      address: '경기 남양주시 조안면 능내리 50'
+    },
+    {
+      title: '근린공원',
+      address: '경기 남양주시 별내면 청학로68번길 40'
+    }
+  ];
+
+  positions.forEach(function (position) { //추가한 코드
+    // 주소로 좌표를 검색합니다
+    geocoder.addressSearch(position.address, function(result, status) {
+
+      // 정상적으로 검색이 완료됐으면
+      if (status === kakao.maps.services.Status.OK) {
+
+        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new kakao.maps.Marker({
+          map: map,
+          position: coords
+        });
+
+        // 인포윈도우로 장소에 대한 설명을 표시합니다
+        //변경한 코드
+        var infowindow = new kakao.maps.InfoWindow({
+          content: '<div style="width:150px;text-align:center;padding:6px 0;">' + position.title + '</div>'
+        });
+        infowindow.open(map, marker);
+
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(coords);
+      }
+    });
+  });
+</script>
 <section id="storeList-container">
 	<h2>매장조회</h2>
 	
