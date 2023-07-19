@@ -36,13 +36,15 @@ input#btn-add{
 	float:right; margin-right: 0px;
 }
 div.btnWrapper {
-	width: 600px;
+	display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
 input.btn-update {
-	float:left; margin-left: 0px;
+	margin-left: 0px;
 }
 input.btn-delete {
-	float:right; margin-right: 0px;
+	margin-right: 0px;
 }
 table#faqCreateTable {
 	width:500px; 
@@ -77,4 +79,16 @@ table#faqUpdateTable td {
 	border:1px solid rgb(217, 250, 217); 
 	padding: 5px 0 5px 15px; 
 	text-align:left;
+}
+input[type="button"]{
+	background-color: #086528;
+	color: white;
+}
+input[type="submit"]{
+	background-color: #086528;
+	color: white;
+}
+button{
+	background-color: #086528;
+	color: white;
 }

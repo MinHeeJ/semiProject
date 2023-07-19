@@ -80,3 +80,11 @@ table#faqUpdateTable td {
 	padding: 5px 0 5px 15px; 
 	text-align:left;
 }
+input[type="button"]{
+	background-color: #086528;
+	color: white;
+}
+button{
+	background-color: #086528;
+	color: white;
+}
