@@ -50,7 +50,9 @@
 				<% if (attachments != null && !attachments.isEmpty()) { %>
 					<div class="content">
 						<% for(Attachment attach : attachments){ %>
-							<img src="<%= request.getContextPath() %>/upload/board/<%= attach.getRenamedFilename() %>">
+							<a href="<%= request.getContextPath() %>/upload/board/<%= attach.getRenamedFilename() %>">
+								<img src="<%= request.getContextPath() %>/upload/board/<%= attach.getRenamedFilename() %>">
+							</a>
 						<% } %>
 					<p><%= board.getContent() %><p>
 					</div>
