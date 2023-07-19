@@ -39,10 +39,10 @@ div.btnWrapper {
 	width: 600px;
 }
 input.btn-update {
-	margin-left: 0px;
+	float:left; margin-left: 0px;
 }
 input.btn-delete {
-	margin-right: 0px;
+	float:right; margin-right: 0px;
 }
 table#faqCreateTable {
 	width:500px; 

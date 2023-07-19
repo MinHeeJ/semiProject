@@ -12,7 +12,7 @@
 	// System.out.println("msg = " + msg);
 	
 	Member loginMember = (Member) session.getAttribute("loginMember");
-	// System.out.println("loginMember = " + loginMember);
+	System.out.println("loginMember = " + loginMember);
 	
 	Cookie[] cookies = request.getCookies();
 	String saveId = null;
