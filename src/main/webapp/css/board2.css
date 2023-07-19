@@ -85,3 +85,8 @@ table#tbl-comment button.btn-comment-enroll2{width:60px; height:23px; color:whit
 table#tbl-comment button.btn-delete{background:red; color:white; display:none;}
 table#tbl-comment tr:hover button.btn-delete{display:inline;}
 
+
+div.addQuestion {
+	width:500px;
+	margin: 5px auto;
+}

@@ -7,6 +7,7 @@
 	FaqBoard faq = (FaqBoard) request.getAttribute("faq");
 	List<Attachment> attachments = faq.getAttachments();
 %>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/faq3.css"/>
 <section class="faqUpdateContainer">
 	<form name="faqUpdateFrm" action="<%= request.getContextPath() %>/board/faqUpdate" method="POST" enctype="multipart/form-data">
 		<input type="hidden" name="boardNo" value="<%= faq.getBoardNo() %>" />

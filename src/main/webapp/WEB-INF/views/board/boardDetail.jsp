@@ -123,11 +123,23 @@
 						<input type="button" value="삭제하기" onclick="deleteComment()">
 					</th>
 				</tr>
-				<% 	} %>
+				<% } %>
 			</table>
-			<% 	} %>
+			
+			<% if(loginMember.getMemberId().equals(board.getWriter()) && (boardComments != null && !boardComments.isEmpty())) { %>
+				<div class="addQuestion">
+					<input 
+					type="button" id="btn-add" value="추가질문하기" 
+					onclick="location.href = '<%= request.getContextPath() %>/board/boardCreate';"/>
+				</div>
+			<% } %>	
+			
+			<% } %>
 		<% } %>
 	</div>
+	<br>
+	<br>
+	<br>
 	<script>
 	
 	// 이벤트버블링을 이용한 폼유효성 검사 
