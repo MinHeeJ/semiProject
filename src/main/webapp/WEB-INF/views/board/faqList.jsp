@@ -29,15 +29,27 @@
 					<% for(Attachment attach : attachs){ %>
 						<img src="<%= request.getContextPath() %>/upload/faq/<%= attach.getRenamedFilename() %>">
 					<% } %>
-				<p><%= faq.getContent() %></p>
+				<p>
+				<%= faq.getContent() %>
+				<% if(admin){ %>
+					<div class="btnWrapper">
+					<button class="btn-update" value="<%= faq.getBoardNo() %>">수정</button>
+					<button class="btn-delete" value="<%= faq.getBoardNo() %>">삭제</button>
+					</div>
+				<% } %>		
+				</p>
 				</div>
 			<% }else{ %>
-				<p class="content"><%= faq.getContent() %></p>
-			<% } %>
-			<% if(admin){ %>
-				<div class="btnWrapper">
-				<button class="btn-update" value="<%= faq.getBoardNo() %>">수정</button>
-				<button class="btn-delete" value="<%= faq.getBoardNo() %>">삭제</button>
+				<div class="content">
+				<p>
+				<%= faq.getContent() %>
+				<% if(admin){ %>
+					<div class="btnWrapper">
+					<button class="btn-update" value="<%= faq.getBoardNo() %>">수정</button>
+					<button class="btn-delete" value="<%= faq.getBoardNo() %>">삭제</button>
+					</div>
+				<% } %>				
+				</p>
 				</div>
 			<% } %>
 		<% } %>
