@@ -29,7 +29,7 @@
 	
 
   <script src="<%= request.getContextPath() %>/js/jquery-3.7.0.js"></script>
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=53ca7ba233962018a7a8996d89d2622a&libraries=services"></script>
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=53ca7ba233962018a7a8996d89d2622a&libraries=services,clusterer,drawing"></script>
 
 <section id="storeList-container">
 
@@ -155,7 +155,7 @@ document.querySelectorAll("#btn1").forEach((elem) => {
 				 var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 		          mapOption = {
 			            center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-			            level: 3 // 지도의 확대 레벨
+			            level: 1 // 지도의 확대 레벨
 			          };
 	
 				  // 지도를 생성합니다
