@@ -12,10 +12,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.FileRenamePolicy;
 import com.semi.mvc.common.HelloMvcFileRenamePolicy;
+import com.semi.mvc.member.model.vo.Member;
 import com.semi.mvc.order.model.vo.Order;
 import com.semi.mvc.review.model.service.ReviewService;
 import com.semi.mvc.review.model.vo.AttachmentReview;
@@ -37,10 +39,24 @@ public class ReviewCreateServlet extends HttpServlet {
 		int limit = 5;
 		int totalPage = (int) Math.ceil((double) totalContent / limit); 
 		request.setAttribute("totalPage", totalPage);
+//		memberId
 		
-		List<Order> orders = reviewService.reviewOrderList(" honggd");
+		HttpSession session = request.getSession();
+		Member loginMember = (Member) session.getAttribute("loginMember");
+		
+		String memberId = loginMember.getMemberId();
+		System.out.println("loginMember ㅇㅇㅇㅇ = " + loginMember);
+		System.out.println("(SDS)memberId: " + memberId);
+		request.setAttribute("memberId", memberId);
+		
+//		String memberId =reviewService.findbyId();
+//		System.out.println("(SDS)memberId: " + memberId);
+//		request.setAttribute("memberId", memberId);
+		
+//		List<Order> orders = reviewService.reviewOrderList("honggd");
+		List<Order> orders = reviewService.reviewOrderList(memberId);
+		System.out.println("memberId++++++++==22" + orders);
 		request.setAttribute("orders", orders);
-		
 		
 		int cpage=1;
 		
@@ -53,9 +69,6 @@ public class ReviewCreateServlet extends HttpServlet {
 		
 		int start = (cpage - 1) * limit + 1; 
 		int end = cpage * limit;
-		
-		String memberId =reviewService.findbyId();
-		request.setAttribute("memberId", memberId);
 		
 		
 		

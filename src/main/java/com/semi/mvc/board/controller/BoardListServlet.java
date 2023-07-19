@@ -37,17 +37,17 @@ public class BoardListServlet extends HttpServlet {
 		int end = cpage * LIMIT;
 		
 		List<Board> boards = boardService.findAll(start, end);
-		System.out.println("boards = " + boards);
+//		System.out.println("boards = " + boards);
 		
 		for(Board board : boards) {
 			board.setTitle(HelloMvcUtils.escapeHtml(board.getTitle()));
 		}
 		
 		int totalContent = boardService.getTotalContent();
-		System.out.println("totalContent = " + totalContent);
+//		System.out.println("totalContent = " + totalContent);
 		String url = request.getRequestURI(); // /mvc/board/boardList
 		String pagebar = HelloMvcUtils.getPagebar(cpage, LIMIT, totalContent, url);
-		System.out.println("pagebar = " + pagebar);
+//		System.out.println("pagebar = " + pagebar);
 		
 		request.setAttribute("totalContent", totalContent);
 		request.setAttribute("boards", boards); 

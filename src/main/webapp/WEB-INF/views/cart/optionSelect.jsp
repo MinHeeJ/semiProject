@@ -26,7 +26,7 @@ List<Ingredient> ingredients = (List) request.getAttribute("ingredients");
 #changeStep{width: 100%; height : 30%; margin : 5% 0 8% 0;}
 #changeStep button {color : white; background-color : darkgreen; font-size : 25px; font-weight : bold; width: 150px; height : 60px; border-radius: 10px; border-color: black; display: inline-block; cursor: pointer;}
 #changeStep div {width: 45%; display: inline-block}
-#optionSelectSection{width: 1200px; font-family:'GmarketSansMedium', Courier, monospace; vertical-align : middle; margin-bottom: 12%}
+#optionSelectSection{margin: auto; width: 1200px; font-family:'GmarketSansMedium', Courier, monospace; vertical-align : middle; margin-bottom: 12%}
 #optionSelectSection form div{text-align: center;}
 .selectTitle {font-size : 40px; font-weight : bold; margin-left : 1%;vertical-align : middle;}
 #bread {width:300px; height :300px; background-color: white; background-image: url('<%= request.getContextPath() %>/images/cart/bread.png'); background-repeat: no-repeat; background-size: contain; background-position-y : center;}

@@ -52,11 +52,11 @@ public class FaqDao {
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			// updateFaq = update faq_board set title = ?, content = ? where board_no = ?
 			pstmt.setString(1, faq.getTitle());
-			System.out.println("title = " + faq.getTitle());
+//			System.out.println("title = " + faq.getTitle());
 			pstmt.setString(2, faq.getContent());
-			System.out.println("content = " + faq.getContent());
+//			System.out.println("content = " + faq.getContent());
 			pstmt.setInt(3, faq.getBoardNo());
-			System.out.println("upNo = " + faq.getBoardNo());
+//			System.out.println("upNo = " + faq.getBoardNo());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new FaqException(e);

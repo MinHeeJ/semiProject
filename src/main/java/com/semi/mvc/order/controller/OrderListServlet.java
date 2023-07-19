@@ -36,6 +36,7 @@ public class OrderListServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		String memberId = loginMember.getMemberId();
+
 		
 		// 2. 업무로직
 		List<Order> orders = orderService.findById(memberId);

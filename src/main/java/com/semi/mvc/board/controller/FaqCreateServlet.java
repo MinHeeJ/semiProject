@@ -43,7 +43,7 @@ public class FaqCreateServlet extends HttpServlet {
 		// 업로드파일 저장경로 C:\\Workspaces\\web_server_workspace\\hello-mvc\\src\\main\\webapp\\upload\\board
 		ServletContext application = getServletContext();
 		String saveDirectory = application.getRealPath("/upload/faq");
-		System.out.println("saveDirectory = " + saveDirectory);
+//		System.out.println("saveDirectory = " + saveDirectory);
 		// 파일하나당 최대크기 10MB 
 		int maxPostSize = 1024 * 1024 * 10; 
 		// 인코딩
@@ -74,7 +74,7 @@ public class FaqCreateServlet extends HttpServlet {
 				attach.setOriginalFilename(multiReq.getOriginalFileName(name));
 				attach.setRenamedFilename(multiReq.getFilesystemName(name)); // renamedFilename
 				faq.addAttachment(attach);
-				System.out.println("faq.attachment = " + faq.getAttachments());
+//				System.out.println("faq.attachment = " + faq.getAttachments());
 			}
 		}
 		

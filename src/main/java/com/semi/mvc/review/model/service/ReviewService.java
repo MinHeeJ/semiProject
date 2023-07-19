@@ -75,7 +75,8 @@ public class ReviewService {
 
 	public List<Order> reviewOrderList(String memberId) {
 		Connection conn = getConnection();
-		List<Order> orders = reviewDao.reviewOrderList(conn,memberId);
+		List<Order> orders = reviewDao.reviewOrderList(conn, memberId);
+		
 		close(conn);
 		return orders;
 	}
