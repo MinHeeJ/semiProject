@@ -31,6 +31,7 @@ public class ReviewLikeServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		String memberId = loginMember.getMemberId();
+
 		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
 		
 		// 2. 업무로직

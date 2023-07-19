@@ -14,12 +14,17 @@
 	String product = (String) request.getAttribute("product");
 	List<Review> reviews = (List<Review>)request.getAttribute("reviews");
 	String memberId = (String) request.getAttribute("memberId");
-	
+	Review review = (Review) request.getAttribute("review");
+
 %>
 <script src="<%= request.getContextPath() %>/js/jquery-3.7.0.js"></script>
+
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/review.css" />
-	<h2>✨리뷰작성✨</h2>
+
+
+
+<h2>✨리뷰작성✨</h2>
 <section id="review-container">
 	<form name="reviewOrderListFrm"
 		action="<%=request.getContextPath() %>/review/reviewOrderList"
@@ -27,7 +32,7 @@
 
 		<table id="tbl-order-review">
 			<h1>상품</h1>
-			
+
 			<tbody>
 				<% 	if(orders == null || orders.isEmpty()) { %>
 				<tr>
@@ -49,7 +54,9 @@
 			%>
 			</tbody>
 		</table>
-	<br><br><br>
+		<br>
+		<br>
+		<br>
 
 		<% 	if(!(orders == null || orders.isEmpty())) { %>
 		<table id="tbl-board-view">
@@ -57,6 +64,7 @@
 				<th>작성자</th>
 				<td><input type="text" name="writer" id="writer"
 					value="<%=memberId%>" readonly /></td>
+
 			</tr>
 			<tr>
 				<th>첨부파일</th>
@@ -88,37 +96,40 @@
 		<%	
 			} 
 			else { 
-				for(Review review : reviews){
-					List<AttachmentReview> files = review.getAttachments();
-		%>		
-				<tr>
-				
-				
-					<div class="polaroid">
-					
-					<!-- ajax -->
-						
-					
-				   </div>
-				   
-				   <br/>  
-			</tr>
-			<% 		
+
+				for(Review reviewss : reviews){
+					List<AttachmentReview> files = reviewss.getAttachments();
+		%>
+
+		<tr>
+
+
+			<div class="polaroid">
+
+				<!-- ajax -->
+
+
+			</div>
+
+			<br />
+		</tr>
+		<% 		
 				}
 			} 
 		%>
-	  </div>  
-	
+	</div>
+
 	<div id='btn-more-container'>
 		<button id="btn-more" value="">
 			더보기(<span id="cpage"><%= cpage %></span>/<span id="totalPage"><%= totalPage %></span>)
 		</button>
 	</div>
-	
+
 </section>
 </section>
-<form action="<%= request.getContextPath() %>/review/reviewDelete" name="reviewDelFrm" method="POST" >
-	<input type="hidden" name="reviewNo" id="reviewNo" value=""/>
+<form action="<%= request.getContextPath() %>/review/reviewDelete"
+	name="reviewDelFrm" method="POST">
+	<input type="hidden" name="reviewNo" id="reviewNo" value="" />
 </form>
 
 
@@ -249,8 +260,11 @@ const getPage = (cpage) => {
 			const container = document.querySelector(".polaroid");
 			
 			reviews.forEach((Review)=>{
+
 				const {reviewNo,writer, content, regDate,product,attachments,likeCount} =Review;
 				console.log(likeCount);
+				console.log(writer);
+
 				let renamedFile = "";
 				let imgElements = "";
 				
@@ -262,6 +276,8 @@ const getPage = (cpage) => {
 				    imgElements += `<img src="<%= request.getContextPath()%>/upload/review/\${renamedFile}" class="photo">`;
 				  }
 				
+			
+				<% 	boolean admin = loginMember != null && (loginMember.getMemberRole() == MemberRole.A); %>
 				
 				container.innerHTML += imgElements + `
 				<div class = "content-container">
@@ -274,15 +290,17 @@ const getPage = (cpage) => {
 					<tr>			
 					<th colspan="2" id="th">
 						<div class="heart-container">
-				            <input type="hidden" name="reviewNo1" value="\${reviewNo}"/>
-				            <input type="image" src="<%= request.getContextPath() %>/images/review/emptyheart.png" alt="heart.png" style="width: 30px;" class="heart" value="\${reviewNo}">
+				            <input type="hidden" name="reviewNo" value="\${reviewNo}"/>
+				            <input type="image" src="<%= request.getContextPath() %>/images/review/heart.png" alt="heart.png" style="width: 30px;" class="heart" value="\${reviewNo}">
 				            <p id="p">0</p>
 		          	 	</div>
 						<%-- 첨부파일이 없는 게시물 수정 --%>
 						<div class = "button-container">
+							<% 	if(admin){ %>
 							<input type="button" value="수정하기" onclick="updateReview('\${reviewNo}');">
 								
 							<input type="button" value="삭제하기" onclick="deleteReview('\${reviewNo}');">
+							<% 	} %>
 						</div>
 					</th>
 				</tr>
@@ -290,14 +308,13 @@ const getPage = (cpage) => {
 				</div>
 				
 				`;
-				console.log(container.innerHTML);
 			})
 		},
 		complete(){
 			document.querySelector("#cpage").innerHTML = cpage;
 			
 
-			if(cpage === <%= totalPage%>|| cpage == 1){
+			if(cpage === <%=totalPage%>|| cpage == 1){
 
 				const btn = document.querySelector("#btn-more");
 				btn.disabled = true;
@@ -320,7 +337,7 @@ function deleteReview(reviewNo){
 }
 
 function updateReview(reviewNo){
-	location.href = "<%= request.getContextPath() %>/review/reviewUpdate?reviewNo=" + reviewNo;
+	location.href = "<%=request.getContextPath()%>/review/reviewUpdate?reviewNo=" + reviewNo;
 }
 </script>
 
