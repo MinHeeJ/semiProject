@@ -51,10 +51,10 @@
 						<% for(Attachment attach : attachments){ %>
 							<img src="<%= request.getContextPath() %>/upload/board/<%= attach.getRenamedFilename() %>">
 						<% } %>
-					<textarea readonly style="resize: none;" rows="10"><%= board.getContent() %></textarea>
+					<p><%= board.getContent() %><p>
 					</div>
 				<% }else{ %>
-					<textarea readonly style="resize: none;" rows="10"><%= board.getContent() %></textarea>
+					<p><%= board.getContent() %><p>
 				<% } %>
 			</td>
 		</tr>
