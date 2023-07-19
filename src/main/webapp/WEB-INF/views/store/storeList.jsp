@@ -13,7 +13,7 @@
 	
 %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/store.css" />
-
+<% boolean admin = loginMember != null && (loginMember.getMemberRole() == MemberRole.A); %>
 <section id="storeList-container">
 	<h2>매장조회</h2>
 	
@@ -23,11 +23,11 @@
                 <input type="text" name="searchKeyword" size="25" placeholder="검색할 매장명을 입력하세요."/>
                 <button class="searchbutton" type="submit">검색</button>			
             </form>	
-           
+           <%	if (admin) { %>
 			<div id="search-container">
 	       <input class="button" type="button" value="매장등록" onclick="location.href='<%= request.getContextPath() %>/store/storeEnroll';">
 			</div>
-	
+			<%	}%>
         </div>
             
         
@@ -41,9 +41,9 @@
 				<th>매장명</th>
 				<th>주소</th>
 				<th>연락처</th>
-				
+				 <%	if (admin) { %>
 				<th>매장삭제</th>
-			
+			 <%	}%>
 			</tr>
 		</thead>
 		
@@ -62,14 +62,11 @@
 					<td><%= store.getStoreName() %></td>
 					<td><%= store.getAddress() %></td> 
 					<td><%= store.getPhone() %></td> 
+			 <%	if (admin) { %>
 					<td>
-				<% 	
-			boolean canEdit = (loginMember != null 
-					&& loginMember.getMemberRole() == MemberRole.A);
-			if (canEdit) { %>
 						<input class="button" type="button" onclick="deleteStore('<%=store.getStoreNo()%>');" value="매장삭제">
-					<% 	} %>
 					</td> 
+					 <%} %>
 				</tr>
 				<% 		
 						}
@@ -85,9 +82,7 @@
 </section>
 
 
-<% boolean canEdit = (loginMember != null 
-&& loginMember.getMemberRole() == MemberRole.A);
-if(canEdit){ %>
+
 <form action="<%= request.getContextPath() %>/store/storeDelete" name="storeDelFrm" method="POST" >
 	<input type="hidden" name="storeNo" id="storeNo" value=""/>
 
@@ -111,5 +106,5 @@ function deleteStore(storeNo){
 	}
 }
 </script>
-<% 	} %>
+
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

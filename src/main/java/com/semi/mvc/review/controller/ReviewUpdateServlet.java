@@ -10,10 +10,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.FileRenamePolicy;
 import com.semi.mvc.common.HelloMvcFileRenamePolicy;
+import com.semi.mvc.member.model.vo.Member;
 import com.semi.mvc.review.model.service.ReviewService;
 import com.semi.mvc.review.model.vo.AttachmentReview;
 import com.semi.mvc.review.model.vo.Review;
@@ -28,14 +30,17 @@ public class ReviewUpdateServlet extends HttpServlet {
   
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-				// 1. 사용자입력값 처리
-				int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
-				// 2. 업무로직
-				Review review = reviewService.findReviewById(reviewNo);
-				request.setAttribute("review", review);
-				// 3. 응답처리
-				request.getRequestDispatcher("/WEB-INF/views/review/reviewUpdate.jsp")
-					.forward(request, response);
+		HttpSession session = request.getSession();
+		Member loginMember = (Member) session.getAttribute("loginMember");
+		
+		// 1. 사용자입력값 처리
+		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
+		// 2. 업무로직
+		Review review = reviewService.findReviewById(reviewNo);
+		request.setAttribute("review", review);
+		// 3. 응답처리
+		request.getRequestDispatcher("/WEB-INF/views/review/reviewUpdate.jsp")
+			.forward(request, response);
 	}
 
 	/**
