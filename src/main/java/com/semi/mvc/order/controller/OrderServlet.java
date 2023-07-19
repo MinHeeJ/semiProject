@@ -25,10 +25,9 @@ public class OrderServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 1. 사용자 입력값 처리
-//		HttpSession session = request.getSession();
-//		Member loginMember = (Member) session.getAttribute("loginMember");
-//		String memberId = loginMember.getMemberId();
-		String memberId = request.getParameter("memberId");
+		HttpSession session = request.getSession();
+		Member loginMember = (Member) session.getAttribute("loginMember");
+		String memberId = loginMember.getMemberId();
 		String[] cartNumber = request.getParameterValues("cartNumber");
 		String[] checkedOrNot = request.getParameterValues("checkedOrNot");
 		
