@@ -15,8 +15,9 @@
 h2 {
   text-align: center;
   color: #2b580c;
+  font-weight: bold;
+  font-size: 24px;
 }
-
 .input-box {
   margin-bottom: 20px;
 }
@@ -29,14 +30,14 @@ label {
 input[type="text"],
 input[type="password"] {
   display: block;
-  width: 100%;
+  width: 95%;
   padding: 8px;
   border: 1px solid #9a9999;
   border-radius: 4px;
   font-size: 16px;
 }
 
-input[type="submit"] {
+.login-button {
   display: block;
   width: 100%;
   padding: 10px;
@@ -67,3 +68,6 @@ input[type="submit"] {
   background-color: #1f3d07;
 }
 
+.login-button:hover {
+  background-color: #1f3d07;
+}
