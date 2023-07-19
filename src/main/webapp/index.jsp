@@ -33,8 +33,10 @@
 	<!-- 로그인 전 -->
 	<div class="recommend_contents">
 		<div id="balloon">
-			<img src="<%= request.getContextPath() %>/images/index/balloon.png"
-				id="choiceBallon" /> <span>고르기 힘들다면?</span>
+		
+			<img src="<%= request.getContextPath() %>/images/index/balloon.png" id="choiceBallon" /> <span>고르기 힘들다면?</span>
+		
+		
 		</div>
 		<br>
 		<h1 id="recommend">리뷰 베스트</h1>
@@ -112,7 +114,7 @@
 					container.innerHTML += `
 						<div class="polaroid">
 							<div class="textArea">
-								<p id="textAreaTitle">🧡 좋아요 \${rank}위 🧡</p><br>
+								<p id="textAreaTitle">💚 좋아요 \${rank}위 💚</p><br>
 								<p class="reviewInfo">\${product}</p><br>
 								<p>
 									<span class ="writer">작성자 : \${writer}</span><br><br>
