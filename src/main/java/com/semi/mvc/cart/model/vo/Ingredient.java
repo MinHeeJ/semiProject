@@ -7,7 +7,7 @@ public class Ingredient {
 	private String ingredientName;
 	private int calorie;
 	private int price;
-	
+	private String weight;
 
 
 	public Ingredient() {
@@ -16,22 +16,27 @@ public class Ingredient {
 	}
 
 
-
-	
-	public Ingredient(int ingredientNo, int categoryNo, String ingredientName, int calorie, int price) {
+	public Ingredient(int ingredientNo, int categoryNo, String ingredientName, int calorie, int price, String weight) {
 		super();
 		this.ingredientNo = ingredientNo;
 		this.categoryNo = categoryNo;
 		this.ingredientName = ingredientName;
 		this.calorie = calorie;
 		this.price = price;
+		this.weight = weight;
 	}
 
-	
+
+	@Override
+	public String toString() {
+		return "Ingredient [ingredientNo=" + ingredientNo + ", categoryNo=" + categoryNo + ", ingredientName="
+				+ ingredientName + ", calorie=" + calorie + ", price=" + price + ", weight=" + weight + "]";
+	}
+
+
 	public int getIngredientNo() {
 		return ingredientNo;
 	}
-
 
 
 	public void setIngredientNo(int ingredientNo) {
@@ -39,11 +44,9 @@ public class Ingredient {
 	}
 
 
-
 	public int getCategoryNo() {
 		return categoryNo;
 	}
-
 
 
 	public void setCategoryNo(int categoryNo) {
@@ -51,11 +54,9 @@ public class Ingredient {
 	}
 
 
-
 	public String getIngredientName() {
 		return ingredientName;
 	}
-
 
 
 	public void setIngredientName(String ingredientName) {
@@ -63,11 +64,9 @@ public class Ingredient {
 	}
 
 
-
 	public int getCalorie() {
 		return calorie;
 	}
-
 
 
 	public void setCalorie(int calorie) {
@@ -75,11 +74,9 @@ public class Ingredient {
 	}
 
 
-
 	public int getPrice() {
 		return price;
 	}
-
 
 
 	public void setPrice(int price) {
@@ -87,14 +84,14 @@ public class Ingredient {
 	}
 
 
-
-
-
-	@Override
-	public String toString() {
-		return "Ingredient [ingredientNo=" + ingredientNo + ", categoryNo=" + categoryNo + ", ingredientName="
-				+ ingredientName + ", calorie=" + calorie + ", price=" + price + "]";
+	public String getWeight() {
+		return weight;
 	}
-	
-	
+
+
+	public void setWeight(String weight) {
+		this.weight = weight;
+	}
+
+
 }

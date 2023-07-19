@@ -18,37 +18,7 @@ String memberId = "";
 <head>
 <meta charset="UTF-8">
 <title></title>
-
-<style>
-div {vertical-align: middle;}
-@font-face {font-family: 'SBAggroB'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff'); font-weight: normal; font-style: normal;}
-@font-face {font-family: 'PyeongChangPeace-Bold'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Bold.woff2') format('woff2');font-weight: 700;font-style: normal;}
-
-#beforeCartSection {margin: auto; width : 1200px; text-align: center; border: 4px solid darkgreen; margin-top: 3%; border-radius: 30px;  overflow: hidden; margin-bottom: 12%}
-#receipt{ display: inline-block; width: 40%; border-left: 2.5px solid black; border-right: 2.5px solid black; margin : 3% 0 3% 0; animation: opacityAni 0.7s linear;}
-#receiptTitle {font-size : 43px !important; margin : 3% 0 20% 0; font-family: 'SBAggroB' !important; font-weight: bold; -webkit-text-stroke: 1px darkGreen;}
-h1#receiptTitle+h1{}
-#receipt h2 {margin-left: 20px; text-align: left; font-size : 20px; font-weight: bold;}
-#optionPrint {width : 100%}
-#optionPrint .optionsLeft {display: inline-block; margin-left: 20px; text-align: left; font-size : 15px; width : 45%}
-#optionPrint .optionsRight {display: inline-block; margin-right: 20px; text-align: right; font-size : 15px; width : 45%}
-.totals {font-size : 23px; font-weight: bold;}
-#selectConfirm h1 {font-family: 'NanumSquareNeo-Variable'; margin-top : 3%; font-size : 25px; font-weight: bold;}
-#selectConfirm button {font-family: 'NanumSquareNeo-Variable'; display: inline-block; width : 150px; height: 50px; font-size : 20px; font-weight: bold; margin: 3% 1%; border: 1px solid black; background-color: white; border-radius : 10px}
-#selectConfirm button:hover {background-color : darkgreen; color: white}
-#selectConfirm {display: inline-block; width: 45%; margin-left:5%;}
-@font-face {font-family: 'NanumSquareNeo-Variable'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');font-weight: normal;font-style: normal;}
-#completeAddCart button {display: inline-block; width : 220px; height: 75px; font-size : 23px; font-weight: bold; margin: 2% 1%; border: 3px solid black; color: white; background-color: darkgreen; border-radius : 10px}
-#backgroundPop { display: none; width: 100%; height: 100%; position: fixed; opacity : 0.1; top: 0; left: 0; right: 0; background-color: black; z-index: 999;}
-#completeAddCart {font-family: 'NanumSquareNeo-Variable'; display: none; overflow:hidden; position: absolute; top: 50%; left: 50%; transform:translate(-50%,-50%); border: 5px solid darkgreen; border-radius: 20px; width: 700px; font-size : 30px; font-weight: bold; height: 500px; background: #fff; z-index: 1000; text-align: center; vertical-align: middle;}
-#completeAddCart button:hover {background-color : white; color: darkgreen; border: 3px solid darkgreen; }
-#completeAddCart img{width: 230px ; height: 230px}
-#completeAddCart img {animation: slideRight 2s linear;}
-@keyframes slideRight {0% {transform: translateX(-120%);} 100% {transform: translateX(0%);}}
-@keyframes opacityAni {0% {transform: translateY(100%);} 100% {transform: translateY(0%);}}
-#completeAddCart img.slideAnimation {animation: slideRight 2.5s linear 1;}
-</style>
-
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/cart.css" />
 <script src="<%= request.getContextPath() %>/js/jquery-3.7.0.js"></script>
 <body>
 	<section id="beforeCartSection">
