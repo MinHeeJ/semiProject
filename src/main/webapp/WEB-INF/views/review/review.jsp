@@ -94,9 +94,11 @@
 		<%	
 			} 
 			else { 
+
 				for(Review reviewss : reviews){
 					List<AttachmentReview> files = reviewss.getAttachments();
 		%>
+
 				<tr>
 				
 				
@@ -148,12 +150,11 @@ document.reviewOrderListFrm.onsubmit = (e) => {
 	return true;
 }
 //좋아요
-
+// onload될때 내가 좋아요 했는지 유무 / 해당게시물 좋아요 총갯수
 function like() {
   const reviewNo = document.querySelectorAll(".heart");
-  reviewNo.forEach(function(e) {
+  reviewNo.forEach((e) => {
     console.log(e);
-
     $.ajax({
       url : "<%= request.getContextPath() %>/review/likeCount",
       method : "POST",
@@ -163,12 +164,14 @@ function like() {
       success(responseData) {
         console.log(responseData);
         const {likeCount, isLike} = responseData;
+        console.log(likeCount);
+        console.log(isLike);
 
         const hearts = document.querySelectorAll(".heart");
         const p = document.querySelectorAll("#p");
         for(let i=0; i<hearts.length; i++) {
           if(e.value == hearts[i].value) {
-            if(isLike) {
+            if(isLike == 1) {
               console.log(e.value);
               console.log(likeCount);
               console.log(isLike);
@@ -195,9 +198,9 @@ document.querySelector("#photo-review-wrapper").onclick = (e) => {
 	love(e);
 }
 
+// 내가 좋아요 했는지 유무/해당게시물 좋아요 총갯수 / 해당게시물 좋아요
 function love(e) {
   console.log(11111111, e.target.value);
-  e.preventDefault();
   $.ajax({
     url : "<%= request.getContextPath() %>/review/like",
     method : "POST",
@@ -214,7 +217,7 @@ function love(e) {
       const p = document.querySelectorAll("#p");
       for(let i=0; i<hearts.length; i++) {
         if(e.target.value == hearts[i].value) {
-          if(isLike) {
+          if(isLike == 1) {
             console.log(123456);
             hearts[i].src = "<%= request.getContextPath() %>/images/review/greenheart.png"
             p[i].innerHTML = `\${likeCount}`;
@@ -254,7 +257,12 @@ const getPage = (cpage) => {
 			const container = document.querySelector(".polaroid");
 			
 			reviews.forEach((Review)=>{
+<<<<<<< HEAD
 				const {reviewNo, writer, content, regDate, product, attachments} =Review;
+=======
+				const {reviewNo,writer, content, regDate,product,attachments,likeCount} =Review;
+				console.log(likeCount);
+>>>>>>> branch 'master' of https://github.com/MinHeeJ/semiProject
 				let renamedFile = "";
 				let imgElements = "";
 				
@@ -280,8 +288,8 @@ const getPage = (cpage) => {
 					<tr>			
 					<th colspan="2" id="th">
 						<div class="heart-container">
-				            <input type="hidden" name="reviewNo" value="\${reviewNo}"/>
-				            <input type="image" src="<%= request.getContextPath() %>/images/review/heart.png" alt="heart.png" style="width: 30px;" class="heart" value="\${reviewNo}">
+				            <input type="hidden" name="reviewNo1" value="\${reviewNo}"/>
+				            <input type="image" src="<%= request.getContextPath() %>/images/review/emptyheart.png" alt="heart.png" style="width: 30px;" class="heart" value="\${reviewNo}">
 				            <p id="p">0</p>
 		          	 	</div>
 						<%-- 첨부파일이 없는 게시물 수정 --%>
@@ -301,6 +309,7 @@ const getPage = (cpage) => {
 				</div>
 				
 				`;
+				console.log(container.innerHTML);
 			})
 		},
 		complete(){
@@ -314,6 +323,7 @@ const getPage = (cpage) => {
 				btn.style.cursor = "not-allowed";
 			}
 			like();
+			console.log('like실행함');
 		}
 	});
 }

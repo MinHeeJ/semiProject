@@ -23,7 +23,7 @@ public class FaqService {
 			// 발급된 board.no를 조회
 			int boardNo = faqDao.getLastBoardNo(conn);
 			faq.setBoardNo(boardNo); // servlet에서 redirect시 사용
-			System.out.println("boardNo = " + boardNo);
+//			System.out.println("boardNo = " + boardNo);
 			
 			// attachment 테이블 추가
 			List<Attachment> attachments = faq.getAttachments();
@@ -103,6 +103,13 @@ public class FaqService {
 		Attachment attach = faqDao.findAttachmentById(conn, attachNo);
 		close(conn);
 		return attach;
+	}
+	
+	public List<Attachment> findAttachmentListByBoardNo(int boardNo){
+		Connection conn = getConnection();
+		List<Attachment> faqAttachments = faqDao.findAttachmentByBoardNo(conn, boardNo);
+		close(conn);
+		return faqAttachments;
 	}
 
 	public int deleteAttachment(int attachNo) {

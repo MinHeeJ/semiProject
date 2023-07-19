@@ -199,14 +199,10 @@ public class ReviewService {
 			if(likeCount == 0) {
 				// 2. 해당게시물에 좋아요가 존재하지않는다면 해당게시물 좋아요 추가
 				result = reviewDao.insertLike(conn, memberId, reviewNo);
-				// 3. 해당게시물 좋아요 갯수 들고 가기
-				likeCount = reviewDao.findAllLikeCount(conn, reviewNo);
 			}
 			else {
 				// 2. 해당게시물에 좋아요가 존재한다면 해당게시물 좋아요 삭제
 				result = reviewDao.deleteLike(conn, memberId, reviewNo);
-				// 3. 해당게시물 좋아요 갯수 들고 가기
-				likeCount = reviewDao.findAllLikeCount(conn, reviewNo);
 			}
 			commit(conn);
 			
@@ -216,17 +212,17 @@ public class ReviewService {
 		} finally {
 			close(conn);
 		}
-		return likeCount;
+		return result;
 	}
 
-	public boolean isLike(String memberId, int reviewNo) {
+	public int onloadAllLikeCount(int reviewNo) {
 		Connection conn = getConnection();
-		boolean isLike = reviewDao.isLike(conn, memberId, reviewNo);
+		int allLikeCount = reviewDao.findAllLikeCount(conn, reviewNo);
 		close(conn);
-		return isLike;
+		return allLikeCount;
 	}
 
-	public int onloadLikeCount(String memberId, int reviewNo) {
+	public int isLike(String memberId, int reviewNo) {
 		Connection conn = getConnection();
 		int likeCount = reviewDao.likeCount(conn, memberId, reviewNo);
 		close(conn);

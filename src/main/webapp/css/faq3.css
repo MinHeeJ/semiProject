@@ -1,0 +1,80 @@
+@CHARSET "UTF-8";
+.faqContainer{
+	display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.title {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 600px;
+    height: 30px;
+    color: #086528;
+    background-color: rgb(217, 250, 217);
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 3px;
+    margin: 10px 0;
+    margin-bottom: 10px;
+}
+.content {
+    width: 600px;
+    margin: 3px 0;
+    padding: 3px;
+    border: 1px solid rgb(217, 250, 217);
+    border-radius: 10px;
+    display: none;
+}
+.content img{
+	width: 100%;
+}
+div.btnAddWrapper{
+	width: 600px;
+}
+input#btn-add{
+	float:right; margin-right: 0px;
+}
+div.btnWrapper {
+	width: 600px;
+}
+input.btn-update {
+	float:left; margin-left: 0px;
+}
+input.btn-delete {
+	float:right; margin-right: 0px;
+}
+table#faqCreateTable {
+	width:500px; 
+	margin:0 auto; 
+	border:1px solid rgb(217, 250, 217); 
+	border-collapse:collapse;  
+}
+table#faqCreateTable th {
+	width: 150px; 
+	border:1px solid rgb(217, 250, 217); 
+	padding: 10px 0; 
+	text-align:center; 
+} 
+table#faqCreateTable td {
+	border:1px solid rgb(217, 250, 217); 
+	padding: 5px 0 5px 15px; 
+	text-align:left;
+}
+table#faqUpdateTable {
+	width:500px; 
+	margin:0 auto; 
+	border:1px solid rgb(217, 250, 217); 
+	border-collapse:collapse;  
+}
+table#faqUpdateTable th {
+	width: 150px; 
+	border:1px solid rgb(217, 250, 217); 
+	padding: 10px 0; 
+	text-align:center; 
+} 
+table#faqUpdateTable td {
+	border:1px solid rgb(217, 250, 217); 
+	padding: 5px 0 5px 15px; 
+	text-align:left;
+}

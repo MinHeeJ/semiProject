@@ -26,3 +26,21 @@
     border-radius: 10px;
     display: none;
 }
+.content img{
+	width: 100%;
+}
+div.btnAddWrapper{
+	width: 600px;
+}
+input#btn-add{
+	float:right; margin-right: 0px;
+}
+div.btnWrapper {
+	width: 600px;
+}
+input.btn-update {
+	float:left; margin-left: 0px;
+}
+input.btn-delete {
+	float:right; margin-right: 0px;
+}

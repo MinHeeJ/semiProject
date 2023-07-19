@@ -18,7 +18,16 @@ import com.semi.mvc.member.model.vo.Member;
 
 @WebFilter({ 
 	"/store/storeDelete", 
-	
+	"/member/memberUpdate", 
+	"/member/memberDelete",
+	"/chat/chat",
+	"/board/boardCreate",
+	"/board/boardUpdate",
+	"/board/boardDelete",
+	"/board/boardCommentCreate",
+	"/board/boardCommentUpdate",
+	"/add/to/cart",
+	"/OnlinOrder"
 })
 public class LoginFilter extends HttpFilter implements Filter {
        
