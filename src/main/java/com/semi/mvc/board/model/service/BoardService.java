@@ -54,7 +54,7 @@ public class BoardService {
 			// 발급된 board.no를 조회
 			int boardNo = boardDao.getLastBoardNo(conn);
 			board.setBoardNo(boardNo); // servlet에서 redirect시 사용
-			System.out.println("boardNo = " + boardNo);
+//			System.out.println("boardNo = " + boardNo);
 			
 			// attachment 테이블 추가
 			List<Attachment> attachments = board.getAttachments();
@@ -91,7 +91,7 @@ public class BoardService {
 				}
 			}
 			commit(conn);
-			System.out.println("update commit");
+//			System.out.println("update commit");
 		} catch (Exception e) {
 			rollback(conn);
 			throw e;
