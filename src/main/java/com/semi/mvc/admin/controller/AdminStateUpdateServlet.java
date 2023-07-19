@@ -1,6 +1,7 @@
 package com.semi.mvc.admin.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,8 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.semi.mvc.board.model.service.NotificationService;
 import com.semi.mvc.order.model.service.OrderService;
-import com.semi.mvc.order.model.vo.State;
+import com.semi.mvc.order.model.vo.Order;
 
 /**
  * Servlet implementation class AdminStateUpdate
@@ -18,7 +20,7 @@ import com.semi.mvc.order.model.vo.State;
 public class AdminStateUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final OrderService orderService = new OrderService();
-
+	private final NotificationService notificationService = new NotificationService();
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -33,7 +35,9 @@ public class AdminStateUpdateServlet extends HttpServlet {
 		
 		// 2. 업무로직
 		int result = orderService.stateUpdate(orderNo, state);
+		List<Order> orderList = orderService.findByOrderNum(orderNo);
 		
+		result = notificationService.notifyNewBoardComment(orderList);
 		// 3. 응답처리
 		response.sendRedirect(request.getContextPath() + "/admin/orderList");
 	}
