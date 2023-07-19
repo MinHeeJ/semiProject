@@ -9,3 +9,4 @@
 		<a href="<%= request.getContextPath()%>/board/boardList">1:1문의</a>
 	</div>
 </div>
+<br>
