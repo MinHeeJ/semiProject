@@ -5,10 +5,11 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.semi.mvc.board.model.vo.Board" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<%@ include file="/WEB-INF/views/board/boardTap.jsp" %>
 <%
 	List<Board> boards = (List<Board>) request.getAttribute("boards");
 %>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/board.css" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/board2.css" />
 <section id="board-container">
 	<h2>게시판 </h2>
 	

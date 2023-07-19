@@ -32,8 +32,13 @@ public class FaqListServlet extends HttpServlet {
 		for(FaqBoard faq : faqs) {
 			faq.setTitle(HelloMvcUtils.escapeHtml(faq.getTitle()));
 			faq.setContent(HelloMvcUtils.escapeHtml(faq.getContent()));
-			Attachment attach = faqService.findAttachmentByBoardNo(faq.getBoardNo());
-			faq.addAttachment(attach);
+			List<Attachment> attach = faqService.findAttachmentListByBoardNo(faq.getBoardNo());
+			if(attach != null && !attach.isEmpty()) {
+				faq.setAttachments(attach);
+			}else {
+				attach = null;
+				faq.setAttachments(attach);
+			}
 //			System.out.println(faq.getBoardNo());
 		}
 		
