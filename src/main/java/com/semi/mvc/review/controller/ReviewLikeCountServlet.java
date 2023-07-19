@@ -34,8 +34,8 @@ public class ReviewLikeCountServlet extends HttpServlet {
 		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
 		
 		// 2. 업무로직
-		int likeCount = reviewService.onloadLikeCount(memberId, reviewNo);
-		boolean isLike = reviewService.isLike(memberId, reviewNo);
+		int likeCount = reviewService.onloadAllLikeCount(reviewNo); // 좋아요 총갯수
+		int isLike = reviewService.isLike(memberId, reviewNo); // 내가 좋아요했는지 유무
 		
 		// 3. 응답처리
 		// 헤더

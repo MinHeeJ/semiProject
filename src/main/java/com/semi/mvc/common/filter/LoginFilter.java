@@ -24,6 +24,7 @@ import com.semi.mvc.member.model.vo.Member;
 	"/store/storeFinder",
 	"/member/memberUpdate", 
 	"/member/memberDelete",
+	"/chat/chat",
 	"/board/boardCreate",
 	"/board/boardUpdate",
 	"/board/boardDelete",

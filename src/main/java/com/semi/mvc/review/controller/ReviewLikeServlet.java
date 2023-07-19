@@ -32,12 +32,11 @@ public class ReviewLikeServlet extends HttpServlet {
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		String memberId = loginMember.getMemberId();
 		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
-		System.out.println("memberId = " + memberId);
-		System.out.println("reviewNo = " + reviewNo);
 		
 		// 2. 업무로직
-		int likeCount = reviewService.likeCount(memberId, reviewNo);
-		boolean isLike = reviewService.isLike(memberId, reviewNo);
+		int result = reviewService.likeCount(memberId, reviewNo); // 내가 좋아요했으면 삭제 좋아요안했으면 추가
+		int isLike = reviewService.isLike(memberId, reviewNo);// 내가 좋아요했는지 유무
+		int likeCount = reviewService.findLikeCount(reviewNo); // 해당게시물 좋아요 총갯수
 		
 		// 3. 응답처리
 		// 헤더
@@ -45,7 +44,6 @@ public class ReviewLikeServlet extends HttpServlet {
 		
 		// 바디
 		Map<String, Object> map = new HashMap<>();
-		map.put("result", "성공");
 		map.put("likeCount", likeCount);
 		map.put("isLike", isLike);
 		System.out.println(map);
