@@ -149,24 +149,16 @@ function like() {
       success(responseData) {
         console.log(responseData);
         const {likeCount, isLike} = responseData;
-        console.log(likeCount);
-        console.log(isLike);
+        console.log(likeCount); // 해당게시물 좋아요 갯수
+        console.log(isLike); // 해당게시물에 좋아요 했으면 1
         const hearts = document.querySelectorAll(".heart");
         const p = document.querySelectorAll("#p");
         for(let i=0; i<hearts.length; i++) {
-          if(e.value == hearts[i].value) {
+          if(e.value == hearts[i].value) { 
             if(isLike == 1) {
-              console.log(e.value);
-              console.log(likeCount);
-              console.log(isLike);
-              console.log(123456);
               hearts[i].src = "<%= request.getContextPath() %>/images/review/greenheart.png"
               p[i].innerHTML = `\${likeCount}`;
             } else {
-              console.log(e.value);
-              console.log(likeCount);
-              console.log(isLike);
-              console.log(123123);
               hearts[i].src = "<%= request.getContextPath() %>/images/review/emptyheart.png"
               p[i].innerHTML = `\${likeCount}`;
             }
@@ -176,12 +168,14 @@ function like() {
     });
   });
 }
+
+// 하트를 눌렀을때
 document.querySelector("#photo-review-wrapper").onclick = (e) => {
 	love(e);
 }
-// 내가 좋아요 했는지 유무/해당게시물 좋아요 총갯수 / 해당게시물 좋아요
+
+// 내가 좋아요 했는지 유무 / 해당게시물 좋아요 총갯수 / 해당게시물 좋아요or좋아요취소
 function love(e) {
-  console.log(11111111, e.target.value);
   $.ajax({
     url : "<%= request.getContextPath() %>/review/like",
     method : "POST",
@@ -189,20 +183,15 @@ function love(e) {
       reviewNo : e.target.value
     },
     success(responseData) {
-      console.log(responseData);
       const {likeCount, isLike} = responseData;
-      console.log(likeCount);
-      console.log(isLike);
       const hearts = document.querySelectorAll(".heart");
       const p = document.querySelectorAll("#p");
       for(let i=0; i<hearts.length; i++) {
         if(e.target.value == hearts[i].value) {
           if(isLike == 1) {
-            console.log(123456);
             hearts[i].src = "<%= request.getContextPath() %>/images/review/greenheart.png"
             p[i].innerHTML = `\${likeCount}`;
           } else {
-            console.log(123123);
             hearts[i].src = "<%= request.getContextPath() %>/images/review/emptyheart.png"
             p[i].innerHTML = `\${likeCount}`;
           }
@@ -291,16 +280,16 @@ const getPage = (cpage) => {
 				} else { // 게시글 작성자 이외
 					container.innerHTML += imgElements + `
 						<div class = "content-container">
-								<p class ="photoDate">\${regDate}</p>
-								<div class="info-container">
-									<p class ="product">🥗\${product}🥗</p>
-									<p class ="writer">작성자 : \${writer}</p></p>
-								<p class ="content">내용 : \${content}</p>
+							<p class ="photoDate">\${regDate}</p>
+							<div class="info-container">
+								<p class ="product">🥗\${product}🥗</p>
+								<p class ="writer">작성자 : \${writer}</p></p>
+							<p class ="content">내용 : \${content}</p>
 						</div>
 					<tr>			
 						<th colspan="2" id="th">
 						
-						<%if(isHeart){ //비로그인사용자 하트안보이기%> 
+						<%if(isHeart){ //비로그인사용자 하트안보이기 %> 
 								<div class="heart-container">
 						            <input type="hidden" name="reviewNo" value="\${reviewNo}"/>
 						            <input type="image" src="<%= request.getContextPath() %>/images/review/emptyheart.png" alt="heart.png" style="width: 30px;" class="heart" value="\${reviewNo}">
@@ -327,13 +316,12 @@ const getPage = (cpage) => {
 		complete(){
 			document.querySelector("#cpage").innerHTML = cpage;
 			
-			if(cpage === <%=totalPage%>|| cpage == 1){
+			if(cpage === <%=totalPage%>){
 				const btn = document.querySelector("#btn-more");
 				btn.disabled = true;
 				btn.style.cursor = "not-allowed";
 			}
 			like();
-			console.log('like실행함');
 		}
 	});
 }

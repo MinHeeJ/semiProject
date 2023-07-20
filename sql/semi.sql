@@ -14,8 +14,12 @@ alter user semi quota unlimited on users;
 --===============================
 -- semi 계정
 --===============================
+<<<<<<< HEAD
+--DROP- USER semi CASCADE;
+=======
 --
 -- DROP USER semi CASCADE;
+>>>>>>> branch 'master' of https://github.com/MinHeeJ/semiProject
 -- select sid, serial#, username,status from v$session where username = 'SEMI';
 -- alter system kill SESSION '742,51322';
 
@@ -189,6 +193,15 @@ create table store (
 );
 insert into store values(seq_store_no.nextval, '킥킥샐러드 역삼역점', '서울 강남구 강남대로94길 66 지상1층', '02-123-4567');
 insert into store values(seq_store_no.nextval, '킥킥샐러드 강남역점', '서울 강남구 강남대로84길 23 1층', '02-111-2222');
+insert into store values(seq_store_no.nextval, '킥킥샐러드 방배1호점', '서울 강남구 강남대로84길 23 1층', '02-789-1594');
+insert into store values(seq_store_no.nextval, '킥킥샐러드 방배2호점', '서울 강남구 강남대로84길 23 1층', '02-457-8547');
+insert into store values(seq_store_no.nextval, '킥킥샐러드 방배3호점', '서울 강남구 강남대로84길 23 1층', '02-854-7852');
+insert into store values(seq_store_no.nextval, '킥킥샐러드 강남사거리점', '서울 강남구 강남대로84길 23 1층', '02-774-2882');
+insert into store values(seq_store_no.nextval, '킥킥샐러드 강남1호점', '서울 강남구 강남대로84길 23 1층', '02-111-2552');
+insert into store values(seq_store_no.nextval, '킥킥샐러드 강남2호점', '서울 강남구 강남대로84길 23 1층', '02-200-2122');
+insert into store values(seq_store_no.nextval, '킥킥샐러드 반월점', '서울 강남구 강남대로84길 23 1층', '031-124-2222');
+insert into store values(seq_store_no.nextval, '킥킥샐러드 정자점', '서울 강남구 강남대로84길 23 1층', '031-213-3131');
+insert into store values(seq_store_no.nextval, '킥킥샐러드 용이점', '경기도 평택시 용이대로4길 3 1층', '031-123-1234');
 select * from store;
 
 create table ingredient (
@@ -255,7 +268,7 @@ create table review (
     review_no number,
     order_serial_no number,
     writer varchar2(20),
-    title varchar2(200) not null,
+    title varchar2(200),
     content varchar2(1000) not null,
     reg_date date default sysdate,
     constraints pk_review_no primary key(review_no),
@@ -298,8 +311,9 @@ create table selected_option (
     constraints fk_selected_option_ingredient_no foreign key(ingredient_no) references ingredient(ingredient_no)
 );
 select * from selected_option;
-
+select * from order_detail;
+select * from order_tbl;
 create sequence seq_attachment_board_no;
 create sequence seq_board_comment_no;
-
+delete from order_tbl where member_id = 'andong' and order_no = 9;
 update member set member_role = 'A' where member_id = 'admin';
