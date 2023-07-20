@@ -142,21 +142,24 @@ document.querySelectorAll("#btn1").forEach((elem) => {
 			 success(store){
 				 const {address} = store;
 				 console.log(address);
-				 
+				 var prevMapContainer = document.getElementById('map');
+			     prevMapContainer.innerHTML = ''; 
 				 var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 		          mapOption = {
 			            center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
 			            level: 1 // 지도의 확대 레벨
 			          };
-	
+				  var map = new kakao.maps.Map(prevMapContainer, mapOption);
 				  // 지도를 생성합니다
-				  var map = new kakao.maps.Map(mapContainer, mapOption);
+				 // var map = new kakao.maps.Map(mapContainer, mapOption);
 	
 				  // 주소-좌표 변환 객체를 생성합니다
 				  var geocoder = new kakao.maps.services.Geocoder();
 	
 				  // 주소로 좌표를 검색합니다
 				  geocoder.addressSearch(address, function(result, status) {
+	
+					  console.log(result, " 12313131321");
 	
 				    // 정상적으로 검색이 완료됐으면
 				    if (status === kakao.maps.services.Status.OK) {
