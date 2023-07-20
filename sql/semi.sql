@@ -19,6 +19,61 @@ alter user semi quota unlimited on users;
 -- select sid, serial#, username,status from v$session where username = 'SEMI';
 -- alter system kill SESSION '742,51322';
 
+
+-- 초기화
+drop sequence seq_order_no;
+drop sequence seq_cart_no;
+drop sequence seq_attachment_board_no;
+drop sequence seq_order_serial_no;
+drop sequence seq_store_no;
+drop sequence seq_ingredient_no;
+drop sequence seq_review_no;
+drop sequence seq_attachment_faq_no;
+drop sequence seq_attachment_review_no;
+drop sequence seq_like_no;
+drop sequence seq_faq_no;
+drop sequence seq_board_no;
+drop sequence seq_attachment_board_no;
+drop sequence seq_board_comment_no;
+drop sequence seq_option_no;
+
+
+create sequence seq_option_no;
+create sequence seq_board_comment_no;
+create sequence seq_attachment_board_no;
+create sequence seq_board_no;
+create sequence seq_faq_no;
+create sequence seq_like_no;
+create sequence seq_attachment_review_no;
+create sequence seq_attachment_faq_no;
+create sequence seq_review_no;
+create sequence seq_ingredient_no;
+create sequence seq_store_no;
+create sequence seq_order_serial_no;
+create sequence seq_attachment_board_no;
+create sequence seq_cart_no;
+create sequence seq_order_no;
+
+drop table selected_option;
+drop table like_tbl;
+drop table attachment_review;
+drop table review;
+drop table attachment_faq;
+drop table faq_board;
+drop table ingredient;
+drop table store;
+drop table order_detail;
+drop table attachment_board;
+drop table board_comment;
+drop table cart_tbl;
+drop table order_tbl;
+drop table category;
+drop table board;
+drop table member;
+
+
+
+
 create table member (
 	member_id varchar2(20),
 	password varchar(500) not null,
@@ -31,25 +86,28 @@ create table member (
     constraints ck_member_gender check(gender in ('M', 'F')),
     constraints ck_member_role check(member_role in ('U', 'A'))
 );
+
 insert into member values ('admin', 1234, '관리자', '010-1234-5678', '서울시 역삼동', 'F', 'A');
 insert into member values ('honggd', 1234, '홍지디', '010-1234-5678', '서울시 역삼동', 'M', 'A');
 insert into member values ('qwerty', 1234, '쿼티', '010-1122-3344', '경기도 안산시', 'F', default);
+
 select * from member;
+
 --drop table member;
+
 -- delete from member;
+
 create table category (
 	category_no	number,
 	category_name varchar2(100)	not null,
     constraints pk_category_no primary key(category_no)
 );
-s
 insert into category values (1, 'main');
 insert into category values (2, 'veg');
 insert into category values (3, 'topping');
 insert into category values (4, 'sauce');
 insert into category values (5, 'drink');
 select * from category;
---drop table category;
 
 create table order_tbl (
 	order_no number(20),
@@ -60,10 +118,8 @@ create table order_tbl (
     constraints fk_order_member_id foreign key(member_id) references member(member_id) on delete cascade,
     constraints ck_order_state check(state in ('주문접수완료', '주문처리완료'))
 );
---drop table order_tbl;
 select * from order_tbl;
-create sequence seq_order_no;
---drop sequence seq_order_no;
+
 
 create table cart_tbl (
     cart_no number,
@@ -74,10 +130,8 @@ create table cart_tbl (
     constraints pk_cart_no_product primary key(cart_no, product),
     constraints fk_cart_member_id foreign key(member_id) references member(member_id) on delete cascade
 );
---drop table cart_tbl;
 select * from cart_tbl;
-create sequence seq_cart_no;
---drop sequence seq_cart_no;
+
 
 create table board (
 	board_no number,
@@ -88,7 +142,6 @@ create table board (
     constraints pk_board_no primary key(board_no),
     constraints fk_board_writer foreign key(writer) references member(member_id)on delete cascade
 );
---drop table board_comment;
 
 create table board_comment (
     comment_no number,
@@ -100,11 +153,7 @@ create table board_comment (
     constraints fk_board_comment_board_no foreign key(board_no) references board(board_no) on delete cascade,
     constraints fk_board_comment_writer foreign key(writer) references member(member_id) on delete cascade
 );
-select * from member;
-
 select * from attachment_faq;
---drop table attachment_faq;
---drop sequence seq_attachment_faq_no;
 
 create table attachment_board(
     no number,
@@ -115,12 +164,9 @@ create table attachment_board(
     constraints pk_attachment_board_no primary key(no),
     constraints fk_attachment_board_no foreign key(board_no) references board(board_no) on delete cascade
 );
-create sequence seq_attachment_board_no;
 select * from attachment_board;
---drop table attachment_board;
---drop sequence seq_attachment_board_no;
 
---drop table board_comment;
+
 create table order_detail (
     order_serial_no number,
     order_no number,
@@ -130,13 +176,8 @@ create table order_detail (
     constraints pk_order_detail_order_serial_no primary key(order_serial_no),
     constraints fk_order_detail_order_no foreign key(order_no) references order_tbl(order_no) on delete cascade
 );
-
---drop table order_detail;
 select * from order_detail;
-create sequence seq_order_serial_no;
---drop sequence seq_order_serial_no;
---select * from (select * from order_tbl t left join order_detail d on t.order_no = d.order_no) where order_date between '2023-07-01' and '2023-07-16' order by order_date;
---select * from order_detail d join order_tbl t on d.order_no = t.order_no;
+
 
 create table store (
     store_no number,
@@ -146,11 +187,6 @@ create table store (
     constraints pk_store_no primary key(store_no),
     constraints uq_store_name unique(store_name)
 );
-
---alter table store modify store_name varchar2(100);
---drop table store;
-create sequence seq_store_no;
---drop sequence seq_store_no;
 insert into store values(seq_store_no.nextval, '킥킥샐러드 역삼역점', '서울 강남구 강남대로94길 66 지상1층', '02-123-4567');
 insert into store values(seq_store_no.nextval, '킥킥샐러드 강남역점', '서울 강남구 강남대로84길 23 1층', '02-111-2222');
 select * from store;
@@ -165,9 +201,6 @@ create table ingredient (
     constraints pk_ingredient_no primary key(ingredient_no),
     constraints fk_ingredient_category_no foreign key(category_no) references category(category_no) on delete cascade
 );
---drop table ingredient;
-create sequence seq_ingredient_no;
---drop sequence seq_ingredient_no;
 insert into ingredient values(seq_ingredient_no.nextval, 1, '호밀빵', 270, 2000, '1개');
 insert into ingredient values(seq_ingredient_no.nextval, 1, '샐러드볼', 0, 0, '0');
 insert into ingredient values(seq_ingredient_no.nextval, 2, '양상추', 4, 500,'30g');
@@ -207,7 +240,7 @@ create table faq_board (
     constraints pk_faq_board_board_no primary key(board_no),
     constraints fk_faq_board_writer foreign key(writer) references member(member_id) on delete cascade
 );
---drop table faq_board;
+
 create table attachment_faq(
     no number,
     board_no number,
@@ -217,8 +250,6 @@ create table attachment_faq(
     constraints pk_attachment_faq_no primary key(no),
     constraints fk_attachment_faq_no foreign key(board_no) references faq_board(board_no) on delete cascade
 );
-
-create sequence seq_attachment_faq_no;
 
 create table review (
     review_no number,
@@ -231,10 +262,6 @@ create table review (
     constraints fk_review_writer foreign key(writer) references member(member_id) on delete cascade,
     constraints fk_order_serial_no foreign key(order_serial_no) references order_detail(order_serial_no) on delete cascade
 );
-
-create sequence seq_review_no;
---drop sequence seq_review_no;
---drop table review;
 select * from review;
 
 create table attachment_review (
@@ -246,24 +273,18 @@ create table attachment_review (
     constraints pk_attachment_no primary key(no),
     constraints fk_attachment_review_no foreign key(review_no) references review(review_no) on delete cascade
 );
-create sequence seq_attachment_review_no;
 select * from attachment_review;
-
---drop table attachment_review;
 
 create table like_tbl (
 	like_no	number,
 	member_id varchar2(20),
 	review_no number,
-	like_count number,
+	like_count number default 1,
     constraints pk_like_no primary key(like_no),
     constraints fk_like_member_id foreign key(member_id) references member(member_id) on delete cascade,
     constraints fk_like_review_no foreign key(review_no) references review(review_no) on delete cascade
 );
---drop table like_tbl;
-create sequence seq_like_no;
 select * from like_tbl;
-select count(like_count)  from like_tbl where review_no = 8;
 
 create table selected_option (
 	serial_no number,
@@ -276,15 +297,9 @@ create table selected_option (
     constraints fk_selected_option_member_id foreign key(member_id) references member(member_id) on delete cascade,
     constraints fk_selected_option_ingredient_no foreign key(ingredient_no) references ingredient(ingredient_no)
 );
--- delete from member where member_id = 'honggd';
---drop table selected_option;
-create sequence seq_option_no;
---drop sequence seq_option_no;
 select * from selected_option;
--- delete from selected_option;
-create sequence seq_faq_no;
-create sequence seq_board_no;
 
 create sequence seq_attachment_board_no;
 create sequence seq_board_comment_no;
+
 update member set member_role = 'A' where member_id = 'admin';
