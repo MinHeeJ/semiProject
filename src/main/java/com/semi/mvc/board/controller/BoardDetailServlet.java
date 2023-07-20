@@ -15,6 +15,7 @@ import com.semi.mvc.board.model.vo.Attachment;
 import com.semi.mvc.board.model.vo.Board;
 import com.semi.mvc.board.model.vo.BoardComment;
 import com.semi.mvc.common.util.HelloMvcUtils;
+import com.semi.mvc.member.model.vo.Member;
 
 /**
  * Servlet implementation class BoardDetailServlet
