@@ -7,16 +7,16 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/memberDetail.css" />
 <section id="login-container">
+
 <%
+	//로그인된 회원 정보를 변수에 저장(마이페이지 이동시 빈칸에 회원 목록 나오게 끔)
 	String memberId = loginMember.getMemberId(); 
 	String name = loginMember.getName();
 	Gender gender = loginMember.getGender();
 	String phone = loginMember.getPhone();
 	String address = loginMember.getAddress();
+	
 	String[] adds = address.split(" ");
-	for(String add : adds){
-		System.out.println("add = " + add);
-	}
 	String city = adds[0]; // 시/도
 	String district = adds[1]; // 구/군
 	String detailAd = adds[2]; // 상세주소 */
@@ -61,7 +61,7 @@
                 <td>    
                     <input type="text" placeholder="시/도" name="city" id="city" value="<%= city %>" required>
                     <input type="text" placeholder="구/군" name="district" id="district" value="<%= district %>" required>
-                    <input type="text" placeholder="상세주소" name="address" id="address" value="<%= detailAd %>" required><br>
+                    <input type="text" placeholder="상세주소" name="address" id="address" value="<%= address %>" required><br>
                 </td>
             </tr>            
 		</table>

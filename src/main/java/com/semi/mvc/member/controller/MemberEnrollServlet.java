@@ -76,4 +76,3 @@ public class MemberEnrollServlet extends HttpServlet {
 	}
 
 }
-
