@@ -22,9 +22,7 @@ String memberId = "";
 <script src="<%= request.getContextPath() %>/js/jquery-3.7.0.js"></script>
 <body>
 	<section id="beforeCartSection">
-	
-		
-		
+			
 		<div id="receipt">
 			<img src="<%= request.getContextPath() %>/images/cart/receiptTop.png" alt="" id="receipTop"  width="100%"/>
 			<h2><%= saladOrBread.equals("2")? "샐러드볼" : "호밀빵"%></h2>
