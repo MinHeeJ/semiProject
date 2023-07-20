@@ -32,16 +32,20 @@
 		<tbody>
 			<% 
 				if(boards != null && !boards.isEmpty()){ 
-					for(Board board : boards){					
+					for(Board board : boards){
 			%>
 						<tr>
 							<td class="t1"><%= board.getBoardNo() %></td>
 							<td class="t2">
-								<a href="<%= request.getContextPath() %>/board/boardDetail?no=<%= board.getBoardNo() %>"><%= board.getTitle() %></a>
-								<%	if(board.getCommentCnt() > 0) { %>
-								<%-- [<%= board.getCommentCnt() %>] --%>
-								✉		
-								<% 	} %>
+								<% if(loginMember.getMemberId().equals(board.getWriter())) { %>
+									<a href="<%= request.getContextPath() %>/board/boardDetail?no=<%= board.getBoardNo() %>"><%= board.getTitle() %></a>
+									<%	if(board.getCommentCnt() > 0) { %>
+									<%-- [<%= board.getCommentCnt() %>] --%>
+									✉		
+									<% } %>
+								<% }else{ %>
+									<%= board.getTitle() %>
+								<% } %>
 							</td>
 							<td class="t3"><%= board.getWriter() %></td>
 							<td class="t4"><%= board.getRegDate() %></td>
@@ -51,7 +55,7 @@
 								<% 	} %>
 							</td>
 						</tr>
-			<%
+			<%		
 					}
 				} 
 				else { 
