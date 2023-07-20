@@ -38,7 +38,7 @@
 		                <td><%= order.getOrderDate() %></td>
 		                <td><%= order.getProduct() %></td>
 		                <td><%= order.getCount() %></td>
-		                <td><%= order.getPrice() %></td>
+		                <td><%= order.getPrice() %>원</td>
 		                <td><%= order.getState() %></td>
 		              </tr>
             <%

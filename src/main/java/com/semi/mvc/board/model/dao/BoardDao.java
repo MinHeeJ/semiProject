@@ -305,4 +305,46 @@ public class BoardDao {
 		} 
 		return result;
 	}
+
+	public List<Board> findBoardsByWriter(Connection conn, String memberId, int start, int end) {
+		List<Board> boards = new ArrayList<>();
+		String sql = prop.getProperty("findBoardsByWriter");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, memberId);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			try(ResultSet rset = pstmt.executeQuery()) {
+				while(rset.next()) {
+					Board board = new Board();
+					board.setBoardNo(rset.getInt("board_no"));
+					board.setTitle(rset.getString("title"));
+					board.setWriter(rset.getString("writer"));
+					board.setContent(rset.getString("content"));
+					board.setRegDate(rset.getDate("reg_date"));
+					board.setAttachCnt(rset.getInt("attach_cnt"));
+					board.setCommentCnt(rset.getInt("comment_cnt"));
+					boards.add(board);
+				}
+			}
+		} catch (SQLException e) {
+			throw new BoardException(e);
+		}
+		return boards;
+	}
+
+	public int getTotalContentByWriter(Connection conn, String memberId) {
+		int totalContent = 0;
+		String sql = prop.getProperty("getTotalContentByWriter");
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, memberId);
+			try (ResultSet rset = pstmt.executeQuery()) {
+				while(rset.next())
+					totalContent = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			throw new BoardException(e);
+		}
+		return totalContent;
+	}
 }
