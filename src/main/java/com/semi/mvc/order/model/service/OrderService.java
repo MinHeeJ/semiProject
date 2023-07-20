@@ -114,4 +114,12 @@ public class OrderService {
 		return orders;
 
 	}
+
+	public int getLastOrderNo() {
+		Connection conn = getConnection();
+		int getLastOrderNo = orderDao.getLastOrderNo(conn);
+		close(conn);
+		return getLastOrderNo;
+	}
+
 }

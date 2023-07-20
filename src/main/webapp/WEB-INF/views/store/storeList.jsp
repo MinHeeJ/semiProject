@@ -15,15 +15,6 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/store.css" />
 <% boolean admin = loginMember != null && (loginMember.getMemberRole() == MemberRole.A); %>
 
-<style>
-@font-face {font-family: 'NanumSquareNeo-Variable'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');font-weight: normal;font-style: normal;}
-#backgroundPop { display: none; width: 100%; height: 100%; position: fixed; background-color: rgba(0, 0, 0, 24%); top: 0; left: 0; right: 0; z-index: 999;}
-#backgroundPop.hidden { display: none; }
-#modalContent { display: none; position: absolute; background-color: #fff; width: 600px; height: 540px; padding: 15px; top: 50%; left: 50%; transform:translate(-50%,-50%); border: 5px solid darkgreen; border-radius: 20px; width: 700px; font-size : 30px; font-weight: bold; height: 500px; background: #fff; z-index: 1000; text-align: center; vertical-align: middle; }
-#map { margin: auto; width:100%; height:85%; }
-#close { width : 14%; background-color: #73b673; padding: 5px; border-radius: 10px; font-family: 'NanumSquareNeo-Variable'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2'); font-size: 30px; height: 10%; margin-top: 3%; }
-#btn1 { width : 70%; background-color: #73b673; padding: 5px; border-radius: 10px; font-family: 'NanumSquareNeo-Variable'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2'); font-size: 13px; height: 10%; margin-top: 3%; }
-</style>
 </head>
 <body>
 	
