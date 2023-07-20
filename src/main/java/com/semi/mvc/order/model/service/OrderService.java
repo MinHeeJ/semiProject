@@ -122,4 +122,18 @@ public class OrderService {
 		return getLastOrderNo;
 	}
 
+	public List<Order> findByOrder(int getLastOrderNo, String memberId) {
+		Connection conn = getConnection();
+		List<Order> orders = orderDao.findByOrder(conn, getLastOrderNo, memberId);
+		close(conn);
+		return orders;
+	}
+
+	public List<Order> findByDateOfId(String memberId, Date startDate, Date endDate) {
+		Connection conn = getConnection();
+		List<Order> orders = orderDao.findByDateOfId(conn, memberId, startDate, endDate);
+		close(conn);
+		return orders;
+	}
+
 }

@@ -40,7 +40,7 @@ public class OrderListServlet extends HttpServlet {
 		
 		// 2. 업무로직
 		int getLastOrderNo = orderService.getLastOrderNo();
-		List<Order> orders = orderService.findByOrderNum(getLastOrderNo);
+		List<Order> orders = orderService.findByOrder(getLastOrderNo, memberId);
 		System.out.println("orders : " + orders);
 		
 		request.setAttribute("orders", orders);

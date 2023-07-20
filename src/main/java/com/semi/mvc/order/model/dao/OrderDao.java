@@ -182,4 +182,45 @@ public class OrderDao {
 		return orders;
 	}
 
+	public List<Order> findByOrder(Connection conn, int getLastOrderNo, String memberId) {
+		List<Order> orders = new ArrayList<>();
+		String sql = prop.getProperty("findByOrder");
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, getLastOrderNo);
+			pstmt.setString(2, memberId);
+			
+			try (ResultSet rset = pstmt.executeQuery()) {
+				while(rset.next()) {
+					Order order = handleOrderResultSet(rset);
+					orders.add(order);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new OrderException(e);
+		}
+		return orders;
+	}
+
+	public List<Order> findByDateOfId(Connection conn, String memberId, Date startDate, Date endDate) {
+		List<Order> orders = new ArrayList<>();
+		String sql = prop.getProperty("findByDateOfId");
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setDate(1, startDate);
+			pstmt.setDate(2, endDate);
+			pstmt.setString(3, memberId);
+			
+			try (ResultSet rset = pstmt.executeQuery()) {
+				while(rset.next()) {
+					Order order = handleOrderResultSet(rset);
+					orders.add(order);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new OrderException(e);
+		}
+		return orders;
+	}
+
 }
