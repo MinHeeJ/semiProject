@@ -14,9 +14,14 @@ alter user semi quota unlimited on users;
 --===============================
 -- semi 계정
 --===============================
+<<<<<<< HEAD
 --DROP- USER semi CASCADE;
+=======
+--
+-- DROP USER semi CASCADE;
+>>>>>>> branch 'master' of https://github.com/MinHeeJ/semiProject
 -- select sid, serial#, username,status from v$session where username = 'SEMI';
--- alter system kill SESSION '1112,23978';
+-- alter system kill SESSION '742,51322';
 
 
 -- 초기화
@@ -85,7 +90,16 @@ create table member (
     constraints ck_member_gender check(gender in ('M', 'F')),
     constraints ck_member_role check(member_role in ('U', 'A'))
 );
+
+insert into member values ('admin', 1234, '관리자', '010-1234-5678', '서울시 역삼동', 'F', 'A');
+insert into member values ('honggd', 1234, '홍지디', '010-1234-5678', '서울시 역삼동', 'M', 'A');
+insert into member values ('qwerty', 1234, '쿼티', '010-1122-3344', '경기도 안산시', 'F', default);
+
 select * from member;
+
+--drop table member;
+
+-- delete from member;
 
 create table category (
 	category_no	number,
@@ -297,7 +311,9 @@ create table selected_option (
     constraints fk_selected_option_ingredient_no foreign key(ingredient_no) references ingredient(ingredient_no)
 );
 select * from selected_option;
-
-
-
+select * from order_detail;
+select * from order_tbl;
+create sequence seq_attachment_board_no;
+create sequence seq_board_comment_no;
+delete from order_tbl where member_id = 'andong' and order_no = 9;
 update member set member_role = 'A' where member_id = 'admin';

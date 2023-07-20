@@ -98,7 +98,6 @@ List<Ingredient> ingredients = (List) request.getAttribute("ingredients");
 				  totalCal += 270;
 				  totalPrice += 2000;
 			  }
-
 			  quantities.forEach((quantity) => {
 
 			    	const calInput = quantity.nextElementSibling.nextElementSibling;
@@ -131,12 +130,11 @@ List<Ingredient> ingredients = (List) request.getAttribute("ingredients");
 		document.querySelector("#orderForm").onsubmit=(e)=>{			
 			const quantities = document.querySelectorAll("[name = quantity]");
 			let bool = true;
-			let over = true;
+
 			quantities.forEach((quantity)=>{
 				if(quantity.value != 0)
 					bool = false;
-				if(quantity.value > 10)
-					over = false;
+			
 			})			
 			if(bool){
 				e.preventDefault();

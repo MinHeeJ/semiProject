@@ -56,8 +56,7 @@
 	window.onload=()=>{
 		
 		findAllCart();
-		
-		
+
 		
 	}
 	document.querySelector("#allCheck").onclick=(e)=>{	
@@ -182,6 +181,7 @@
                 				<td colspan="6">총금액 : 0원</td>
                 			</tr>
                 		`;
+                		location.reload();
                     }
                 });
 
@@ -190,14 +190,15 @@
         }
     }
 	
+	
+	
 	document.querySelector("#cartUpdate").onclick =(e) =>{
-
-		e.preventDefault();
-		
+	
 		checkckeck(e);
 		
 		document.querySelector("#printCartList").onsubmit =(e) =>{
 			
+			e.preventDefault();
 			
 			const frmData = new FormData(e.target); 
 			$.ajax({				
@@ -213,13 +214,16 @@
 				
 				},
 				complete(){
-					findAllCart();
+					
 					const tfoot = document.querySelector("#cartListTable tfoot");
 					tfoot.innerHTML = `
 						<tr>
 							<td colspan="6">총금액 : 0원</td>
 						</tr>
 					`;
+					
+					findAllCart();
+					location.reload();
 				}
 			
 			});
@@ -229,9 +233,19 @@
 	}
 	
 	// 선택한 상품 없으면 주문 x
-	document.querySelector("#order").onclick = (e) => {
+	document.querySelector("#printCartList").onsubmit = (e) => {
 		
-		checkckeck(e);
+		const checkboxes = document.querySelectorAll("input[name=checkedOrNot]");
+		  
+		let flag = true;
+	    checkboxes.forEach((checkbox) => {
+			if (checkbox.checked) 		   
+			    flag = false;
+		});
+	    if(flag){
+	    	 alert('선택하신 상품이 없습니다.');
+			 e.preventDefault();
+	    }
 		
 	};
 	

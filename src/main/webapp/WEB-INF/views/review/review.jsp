@@ -28,14 +28,14 @@
 		<table id="tbl-order-review">
 			<h1>상품</h1>
 			<tbody>
-				<% 	if(orders == null || orders.isEmpty()) { %>
+				<% 	if(orders == null || orders.isEmpty()) { //주문내역이 없으면%>
 				<tr>
 					<td colspan="4">작성할 리뷰가 없습니다.</td>
 				</tr>
 				<%	
 				} 
 				else { 
-					for(Order order : orders) {
+					for(Order order : orders) { //주문내역 있으면 시리얼번호로 주문제품알아오기
 			%>
 				<tr>
 					<td><input type="radio" name="orderSerialNo"
@@ -51,7 +51,7 @@
 		<br>
 		<br>
 		<br>
-		<% 	if(!(orders == null || orders.isEmpty())) { %>
+		<% 	if(!(orders == null || orders.isEmpty())) { //주문내역이 있으면 띄워주기 %>
 		<table id="tbl-board-view">
 			<tr>
 				<th>작성자</th>
@@ -82,13 +82,13 @@
 <section id="photo-review-wrapper">
 	<h2>✨리뷰게시판✨</h2>
 	<div id="photo-review-container">
-		<% 	if(reviews == null || reviews.isEmpty()) { %>
+		<% 	if(reviews == null || reviews.isEmpty()) {//리뷰가 없으면 %>
 		<tr>
 			<td>리뷰가 없습니다.</td>
 		</tr>
 		<%	
 			} 
-			else { 
+			else { //첨부파일뿌려ㅇ
 				for(Review reviewss : reviews){
 					List<AttachmentReview> files = reviewss.getAttachments();
 		%>
@@ -262,7 +262,7 @@ const getPage = (cpage) => {
 										
 										<div class="heart-container">
 								            <input type="hidden" name="reviewNo" value="\${reviewNo}"/>
-								            <input type="image" src="<%= request.getContextPath() %>/images/review/heart.png" alt="heart.png" style="width: 30px;" class="heart" value="\${reviewNo}">
+								            <input type="image" src="<%= request.getContextPath() %>/images/review/emptyheart.png" alt="heart.png" style="width: 30px;" class="heart" value="\${reviewNo}">
 								            <p id="p">0</p>
 						          	 	</div>
 										
@@ -273,10 +273,7 @@ const getPage = (cpage) => {
 								</th>
 							</tr>
 						</div>
-						<div id="imageModal" class="modal">
-						  <span class="closeModal">&times;</span>
-						  <img class="modal-content" id="modalImage">
-						</div>
+						
 					`;
 					
 					
@@ -292,14 +289,13 @@ const getPage = (cpage) => {
 					<tr>			
 						<th colspan="2" id="th">
 						
-							<% if(isHeart){ //비로그인사용자 하트안보이기 %> 
-									<div class="heart-container">
-							            <input type="hidden" name="reviewNo" value="\${reviewNo}"/>
-							            <input type="image" src="<%= request.getContextPath() %>/images/review/heart.png" 
-							            		alt="heart.png" style="width: 30px;" class="heart" value="\${reviewNo}">
-							            <p id="p">0</p>
-					          	 	</div>
-					         <%} %>
+						<%if(isHeart){ //비로그인사용자 하트안보이기 %> 
+								<div class="heart-container">
+						            <input type="hidden" name="reviewNo" value="\${reviewNo}"/>
+						            <input type="image" src="<%= request.getContextPath() %>/images/review/emptyheart.png" alt="heart.png" style="width: 30px;" class="heart" value="\${reviewNo}">
+						            <p id="p">0</p>
+				          	 	</div>
+				         <%} %>
 				  		    
 							<% 	if(admin){// & 관리자 %> 
 							<div class = "button-container">
@@ -311,8 +307,8 @@ const getPage = (cpage) => {
 							<% 	} %>
 						</th>
 					</tr>
-							
-					</div>
+				</div>
+				
 					`;
 				}
 			})
@@ -320,7 +316,7 @@ const getPage = (cpage) => {
 		complete(){
 			document.querySelector("#cpage").innerHTML = cpage;
 			
-			if(cpage === <%=totalPage%>|| cpage == 1){
+			if(cpage === <%=totalPage%>){
 				const btn = document.querySelector("#btn-more");
 				btn.disabled = true;
 				btn.style.cursor = "not-allowed";
