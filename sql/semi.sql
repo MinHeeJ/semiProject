@@ -15,9 +15,9 @@ alter user semi quota unlimited on users;
 -- semi 계정
 --===============================
 --
---DROP USER semi CASCADE;
+-- DROP USER semi CASCADE;
 -- select sid, serial#, username,status from v$session where username = 'SEMI';
--- alter system kill SESSION '1112,23978';
+-- alter system kill SESSION '742,51322';
 
 create table member (
 	member_id varchar2(20),
@@ -32,11 +32,11 @@ create table member (
     constraints ck_member_role check(member_role in ('U', 'A'))
 );
 insert into member values ('admin', 1234, '관리자', '010-1234-5678', '서울시 역삼동', 'F', 'A');
-insert into member values ('honggd', 1234, '홍지디', '010-1234-5678', '서울시 역삼동', 'M', default);
+insert into member values ('honggd', 1234, '홍지디', '010-1234-5678', '서울시 역삼동', 'M', 'A');
 insert into member values ('qwerty', 1234, '쿼티', '010-1122-3344', '경기도 안산시', 'F', default);
 select * from member;
 --drop table member;
-
+-- delete from member;
 create table category (
 	category_no	number,
 	category_name varchar2(100)	not null,
@@ -224,7 +224,7 @@ create table review (
     review_no number,
     order_serial_no number,
     writer varchar2(20),
-     title varchar2(200)    not null,
+    title varchar2(200) not null,
     content varchar2(1000) not null,
     reg_date date default sysdate,
     constraints pk_review_no primary key(review_no),
@@ -287,4 +287,4 @@ create sequence seq_board_no;
 
 create sequence seq_attachment_board_no;
 create sequence seq_board_comment_no;
-update member set member_role = 'A' where member_id = 'hihi';
+update member set member_role = 'A' where member_id = 'admin';
