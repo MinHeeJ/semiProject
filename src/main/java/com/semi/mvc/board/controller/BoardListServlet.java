@@ -1,6 +1,7 @@
 package com.semi.mvc.board.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -14,6 +15,7 @@ import com.semi.mvc.board.model.service.BoardService;
 import com.semi.mvc.board.model.vo.Board;
 import com.semi.mvc.common.util.HelloMvcUtils;
 import com.semi.mvc.member.model.vo.Member;
+import com.semi.mvc.member.model.vo.MemberRole;
 
 /**
  * Servlet implementation class BoardListServlet
@@ -40,14 +42,22 @@ public class BoardListServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		String memberId = loginMember.getMemberId();
-		List<Board> boards = boardService.findBoardsByWriter(memberId, start, end);
+		MemberRole memberRole = loginMember.getMemberRole();
+		List<Board> boards = new ArrayList<>();
+		int totalContent = 0;
+		if(memberRole != MemberRole.A) {
+			boards = boardService.findBoardsByWriter(memberId, start, end);			
+			totalContent = boardService.getTotalContentByWriter(memberId);
+		}else {
+			boards = boardService.findAll(start, end);
+			totalContent = boardService.getTotalContent();
+		}
 //		System.out.println("boards = " + boards);
 		
 		for(Board board : boards) {
 			board.setTitle(HelloMvcUtils.escapeHtml(board.getTitle()));
 		}
 		
-		int totalContent = boardService.getTotalContentByWriter(memberId);
 //		System.out.println("totalContent = " + totalContent);
 		String url = request.getRequestURI(); // /mvc/board/boardList
 		String pagebar = HelloMvcUtils.getPagebar(cpage, LIMIT, totalContent, url);

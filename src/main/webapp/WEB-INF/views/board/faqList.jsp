@@ -9,7 +9,6 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/faq3.css"/>
 <%
 	List<FaqBoard> faqs = (List<FaqBoard>) request.getAttribute("faqs");
-	
 %>
 <% boolean admin = loginMember != null && (loginMember.getMemberRole() == MemberRole.A); %>
 <section class="faqContainer">
