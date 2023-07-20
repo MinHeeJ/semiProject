@@ -39,7 +39,8 @@ private Properties prop = new Properties();
 					ingredient.setCategoryNo(rset.getInt("category_no"));
 					ingredient.setIngredientName(rset.getString("ingredient_name"));
 					ingredient.setCalorie(rset.getInt("calorie"));
-					ingredient.setPrice(rset.getInt("price"));			
+					ingredient.setPrice(rset.getInt("price"));	
+					ingredient.setWeight(rset.getString("weight"));
 					ingredients.add(ingredient);
 				}
 		

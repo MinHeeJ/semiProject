@@ -137,5 +137,23 @@ public class StoreDao {
 		return result;
 	}
 
+	public Store findByStoreNo(Connection conn, int storeNo) {
+		Store store = null;
+		String sql = prop.getProperty("findByStoreNo");
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, storeNo);
+			
+			try (ResultSet rset = pstmt.executeQuery()) {
+				while (rset.next()) {
+					store = handleStoreResultSet(rset);
+				}
+			}
+		} catch (SQLException e) {
+			throw new StoreException(e);
+		}
+		return store;
+	}
+
 	
 }

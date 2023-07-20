@@ -44,14 +44,16 @@ public class ReviewCreateServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		Member loginMember = (Member) session.getAttribute("loginMember");
-		 
+		
 		String memberId;
 		    if(loginMember != null) {
-		        memberId = loginMember.getAddress();
+		        memberId = loginMember.getMemberId();
 		    } else {
+		    	System.out.println(" 여기기기ㅣ긱 loginMember = " + loginMember);
 		        memberId = "guest"; // 로그인하지 않은 사용자의 memberId는 "guest"로 설정
-		        request.setAttribute("memberId", memberId);
+		 
 		    }
+		    request.setAttribute("memberId", memberId);
 		    
 
 		List<Order> orders = reviewService.reviewOrderList(memberId);

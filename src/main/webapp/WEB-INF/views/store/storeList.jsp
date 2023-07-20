@@ -16,72 +16,21 @@
 <% boolean admin = loginMember != null && (loginMember.getMemberRole() == MemberRole.A); %>
 
 <style>
-#map { width:500px; height:400px; }
+@font-face {font-family: 'NanumSquareNeo-Variable'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');font-weight: normal;font-style: normal;}
+#backgroundPop { display: none; width: 100%; height: 100%; position: fixed; background-color: rgba(0, 0, 0, 24%); top: 0; left: 0; right: 0; z-index: 999;}
+#backgroundPop.hidden { display: none; }
+#modalContent { display: none; position: absolute; background-color: #fff; width: 600px; height: 540px; padding: 15px; top: 50%; left: 50%; transform:translate(-50%,-50%); border: 5px solid darkgreen; border-radius: 20px; width: 700px; font-size : 30px; font-weight: bold; height: 500px; background: #fff; z-index: 1000; text-align: center; vertical-align: middle; }
+#map { margin: auto; width:100%; height:85%; }
+#close { width : 14%; background-color: #73b673; padding: 5px; border-radius: 10px; font-family: 'NanumSquareNeo-Variable'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2'); font-size: 30px; height: 10%; margin-top: 3%; }
+#btn1 { width : 70%; background-color: #73b673; padding: 5px; border-radius: 10px; font-family: 'NanumSquareNeo-Variable'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2'); font-size: 13px; height: 10%; margin-top: 3%; }
 </style>
 </head>
 <body>
 	
 
-	
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=53ca7ba233962018a7a8996d89d2622a&libraries=services"></script>
-  <div id="map"></div>
-<script>
-  var mapContainer = document.getElementById('map'), // 지도를 표시할 div
-	  mapOption = {
-	    center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-	    level: 3 // 지도의 확대 레벨
-	  };
+  <script src="<%= request.getContextPath() %>/js/jquery-3.7.0.js"></script>
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=53ca7ba233962018a7a8996d89d2622a&libraries=services,clusterer,drawing"></script>
 
-  // 지도를 생성합니다
-  var map = new kakao.maps.Map(mapContainer, mapOption);
-
-  // 주소-좌표 변환 객체를 생성합니다
-  var geocoder = new kakao.maps.services.Geocoder();
-
-  // 장소의 정보들을 담을 positions 배열
-  var positions = [
-    {
-      title: '카카오',
-      address: '제주특별자치도 제주시 첨단로 242'
-    },
-    {
-      title: '생태연못',
-      address: '경기 남양주시 조안면 능내리 50'
-    },
-    {
-      title: '근린공원',
-      address: '경기 남양주시 별내면 청학로68번길 40'
-    }
-  ];
-
-  positions.forEach(function (position) { //추가한 코드
-    // 주소로 좌표를 검색합니다
-    geocoder.addressSearch(position.address, function(result, status) {
-
-      // 정상적으로 검색이 완료됐으면
-      if (status === kakao.maps.services.Status.OK) {
-
-        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
-        // 결과값으로 받은 위치를 마커로 표시합니다
-        var marker = new kakao.maps.Marker({
-          map: map,
-          position: coords
-        });
-
-        // 인포윈도우로 장소에 대한 설명을 표시합니다
-        //변경한 코드
-        var infowindow = new kakao.maps.InfoWindow({
-          content: '<div style="width:150px;text-align:center;padding:6px 0;">' + position.title + '</div>'
-        });
-        infowindow.open(map, marker);
-
-        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-        map.setCenter(coords);
-      }
-    });
-  });
-</script>
 <section id="storeList-container">
 
 	<h2>매장조회</h2>
@@ -102,7 +51,6 @@
         
        
 
-	
 	<table id="tbl-store">
 		<thead>
 			<tr>
@@ -112,7 +60,9 @@
 				<th>연락처</th>
 				 <%	if (admin) { %>
 				<th>매장삭제</th>
-			 <%	}%>
+			 <%	} else {%>
+		 		<th></th>
+			 <% } %>
 			</tr>
 		</thead>
 		
@@ -127,19 +77,24 @@
 					for(Store store : stores) {
 			%>
 			<tr>
-					<td><%= store.getStoreNo() %></td>
-					<td><%= store.getStoreName() %></td>
-					<td><%= store.getAddress() %></td> 
-					<td><%= store.getPhone() %></td> 
+				<td><%= store.getStoreNo() %></td>
+				<td><%= store.getStoreName() %></td>
+				<td><%= store.getAddress() %></td> 
+				<td><%= store.getPhone() %></td> 
 			 <%	if (admin) { %>
-					<td>
-						<input class="button" type="button" onclick="deleteStore('<%=store.getStoreNo()%>');" value="매장삭제">
-					</td> 
-					 <%} %>
-				</tr>
-				<% 		
-						}
-					} 
+				<td>
+					<input class="button" type="button" onclick="deleteStore('<%=store.getStoreNo()%>');" value="매장삭제">
+				</td> 
+				 <%} else { %>
+			 	<td>
+					<button id="btn1">지도보기</button>
+					<input type="hidden" name="storeNo" value="<%= store.getStoreNo() %>">
+				</td> 
+			</tr>
+			<% 		
+				 }
+					}
+				} 
 				
 			%>
 		</tbody>
@@ -154,8 +109,15 @@
 
 <form action="<%= request.getContextPath() %>/store/storeDelete" name="storeDelFrm" method="POST" >
 	<input type="hidden" name="storeNo" id="storeNo" value=""/>
-
 </form>
+
+<div id="backgroundPop">
+	<div id="modalContent">
+		<div id="map"></div>
+		<button id="close">닫기</button>
+	</div>
+</div>
+
 <script>
 
 
@@ -174,6 +136,85 @@ function deleteStore(storeNo){
 		document.storeDelFrm.submit();
 	}
 }
+
+// 지도보기
+document.querySelectorAll("#btn1").forEach((elem) => {
+	elem.addEventListener('click', (e) => {
+		console.log(1111111, e.target);
+		const storeNo = e.target.parentNode.querySelector('input[name="storeNo"]').value;
+		console.log(storeNo);
+		$.ajax({
+			 url : "<%= request.getContextPath() %>/store/lookMap",
+			 data : {
+				 storeNo : storeNo
+			 },
+			 success(store){
+				 const {address} = store;
+				 console.log(address);
+				 
+				 var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+		          mapOption = {
+			            center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+			            level: 1 // 지도의 확대 레벨
+			          };
+	
+				  // 지도를 생성합니다
+				  var map = new kakao.maps.Map(mapContainer, mapOption);
+	
+				  // 주소-좌표 변환 객체를 생성합니다
+				  var geocoder = new kakao.maps.services.Geocoder();
+	
+				  // 주소로 좌표를 검색합니다
+				  geocoder.addressSearch(address, function(result, status) {
+	
+				    // 정상적으로 검색이 완료됐으면
+				    if (status === kakao.maps.services.Status.OK) {
+	
+				      var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+	
+				      // 결과값으로 받은 위치를 마커로 표시합니다
+				      var marker = new kakao.maps.Marker({
+				        map: map,
+				        position: coords
+				      });
+	
+				   	  // 마커 이미지를 생성합니다
+				      var imageSrc = '<%= request.getContextPath() %>/images/main/logo.png', // 마커이미지의 주소입니다    
+				          imageSize = new kakao.maps.Size(50, 65), // 마커이미지의 크기입니다
+				          imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+	
+				      var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+	
+				      // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+				      map.setCenter(coords);
+				    }
+				  });
+				 },
+				 complete() {
+					 popOpen();
+				 }
+		});
+	});
+});
+
+// 지도 모달창
+function popOpen() {
+	const modalPop = $('#map');
+	document.querySelector("#backgroundPop").style.display = "inline-block";
+	document.querySelector("#modalContent").style.display = "inline-block";
+	
+	$(modalPop).show();
+}
+
+// 모달창 닫기
+document.querySelector("#close").onclick = () => {
+	const modalPop = $('#map');
+	document.querySelector("#backgroundPop").style.display = "none";
+	document.querySelector("#modalContent").style.display = "none";
+	
+	$(modalPop).hide();
+}
+
 </script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

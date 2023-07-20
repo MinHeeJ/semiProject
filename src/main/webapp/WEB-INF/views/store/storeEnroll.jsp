@@ -86,7 +86,7 @@ document.storeEnrollFrm.onsubmit = (e) => {
 		return false;
 	}
 	
-	// 전화번호 검사 - 숫자8자리 여부 확인
+	// 전화번호 검사 - 숫자9자리 여부 확인
 	if (!/^(070|02|0[3-9]{1}[0-9]{1})-[0-9]{3,4}-[0-9]{4}$/.test(phone.value)) {
 		alert("숫자9자리이상여야 합니다.");
 		return false;
