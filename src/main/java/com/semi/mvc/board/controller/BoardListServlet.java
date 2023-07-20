@@ -8,10 +8,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.semi.mvc.board.model.service.BoardService;
 import com.semi.mvc.board.model.vo.Board;
 import com.semi.mvc.common.util.HelloMvcUtils;
+import com.semi.mvc.member.model.vo.Member;
 
 /**
  * Servlet implementation class BoardListServlet
@@ -35,15 +37,17 @@ public class BoardListServlet extends HttpServlet {
 		
 		int start = (cpage - 1) * LIMIT + 1;
 		int end = cpage * LIMIT;
-		
-		List<Board> boards = boardService.findAll(start, end);
+		HttpSession session = request.getSession();
+		Member loginMember = (Member) session.getAttribute("loginMember");
+		String memberId = loginMember.getMemberId();
+		List<Board> boards = boardService.findBoardsByWriter(memberId, start, end);
 //		System.out.println("boards = " + boards);
 		
 		for(Board board : boards) {
 			board.setTitle(HelloMvcUtils.escapeHtml(board.getTitle()));
 		}
 		
-		int totalContent = boardService.getTotalContent();
+		int totalContent = boardService.getTotalContentByWriter(memberId);
 //		System.out.println("totalContent = " + totalContent);
 		String url = request.getRequestURI(); // /mvc/board/boardList
 		String pagebar = HelloMvcUtils.getPagebar(cpage, LIMIT, totalContent, url);

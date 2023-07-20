@@ -185,4 +185,18 @@ public class BoardService {
 		return result;
 	}
 
+	public List<Board> findBoardsByWriter(String memberId, int start, int end) {
+		Connection conn = getConnection();
+		List<Board> boards = boardDao.findBoardsByWriter(conn, memberId, start, end);
+		close(conn);
+		return boards;
+	}
+
+	public int getTotalContentByWriter(String memberId) {
+		Connection conn = getConnection();
+		int totalContent = boardDao.getTotalContentByWriter(conn, memberId);
+		close(conn);
+		return totalContent;
+	}
+
 }
