@@ -4,9 +4,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
-
 <% 
 	int totalPage = (int) request.getAttribute("totalPage");  
 	int cpage = (int) request.getAttribute("cpage");
@@ -15,25 +13,20 @@
 	List<Review> reviews = (List<Review>)request.getAttribute("reviews");
 	String memberId = (String) request.getAttribute("memberId");
 	Review review = (Review) request.getAttribute("review");
-	 HttpSession sessions = request.getSession(false);
-
 %>
 <script src="<%= request.getContextPath() %>/js/jquery-3.7.0.js"></script>
 
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/review.css" />
 
-
-
-<h2>✨리뷰작성✨</h2>
-<section id="review-container">
 	<form name="reviewOrderListFrm"
 		action="<%=request.getContextPath() %>/review/reviewOrderList"
 		method="POST" enctype="multipart/form-data">
-
+<% if (loginMember != null) { %>
+<h2>✨리뷰작성✨</h2>
+<section id="review-container">
 		<table id="tbl-order-review">
 			<h1>상품</h1>
-
 			<tbody>
 				<% 	if(orders == null || orders.isEmpty()) { %>
 				<tr>
@@ -46,7 +39,7 @@
 			%>
 				<tr>
 					<td><input type="radio" name="orderSerialNo"
-						value="<%= order.getOrderSerialNo() %>" required /> <%= order.getProduct() %>
+						value="<%= order.getOrderSerialNo() %>" /> <%= order.getProduct() %>
 					</td>
 				</tr>
 				<% 		
@@ -55,18 +48,15 @@
 			%>
 			</tbody>
 		</table>
-	
 		<br>
 		<br>
 		<br>
-
 		<% 	if(!(orders == null || orders.isEmpty())) { %>
 		<table id="tbl-board-view">
 			<tr>
 				<th>작성자</th>
 				<td><input type="text" name="writer" id="writer"
 					value="<%=memberId%>" readonly /></td>
-
 			</tr>
 			<tr>
 				<th>첨부파일</th>
@@ -81,15 +71,16 @@
 				<th colspan="2"><input type="submit" value="등록하기"></th>
 			</tr>
 		</table>
-		<%}%>
+		<%}
+			}%>
 	</form>
-
 </section>
+		
+
 
 
 <section id="photo-review-wrapper">
 	<h2>✨리뷰게시판✨</h2>
-
 	<div id="photo-review-container">
 		<% 	if(reviews == null || reviews.isEmpty()) { %>
 		<tr>
@@ -98,21 +89,13 @@
 		<%	
 			} 
 			else { 
-
 				for(Review reviewss : reviews){
 					List<AttachmentReview> files = reviewss.getAttachments();
 		%>
-
 		<tr>
-
-
 			<div class="polaroid">
-
 				<!-- ajax -->
-
-
 			</div>
-
 			<br />
 		</tr>
 		<% 		
@@ -120,7 +103,6 @@
 			} 
 		%>
 	</div>
-
 	<div id='btn-more-container'>
 		<button id="btn-more" value="">
 			더보기(<span id="cpage"><%= cpage %></span>/<span id="totalPage"><%= totalPage %></span>)
@@ -133,8 +115,6 @@
 	name="reviewDelFrm" method="POST">
 	<input type="hidden" name="reviewNo" id="reviewNo" value="" />
 </form>
-
-
 <script>
 document.reviewOrderListFrm.onsubmit = (e) => {
 	const frm = e.target;
@@ -171,7 +151,6 @@ function like() {
         const {likeCount, isLike} = responseData;
         console.log(likeCount);
         console.log(isLike);
-
         const hearts = document.querySelectorAll(".heart");
         const p = document.querySelectorAll("#p");
         for(let i=0; i<hearts.length; i++) {
@@ -192,17 +171,14 @@ function like() {
               p[i].innerHTML = `\${likeCount}`;
             }
           }
-
         }
       }
     });
   });
 }
-
 document.querySelector("#photo-review-wrapper").onclick = (e) => {
 	love(e);
 }
-
 // 내가 좋아요 했는지 유무/해당게시물 좋아요 총갯수 / 해당게시물 좋아요
 function love(e) {
   console.log(11111111, e.target.value);
@@ -217,7 +193,6 @@ function love(e) {
       const {likeCount, isLike} = responseData;
       console.log(likeCount);
       console.log(isLike);
-
       const hearts = document.querySelectorAll(".heart");
       const p = document.querySelectorAll("#p");
       for(let i=0; i<hearts.length; i++) {
@@ -233,100 +208,160 @@ function love(e) {
           }
         }
       }
-
     }
   });
 }
 /**
 * 
 */
-
-
-
 document.querySelector("#btn-more").onclick = () =>{
 	const cpage = Number(document.querySelector("#cpage").innerHTML);
 	const nextPage = cpage + 1;
 	getPage(nextPage);
 };
-
 window.addEventListener('load', () => { 
 	getPage(1);
 });
 
 const getPage = (cpage) => {
+	var loginMemberId = "<%= loginMember != null ? loginMember.getMemberId() : "" %>"
+	
+		
 	$.ajax({
 		url : "<%=request.getContextPath()%>/review/reviewMore",
 		data : {cpage},
 		success(reviews) {
+			
 			console.log(reviews);
 			const container = document.querySelector(".polaroid");
 			
 			reviews.forEach((Review)=>{
-
 				const {reviewNo,writer, content, regDate,product,attachments,likeCount} =Review;
 				console.log(likeCount);
 				console.log(writer);
-
 				let renamedFile = "";
 				let imgElements = "";
+				
 				
 				for (let i = 0; i < attachments.length; i++) {
 				    const attachment = attachments[i];
 				    const { renamedFilename } = attachment;
 				    renamedFile = renamedFilename;
-
-				    imgElements += `<img src="<%= request.getContextPath()%>/upload/review/\${renamedFile}" class="photo">`;
+				    imgElements += `<img src="<%= request.getContextPath()%>/upload/review/\${renamedFile}" class="photo photoModal">`;
 				  }
 				
 			
-				<% 	boolean admin = loginMember != null && (loginMember.getMemberRole() == MemberRole.A); %>
-				
-				container.innerHTML += imgElements + `
-				<div class = "content-container">
-						<p class ="product">🥗\${product}</p>
-						<div class="info-container">
-							<p class ="photoDate">\${regDate}</p>
-							<p class ="writer">✍작성자 : \${writer}</p></p>
-						<p class ="content">내용 : \${content}</p>
+					
+				<% 	boolean admin = loginMember != null && (loginMember.getMemberRole() == MemberRole.A); 
+					boolean isHeart = loginMember == null? false : true;
+				%>
+			
+				const isWriter = loginMemberId == writer;
+			
+				if(isWriter){ //게시글 작성자
+					container.innerHTML += imgElements + `
+						<div class = "content-container">
+									<p class ="photoDate">\${regDate}</p>
+								<div class="info-container">
+								<p class ="product">🥗\${product}🥗</p>
+									<p class ="writer">작성자 : \${writer}</p></p>
+									<p class ="content">내용 : \${content}</p>
+								</div>
+						
+							<tr>			
+								<th colspan="2" id="th">
+										
+										<div class="heart-container">
+								            <input type="hidden" name="reviewNo" value="\${reviewNo}"/>
+								            <input type="image" src="<%= request.getContextPath() %>/images/review/heart.png" alt="heart.png" style="width: 30px;" class="heart" value="\${reviewNo}">
+								            <p id="p">0</p>
+						          	 	</div>
+										
+										<div class = "button-container">
+											<input type="button" value="수정하기" onclick="updateReview('\${reviewNo}');">
+											<input type="button" value="삭제하기" onclick="deleteReview('\${reviewNo}');">
+										</div>
+								</th>
+							</tr>
+						</div>
+						<div id="imageModal" class="modal">
+						  <span class="closeModal">&times;</span>
+						  <img class="modal-content" id="modalImage">
+						</div>
+					`;
+					
+					
+				} else { // 게시글 작성자 이외
+					container.innerHTML += imgElements + `
+						<div class = "content-container">
+								<p class ="photoDate">\${regDate}</p>
+								<div class="info-container">
+									<p class ="product">🥗\${product}🥗</p>
+									<p class ="writer">작성자 : \${writer}</p></p>
+								<p class ="content">내용 : \${content}</p>
 						</div>
 					<tr>			
-					<th colspan="2" id="th">
-						<div class="heart-container">
-				            <input type="hidden" name="reviewNo" value="\${reviewNo}"/>
-				            <input type="image" src="<%= request.getContextPath() %>/images/review/heart.png" alt="heart.png" style="width: 30px;" class="heart" value="\${reviewNo}">
-				            <p id="p">0</p>
-		          	 	</div>
-						<%-- 첨부파일이 없는 게시물 수정 --%>
-						<div class = "button-container">
-							<% 	if(admin){ %>
-							<input type="button" value="수정하기" onclick="updateReview('\${reviewNo}');">
-								
-							<input type="button" value="삭제하기" onclick="deleteReview('\${reviewNo}');">
-							<% 	} %>
-						</div>
-					</th>
-				</tr>
+						<th colspan="2" id="th">
 						
-				</div>
-				
-				`;
+						<%if(isHeart){ //비로그인사용자 하트안보이기%> 
+								<div class="heart-container">
+						            <input type="hidden" name="reviewNo" value="\${reviewNo}"/>
+						            <input type="image" src="<%= request.getContextPath() %>/images/review/heart.png" alt="heart.png" style="width: 30px;" class="heart" value="\${reviewNo}">
+						            <p id="p">0</p>
+				          	 	</div>
+				         <%} %>
+				  		    
+							<% 	if(admin){// & 관리자 %> 
+							<div class = "button-container">
+									
+								<input type="button" value="수정하기" onclick="updateReview('\${reviewNo}');">
+									
+								<input type="button" value="삭제하기" onclick="deleteReview('\${reviewNo}');">
+							</div>
+							<% 	} %>
+						</th>
+					</tr>
+							
+					</div>
+					`;
+				}
 			})
 		},
 		complete(){
 			document.querySelector("#cpage").innerHTML = cpage;
 			
-
-			if(cpage === <%=totalPage%>){
-
+			if(cpage === <%=totalPage%>|| cpage == 1){
 				const btn = document.querySelector("#btn-more");
 				btn.disabled = true;
 				btn.style.cursor = "not-allowed";
 			}
 			like();
 			console.log('like실행함');
+			
+			
+			
+			document.querySelectorAll(".photoModal").forEach((img) => {
+				  img.addEventListener("click", function () {
+				    const modal = document.getElementById("imageModal");
+				    const modalImg = document.getElementById("modalImage");
+				    modal.style.display = "block";
+				    modalImg.src = this.src;
+				    document.body.style.overflow = "hidden"; // 스크롤 잠금
+				  });
+				});
+
+				const closeModal = document.querySelector(".closeModal");
+				closeModal.onclick = function () {
+				  const modal = document.getElementById("imageModal");
+				  modal.style.display = "none";
+				  document.body.style.overflow = "auto"; // 스크롤 풀림
+				};
+
+		
 		}
 	});
 }
+
 
 
 
@@ -337,11 +372,8 @@ function deleteReview(reviewNo){
 		document.reviewDelFrm.submit();
 	}
 }
-
 function updateReview(reviewNo){
-	location.href = "<%= request.getContextPath()%>/review/reviewUpdate?reviewNo=" + reviewNo;
+	location.href = "<%=request.getContextPath()%>/review/reviewUpdate?reviewNo=" + reviewNo;
 }
-
 </script>
-
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

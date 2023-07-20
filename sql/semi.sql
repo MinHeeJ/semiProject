@@ -146,6 +146,8 @@ create table store (
     constraints pk_store_no primary key(store_no),
     constraints uq_store_name unique(store_name)
 );
+
+--alter table store modify store_name varchar2(100);
 --drop table store;
 create sequence seq_store_no;
 --drop sequence seq_store_no;

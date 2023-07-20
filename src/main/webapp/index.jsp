@@ -12,11 +12,11 @@
 	<div class="swiper slide_wrapper">
 		<div class="swiper-wrapper">
 			<div class="swiper-slide"
-				style="background-image: url('<%= request.getContextPath() %>/images/index/banner1.jpg');"></div>
+				style="background-image: url('<%= request.getContextPath() %>/images/index/banner1.png');"></div>
 			<div class="swiper-slide"
-				style="background-image: url('<%= request.getContextPath() %>/images/index/banner2.jpg');"></div>
+				style="background-image: url('<%= request.getContextPath() %>/images/index/banner2.png');"></div>
 			<div class="swiper-slide"
-				style="background-image: url('<%= request.getContextPath() %>/images/index/banner3.jpg');"></div>
+				style="background-image: url('<%= request.getContextPath() %>/images/index/banner3.png');"></div>
 		</div>
 
 		<div class="slide_pagination">
