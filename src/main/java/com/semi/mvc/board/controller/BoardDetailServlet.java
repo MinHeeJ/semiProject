@@ -15,6 +15,7 @@ import com.semi.mvc.board.model.vo.Attachment;
 import com.semi.mvc.board.model.vo.Board;
 import com.semi.mvc.board.model.vo.BoardComment;
 import com.semi.mvc.common.util.HelloMvcUtils;
+import com.semi.mvc.member.model.vo.Member;
 
 /**
  * Servlet implementation class BoardDetailServlet
@@ -37,6 +38,7 @@ public class BoardDetailServlet extends HttpServlet {
 				List<BoardComment> boardComments = boardService.findBoardCommentByBoardNo(no);
 //				System.out.println("board = " + board);
 //				System.out.println("boardComments = " + boardComments);
+				System.out.println("writer = " + board.getWriter());
 				
 				// secure coding처리 
 				String unsecureTitle = board.getTitle();

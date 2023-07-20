@@ -123,7 +123,7 @@ header > nav > ul > li > a{
 }
 
 .slide_wrapper{
-    width: 100%;
+    width: 1920px;
     height: 450px;
     position:relative;
     overflow: hidden;
@@ -134,7 +134,7 @@ header > nav > ul > li > a{
     display:flex;
     height: 100%;
     left:0%;
-    width: 3600px;
+    width: 5760px;
     transition: all 1s ease;
 }
 

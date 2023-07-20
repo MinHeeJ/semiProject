@@ -28,7 +28,7 @@ public class IngredientServlet extends HttpServlet {
 		//2. 업무로직
 		List<Ingredient> ingredients = cartService.findAll();
 		request.setAttribute("ingredients", ingredients);
-
+		
 		request.getRequestDispatcher("/WEB-INF/views/cart/optionSelect.jsp").forward(request, response);
 		
 	}

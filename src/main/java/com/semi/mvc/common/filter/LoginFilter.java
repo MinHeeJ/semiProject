@@ -28,6 +28,7 @@ import com.semi.mvc.member.model.vo.Member;
 	"/board/boardDelete",
 	"/board/boardCommentCreate",
 	"/board/boardCommentUpdate",
+	"/board/boardList",
 	"/add/to/cart",
 	"/OnlinOrder",
 	"/myCart/list",
@@ -55,8 +56,7 @@ public class LoginFilter extends HttpFilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		
-		System.out.println("[Login 체크중...]");
+
 		
 		HttpServletRequest httpReq = (HttpServletRequest) request; 
 		HttpServletResponse httpRes = (HttpServletResponse) response; 
