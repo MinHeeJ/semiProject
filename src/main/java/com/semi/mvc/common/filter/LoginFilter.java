@@ -28,6 +28,7 @@ import com.semi.mvc.member.model.vo.Member;
 	"/board/boardDelete",
 	"/board/boardCommentCreate",
 	"/board/boardCommentUpdate",
+	"/board/boardList",
 	"/add/to/cart",
 	"/OnlinOrder",
 	"/myCart/list",

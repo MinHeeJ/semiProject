@@ -13,6 +13,16 @@
 	List<Attachment> attachments = board.getAttachments();
 	List<BoardComment> boardComments = (List<BoardComment>) request.getAttribute("boardComments");
 %>
+<script>
+	window.onload = () => {
+		<% if(loginMember.getMemberRole() == MemberRole.A || (loginMember.getMemberId()).equals(board.getWriter())) { %>
+
+		<% }else{ %>
+			alert("접근권한이 없습니다");
+			location.href = "<%= request.getContextPath() %>"
+		<% } %>
+	}
+</script>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/board2.css" />
 <section id="board-container">
 	<h2>게시판</h2>
