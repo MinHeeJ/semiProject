@@ -66,7 +66,7 @@
         } else {
             slide_index -= 1;
         }
-        swiper_wrapper.style.left = -1295 * slide_index + 'px';
+        swiper_wrapper.style.left = -1920 * slide_index + 'px';
         slide_page_number[slide_index].classList.add('slide_active');
     });
 
@@ -77,7 +77,7 @@
         } else {
             slide_index += 1;
         }
-        swiper_wrapper.style.left = -1295 * slide_index + 'px';
+        swiper_wrapper.style.left = -1920 * slide_index + 'px';
         slide_page_number[slide_index].classList.add('slide_active');
     });
 
@@ -88,7 +88,7 @@
         } else {
             slide_index += 1;
         }
-        swiper_wrapper.style.left = -1295 * slide_index + 'px';
+        swiper_wrapper.style.left = -1920 * slide_index + 'px';
         slide_page_number[slide_index].classList.add('slide_active');
     }, 3000);
 

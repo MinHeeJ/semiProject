@@ -31,16 +31,13 @@ public class HelloWebSocket {
 			Collections.synchronizedMap(new HashMap<>());
 	
 	private static void log() {
-		System.out.println("[현재 접속자수 : " + clientMap.size() + "명] " + clientMap);
 	}
 	
 	@OnOpen
 	public void onOpen(EndpointConfig config, Session session) {
-		System.out.println("open");
 		Map<String, Object> configProperties = config.getUserProperties();
 		String memberId = (String) configProperties.get("memberId");
 		
-		System.out.println("11111111111111111111111111111111111111111111111" + memberId);
 		
 		// 1. clientMap에 저장
 		clientMap.put(memberId, session);
@@ -54,7 +51,6 @@ public class HelloWebSocket {
 			addToChatroom(chatroomId, memberId);			
 		}
 		
-		log();
 	}
 	
 
@@ -83,11 +79,9 @@ public class HelloWebSocket {
 	}
 
 	private void chatroomLog() {
-		System.out.print("[현재 채팅방 현황 : ");
 		for(String chatroomId : chatroomClientMap.keySet()) {
 			System.out.print(chatroomId + "=" + chatroomClientMap.get(chatroomId) + " ");
 		}
-		System.out.println("]");
 		
 	}
 
@@ -95,7 +89,6 @@ public class HelloWebSocket {
 	public void onMessage(String message, Session session) {
 		// db chatService.insertChat(chat) 시작!
 		
-		System.out.println("message : " + message);
 		Map<String, Object> payload = new Gson().fromJson(message, Map.class);
 		System.out.println("payload from message : " + payload);
 		String chatroomId = (String) payload.get("chatroomId");
@@ -118,7 +111,6 @@ public class HelloWebSocket {
 	}
 	@OnClose
 	public void onClose(Session session) {
-		System.out.println("close");
 		Map<String, Object> sessionProperties = session.getUserProperties();
 		String memberId = (String) sessionProperties.get("memberId");
 		clientMap.remove(memberId); // 해당 memberId의 WebSocket Session객체 제거
