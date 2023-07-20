@@ -7,16 +7,19 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/memberDetail.css" />
 <section id="login-container">
-
-
-
 <%
-
 	String memberId = loginMember.getMemberId(); 
 	String name = loginMember.getName();
 	Gender gender = loginMember.getGender();
 	String phone = loginMember.getPhone();
-		
+	String address = loginMember.getAddress();
+	String[] adds = address.split(" ");
+	for(String add : adds){
+		System.out.println("add = " + add);
+	}
+	String city = adds[0]; // 시/도
+	String district = adds[1]; // 구/군
+	String detailAd = adds[2]; // 상세주소 */
 %>
 
 <section id="enroll-container">
@@ -56,9 +59,9 @@
 			<tr>
                 <th>주소<sup>: </sup></th>
                 <td>    
-                    <input type="text" placeholder="시/도" name="city" id="city"  required>
-                    <input type="text" placeholder="구/군" name="district" id="district"  required>
-                    <input type="text" placeholder="상세주소" name="address" id="address"  required><br>
+                    <input type="text" placeholder="시/도" name="city" id="city" value="<%= city %>" required>
+                    <input type="text" placeholder="구/군" name="district" id="district" value="<%= district %>" required>
+                    <input type="text" placeholder="상세주소" name="address" id="address" value="<%= detailAd %>" required><br>
                 </td>
             </tr>            
 		</table>
