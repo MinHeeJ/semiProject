@@ -15,7 +15,9 @@
 %>
 <script>
 	window.onload = () => {
-		<% if(!loginMember.getMemberId().equals(board.getWriter()) || loginMember.getMemberRole() == MemberRole.A) { %>
+		<% if(loginMember.getMemberRole() == MemberRole.A || (loginMember.getMemberId()).equals(board.getWriter())) { %>
+
+		<% }else{ %>
 			alert("접근권한이 없습니다");
 			location.href = "<%= request.getContextPath() %>"
 		<% } %>

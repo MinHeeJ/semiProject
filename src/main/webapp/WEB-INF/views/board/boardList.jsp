@@ -37,7 +37,7 @@
 						<tr>
 							<td class="t1"><%= board.getBoardNo() %></td>
 							<td class="t2">
-								<% if(loginMember.getMemberId().equals(board.getWriter())) { %>
+								<% if(loginMember.getMemberId().equals(board.getWriter()) || loginMember.getMemberRole() == MemberRole.A) { %>
 									<a href="<%= request.getContextPath() %>/board/boardDetail?no=<%= board.getBoardNo() %>"><%= board.getTitle() %></a>
 									<%	if(board.getCommentCnt() > 0) { %>
 									<%-- [<%= board.getCommentCnt() %>] --%>
