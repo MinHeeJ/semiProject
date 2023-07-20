@@ -103,9 +103,21 @@ const findAll = () => {
 
 
 
-// 삭제하기
+// 삭제하기 //선택한 회원 없으면 삭제 x
 document.querySelector("#delete").onclick = (e) => {
-	if(confirm('삭제하시겠습니까?')) {
+	let flag = true;
+	 
+	const checkboxes = document.querySelectorAll("input[name=checkedOrNot]");
+	  
+    checkboxes.forEach((checkbox) => {
+		if (checkbox.checked) 		   
+		    flag = false;
+	});
+    if(flag){
+    	 alert('선택하신 회원이 없습니다.');
+		    e.preventDefault();
+    }
+	if(!flag && confirm('삭제하시겠습니까?')) {
 		
 		document.querySelector("#memberList").onsubmit = (e) => {
 			console.log(123);
@@ -121,29 +133,13 @@ document.querySelector("#delete").onclick = (e) => {
 				method : "POST",
 				success(responseData) {
 					findAll();
+					
 				}
 			});
 		}
 	}
 }
 
-//선택한 회원 없으면 삭제 x
-document.querySelector("#delete").onclick = (e) => {
-	
-	let flag = true;
-	 
-	const checkboxes = document.querySelectorAll("input[name=checkedOrNot]");
-	  
-    checkboxes.forEach((checkbox) => {
-		if (checkbox.checked) 		   
-		    flag = false;
-	});
-    if(flag){
-    	 alert('선택하신 회원이 없습니다.');
-		    e.preventDefault();
-    }
-
-};
 
 </script>
 

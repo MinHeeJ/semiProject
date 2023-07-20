@@ -191,12 +191,13 @@
     }
 	
 	document.querySelector("#cartUpdate").onclick =(e) =>{
+
+		e.preventDefault();
 		
 		checkckeck(e);
 		
 		document.querySelector("#printCartList").onsubmit =(e) =>{
 			
-			e.preventDefault();
 			
 			const frmData = new FormData(e.target); 
 			$.ajax({				

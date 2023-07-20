@@ -37,14 +37,10 @@ public class ReviewMoreServlet extends HttpServlet {
 		int start = (cpage - 1) * limit + 1; 
 		int end = cpage * limit;
 		
-		// 좋아요
-//		int reviewNo = Integer.parseInt(request.getParameter("reviewNo1"));
-//		int likeCount = reviewService.findLikeCount(reviewNo);
 		
 		// 2. 업무로직
 		List<Review> reviews = reviewService.findReview(start, end);
 		request.setAttribute("reviews", reviews);
-//		request.setAttribute("likeCount", likeCount);
 		
 		// 3. 응답처리 (json)
 		response.setContentType("application/json; charset=utf-8");
