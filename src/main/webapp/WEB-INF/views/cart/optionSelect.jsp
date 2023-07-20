@@ -128,7 +128,6 @@ List<Ingredient> ingredients = (List) request.getAttribute("ingredients");
 		};
 
 		
-		
 		document.querySelector("#orderForm").onsubmit=(e)=>{			
 			const quantities = document.querySelectorAll("[name = quantity]");
 			let bool = true;

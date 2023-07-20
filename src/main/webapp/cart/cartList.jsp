@@ -57,6 +57,8 @@
 		
 		findAllCart();
 		
+		
+		
 	}
 	document.querySelector("#allCheck").onclick=(e)=>{	
 		const checkBoxes = document.querySelectorAll("[name=checkedOrNot]");
@@ -174,6 +176,12 @@
                     },
                     complete(){
                         findAllCart();
+                        const tfoot = document.querySelector("#cartListTable tfoot");
+                		tfoot.innerHTML = `
+                			<tr>
+                				<td colspan="6">총금액 : 0원</td>
+                			</tr>
+                		`;
                     }
                 });
 
@@ -205,6 +213,12 @@
 				},
 				complete(){
 					findAllCart();
+					const tfoot = document.querySelector("#cartListTable tfoot");
+					tfoot.innerHTML = `
+						<tr>
+							<td colspan="6">총금액 : 0원</td>
+						</tr>
+					`;
 				}
 			
 			});
