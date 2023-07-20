@@ -38,6 +38,7 @@ public class BoardDetailServlet extends HttpServlet {
 				List<BoardComment> boardComments = boardService.findBoardCommentByBoardNo(no);
 //				System.out.println("board = " + board);
 //				System.out.println("boardComments = " + boardComments);
+				System.out.println("writer = " + board.getWriter());
 				
 				// secure coding처리 
 				String unsecureTitle = board.getTitle();
