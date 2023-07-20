@@ -1,6 +1,10 @@
 package com.semi.mvc.member.model.service;
 
-import static com.semi.mvc.common.JdbcTemplate.*;
+import static com.semi.mvc.common.JdbcTemplate.close;
+import static com.semi.mvc.common.JdbcTemplate.commit;
+import static com.semi.mvc.common.JdbcTemplate.getConnection;
+import static com.semi.mvc.common.JdbcTemplate.rollback;
+
 import java.sql.Connection;
 import java.util.List;
 
