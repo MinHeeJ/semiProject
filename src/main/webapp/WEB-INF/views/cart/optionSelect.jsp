@@ -106,7 +106,7 @@ List<Ingredient> ingredients = (List) request.getAttribute("ingredients");
 					
 					const priceInput = quantity.nextElementSibling.nextElementSibling.nextElementSibling;
 					const price = parseInt(priceInput.value);
-					
+					const re= /^[0-9]+$/;
 					totalCal += cal * quantityValue;
 					totalPrice += price * quantityValue;
 					
@@ -115,8 +115,10 @@ List<Ingredient> ingredients = (List) request.getAttribute("ingredients");
 						if(e.target.value > 10){
 							alert("하나의 재료의 수량은 10개를 추가할 수 없습니다!");
 							e.target.value = 10;
-						}					
-						
+						} else if(!re.test(e.target.value)) {
+							alert("숫자만 입력해주세요.");
+							e.target.value = 0;
+						}				 						
 			         };
 		
 			  });
@@ -193,9 +195,9 @@ List<Ingredient> ingredients = (List) request.getAttribute("ingredients");
 					if (selectTitle == 2) {
 						selectTitles[i].innerHTML = "야채 선택";
 					} else if (selectTitle == 3) {
-						selectTitles[i].innerHTML= "소스 선택";
+						selectTitles[i].innerHTML= "토핑 선택";
 					} else if (selectTitle == 4) {
-						selectTitles[i].innerHTML = "토핑 선택";
+						selectTitles[i].innerHTML = "소스 선택";
 					} else if (selectTitle == 5) {
 						selectTitles[i].innerHTML = "음료 선택";
 					}
