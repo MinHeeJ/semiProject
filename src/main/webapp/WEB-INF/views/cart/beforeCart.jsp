@@ -25,24 +25,26 @@ String memberId = "";
 			
 		<div id="receipt">
 			<img src="<%= request.getContextPath() %>/images/cart/receiptTop.png" alt="" id="receipTop"  width="100%"/>
-			<h2><%= saladOrBread.equals("2")? "샐러드볼" : "호밀빵"%></h2>
+			<h2><%= saladOrBread.equals("2")? "샐러드볼" : "호밀빵 (270kcal, 2000원)"%></h2>
 			<br>
 			<% for(SelectedOption sOption : selectedOption){ %>
 			<div id="optionPrint">
 				<span class="optionsLeft"> - <%= sOption.getIngredientName() %> [ <%= sOption.getCount() %> ]</span>
 				<span class="optionsRight"><%=sOption.getPrice()%> 원</span>	<br>	
 				<% 
-					totalPrice += sOption.getPrice();
-					totalCalorie += sOption.getCalorie();
-					memberId = sOption.getMemberId();
+	
+						totalPrice += sOption.getPrice();
+						totalCalorie += sOption.getCalorie();
+						memberId = sOption.getMemberId();
+					
 				%>		
 			</div>
 			<% } %>
 			<br>
 			<img src="<%= request.getContextPath() %>/images/cart/line.png" alt="" width="100%"/>
 			<br>
-			<span  class="totals">✨ Total Price : <%= totalPrice %> 원 ✨</span><br>	
-			<span  class="totals">✨ Total Calorie : <%= totalCalorie %> kcal ✨</span><br>	<br>
+			<span  class="totals">✨ Total Price : <%= totalPrice + (saladOrBread.equals("1") ? 2000 : 0)%> 원 ✨</span><br>	
+			<span  class="totals">✨ Total Calorie : <%= totalCalorie + (saladOrBread.equals("1") ? 270 : 0) %> kcal ✨</span><br>	<br>
 			<img src="<%= request.getContextPath() %>/images/cart/receiptBottom.png" alt="" id="receipBottom" width="100%"/>
 		</div>
 		<div id = "selectConfirm">

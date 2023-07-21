@@ -113,7 +113,7 @@
 					</td>
 				</tr>
 				<%-- 작성자와 관리자만 마지막행 수정/삭제버튼이 보일수 있게 할 것 --%>
-				<% if (canEdit) { %>
+				<% if (loginMember.getMemberRole() == MemberRole.A) { %>
 				<tr>			
 					<th colspan="2">
 						<%-- 첨부파일이 없는 게시물 수정 --%>

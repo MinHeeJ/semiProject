@@ -37,8 +37,7 @@ public class SelectedOptionServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		String memberId = loginMember.getMemberId();
-		
-			
+	
 		List<Ingredient> ingredients = cartService.findAll();
 		List<SelectedOption> selectedOption = new ArrayList<>();
 		if(optionName != null && quantity != null) {

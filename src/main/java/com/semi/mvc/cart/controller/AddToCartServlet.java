@@ -54,10 +54,14 @@ public class AddToCartServlet extends HttpServlet {
 				map.put("message", "이미 같은 상품이 장바구니에 존재하여 수량을 변경하였습니다.");
 			}
 		}
-		
-		if(!flag)
-			result = cartService.insertCart(confirmOptions, totalPrice, memberId);
-		
+		int total = Integer.parseInt(totalPrice);
+		if(!flag) {
+
+			if(saladOrBread.equals("호밀빵"))
+				result = cartService.insertCart(confirmOptions, (total + 2000) +"", memberId);
+			else
+				result = cartService.insertCart(confirmOptions, totalPrice, memberId);
+		}
 		new Gson().toJson(map, response.getWriter());
 	}
 
